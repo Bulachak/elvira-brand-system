@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "cleanUrls": false,
   "rewrites": [
-    { "source": "/", "destination": "/deliverables/index.html" },
-    { "source": "/bio", "destination": "/deliverables/content-templates/link-in-bio.html" },
-    { "source": "/link-in-bio", "destination": "/deliverables/content-templates/link-in-bio.html" },
-    { "source": "/newsletter", "destination": "/deliverables/content-templates/email-newsletter-template.html" },
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/bio", "destination": "/bio.html" },
+    { "source": "/link-in-bio", "destination": "/link-in-bio.html" },
+    { "source": "/newsletter", "destination": "/newsletter.html" },
     { "source": "/carousel", "destination": "/instagram_carousel_generator.html" },
     { "source": "/brand", "destination": "/aesthetic_canvas_klimt_ml_brand_system.html" },
     { "source": "/video", "destination": "/video.html" },
