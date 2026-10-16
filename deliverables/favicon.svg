@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Minimalist High-Contrast Gustav Klimt Geometric Emblem (Discrete Grid × Concentric Target) -->
+  <!-- Outer Obsidian Ground & Gold Leaf Architectural Frame -->
+  <rect x="2" y="2" width="60" height="60" rx="10" fill="#1A1815" stroke="#D4AF37" stroke-width="3.5"/>
+  
+  <!-- Left Half: Klimt Male Robe Discrete Rectilinear Blocks (Matrices / Tensors) -->
+  <!-- Top-Left Alabaster Tile with Signature Vertical Obsidian Bar -->
+  <rect x="8" y="8" width="20" height="26" rx="2" fill="#F5F0E6"/>
+  <rect x="16" y="12" width="4" height="18" fill="#1A1815"/>
+  
+  <!-- Bottom-Left Gold Leaf & Lapis Mosaic Tiles -->
+  <rect x="8" y="38" width="20" height="10" rx="1.5" fill="#D4AF37"/>
+  <rect x="8" y="50" width="20" height="6" rx="1.5" fill="#2B5A75"/>
+
+  <!-- Vertical Golden Dividing Seam -->
+  <line x1="32" y1="6" x2="32" y2="58" stroke="#D4AF37" stroke-width="2"/>
+
+  <!-- Right Half: Klimt Female Robe Concentric Rings (Probability Contours) -->
+  <circle cx="46" cy="24" r="11" fill="#C02B37" stroke="#D4AF37" stroke-width="2.5"/>
+  <circle cx="46" cy="24" r="5" fill="#F5F0E6"/>
+  
+  <!-- Bottom-Right Concentric Gold / Lapis Node -->
+  <circle cx="46" cy="47" r="8" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+  <circle cx="46" cy="47" r="3.2" fill="#D4AF37"/>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&amp;family=JetBrains+Mono:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap');
+      .serif-title { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; }
+      .serif-italic { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; font-style: italic; }
+      .sans-body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, Arial, sans-serif; }
+      .mono-label { font-family: 'JetBrains Mono', 'Courier New', monospace; font-weight: 700; }
+    </style>
+    <pattern id="klimtDots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="1.2" fill="#D4AF37" fill-opacity="0.18"/>
+      <circle cx="18" cy="18" r="1.2" fill="#2B5A75" fill-opacity="0.16"/>
+    </pattern>
+  </defs>
+
+  <!-- Obsidian Gallery Base -->
+  <rect width="1200" height="630" fill="#1A1815"/>
+  <rect width="1200" height="630" fill="url(#klimtDots)"/>
+
+  <!-- Outer Gold Architectural Frame -->
+  <rect x="24" y="24" width="1152" height="582" rx="16" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+  <rect x="34" y="34" width="1132" height="562" rx="12" fill="none" stroke="#D4AF37" stroke-width="0.8" stroke-opacity="0.4"/>
+
+  <!-- Top 6-Tone Klimt Spectrum Bar -->
+  <g transform="translate(64, 62)">
+    <rect x="0" y="0" width="190" height="7" rx="2" fill="#D4AF37"/>
+    <rect x="196" y="0" width="135" height="7" rx="2" fill="#2B5A75"/>
+    <rect x="337" y="0" width="95" height="7" rx="2" fill="#C02B37"/>
+    <rect x="438" y="0" width="95" height="7" rx="2" fill="#2E6B56"/>
+    <rect x="539" y="0" width="85" height="7" rx="2" fill="#DED6C5"/>
+  </g>
+
+  <!-- Horizontal Lockup (Logo + Elvira Astashkina) -->
+  <g transform="translate(64, 96)">
+    <rect x="0" y="0" width="60" height="60" rx="10" fill="#1A1815" stroke="#D4AF37" stroke-width="3"/>
+    <rect x="8" y="8" width="19" height="24" rx="2" fill="#F5F0E6"/>
+    <rect x="15" y="12" width="4.2" height="16" fill="#1A1815"/>
+    <rect x="8" y="35" width="19" height="10" rx="1.5" fill="#D4AF37"/>
+    <rect x="8" y="47" width="19" height="6" rx="1.5" fill="#2B5A75"/>
+    <line x1="31" y1="7" x2="31" y2="53" stroke="#D4AF37" stroke-width="2"/>
+    <circle cx="44" cy="22" r="10.5" fill="#C02B37" stroke="#D4AF37" stroke-width="2"/>
+    <circle cx="44" cy="22" r="4.5" fill="#F5F0E6"/>
+    <circle cx="44" cy="43" r="8" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+    <circle cx="44" cy="43" r="3" fill="#2E6B56"/>
+
+    <text x="78" y="41" class="serif-title" font-size="36" fill="#F5F0E6">Elvira Astashkina</text>
+  </g>
+
+  <!-- Eyebrow Tag -->
+  <g transform="translate(64, 184)">
+    <rect x="0" y="0" width="470" height="32" rx="6" fill="#22201D" stroke="#D4AF37" stroke-width="1"/>
+    <text x="14" y="20" class="mono-label" font-size="12" fill="#D4AF37" letter-spacing="1.5">APPLIED MACHINE LEARNING ENGINEER &amp; AI EDUCATOR</text>
+  </g>
+
+  <!-- Main Editorial Headline (Sized & positioned with generous 140px+ margin before right frame) -->
+  <text x="64" y="276" class="serif-title" font-size="42" fill="#F5F0E6">Where Mathematical Rigor</text>
+  <text x="64" y="330" class="serif-italic" font-size="42" fill="#D4AF37">Meets Editorial Clarity.</text>
+
+  <!-- Subtitle -->
+  <text x="64" y="384" class="sans-body" font-size="18" fill="#DED6C5">First-principles machine learning, measure-theoretic probability,</text>
+  <text x="64" y="412" class="sans-body" font-size="18" fill="#DED6C5">and statistical mechanics — visual monographs, animated</text>
+  <text x="64" y="440" class="sans-body" font-size="18" fill="#DED6C5">derivations, and reproducible open-source code.</text>
+
+  <!-- Mathematical Identity Box -->
+  <g transform="translate(64, 468)">
+    <rect x="0" y="0" width="500" height="42" rx="8" fill="#22201D" stroke="#DED6C5" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="18" y="26" class="mono-label" font-size="14.5" fill="#F5F0E6">μ(⋃ Aᵢ) = ∑ μ(Aᵢ)   ·   ∇θ L(θ, x)   ·   KL(P ∥ Q)</text>
+  </g>
+
+  <!-- Bottom Handle & Location -->
+  <text x="64" y="556" class="mono-label" font-size="15" fill="#D4AF37" letter-spacing="1.4">@ELVRAST   ·   SAN FRANCISCO BAY AREA</text>
+
+  <!-- Right Column: Klimt Mosaic Frame (Starts at x=810, leaving clean separation from text) -->
+  <g transform="translate(810, 66)">
+    <rect x="0" y="0" width="326" height="498" rx="14" fill="#22201D" stroke="#D4AF37" stroke-width="3"/>
+    <!-- Decorative Klimt Geometric Mosaic Composition -->
+    <rect x="20" y="22" width="128" height="210" rx="6" fill="#F5F0E6"/>
+    <rect x="65" y="48" width="34" height="156" rx="3" fill="#1A1815"/>
+    <rect x="20" y="246" width="128" height="92" rx="6" fill="#D4AF37"/>
+    <rect x="20" y="352" width="128" height="124" rx="6" fill="#2B5A75"/>
+    <line x1="164" y1="22" x2="164" y2="476" stroke="#D4AF37" stroke-width="3"/>
+    <circle cx="245" cy="145" r="64" fill="#C02B37" stroke="#D4AF37" stroke-width="4"/>
+    <circle cx="245" cy="145" r="28" fill="#F5F0E6"/>
+    <circle cx="245" cy="345" r="56" fill="#2B5A75" stroke="#D4AF37" stroke-width="4"/>
+    <circle cx="245" cy="345" r="22" fill="#2E6B56"/>
+  </g>
+</svg>

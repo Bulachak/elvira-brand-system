@@ -1,0 +1,31 @@
+# Python & Manim caches
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Manim intermediate caches (keep final rendered .mp4 and .webm videos)
+media/Tex/
+media/texts/
+media/images/
+media/videos/**/partial_movie_files/
+
+# Environment & credentials (never commit secrets)
+.env
+.env.*
+*.pem
+*.key
+custom_carousel.json
+_temp_scene_config_*.json
+
+# Local scratch & reference archives
+gdrive_downloads/
+Modular Brand Design System/
+Modular Brand Design System (1)/
+scratchpad_*.md
+pencil-elvira.pen
+extract_cells.py
+test_*.png
+.vercel/

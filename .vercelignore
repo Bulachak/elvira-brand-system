@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+media/Tex/
+media/texts/
+media/images/
+media/videos/**/partial_movie_files/
+.env
+.env.*
+gdrive_downloads/
+Modular Brand Design System/
+Modular Brand Design System (1)/
+scratchpad_*.md
+pencil-elvira.pen
+extract_cells.py
+test_*.png
+.git/

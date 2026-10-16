@@ -1,0 +1,257 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="100%" height="100%">
+<defs>
+  <style>
+    .bg-obsidian { fill: #1A1815; }
+    .stroke-gold { stroke: #D4AF37; fill: none; }
+    .stroke-gold-thin { stroke: #D4AF37; stroke-width: 1; fill: none; }
+    .stroke-gold-dashed { stroke: #D4AF37; stroke-width: 1.2; stroke-dasharray: 4,4; fill: none; }
+    .title-serif { font-family: "Cinzel", "Didot", "Bodoni MT", "Times New Roman", serif; font-weight: 700; text-anchor: middle; text-transform: uppercase; }
+    .subtitle-serif { font-family: "Cinzel", "Didot", "Bodoni MT", "Times New Roman", serif; font-weight: 500; text-anchor: middle; text-transform: uppercase; }
+    .label-sans { font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 600; text-anchor: middle; text-transform: uppercase; letter-spacing: 0.25em; }
+    .mono-tech { font-family: "JetBrains Mono", monospace; font-size: 14px; fill: #F5F0E6; opacity: 0.8; letter-spacing: 0.12em; }
+  </style>
+</defs>
+
+<!-- BASE OBSIDIAN GROUND -->
+<rect width="1080" height="1920" class="bg-obsidian"/>
+
+<!-- ARCHITECTURAL MARGIN FRAMES & REGISTRATION TICKS -->
+<g id="architectural-framing">
+  <!-- Outer Gold Border -->
+  <rect x="40" y="40" width="1000" height="1840" rx="16" fill="none" stroke="#D4AF37" stroke-width="2"/>
+  <rect x="56" y="56" width="968" height="1808" rx="10" fill="none" stroke="#D4AF37" stroke-width="0.8" stroke-dasharray="6,4" opacity="0.6"/>
+  <rect x="70" y="70" width="940" height="1780" fill="none" stroke="#F5F0E6" stroke-width="0.5" opacity="0.25"/>
+
+  <!-- Corner Precision Crosshairs -->
+  <g stroke="#D4AF37" stroke-width="1.2">
+    <!-- Top-Left -->
+    <line x1="28" y1="40" x2="52" y2="40"/>
+    <line x1="40" y1="28" x2="40" y2="52"/>
+    <!-- Top-Right -->
+    <line x1="1028" y1="40" x2="1052" y2="40"/>
+    <line x1="1040" y1="28" x2="1040" y2="52"/>
+    <!-- Bottom-Left -->
+    <line x1="28" y1="1880" x2="52" y2="1880"/>
+    <line x1="40" y1="1868" x2="40" y2="1892"/>
+    <!-- Bottom-Right -->
+    <line x1="1028" y1="1880" x2="1052" y2="1880"/>
+    <line x1="1040" y1="1868" x2="1040" y2="1892"/>
+    <!-- Axis Centering Marks -->
+    <line x1="540" y1="30" x2="540" y2="50"/>
+    <line x1="540" y1="1870" x2="540" y2="1890"/>
+    <line x1="30" y1="960" x2="50" y2="960"/>
+    <line x1="1030" y1="960" x2="1050" y2="960"/>
+  </g>
+</g>
+
+<!-- ZONE 1: HEADER & SYSTEM METADATA -->
+<g id="header-metadata" transform="translate(540, 140)">
+  <text y="0" class="label-sans" fill="#D4AF37" font-size="15">APPLIED MATHEMATICS × MACHINE LEARNING</text>
+  <text y="32" class="mono-tech" font-size="13" text-anchor="middle" fill="#F5F0E6">SYSTEM PROTOCOL // BAZA-PRTCL-001 • GILDED TENSOR</text>
+  <line x1="-320" y1="65" x2="320" y2="65" stroke="#D4AF37" stroke-width="1"/>
+  <polygon points="0,60 -6,65 0,70 6,65" fill="#C02B37"/>
+</g>
+
+<!-- ZONE 2: HERO MATHEMATICAL SYNTHESIS (KLIMT × ML) -->
+<g id="hero-mandala">
+  <!-- Connective Diamond Latent Orbit Lines -->
+  <path d="M 540 380 Q 760 500 880 720 Q 760 940 540 1060 Q 320 940 200 720 Q 320 500 540 380" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <path d="M 540 360 Q 800 480 900 720 Q 800 960 540 1080 Q 280 960 180 720 Q 280 480 540 360" fill="none" stroke="#F5F0E6" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Concentric Probability Iso-Density Target at Center -->
+  <g id="center-probability-target">
+    <!-- Outer Calibration Rings & Ticks -->
+    <circle cx="540" cy="720" r="310" fill="none" stroke="#F5F0E6" stroke-width="0.6" opacity="0.2"/>
+    <circle cx="540" cy="720" r="285" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+    <line x1="825.0" y1="720.0" x2="835.0" y2="720.0" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="815.3" y1="793.8" x2="820.1" y2="795.1" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="786.8" y1="862.5" x2="791.1" y2="865.0" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="741.5" y1="921.5" x2="748.6" y2="928.6" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="682.5" y1="966.8" x2="685.0" y2="971.1" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="613.8" y1="995.3" x2="615.1" y2="1000.1" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="540.0" y1="1005.0" x2="540.0" y2="1015.0" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="466.2" y1="995.3" x2="464.9" y2="1000.1" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="397.5" y1="966.8" x2="395.0" y2="971.1" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="338.5" y1="921.5" x2="331.4" y2="928.6" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="293.2" y1="862.5" x2="288.9" y2="865.0" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="264.7" y1="793.8" x2="259.9" y2="795.1" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="255.0" y1="720.0" x2="245.0" y2="720.0" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="264.7" y1="646.2" x2="259.9" y2="644.9" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="293.2" y1="577.5" x2="288.9" y2="575.0" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="338.5" y1="518.5" x2="331.4" y2="511.4" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="397.5" y1="473.2" x2="395.0" y2="468.9" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="466.2" y1="444.7" x2="464.9" y2="439.9" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="540.0" y1="435.0" x2="540.0" y2="425.0" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="613.8" y1="444.7" x2="615.1" y2="439.9" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="682.5" y1="473.2" x2="685.0" y2="468.9" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="741.5" y1="518.5" x2="748.6" y2="511.4" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="786.8" y1="577.5" x2="791.1" y2="575.0" stroke="#D4AF37" stroke-width="1.2"/>
+    <line x1="815.3" y1="646.2" x2="820.1" y2="644.9" stroke="#D4AF37" stroke-width="1.2"/>
+    
+    <!-- Concentric Density Zones -->
+    <circle cx="540" cy="720" r="230" fill="#2B5A75" fill-opacity="0.25" stroke="#D4AF37" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <circle cx="540" cy="720" r="170" fill="#2E6B56" fill-opacity="0.3" stroke="#2B5A75" stroke-width="2"/>
+    <circle cx="540" cy="720" r="115" fill="#C02B37" stroke="#D4AF37" stroke-width="2.5"/>
+    <circle cx="540" cy="720" r="65" fill="#F5F0E6" stroke="#1A1815" stroke-width="1.5"/>
+    <circle cx="540" cy="720" r="26" fill="#D4AF37"/>
+    
+    <!-- Golden Ratio Optimization Spiral -->
+    <path d="M 542.63,721.44 L 542.55,721.67 L 542.45,721.91 L 542.34,722.13 L 542.20,722.35 L 542.04,722.57 L 541.86,722.77 L 541.66,722.96 L 541.44,723.14 L 541.21,723.30 L 540.96,723.45 L 540.69,723.57 L 540.41,723.68 L 540.12,723.77 L 539.81,723.83 L 539.50,723.87 L 539.17,723.89 L 538.85,723.88 L 538.51,723.84 L 538.18,723.78 L 537.85,723.68 L 537.52,723.56 L 537.19,723.41 L 536.87,723.23 L 536.56,723.02 L 536.27,722.79 L 535.99,722.52 L 535.72,722.23 L 535.48,721.92 L 535.26,721.58 L 535.06,721.22 L 534.89,720.83 L 534.75,720.43 L 534.64,720.01 L 534.56,719.57 L 534.52,719.12 L 534.51,718.66 L 534.54,718.20 L 534.60,717.73 L 534.71,717.26 L 534.86,716.79 L 535.04,716.32 L 535.27,715.86 L 535.54,715.42 L 535.85,714.99 L 536.19,714.58 L 536.58,714.19 L 537.00,713.83 L 537.46,713.50 L 537.95,713.20 L 538.48,712.93 L 539.03,712.70 L 539.61,712.52 L 540.21,712.38 L 540.83,712.28 L 541.47,712.24 L 542.13,712.25 L 542.79,712.31 L 543.45,712.42 L 544.12,712.59 L 544.78,712.82 L 545.43,713.11 L 546.07,713.45 L 546.69,713.85 L 547.29,714.30 L 547.86,714.81 L 548.40,715.38 L 548.89,715.99 L 549.35,716.66 L 549.76,717.37 L 550.11,718.13 L 550.41,718.92 L 550.65,719.75 L 550.82,720.62 L 550.93,721.50 L 550.97,722.42 L 550.93,723.34 L 550.82,724.28 L 550.63,725.22 L 550.35,726.16 L 550.00,727.09 L 549.57,728.01 L 549.06,728.90 L 548.47,729.77 L 547.79,730.60 L 547.04,731.39 L 546.22,732.13 L 545.32,732.81 L 544.36,733.43 L 543.33,733.98 L 542.24,734.45 L 541.10,734.84 L 539.91,735.15 L 538.68,735.36 L 537.41,735.47 L 536.11,735.49 L 534.79,735.40 L 533.47,735.20 L 532.14,734.88 L 530.81,734.46 L 529.50,733.92 L 528.22,733.27 L 526.97,732.51 L 525.76,731.63 L 524.61,730.64 L 523.52,729.54 L 522.51,728.34 L 521.57,727.04 L 520.73,725.64 L 520.00,724.15 L 519.37,722.59 L 518.86,720.95 L 518.48,719.24 L 518.23,717.48 L 518.11,715.67 L 518.15,713.83 L 518.33,711.96 L 518.67,710.08 L 519.17,708.21 L 519.83,706.34 L 520.65,704.50 L 521.63,702.70 L 522.77,700.96 L 524.07,699.28 L 525.52,697.68 L 527.12,696.18 L 528.88,694.79 L 530.76,693.52 L 532.78,692.38 L 534.93,691.40 L 537.18,690.57 L 539.53,689.91 L 541.97,689.44 L 544.49,689.16 L 547.06,689.07 L 549.68,689.20 L 552.32,689.54 L 554.98,690.10 L 557.63,690.88 L 560.25,691.90 L 562.83,693.14 L 565.35,694.60 L 567.78,696.30 L 570.11,698.21 L 572.32,700.35 L 574.39,702.69 L 576.29,705.24 L 578.02,707.97 L 579.55,710.89 L 580.86,713.98 L 581.95,717.21 L 582.78,720.58 L 583.36,724.07 L 583.65,727.66 L 583.66,731.32 L 583.38,735.03 L 582.78,738.78 L 581.87,742.53 L 580.65,746.26 L 579.10,749.95" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+    <circle cx="540" cy="720" r="5" fill="#C02B37"/>
+  </g>
+
+  <!-- TOP MOTIF: Abstraction Feature Pyramid (Y: 340 to 450) -->
+  <g id="top-abstraction-pyramid" transform="translate(540, 390)">
+    <polygon points="0,-60 -70,50 70,50" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+    <polygon points="0,-45 -52,38 52,38" fill="none" stroke="#F5F0E6" stroke-width="1"/>
+    <!-- Tiers -->
+    <polygon points="0,-45 -20,-10 20,-10" fill="#C02B37" fill-opacity="0.85"/>
+    <polygon points="-20,-10 20,-10 40,20 -40,20" fill="#D4AF37" fill-opacity="0.75"/>
+    <polygon points="-40,20 40,20 52,38 -52,38" fill="#2B5A75" fill-opacity="0.8"/>
+    <!-- Peak Node -->
+    <circle cx="0" cy="-60" r="5" fill="#D4AF37"/>
+  </g>
+
+  <!-- BOTTOM MOTIF: Attention Eye of Horus (Y: 1000 to 1120) -->
+  <g id="bottom-attention-eye" transform="translate(540, 1050)">
+    <!-- Surveyor Axis Ticks -->
+    <line x1="-120" y1="0" x2="120" y2="0" stroke="#D4AF37" stroke-width="1" stroke-dasharray="3,4"/>
+    <line x1="0" y1="-50" x2="0" y2="50" stroke="#D4AF37" stroke-width="1" stroke-dasharray="3,4"/>
+    <!-- Eye Almond -->
+    <path d="M -80 0 Q 0 -55 80 0 Q 0 55 -80 0 Z" fill="#1A1815" stroke="#D4AF37" stroke-width="2.5"/>
+    <path d="M -60 0 Q 0 -38 60 0 Q 0 38 -60 0 Z" fill="#F5F0E6"/>
+    <circle cx="0" cy="0" r="26" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+    <circle cx="0" cy="0" r="12" fill="#C02B37"/>
+    <circle cx="4" cy="-4" r="3.5" fill="#D4AF37"/>
+  </g>
+
+  <!-- LEFT FLANK: ViT Patch Grid & Tensor Multiplier (X: 120 to 280) -->
+  <g id="left-vit-matrix-card" transform="translate(195, 720)">
+    <rect x="-80" y="-105" width="160" height="210" rx="8" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+    <!-- Top Matrix Bracket Header -->
+    <path d="M -68 -90 L -68 -75 L 68 -75 L 68 -90" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+    <!-- 2x3 ViT Patch Grid -->
+    <g transform="translate(-62, -65)">
+      <!-- Row 1 -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="38" height="38" fill="#F5F0E6"/>
+        <line x1="19" y1="5" x2="19" y2="33" stroke="#1A1815" stroke-width="3"/>
+      </g>
+      <rect x="43" y="0" width="38" height="38" fill="#D4AF37"/>
+      <rect x="86" y="0" width="38" height="38" fill="#C02B37"/>
+      <!-- Row 2 -->
+      <rect x="0" y="44" width="38" height="38" fill="#2B5A75"/>
+      <g transform="translate(43, 44)">
+        <rect x="0" y="0" width="38" height="38" fill="#F5F0E6"/>
+        <line x1="19" y1="5" x2="19" y2="33" stroke="#1A1815" stroke-width="3"/>
+      </g>
+      <rect x="86" y="44" width="38" height="38" fill="#D4AF37"/>
+    </g>
+    <!-- Label -->
+    <text x="0" y="55" class="mono-tech" font-size="11" text-anchor="middle" fill="#D4AF37">W·x + b</text>
+    <text x="0" y="75" class="mono-tech" font-size="10" text-anchor="middle" fill="#F5F0E6">ViT PATCH GRID</text>
+  </g>
+
+  <!-- RIGHT FLANK: Quantized Tensor Blocks & Loss Curve (X: 800 to 960) -->
+  <g id="right-tensor-block-card" transform="translate(885, 720)">
+    <rect x="-80" y="-105" width="160" height="210" rx="8" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+    <!-- 3x3 Internal Tensor Activation Grid -->
+    <g transform="translate(-56, -85)">
+      <rect x="0" y="0" width="32" height="24" fill="#2B5A75"/>
+      <rect x="40" y="0" width="32" height="24" fill="#F5F0E6"/>
+      <rect x="80" y="0" width="32" height="24" fill="#D4AF37"/>
+      <rect x="0" y="32" width="32" height="24" fill="#2E6B56"/>
+      <rect x="40" y="32" width="32" height="24" fill="#1A1815" stroke="#D4AF37" stroke-width="1"/>
+      <rect x="80" y="32" width="32" height="24" fill="#C02B37"/>
+      <rect x="0" y="64" width="32" height="24" fill="#D4AF37"/>
+      <rect x="40" y="64" width="32" height="24" fill="#2B5A75"/>
+      <rect x="80" y="64" width="32" height="24" fill="#F5F0E6"/>
+    </g>
+    <!-- Label -->
+    <text x="0" y="55" class="mono-tech" font-size="11" text-anchor="middle" fill="#D4AF37">L(θ) // TENSORS</text>
+    <text x="0" y="75" class="mono-tech" font-size="10" text-anchor="middle" fill="#F5F0E6">LATENT MANIFOLD</text>
+  </g>
+
+  <!-- MEADOW MOTIF: Pointillist Latent Embeddings & t-SNE Particles -->
+  <g id="meadow-pointillist-particles">
+  <circle cx="340" cy="520" r="5.5" fill="#C02B37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="380" cy="480" r="6.0" fill="#D4AF37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="430" cy="440" r="4.5" fill="#2B5A75" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="480" cy="410" r="6.0" fill="#2E6B56" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="510" cy="395" r="4.5" fill="#F5F0E6" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="570" cy="395" r="4.5" fill="#C02B37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="610" cy="420" r="6.0" fill="#D4AF37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="660" cy="460" r="5.0" fill="#2B5A75" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="710" cy="510" r="5.5" fill="#2E6B56" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="750" cy="560" r="4.5" fill="#F5F0E6" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="760" cy="880" r="6.0" fill="#C02B37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="720" cy="930" r="5.0" fill="#D4AF37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="670" cy="970" r="6.0" fill="#2B5A75" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="620" cy="1010" r="4.5" fill="#2E6B56" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="580" cy="1035" r="5.5" fill="#F5F0E6" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="500" cy="1035" r="4.5" fill="#C02B37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="450" cy="1005" r="6.0" fill="#D4AF37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="400" cy="960" r="5.0" fill="#2B5A75" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="350" cy="910" r="5.5" fill="#2E6B56" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="310" cy="850" r="5.0" fill="#F5F0E6" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="290" cy="620" r="3.5" fill="#D4AF37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="270" cy="680" r="4.0" fill="#C02B37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="280" cy="750" r="3.5" fill="#2E6B56" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="300" cy="810" r="4.0" fill="#2B5A75" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="780" cy="630" r="3.5" fill="#F5F0E6" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="810" cy="690" r="4.0" fill="#D4AF37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="800" cy="760" r="3.5" fill="#C02B37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="770" cy="820" r="4.0" fill="#2E6B56" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="460" cy="600" r="3.0" fill="#D4AF37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="620" cy="600" r="3.0" fill="#2B5A75" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="460" cy="840" r="3.0" fill="#C02B37" stroke="#1A1815" stroke-width="0.8"/>
+  <circle cx="620" cy="840" r="3.0" fill="#2E6B56" stroke="#1A1815" stroke-width="0.8"/>
+  </g>
+</g>
+
+<!-- ZONE 3: EDITORIAL TYPOGRAPHY & BRAND MANIFESTO -->
+<g id="editorial-typography" transform="translate(540, 1260)">
+  <!-- Monograph Category Tag -->
+  <text y="0" class="label-sans" fill="#D4AF37" font-size="14">THE MODULAR SPECIFICATION</text>
+  
+  <!-- Master Title: Upright Roman Serif in Alabaster -->
+  <text y="80" class="title-serif" fill="#F5F0E6" font-size="76" letter-spacing="0.14em">GILDED TENSOR</text>
+  
+  <!-- Subtitle: Elegant Serif in Gold -->
+  <text y="145" class="subtitle-serif" fill="#D4AF37" font-size="28" letter-spacing="0.22em">THE ARCHITECTURE OF LEARNING</text>
+  
+  <!-- Ornamental Gold Divider -->
+  <line x1="-240" y1="185" x2="240" y2="185" stroke="#D4AF37" stroke-width="1.2"/>
+  <rect x="-18" y="177" width="36" height="16" fill="#1A1815" stroke="#D4AF37" stroke-width="1"/>
+  <circle cx="0" cy="185" r="4" fill="#C02B37"/>
+
+  <!-- Academic / Mathematical Doctrine Caption -->
+  <text y="240" class="mono-tech" font-size="14" text-anchor="middle" fill="#F5F0E6">
+    p(x) = &#8747; p(x|z)p(z)dz  &#8226;  W&#183;x + b  &#8226;  &#8711;L(&#952;) &#8712; R^N
+  </text>
+  
+  <text y="275" font-family="Space Grotesk, sans-serif" font-size="14" text-anchor="middle" fill="#F5F0E6" opacity="0.75" letter-spacing="0.08em">
+    Discrete Matrices &#8226; Continuous Iso-Density &#8226; Latent Manifolds
+  </text>
+</g>
+
+<!-- ZONE 4: TECHNICAL FOOTER BLOCK -->
+<g id="footer-technical-bar" transform="translate(540, 1720)">
+  <rect x="-440" y="0" width="880" height="90" rx="8" fill="#1A1815" stroke="#D4AF37" stroke-width="1.5"/>
+  <line x1="-150" y1="0" x2="-150" y2="90" stroke="#D4AF37" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.6"/>
+  <line x1="150" y1="0" x2="150" y2="90" stroke="#D4AF37" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.6"/>
+  
+  <!-- Left Column -->
+  <text x="-295" y="38" class="mono-tech" font-size="11" text-anchor="middle" fill="#D4AF37">RENDER ENGINE</text>
+  <text x="-295" y="60" class="mono-tech" font-size="12" text-anchor="middle" fill="#F5F0E6">KLIMT_CORE // v0.1</text>
+  
+  <!-- Center Column -->
+  <text x="0" y="38" class="mono-tech" font-size="11" text-anchor="middle" fill="#D4AF37">STATE GEOMETRY</text>
+  <text x="0" y="60" class="mono-tech" font-size="12" text-anchor="middle" fill="#F5F0E6">[B, D, H] &#8594; LATENT</text>
+  
+  <!-- Right Column -->
+  <text x="295" y="38" class="mono-tech" font-size="11" text-anchor="middle" fill="#D4AF37">SPECIFICATION</text>
+  <text x="295" y="60" class="mono-tech" font-size="12" text-anchor="middle" fill="#F5F0E6">BAZA-PRTCL-001</text>
+</g>
+
+</svg>

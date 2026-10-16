@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <title>Brand Social Content Generator</title>
+  <script>
+window.contentConfig = {
+  "PRIMARY_COLOR": "#1A1815",
+  "ACCENT_COLOR": "#D4AF37",
+  "LILAC_COLOR": "#2B5A75",
+  "TEXT_LIGHT": "#FFFFFF",
+  "TEXT_DARK": "#1A1815",
+  "FONT_HEADLINE": "'Cormorant Garamond', Georgia, \"Times New Roman\", serif",
+  "FONT_BODY": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif",
+  "LOGO_URL": "../assets/logo.svg",
+  "BRAND_NAME": "Elvira Astashkina"
+};
+</script>
+  <link rel="stylesheet" href="core/factory-core.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --primary-color: #000000;
+      --accent-color: #0055ff;
+      --font-body: sans-serif;
+      --font-heading: sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); height: 100vh; display: flex; overflow: hidden; }
+
+    /* Control Panel styling */
+    .sidebar { width: 360px; background: var(--color-surface); padding: 24px; overflow-y: auto; border-right: 1px solid var(--color-border); z-index: 100; flex-shrink: 0; }
+    .sidebar h2 { margin-bottom: 20px; color: var(--color-text); font-family: var(--font-heading); font-size: 20px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 11px; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-muted); }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; border: 1px solid var(--color-border); border-radius: 4px; padding: 10px; font-family: var(--font-body); font-size: 13px; background: var(--color-bg); color: var(--color-text); }
+    .form-group textarea { resize: vertical; min-height: 60px; }
+    .btn-update { width: 100%; background: var(--color-primary); color: var(--color-bg); padding: 12px; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
+    .btn-update:hover { opacity: 0.9; }
+    
+    /* Viewport Area */
+    .viewport { flex: 1; padding: 40px; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; justify-items: center; align-items: start; background: var(--color-bg); }
+    
+    .template-box { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 380px; align-items: center; }
+    .template-header { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .template-title { font-weight: 700; font-family: var(--font-heading); font-size: 16px; }
+    .download-btn { background: var(--color-accent); color: #fff; font-weight: bold; padding: 6px 12px; border-radius: 4px; border: none; cursor: pointer; font-size: 11px; text-transform: uppercase; }
+    .download-btn:hover { filter: brightness(1.1); }
+    
+    /* Canvas Base */
+    .canvas-outer { position: relative; width: 324px; height: 576px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: #fff; overflow: hidden; }
+    .canvas-inner { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; transform: scale(0.3); transform-origin: top left; background: var(--bg-val, var(--primary-color)); overflow: hidden; }
+
+    /* Core Template Components Base */
+    .bg-layer, .stickers-layer, .text-layer { position: absolute; inset: 0; }
+    .bg-layer img { width: 100%; height: 100%; object-fit: cover; }
+    .bg-layer { z-index: 1; }
+    .stickers-layer { z-index: 5; }
+    .text-layer { z-index: 10; display: flex; flex-direction: column; justify-content: space-between; padding: 100px; text-align: center; }
+    .top-group { display: flex; flex-direction: column; align-items: center; }
+    .bottom-group { display: flex; flex-direction: column; align-items: center; }
+
+    /* Variables Logic */
+    .canvas-inner { --highlight-color: var(--accent-color); --body-color: #fff; --cta-bg: var(--accent-color); --cta-fg: #fff; }
+    .canvas-inner.fg-black { --body-color: #000; --cta-fg: #000; }
+    
+    /* Typography Components */
+    h1.caption-title { font-family: var(--font-heading); font-size: 140px; color: var(--body-color); line-height: 0.9; text-transform: uppercase; font-weight: 900; margin-bottom: 20px; transition: all 0.3s ease; text-wrap: balance; }
+    p.caption-body strong { color: var(--highlight-color); }
+    p.caption-body { font-family: var(--font-body); font-size: 42px; font-weight: 600; color: var(--body-color); line-height: 1.3; margin-bottom: 40px; transition: all 0.3s ease; }
+    .cta-box { font-family: var(--font-heading); font-size: 38px; font-weight: 800; letter-spacing: 2px; color: var(--cta-fg); background: var(--cta-bg); padding: 24px 64px; border-radius: 8px; display: inline-flex; text-transform: uppercase; transition: all 0.3s ease; }
+
+    /* Logos Row */
+    .logo-row { display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 80px; flex-wrap: wrap; }
+    .logo-row img { max-width: 300px; max-height: 140px; object-fit: contain; }
+
+    /* Ratio Adjustments */
+    .canvas-inner.is-ig-portrait .text-layer, .canvas-inner.is-ig-square .text-layer { padding: 80px; }
+    .canvas-inner.is-ig-portrait h1.caption-title { font-size: 110px; }
+    .canvas-inner.is-ig-square h1.caption-title { font-size: 80px; }
+
+    /* Animations */
+    .tpl-standard .stickers-layer { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; }
+    .tpl-standard .stickers-layer img { max-width: 800px; max-height: 800px; object-fit: contain; transform: scale(1.5); opacity: 0; }
+    
+    @keyframes slideUpFade { 0% { transform: translateY(200px) scale(1.2); opacity: 0; } 100% { transform: translateY(0) scale(1.5); opacity: 1; } }
+    .animated .tpl-standard .stickers-layer img { animation: slideUpFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: 0.1s; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Config -->
+  <div class="sidebar">
+    <h2>Dynamic Social Generator</h2>
+    
+    <div class="form-group">
+      <label>Orientation</label>
+      <select id="input-ratio">
+        <option value="9:16">1080 x 1920 (Story / Reel)</option>
+        <option value="4:5">1080 x 1350 (Portrait Post)</option>
+        <option value="1:1">1080 x 1080 (Square Post)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Background Color / Photo URL</label>
+      <input type="text" id="input-bg" value="">
+    </div>
+
+    <div class="form-group">
+      <label>Logo Cloudinary URL</label>
+      <input type="text" id="input-logos">
+    </div>
+
+    <div class="form-group">
+      <label>Asset / Product Graphic URL (Transparent)</label>
+      <input type="text" id="input-stickers">
+    </div>
+
+    <div class="form-group">
+      <label>Main Headline</label>
+      <input type="text" id="input-headline" value="NEW ARRIVALS">
+    </div>
+
+    <div class="form-group">
+      <label>Body Copy (Use *text* to highlight)</label>
+      <textarea id="input-body">Explore the latest *premium* collection exclusively on our site.</textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Call to Action Button</label>
+      <input type="text" id="input-cta" value="SHOP NOW">
+    </div>
+
+    <button class="btn-update" id="btn-render" onclick="renderTemplates()">Render Configurations</button>
+  </div>
+
+  <!-- Viewport -->
+  <div class="viewport" id="viewport">
+    
+    <!-- Design 1 -->
+    <div class="template-box">
+      <div class="template-header">
+        <span class="template-title">Standard Impact</span>
+        <button class="download-btn" onclick="downloadImage('out-1')">Save PNG</button>
+      </div>
+      <div class="canvas-outer" id="out-1">
+        <div class="canvas-inner tpl-standard" id="tpl1">
+          <div class="bg-layer" id="bg-1"></div>
+          <div class="stickers-layer" id="stickers-1"></div>
+          <div class="text-layer">
+            <div class="top-group">
+              <div class="logo-row" id="logos-1"></div>
+              <h1 class="caption-title" id="head-1"></h1>
+            </div>
+            <div class="bottom-group">
+              <p class="caption-body" id="body-1"></p>
+              <div class="cta-box" id="cta-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    window.contentConfig = window.contentConfig || {
+      PRIMARY_COLOR:   '#0a1628',
+      ACCENT_COLOR:    '#0055ff',
+      TEXT_LIGHT:      '#ffffff',
+      TEXT_DARK:       '#111111',
+      FONT_HEADING:    '"Inter", sans-serif',
+      FONT_BODY:       '"Inter", sans-serif',
+      LOGO_URL:        '', 
+      BRAND_NAME:      'Brand'
+    };
+
+    function initFromConfig() {
+      const root = document.documentElement;
+      root.style.setProperty('--primary-color', window.contentConfig.PRIMARY_COLOR);
+      root.style.setProperty('--accent-color', window.contentConfig.ACCENT_COLOR);
+      root.style.setProperty('--font-heading', window.contentConfig.FONT_HEADING);
+      root.style.setProperty('--font-body', window.contentConfig.FONT_BODY);
+
+      document.getElementById('input-bg').value = window.contentConfig.PRIMARY_COLOR;
+      document.getElementById('input-logos').value = window.contentConfig.LOGO_URL || '';
+      renderTemplates();
+    }
+
+    function renderTemplates() {
+      // Remove animation to restart
+      document.body.classList.remove('animated');
+
+      const bg = document.getElementById('input-bg').value.trim();
+      const logos = document.getElementById('input-logos').value.trim();
+      const stickers = document.getElementById('input-stickers').value.split(',').map(s=>s.trim()).filter(Boolean);
+      const headline = document.getElementById('input-headline').value.trim();
+      const body = document.getElementById('input-body').value.replace(/\n/g, '<br>');
+      const cta = document.getElementById('input-cta').value.trim();
+      const ratio = document.getElementById('input-ratio').value;
+
+      let ratioW = 1080, ratioH = 1920;
+      if(ratio === '4:5') ratioH = 1350;
+      else if(ratio === '1:1') ratioH = 1080;
+
+      // Single template logic
+      [1].forEach(idx => {
+        const outer = document.getElementById(`out-${idx}`);
+        const inner = document.getElementById(`tpl${idx}`);
+        
+        const scale = 0.3; // static scale for UI preview
+        outer.style.width = (ratioW * scale) + 'px';
+        outer.style.height = (ratioH * scale) + 'px';
+        inner.style.width = ratioW + 'px';
+        inner.style.height = ratioH + 'px';
+        inner.style.transform = `scale(${scale})`;
+
+        inner.className = 'canvas-inner tpl-standard';
+        if (ratio === '9:16') inner.classList.add('is-ig-story');
+        else if (ratio === '4:5') inner.classList.add('is-ig-portrait');
+        else inner.classList.add('is-ig-square');
+
+        // Background
+        const bgNode = document.getElementById(`bg-${idx}`);
+        if(bg.startsWith('http')) {
+          bgNode.innerHTML = `<img src="${bg}" crossorigin="anonymous" />`;
+          inner.style.setProperty('--bg-val', 'transparent');
+        } else {
+          bgNode.innerHTML = '';
+          inner.style.setProperty('--bg-val', bg);
+          
+          // Auto contrast text
+          let hex = bg.replace('#', '');
+          if(hex.length === 6) {
+            const yiq = ((parseInt(hex.substr(0,2),16)*299)+(parseInt(hex.substr(2,2),16)*587)+(parseInt(hex.substr(4,2),16)*114))/1000;
+            if(yiq >= 128) inner.classList.add('fg-black');
+          }
+        }
+
+        // Logos
+        const logosNode = document.getElementById(`logos-${idx}`);
+        logosNode.innerHTML = logos ? `<img src="${logos}" crossorigin="anonymous" />` : `<h2 style="font-family:var(--font-heading);font-size:60px;">${window.contentConfig.BRAND_NAME}</h2>`;
+
+        // Stickers
+        const stickersNode = document.getElementById(`stickers-${idx}`);
+        stickersNode.innerHTML = stickers.map(src => `<img src="${src}" crossorigin="anonymous" />`).join('');
+
+        // Text
+        const headNode = document.getElementById(`head-${idx}`);
+        headNode.innerHTML = headline;
+        
+        const bodyNode = document.getElementById(`body-${idx}`);
+        bodyNode.innerHTML = body.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
+        
+        const ctaNode = document.getElementById(`cta-${idx}`);
+        ctaNode.innerHTML = cta;
+        ctaNode.style.display = cta ? 'inline-flex' : 'none';
+      });
+
+      setTimeout(() => document.body.classList.add('animated'), 50);
+    }
+
+    window.downloadImage = function(outerId) {
+      const outer = document.getElementById(outerId);
+      const inner = outer.querySelector('.canvas-inner');
+      const originalTransform = inner.style.transform;
+      inner.style.transform = 'none';
+
+      html2canvas(inner, { 
+        useCORS: true, 
+        backgroundColor: null,
+        scale: 1 
+      }).then(canvas => {
+        inner.style.transform = originalTransform;
+        const link = document.createElement('a');
+        link.download = `brand-social-asset-${Date.now()}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    };
+
+    window.onload = initFromConfig;
+  </script>
+  <script src="core/components.js"></script>
+</body>
+</html>

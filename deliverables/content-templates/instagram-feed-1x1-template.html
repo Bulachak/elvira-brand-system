@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+window.contentConfig = {
+  "PRIMARY_COLOR": "#1A1815",
+  "ACCENT_COLOR": "#D4AF37",
+  "LILAC_COLOR": "#2B5A75",
+  "TEXT_LIGHT": "#FFFFFF",
+  "TEXT_DARK": "#1A1815",
+  "FONT_HEADLINE": "'Cormorant Garamond', Georgia, \"Times New Roman\", serif",
+  "FONT_BODY": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif",
+  "LOGO_URL": "../assets/logo.svg",
+  "BRAND_NAME": "Elvira Astashkina"
+};
+</script>
+<title>Instagram Feed 1×1 — Brand Template</title>
+<style>
+/* ── RESET ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── PAGE SHELL ── */
+body {
+  background: #0d0d0d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 40px;
+  min-height: 100vh;
+  font-family: sans-serif;
+  gap: 0;
+}
+
+/* ── CONTROLS (outside the frame — not exported) ── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  width: 540px;
+}
+.controls-label {
+  color: #aaa;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  flex: 1;
+}
+.export-btn {
+  background: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.export-btn:hover { background: #eee; }
+
+/* ── SLIDE WRAPPER (scales 1080→540 for preview) ── */
+.slide-wrapper {
+  width: 540px;
+  height: 540px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.slide {
+  width: 1080px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  background: var(--primary);
+  transform: scale(0.5);
+  transform-origin: top left;
+  font-family: var(--font-body);
+}
+
+/* ════════════════════════════════════════════
+   LAYERS
+   ════════════════════════════════════════════ */
+
+/* Photo */
+.l-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Gradient overlay */
+.l-gradient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.gradient-bottom .l-gradient {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--overlay-color) 92%, transparent) 0%,
+    color-mix(in srgb, var(--overlay-color) 55%, transparent) 35%,
+    transparent 70%
+  );
+}
+.gradient-center .l-gradient {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 15%,
+    color-mix(in srgb, var(--overlay-color) 75%, transparent) 80%
+  );
+}
+.gradient-top .l-gradient {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--overlay-color) 92%, transparent) 0%,
+    color-mix(in srgb, var(--overlay-color) 30%, transparent) 40%,
+    transparent 65%
+  );
+}
+.gradient-none .l-gradient { display: none; }
+
+/* Solid dim (typographic + color-split base) */
+.l-solid {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-color);
+  opacity: var(--overlay-opacity);
+  pointer-events: none;
+  display: none;
+}
+
+/* Graphic elements */
+.l-graphic-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(45deg,
+      var(--accent) 0, var(--accent) 1px,
+      transparent 0, transparent 50%);
+  background-size: 14px 14px;
+  opacity: 0.07;
+  display: none;
+}
+.l-graphic-border {
+  position: absolute;
+  inset: 48px;
+  border: 5px solid var(--accent);
+  pointer-events: none;
+  display: none;
+}
+.l-graphic-band {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: var(--accent);
+  opacity: 0.18;
+  pointer-events: none;
+  display: none;
+}
+
+/* Logo */
+.l-logo {
+  position: absolute;
+  top: 72px;
+  left: 80px;
+  z-index: 10;
+}
+.l-logo img {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+}
+.logo-wordmark {
+  font-family: var(--font-headline);
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--text-light);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════════════
+   SHARED COMPONENTS
+   ════════════════════════════════════════════ */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  background: var(--accent);
+  color: var(--text-light);
+  font-family: var(--font-body);
+  font-size: 28px;
+  font-weight: 700;
+  padding: 10px 32px;
+  border-radius: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.headline {
+  font-family: var(--font-headline);
+  font-size: 128px;
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  -webkit-text-stroke: 3px rgba(0,0,0,0.35);
+  paint-order: stroke fill;
+  text-shadow: 6px 8px 0 rgba(0,0,0,0.55);
+}
+.subheadline {
+  font-family: var(--font-body);
+  font-size: 38px;
+  line-height: 1.35;
+  color: var(--text-light);
+  opacity: 0.82;
+  max-width: 820px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 14px;
+  background: var(--accent);
+  color: var(--text-light);
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 700;
+  padding: 22px 52px;
+  border-radius: 8px;
+  border: none;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: default;
+  white-space: nowrap;
+}
+.cta-btn::after { content: ' →'; }
+.layout-center-stage .cta-btn { align-self: center; }
+
+/* ════════════════════════════════════════════
+   LAYOUT A — BOTTOM ANCHOR
+   Photo full-bleed. Content anchored to bottom-left.
+   ════════════════════════════════════════════ */
+.layout-bottom-anchor .l-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px;
+  gap: 28px;
+  z-index: 5;
+}
+
+/* ════════════════════════════════════════════
+   LAYOUT B — CENTER STAGE
+   Photo full-bleed. Content centered.
+   ════════════════════════════════════════════ */
+.layout-center-stage .l-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px;
+  gap: 32px;
+  z-index: 5;
+}
+.layout-center-stage .headline {
+  font-size: 140px;
+  line-height: 0.85;
+}
+.layout-center-stage .tag-pill { align-self: center; }
+.layout-center-stage .cta-btn  { align-self: center; }
+
+/* ════════════════════════════════════════════
+   LAYOUT C — COLOR SPLIT
+   Left: brand color with text. Right: photo.
+   ════════════════════════════════════════════ */
+.layout-color-split .l-photo    { display: none; }
+.layout-color-split .l-gradient { display: none; }
+.layout-color-split .l-content  { display: none; }
+
+.l-split {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+.layout-color-split .l-split {
+  display: flex;
+}
+.split-color {
+  width: 52%;
+  background: var(--primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 60px 80px 80px;
+  gap: 28px;
+  flex-shrink: 0;
+}
+.split-photo {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+}
+/* Divider accent */
+.split-color::after {
+  content: '';
+  position: absolute;
+  left: calc(52% - 6px);
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: var(--accent);
+}
+.layout-color-split .headline {
+  font-size: 80px;
+  line-height: 0.88;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  overflow: hidden;
+}
+.layout-color-split .subheadline { font-size: 34px; }
+/* Logo sits top-right in color-split so it doesn't crowd the text column */
+.layout-color-split .l-logo { left: auto; right: 80px; }
+
+/* ════════════════════════════════════════════
+   LAYOUT D — TYPOGRAPHIC
+   Solid color BG. No photo. Statement text.
+   ════════════════════════════════════════════ */
+.layout-typographic .l-photo    { display: none; }
+.layout-typographic .l-gradient { display: none; }
+.layout-typographic .l-solid    { display: block; opacity: 1; background: var(--primary); }
+.layout-typographic .l-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  gap: 36px;
+  z-index: 5;
+}
+/* On solid BG: remove text-stroke & shadow for cleaner look */
+.layout-typographic .headline {
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  font-size: 136px;
+  line-height: 0.88;
+}
+/* Accent underline accent */
+.layout-typographic .headline-accent {
+  display: block;
+  width: 120px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 4px;
+  margin-top: 24px;
+}
+
+/* ════════════════════════════════════════════
+   LAYOUT E — FRAME
+   Photo inset in a decorative frame. Text below.
+   ════════════════════════════════════════════ */
+.layout-frame .l-photo    { display: none; }
+.layout-frame .l-gradient { display: none; }
+.layout-frame .l-solid    { display: block; opacity: 1; background: var(--primary); }
+
+.l-frame-photo {
+  display: none;
+  position: absolute;
+  top: 72px;
+  left: 72px;
+  right: 72px;
+  height: 570px;
+  overflow: hidden;
+  border: 6px solid var(--accent);
+  z-index: 4;
+}
+.l-frame-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.layout-frame .l-frame-photo { display: block; }
+
+.layout-frame .l-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 72px 64px;
+  gap: 20px;
+  z-index: 5;
+}
+.layout-frame .headline {
+  font-size: 86px;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  line-height: 0.9;
+}
+
+/* Logo — inside the photo frame area for frame layout */
+.layout-frame .l-logo {
+  top: 92px;
+  left: 92px;
+  bottom: auto;
+}
+.layout-frame .logo-wordmark { font-size: 38px; }
+</style>
+    <link rel="stylesheet" href="core/factory-core.css">
+</head>
+<body>
+
+<!-- ── CONTROLS (NOT exported) ── -->
+<div class="controls">
+  <span class="controls-label">Instagram Feed · 1080 × 1080px</span>
+  <button class="export-btn" onclick="exportPNG()">⬇ Export PNG</button>
+</div>
+
+<!-- ── SLIDE FRAME ── -->
+<div class="slide-wrapper">
+  <div class="slide" id="slide">
+
+    <!-- Photo layer -->
+    <div class="l-photo" id="photoLayer"></div>
+
+    <!-- Gradient overlay -->
+    <div class="l-gradient"></div>
+
+    <!-- Solid overlay (typographic / frame) -->
+    <div class="l-solid"></div>
+
+    <!-- Graphic elements -->
+    <div class="l-graphic-texture" id="gTexture"></div>
+    <div class="l-graphic-border"  id="gBorder"></div>
+    <div class="l-graphic-band"    id="gBand"></div>
+
+    <!-- Layout C: Color Split -->
+    <div class="l-split" id="splitPanel">
+      <div class="split-color" id="splitColor">
+        <div class="tag-pill"  id="sSplitTag"></div>
+        <h1  class="headline"  id="sSplitHead"></h1>
+        <p   class="subheadline" id="sSplitSub"></p>
+        <div class="cta-btn"  id="sSplitCta"></div>
+      </div>
+      <div class="split-photo" id="splitPhoto"></div>
+    </div>
+
+    <!-- Layout E: Frame photo -->
+    <div class="l-frame-photo" id="framePanel">
+      <img id="frameImg" src="" alt="">
+    </div>
+
+    <!-- Content layer (layouts A, B, D, E) -->
+    <div class="l-content" id="contentLayer">
+      <div class="tag-pill"     id="tagPill"></div>
+      <h1  class="headline"     id="headline">
+        <span id="headlineText"></span>
+        <span class="headline-accent" id="headlineAccent"></span>
+      </h1>
+      <p   class="subheadline"  id="subheadline"></p>
+      <div class="cta-btn"      id="ctaBtn"></div>
+    </div>
+
+    <!-- Logo (always on top) -->
+    <div class="l-logo" id="logoLayer"></div>
+
+  </div><!-- /.slide -->
+</div><!-- /.slide-wrapper -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+
+// ══════════════════════════════════════════════════════════════
+// BRAND CONFIG — set once per client at package generation time
+// ══════════════════════════════════════════════════════════════
+window.contentConfig = window.contentConfig || {
+  PRIMARY_COLOR:   '#1a1a2e',
+  SECONDARY_COLOR: '#16213e',
+  ACCENT_COLOR:    '#e94560',
+  TEXT_LIGHT:      '#ffffff',
+  TEXT_DARK:       '#1a1a1a',
+  FONT_HEADLINE:   '"Montserrat", sans-serif',
+  FONT_BODY:       '"Inter", sans-serif',
+  LOGO_URL:        '',            // PNG/SVG URL — blank = wordmark
+  BRAND_NAME:      'Brand',
+};
+
+// ══════════════════════════════════════════════════════════════
+// PER-POST VARIABLES — edit these for each post
+// ══════════════════════════════════════════════════════════════
+const POST = {
+  LAYOUT:            'bottom-anchor',  // bottom-anchor | center-stage | color-split | typographic | frame
+  PHOTO_URL:         '',               // image URL or local path
+  HEADLINE:          'YOUR HEADLINE',
+  SUBHEADLINE:       '',               // optional second line
+  TAG_SHOW:          true,
+  TAG_TEXT:          '#brand',
+  CTA_SHOW:          false,
+  CTA_TEXT:          'Learn More',
+  GRADIENT_POSITION: 'bottom',         // bottom | center | top | none
+  OVERLAY_COLOR:     '',               // hex — overrides PRIMARY_COLOR if set
+  OVERLAY_OPACITY:   0.75,
+  GRAPHIC_SHOW:      false,
+  GRAPHIC_TYPE:      'texture',        // texture | border | band
+};
+
+// ══════════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════════
+function render() {
+  const cfg  = window.contentConfig;
+  const post = POST;
+  const slide = document.getElementById('slide');
+  const root  = document.documentElement;
+
+  // Brand CSS variables
+  root.style.setProperty('--primary',         cfg.PRIMARY_COLOR);
+  root.style.setProperty('--secondary',       cfg.SECONDARY_COLOR);
+  root.style.setProperty('--accent',          cfg.ACCENT_COLOR);
+  root.style.setProperty('--text-light',      cfg.TEXT_LIGHT);
+  root.style.setProperty('--text-dark',       cfg.TEXT_DARK);
+  root.style.setProperty('--font-headline',   cfg.FONT_HEADLINE);
+  root.style.setProperty('--font-body',       cfg.FONT_BODY);
+  root.style.setProperty('--overlay-color',   post.OVERLAY_COLOR || cfg.PRIMARY_COLOR);
+  root.style.setProperty('--overlay-opacity', post.OVERLAY_OPACITY);
+
+  // Layout + gradient classes
+  slide.className = `slide layout-${post.LAYOUT} gradient-${post.GRADIENT_POSITION}`;
+
+  // Photo
+  const photoEl = document.getElementById('photoLayer');
+  if (post.PHOTO_URL) photoEl.style.backgroundImage = `url(${post.PHOTO_URL})`;
+
+  // Graphic elements
+  document.getElementById('gTexture').style.display = (post.GRAPHIC_SHOW && post.GRAPHIC_TYPE === 'texture') ? '' : 'none';
+  document.getElementById('gBorder').style.display  = (post.GRAPHIC_SHOW && post.GRAPHIC_TYPE === 'border')  ? '' : 'none';
+  document.getElementById('gBand').style.display    = (post.GRAPHIC_SHOW && post.GRAPHIC_TYPE === 'band')    ? '' : 'none';
+
+  const isSplit  = post.LAYOUT === 'color-split';
+  const isFrame  = post.LAYOUT === 'frame';
+  const isTypo   = post.LAYOUT === 'typographic';
+
+  // ── Color Split ──
+  document.getElementById('splitPanel').style.display   = isSplit ? 'flex' : 'none';
+  document.getElementById('contentLayer').style.display = isSplit ? 'none' : '';
+  if (isSplit) {
+    document.getElementById('splitPhoto').style.backgroundImage = `url(${post.PHOTO_URL})`;
+    setText('sSplitTag',  post.TAG_TEXT,    post.TAG_SHOW);
+    setText('sSplitHead', post.HEADLINE,    true);
+    setText('sSplitSub',  post.SUBHEADLINE, !!post.SUBHEADLINE);
+    setText('sSplitCta',  post.CTA_TEXT,    post.CTA_SHOW);
+  }
+
+  // ── Frame ──
+  if (isFrame && post.PHOTO_URL) {
+    document.getElementById('frameImg').src = post.PHOTO_URL;
+  }
+
+  // ── Typographic: show accent bar ──
+  document.getElementById('headlineAccent').style.display = isTypo ? '' : 'none';
+
+  // ── Content layer (A, B, D, E) ──
+  if (!isSplit) {
+    document.getElementById('headlineText').textContent = post.HEADLINE;
+    setText('tagPill',    post.TAG_TEXT,    post.TAG_SHOW);
+    setText('subheadline',post.SUBHEADLINE, !!post.SUBHEADLINE);
+    setText('ctaBtn',     post.CTA_TEXT,    post.CTA_SHOW);
+  }
+
+  // ── Logo ──
+  const logoEl = document.getElementById('logoLayer');
+  if (cfg.LOGO_URL) {
+    logoEl.innerHTML = `<img src="${cfg.LOGO_URL}" alt="${cfg.BRAND_NAME}">`;
+  } else {
+    logoEl.innerHTML = `<span class="logo-wordmark">${cfg.BRAND_NAME}</span>`;
+  }
+}
+
+function setText(id, text, show) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = text;
+  el.style.display = show ? '' : 'none';
+}
+
+// ══════════════════════════════════════════════════════════════
+// EXPORT — captures the 1080×1080 slide at full resolution
+// ══════════════════════════════════════════════════════════════
+async function exportPNG() {
+  const slide = document.getElementById('slide');
+  // Temporarily disable the scale transform for capture
+  slide.style.transform = 'none';
+  const canvas = await html2canvas(slide, {
+    width:   1080,
+    height:  1080,
+    scale:   1,
+    useCORS: true,
+    logging: false,
+    backgroundColor: null,
+  });
+  slide.style.transform = '';  // restore preview scale
+  const a = document.createElement('a');
+  a.download = `ig-1x1-${Date.now()}.png`;
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+}
+
+render();
+</script>
+    <script src="core/components.js"></script>
+</body>
+</html>

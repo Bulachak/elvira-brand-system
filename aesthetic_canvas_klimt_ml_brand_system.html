@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Brand Canvas: Elvira Astashkina (Klimt × ML)</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='10' fill='%231A1815' stroke='%23D4AF37' stroke-width='3.5'/%3E%3Crect x='8' y='8' width='20' height='26' rx='2' fill='%23F5F0E6'/%3E%3Crect x='16' y='12' width='4' height='18' fill='%231A1815'/%3E%3Crect x='8' y='38' width='20' height='10' rx='1.5' fill='%23D4AF37'/%3E%3Crect x='8' y='50' width='20' height='6' rx='1.5' fill='%232B5A75'/%3E%3Cline x1='32' y1='6' x2='32' y2='58' stroke='%23D4AF37' stroke-width='2'/%3E%3Ccircle cx='46' cy='24' r='11' fill='%23C02B37' stroke='%23D4AF37' stroke-width='2.5'/%3E%3Ccircle cx='46' cy='24' r='5' fill='%23F5F0E6'/%3E%3Ccircle cx='46' cy='47' r='8' fill='%232B5A75' stroke='%23D4AF37' stroke-width='2'/%3E%3Ccircle cx='46' cy='47' r='3.2' fill='%23D4AF37'/%3E%3C/svg%3E">
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond (Editorial Serif), Plus Jakarta Sans (Modern Sans), & Cinzel (Classical Roman) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+    <!-- KaTeX Mathematical Typesetting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        cinzel: ['"Cinzel"', 'serif'],
+                    },
+                    colors: {
+                        klimt: {
+                            gold: '#D4AF37',       // Primary Gold Leaf (The Kiss)
+                            ochre: '#B58E43',      // Warm Ochre Background Shimmer
+                            lapis: '#2B5A75',      // Lapis Teal Blue Mosaic
+                            crimson: '#C02B37',    // Crimson Red Mosaic Pop
+                            emerald: '#2E6B56',    // Meadow Green Pointillist Speck
+                            obsidian: '#1A1815',   // Male Robe Black Rectangle
+                            alabaster: '#F5F0E6',  // Flesh Tone / Parchment Light Base
+                            clay: '#DED6C5',       // Sandstone Frame Border
+                            charcoal: '#22201D',   // Crisp Typography Dark
+                            slate: '#5A5852'       // Muted Limestone Contour
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F0E6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 3px;
+        }
+        .klimt-texture {
+            background-color: #F5F0E6;
+            background-image: radial-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 0),
+                              radial-gradient(rgba(43, 90, 117, 0.06) 1px, transparent 0);
+            background-size: 28px 28px;
+            background-position: 0 0, 14px 14px;
+        }
+        .gold-shimmer {
+            background: linear-gradient(135deg, #D4AF37 0%, #F5E6BE 50%, #B58E43 100%);
+        }
+        .spiral-pulse {
+            animation: rotate-spiral 25s linear infinite;
+        }
+        @keyframes rotate-spiral {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+  <!-- Open Graph / Telegram / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Elvira Astashkina (@elvrast)">
+  <meta property="og:title" content="Aesthetic Brand Canvas: Elvira Astashkina (Klimt × ML)">
+  <meta property="og:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta property="og:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:secure_url" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Elvira Astashkina — Applied Machine Learning Engineer &amp; AI Educator (@elvrast)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aesthetic Brand Canvas: Elvira Astashkina (Klimt × ML)">
+  <meta name="twitter:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta name="twitter:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+</head>
+<body class="text-klimt-charcoal font-sans selection:bg-klimt-gold selection:text-klimt-obsidian klimt-texture">
+
+    <!-- Premium Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-klimt-obsidian text-klimt-alabaster px-6 py-4 rounded-lg shadow-2xl border border-klimt-gold flex items-center space-x-3 pointer-events-none">
+        <span class="w-2 h-2 rounded-full bg-klimt-gold animate-ping"></span>
+        <span id="toast-message" class="text-sm font-medium">System configuration updated</span>
+    </div>
+
+    <!-- Editorial Header / Navigation -->
+    <header class="border-b border-klimt-clay px-6 py-4 md:px-12 flex flex-col lg:flex-row justify-between items-center bg-[#F5F0E6]/95 backdrop-blur-md sticky top-0 z-40 shadow-sm gap-4">
+        <div class="flex items-center gap-3.5 text-left">
+            <a href="/" class="flex items-center gap-3 no-underline shrink-0" title="Canonical Horizontal Lockup — Light (Logo + First & Last Name)">
+                <svg class="w-10 h-10 rounded-lg shadow-sm border border-[#1A1815]" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="2" width="60" height="60" rx="10" fill="#F5F0E6" stroke="#1A1815" stroke-width="3.5"/>
+                    <rect x="8" y="8" width="20" height="26" rx="2" fill="#1A1815"/>
+                    <rect x="16" y="12" width="4" height="18" fill="#D4AF37"/>
+                    <rect x="8" y="38" width="20" height="10" rx="1.5" fill="#D4AF37"/>
+                    <rect x="8" y="50" width="20" height="6" rx="1.5" fill="#2B5A75"/>
+                    <line x1="32" y1="6" x2="32" y2="58" stroke="#1A1815" stroke-width="2"/>
+                    <circle cx="46" cy="24" r="11" fill="#C02B37" stroke="#1A1815" stroke-width="2"/>
+                    <circle cx="46" cy="24" r="5" fill="#D4AF37"/>
+                    <circle cx="46" cy="47" r="8" fill="#2B5A75" stroke="#1A1815" stroke-width="2"/>
+                    <circle cx="46" cy="47" r="3.2" fill="#F5F0E6"/>
+                </svg>
+                <span class="text-xl md:text-2xl font-serif font-bold tracking-tight text-[#1A1815]">
+                    Elvira Astashkina
+                </span>
+            </a>
+            <span class="hidden sm:inline-block h-6 w-px bg-[#C8BEAA]"></span>
+            <span class="hidden sm:inline-block text-[10px] font-mono uppercase tracking-[0.2em] text-[#7A5B14] font-bold">
+                Interactive Brand Identity Canvas
+            </span>
+        </div>
+        <div class="flex flex-wrap gap-2 md:gap-2.5 justify-center items-center text-xs font-mono uppercase tracking-wider font-bold text-klimt-charcoal">
+            <a href="/" class="px-3 py-2 rounded-lg border border-[#C8BEAA] bg-white hover:border-[#1A1815] transition">← Brand Hub</a>
+            <a href="/deliverables/brand-book/elvira-astashkina-2026-10-brand-book.html" class="px-3 py-2 rounded-lg border border-[#C8BEAA] bg-white text-[#7A5B14] hover:border-[#1A1815] transition">Brand Book</a>
+            <a href="/carousel" class="px-3 py-2 rounded-lg bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37] hover:bg-[#2B5A75] transition">Carousel Studio</a>
+            <a href="/video" class="px-3 py-2 rounded-lg bg-[#1A1815] text-[#D4AF37] border border-[#D4AF37] hover:bg-[#2B5A75] hover:text-white transition">Video Studio</a>
+            <button onclick="openExportModal()" class="px-3.5 py-2 bg-[#D4AF37] text-[#1A1815] text-xs uppercase tracking-[0.14em] hover:bg-[#1A1815] hover:text-[#D4AF37] transition shadow-sm rounded-lg font-bold border border-[#1A1815]">
+                Export Guidelines
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Hero Workspace -->
+    <section class="relative px-6 py-12 md:px-12 md:py-20 bg-klimt-alabaster border-b border-klimt-clay overflow-hidden">
+        <!-- Abstract Background Ornaments -->
+        <div class="absolute inset-0 opacity-15 pointer-events-none">
+            <div class="absolute right-[-5%] top-[-10%] w-[500px] h-[500px] rounded-full border-2 border-klimt-gold"></div>
+            <div class="absolute right-[10%] top-[20%] w-[300px] h-[300px] rounded-full border border-klimt-lapis"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Hero Left: Strategic Premise -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 border border-klimt-gold text-[10px] uppercase tracking-[0.2em] text-klimt-charcoal rounded-lg font-extrabold bg-klimt-gold/10">
+                    <span class="w-2 h-2 rounded-full bg-klimt-crimson"></span>
+                    <span>Conceptual Master Strategy</span>
+                </div>
+                <h2 class="text-4xl md:text-6xl font-serif font-light leading-none tracking-tight text-klimt-charcoal">
+                    Gustav Klimt’s <span class="italic font-normal text-klimt-gold">"The Kiss"</span> <br>
+                    Encoded into <br>
+                    <span class="font-normal underline decoration-klimt-lapis decoration-2">Applied Machine Learning</span>.
+                </h2>
+                <p class="text-klimt-slate max-w-xl text-md md:text-lg leading-relaxed">
+                    By extracting the exact color spectrum and dual geometry of Klimt's masterpiece—the <strong>rectilinear discrete tiles</strong> of the male figure and the <strong>concentric continuous rings</strong> of the female figure—we build an unmatched visual identity for <strong>Elvira Astashkina (`@elvrast`)</strong>.
+                </p>
+                <p class="text-klimt-slate max-w-xl text-sm leading-relaxed">
+                    This system maps matrices, tensor blocks, probability density fields, and latent space embeddings directly onto high-fashion social video overlays, backed by the intellectual authority of <strong>Aliona Doletskaya</strong> and <strong>Maria Logvinova</strong>.
+                </p>
+                <div class="flex gap-6 pt-4 border-t border-klimt-clay max-w-md">
+                    <div>
+                        <p class="text-3xl font-serif text-klimt-gold font-bold">01</p>
+                        <p class="text-[10px] uppercase tracking-widest text-klimt-charcoal mt-1 font-bold">Klimt Leaf Gold</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-serif text-klimt-lapis font-bold">02</p>
+                        <p class="text-[10px] uppercase tracking-widest text-klimt-charcoal mt-1 font-bold">Discrete Tensors</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-serif text-klimt-crimson font-bold">03</p>
+                        <p class="text-[10px] uppercase tracking-widest text-klimt-charcoal mt-1 font-bold">Probability Fields</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Right: Interactive Painting Synthesis Card -->
+            <div class="lg:col-span-5 bg-klimt-obsidian text-klimt-alabaster p-8 rounded-2xl border-2 border-klimt-gold shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-16 -top-16 w-48 h-48 bg-klimt-gold/10 rounded-full blur-2xl"></div>
+                
+                <div class="relative z-10 space-y-6">
+                    <div class="flex justify-between items-center border-b border-klimt-gold/30 pb-3">
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-klimt-gold font-mono font-bold">Artwork Reference</span>
+                        <span class="text-xs font-serif italic text-klimt-alabaster">1907–1908, Vienna</span>
+                    </div>
+
+                    <!-- Mini Visual Representation of The Kiss Geometry -->
+                    <div class="h-44 bg-gradient-to-b from-[#2B2317] to-[#12100D] rounded-xl border border-klimt-gold/40 p-4 flex items-center justify-between relative overflow-hidden">
+                        <!-- Male Discrete Grid Side -->
+                        <div class="w-1/2 h-full flex flex-col justify-center items-center space-y-1.5 border-r border-klimt-gold/20 pr-2">
+                            <span class="text-[8px] uppercase tracking-widest text-klimt-gold font-mono mb-1">Discrete Male Grid</span>
+                            <div class="grid grid-cols-3 gap-1">
+                                <div class="w-5 h-7 bg-klimt-alabaster rounded-xs border border-klimt-obsidian flex items-center justify-center"><div class="w-1.5 h-5 bg-klimt-obsidian"></div></div>
+                                <div class="w-5 h-7 bg-klimt-gold rounded-xs"></div>
+                                <div class="w-5 h-7 bg-klimt-obsidian border border-klimt-gold rounded-xs"></div>
+                                <div class="w-5 h-7 bg-klimt-lapis rounded-xs"></div>
+                                <div class="w-5 h-7 bg-klimt-alabaster rounded-xs"></div>
+                                <div class="w-5 h-7 bg-klimt-crimson rounded-xs"></div>
+                            </div>
+                            <span class="text-[7px] text-klimt-clay font-mono mt-1">Matrices &amp; Tensors</span>
+                        </div>
+
+                        <!-- Female Continuous Circles Side -->
+                        <div class="w-1/2 h-full flex flex-col justify-center items-center space-y-1.5 pl-2">
+                            <span class="text-[8px] uppercase tracking-widest text-klimt-lapis font-mono mb-1">Continuous Female Rings</span>
+                            <div class="relative w-16 h-16 flex items-center justify-center">
+                                <circle class="w-16 h-16 rounded-full bg-klimt-gold/30 border border-klimt-gold flex items-center justify-center">
+                                    <circle class="w-12 h-12 rounded-full bg-klimt-crimson flex items-center justify-center">
+                                        <circle class="w-8 h-8 rounded-full bg-klimt-alabaster flex items-center justify-center">
+                                            <circle class="w-4 h-4 rounded-full bg-klimt-lapis"></circle>
+                                        </circle>
+                                    </circle>
+                                </circle>
+                            </div>
+                            <span class="text-[7px] text-klimt-clay font-mono mt-1">Probability Distributions</span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-klimt-clay italic font-serif leading-relaxed">
+                        "The Kiss is the ultimate synthesis: rigid discrete matrices unioned with fluid continuous probability fields inside a golden latent space."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: THE KISS PALETTE EXTRACTOR -->
+    <section id="palette-section" class="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto space-y-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <span class="text-xs uppercase tracking-[0.2em] text-klimt-gold font-extrabold">Color Extraction System</span>
+            <h3 class="text-3xl md:text-5xl font-serif font-light mt-1 text-klimt-charcoal">The Spectrum of "The Kiss"</h3>
+            <p class="text-klimt-slate text-sm mt-3 leading-relaxed">
+                Sampled directly from Gustav Klimt's masterwork, this 6-tone color system gives Elvira a vibrant yet deeply refined editorial palette.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-5">
+            <!-- Swatch 1: Klimt Gold -->
+            <div class="bg-white p-4 rounded-xl border border-klimt-clay shadow-sm hover:shadow-md transition group">
+                <div class="h-28 rounded-lg bg-klimt-gold mb-3 relative overflow-hidden shadow-inner flex items-end p-2">
+                    <span class="text-[9px] font-mono font-bold text-klimt-obsidian bg-white/80 px-1.5 py-0.5 rounded">Core Leaf</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-klimt-charcoal">Klimt Gold</span>
+                    <span class="font-mono text-klimt-slate">#D4AF37</span>
+                </div>
+                <p class="text-[11px] text-klimt-slate mt-2 leading-tight">Shimmering background latent space, high-value highlight lines.</p>
+            </div>
+
+            <!-- Swatch 2: Lapis Blue -->
+            <div class="bg-white p-4 rounded-xl border border-klimt-clay shadow-sm hover:shadow-md transition group">
+                <div class="h-28 rounded-lg bg-klimt-lapis mb-3 relative overflow-hidden shadow-inner flex items-end p-2">
+                    <span class="text-[9px] font-mono font-bold text-white bg-black/40 px-1.5 py-0.5 rounded">Mosaic Lapis</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-klimt-charcoal">Lapis Mosaic</span>
+                    <span class="font-mono text-klimt-slate">#2B5A75</span>
+                </div>
+                <p class="text-[11px] text-klimt-slate mt-2 leading-tight">Muted teal/blue from female concentric circles &amp; flower ground.</p>
+            </div>
+
+            <!-- Swatch 3: Crimson Berry -->
+            <div class="bg-white p-4 rounded-xl border border-klimt-clay shadow-sm hover:shadow-md transition group">
+                <div class="h-28 rounded-lg bg-klimt-crimson mb-3 relative overflow-hidden shadow-inner flex items-end p-2">
+                    <span class="text-[9px] font-mono font-bold text-white bg-black/40 px-1.5 py-0.5 rounded">Vibrant Pop</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-klimt-charcoal">Crimson Berry</span>
+                    <span class="font-mono text-klimt-slate">#C02B37</span>
+                </div>
+                <p class="text-[11px] text-klimt-slate mt-2 leading-tight">High-contrast accent from female floral clusters &amp; lips.</p>
+            </div>
+
+            <!-- Swatch 4: Emerald Meadow -->
+            <div class="bg-white p-4 rounded-xl border border-klimt-clay shadow-sm hover:shadow-md transition group">
+                <div class="h-28 rounded-lg bg-klimt-emerald mb-3 relative overflow-hidden shadow-inner flex items-end p-2">
+                    <span class="text-[9px] font-mono font-bold text-white bg-black/40 px-1.5 py-0.5 rounded">Flora Pointillist</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-klimt-charcoal">Emerald Flora</span>
+                    <span class="font-mono text-klimt-slate">#2E6B56</span>
+                </div>
+                <p class="text-[11px] text-klimt-slate mt-2 leading-tight">Natural green ground from the flower meadow under their feet.</p>
+            </div>
+
+            <!-- Swatch 5: Obsidian Charcoal -->
+            <div class="bg-white p-4 rounded-xl border border-klimt-clay shadow-sm hover:shadow-md transition group">
+                <div class="h-28 rounded-lg bg-klimt-obsidian mb-3 relative overflow-hidden shadow-inner flex items-end p-2">
+                    <span class="text-[9px] font-mono font-bold text-klimt-gold bg-black/80 px-1.5 py-0.5 rounded">Rectangular Dark</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-klimt-charcoal">Obsidian Grid</span>
+                    <span class="font-mono text-klimt-slate">#1A1815</span>
+                </div>
+                <p class="text-[11px] text-klimt-slate mt-2 leading-tight">Male robe black rectangles; provides crisp structure &amp; text contrast.</p>
+            </div>
+
+            <!-- Swatch 6: Alabaster Parchment -->
+            <div class="bg-white p-4 rounded-xl border border-klimt-clay shadow-sm hover:shadow-md transition group">
+                <div class="h-28 rounded-lg bg-klimt-alabaster border border-klimt-clay/60 mb-3 relative overflow-hidden flex items-end p-2">
+                    <span class="text-[9px] font-mono font-bold text-klimt-charcoal bg-white/90 px-1.5 py-0.5 rounded">Luminous Canvas</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-klimt-charcoal">Alabaster Parchment</span>
+                    <span class="font-mono text-klimt-slate">#F5F0E6</span>
+                </div>
+                <p class="text-[11px] text-klimt-slate mt-2 leading-tight">Flesh tones &amp; warm white gallery paper base; soft &amp; non-glare.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: GEOMETRIC MOTIF MAPPING (KLIMT <-> APPLIED MATH / ML) -->
+    <section id="motif-mapping" class="py-16 md:py-24 px-6 md:px-12 bg-white border-t border-b border-klimt-clay">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="text-xs uppercase tracking-[0.2em] text-klimt-lapis font-extrabold">Conceptual Bridge</span>
+                <h3 class="text-3xl md:text-5xl font-serif font-light mt-1 text-klimt-charcoal">Geometric Shape Matrix</h3>
+                <p class="text-klimt-slate text-sm mt-3">How specific visual shapes from <em>The Kiss</em> map directly to Machine Learning &amp; Applied Mathematics.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Motif 1: Rectangular Stacked Tiles -->
+                <div class="bg-klimt-alabaster/60 p-6 rounded-xl border border-klimt-clay space-y-4 hover:border-klimt-gold transition">
+                    <div class="w-full h-36 bg-klimt-obsidian rounded-lg p-4 flex items-center justify-center relative overflow-hidden border border-klimt-gold/30">
+                        <!-- Rectangular Stack Graphics -->
+                        <div class="grid grid-cols-3 gap-1.5 w-32">
+                            <div class="h-10 bg-klimt-alabaster rounded-xs flex items-center justify-center"><div class="w-1.5 h-8 bg-klimt-obsidian"></div></div>
+                            <div class="h-10 bg-klimt-gold rounded-xs"></div>
+                            <div class="h-10 bg-klimt-crimson rounded-xs"></div>
+                            <div class="h-10 bg-klimt-lapis rounded-xs"></div>
+                            <div class="h-10 bg-klimt-alabaster rounded-xs flex items-center justify-center"><div class="w-1.5 h-8 bg-klimt-obsidian"></div></div>
+                            <div class="h-10 bg-klimt-gold rounded-xs"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-klimt-gold font-bold">Klimt Male Robe Motif</span>
+                        <h4 class="font-serif text-xl font-bold text-klimt-charcoal mt-0.5">Discrete Rectangles</h4>
+                    </div>
+                    <div class="border-t border-klimt-clay/60 pt-3 text-xs space-y-2">
+                        <p class="font-semibold text-klimt-lapis">Math &amp; ML Translation:</p>
+                        <p class="text-klimt-slate text-[11px] leading-relaxed">
+                            • Matrix Multiplication $\mathbf{W} \cdot \mathbf{x} + \mathbf{b}$<br>
+                            • Vision Transformer (ViT) Patch Grids $x_p \in \mathbb{R}^{P^2 \cdot C}$<br>
+                            • Quantized Tensor Blocks &amp; Attention Masks
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Motif 2: Concentric Circular Rings -->
+                <div class="bg-klimt-alabaster/60 p-6 rounded-xl border border-klimt-clay space-y-4 hover:border-klimt-gold transition">
+                    <div class="w-full h-36 bg-klimt-obsidian rounded-lg p-4 flex items-center justify-center relative overflow-hidden border border-klimt-gold/30">
+                        <!-- Concentric Circles Graphics -->
+                        <div class="relative w-24 h-24 flex items-center justify-center">
+                            <div class="w-24 h-24 rounded-full border-2 border-klimt-gold/40 flex items-center justify-center">
+                                <div class="w-18 h-18 rounded-full bg-klimt-lapis/40 flex items-center justify-center border border-klimt-gold">
+                                    <div class="w-12 h-12 rounded-full bg-klimt-crimson flex items-center justify-center">
+                                        <div class="w-6 h-6 rounded-full bg-klimt-alabaster border border-klimt-obsidian"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-klimt-lapis font-bold">Klimt Female Robe Motif</span>
+                        <h4 class="font-serif text-xl font-bold text-klimt-charcoal mt-0.5">Concentric Ovals &amp; Rings</h4>
+                    </div>
+                    <div class="border-t border-klimt-clay/60 pt-3 text-xs space-y-2">
+                        <p class="font-semibold text-klimt-lapis">Math &amp; ML Translation:</p>
+                        <p class="text-klimt-slate text-[11px] leading-relaxed">
+                            • Continuous Probability Density $p(\mathbf{x})$<br>
+                            • Iso-density Contours &amp; Gaussian Spheres<br>
+                            • Radial Basis Function (RBF) Kernels<br>
+                            • Mixture of Experts (MoE) Centroids
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Motif 3: Pointillist Flower Meadow -->
+                <div class="bg-klimt-alabaster/60 p-6 rounded-xl border border-klimt-clay space-y-4 hover:border-klimt-gold transition">
+                    <div class="w-full h-36 bg-klimt-obsidian rounded-lg p-4 flex items-center justify-center relative overflow-hidden border border-klimt-gold/30">
+                        <!-- Pointillist Cluster Dots -->
+                        <svg class="w-32 h-28" viewBox="0 0 120 100" fill="none">
+                            <!-- Cluster 1: Emerald -->
+                            <circle cx="30" cy="40" r="6" fill="#2E6B56" />
+                            <circle cx="22" cy="32" r="4" fill="#D4AF37" />
+                            <circle cx="38" cy="48" r="4" fill="#2B5A75" />
+                            <circle cx="20" cy="48" r="3" fill="#C02B37" />
+                            <!-- Cluster 2: Lapis & Crimson -->
+                            <circle cx="80" cy="60" r="7" fill="#C02B37" />
+                            <circle cx="70" cy="50" r="5" fill="#2B5A75" />
+                            <circle cx="92" cy="65" r="4" fill="#D4AF37" />
+                            <circle cx="85" cy="45" r="3" fill="#2E6B56" />
+                            <!-- Decision Boundary Line -->
+                            <path d="M 10 80 Q 60 40 110 20" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="3,3" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-klimt-emerald font-bold">Klimt Meadow Motif</span>
+                        <h4 class="font-serif text-xl font-bold text-klimt-charcoal mt-0.5">Pointillist Mosaic Tiles</h4>
+                    </div>
+                    <div class="border-t border-klimt-clay/60 pt-3 text-xs space-y-2">
+                        <p class="font-semibold text-klimt-lapis">Math &amp; ML Translation:</p>
+                        <p class="text-klimt-slate text-[11px] leading-relaxed">
+                            • High-Dimensional Latent Embeddings<br>
+                            • t-SNE &amp; UMAP Feature Cluster Maps<br>
+                            • k-Nearest Neighbors ($k$-NN) Boundaries<br>
+                            • Vector Database Point Clouds
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Motif 4: Golden Shimmer Field -->
+                <div class="bg-klimt-alabaster/60 p-6 rounded-xl border border-klimt-clay space-y-4 hover:border-klimt-gold transition">
+                    <div class="w-full h-36 bg-klimt-obsidian rounded-lg p-4 flex items-center justify-center relative overflow-hidden border border-klimt-gold/30">
+                        <!-- Flowing Vector Streamlines -->
+                        <svg class="w-36 h-28" viewBox="0 0 140 100" fill="none">
+                            <path d="M 10 80 Q 70 10 130 50" stroke="#D4AF37" stroke-width="2" />
+                            <path d="M 10 90 Q 70 20 130 60" stroke="#2B5A75" stroke-width="1.5" />
+                            <path d="M 10 70 Q 70 0 130 40" stroke="#C02B37" stroke-width="1" stroke-dasharray="2,2" />
+                            <circle cx="70" cy="35" r="4" fill="#D4AF37" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-klimt-gold font-bold">Klimt Gold Leaf Motif</span>
+                        <h4 class="font-serif text-xl font-bold text-klimt-charcoal mt-0.5">Golden Streamlines</h4>
+                    </div>
+                    <div class="border-t border-klimt-clay/60 pt-3 text-xs space-y-2">
+                        <p class="font-semibold text-klimt-lapis">Math &amp; ML Translation:</p>
+                        <p class="text-klimt-slate text-[11px] leading-relaxed">
+                            • Optimization Loss Landscapes $\mathcal{L}(\theta)$<br>
+                            • Gradient Field Flow Trajectories $\nabla f(x)$<br>
+                            • Diffusion Model Noise Continuum $\mathcal{N}(0, \mathbf{I})$<br>
+                            • Latent Manifold Projection
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: SOCIAL MEDIA VIDEO OVERLAY STUDIO (REELS / TIKTOKS) -->
+    <section id="video-studio" class="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto space-y-12">
+        <div class="text-center max-w-3xl mx-auto">
+            <span class="text-xs uppercase tracking-[0.2em] text-klimt-gold font-extrabold">Reels &amp; TikTok Templates</span>
+            <h3 class="text-3xl md:text-5xl font-serif font-light mt-1 text-klimt-charcoal">Instagram &amp; TikTok Overlay Studio</h3>
+            <p class="text-klimt-slate text-sm mt-3 leading-relaxed">
+                Here is how Klimt's geometric motifs from <em>The Kiss</em> function directly as high-fashion, mathematically accurate overlays on Elvira's video posts.
+            </p>
+        </div>
+
+        <!-- Video Frames Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            
+            <!-- Phone Frame 1: The Matrix Mosaic (Discrete Tensors) -->
+            <div class="space-y-4">
+                <div class="text-center">
+                    <span class="text-[10px] font-mono text-klimt-gold font-bold uppercase tracking-widest block">Overlay Template A</span>
+                    <h4 class="font-serif text-xl font-bold text-klimt-charcoal">The Discrete Matrix Sidebar</h4>
+                    <p class="text-xs text-klimt-slate">Klimt's stacked male rectangular tiles frame her video while showing tensor math concepts.</p>
+                </div>
+
+                <div class="aspect-[9/16] bg-klimt-obsidian rounded-[36px] p-3 border-4 border-klimt-gold shadow-2xl relative overflow-hidden max-w-xs mx-auto">
+                    <!-- Top Notch -->
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-4 bg-black rounded-full z-30"></div>
+                    
+                    <!-- Video Canvas Area -->
+                    <div class="w-full h-full bg-klimt-alabaster rounded-[28px] overflow-hidden relative flex flex-col justify-between p-5">
+                        
+                        <!-- Left Sidebar: Klimt Male Mosaic Tiles Overlay -->
+                        <div class="absolute top-0 left-0 bottom-0 w-16 bg-klimt-obsidian border-r border-klimt-gold/40 flex flex-col justify-between py-10 items-center z-20">
+                            <!-- Stacked Rectangles -->
+                            <div class="space-y-2">
+                                <div class="w-7 h-10 bg-klimt-alabaster rounded-xs flex items-center justify-center"><div class="w-1.5 h-8 bg-klimt-obsidian"></div></div>
+                                <div class="w-7 h-6 rounded-xs bg-klimt-gold"></div>
+                                <div class="w-7 h-8 rounded-xs bg-klimt-crimson"></div>
+                                <div class="w-7 h-5 rounded-xs bg-klimt-lapis"></div>
+                            </div>
+                            <!-- Mini Matrix Equation -->
+                            <div class="text-[7px] font-mono text-klimt-gold -rotate-90 tracking-widest uppercase my-4">
+                                W &isin; &Ropf;<sup>m&times;n</sup>
+                            </div>
+                            <div class="w-6 h-6 rounded-full bg-klimt-gold flex items-center justify-center">
+                                <div class="w-3 h-3 rounded-full bg-klimt-crimson"></div>
+                            </div>
+                        </div>
+
+                        <!-- Video Stream Simulation -->
+                        <div class="absolute inset-y-0 right-0 left-16 flex flex-col justify-between p-4 z-10">
+                            <!-- Profile Header -->
+                            <div class="flex items-center space-x-2 bg-white/90 backdrop-blur-md p-1.5 rounded-full self-start border border-klimt-clay">
+                                <div class="w-6 h-6 bg-klimt-gold rounded-full flex items-center justify-center font-cinzel text-[8px] text-klimt-obsidian font-bold">EA</div>
+                                <span class="text-[9px] font-bold tracking-tight text-klimt-charcoal">@elvrast</span>
+                            </div>
+
+                            <!-- Avatar / Talking Speaker Representation -->
+                            <div class="my-auto text-center space-y-2 translate-x-2">
+                                <div class="w-24 h-24 rounded-full border-2 border-klimt-gold mx-auto overflow-hidden bg-klimt-gold/20 relative flex items-center justify-center shadow-lg">
+                                    <svg class="w-16 h-16 text-klimt-charcoal/80" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="absolute bottom-1 right-2 bg-klimt-crimson text-white rounded-full p-0.5 text-[8px]">🎙️</span>
+                                </div>
+                                <span class="inline-block px-2 py-0.5 bg-klimt-lapis text-white text-[8px] uppercase tracking-widest font-bold rounded">Measure Theory: Ep. 1</span>
+                            </div>
+
+                            <!-- Editorial Subtitle Overlay Card -->
+                            <div class="space-y-1.5 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-klimt-clay shadow-lg translate-x-2">
+                                <span class="text-[8px] font-mono tracking-widest text-klimt-gold uppercase block font-extrabold">Applied Math &amp; ML</span>
+                                <h5 class="font-serif italic text-xs text-klimt-charcoal leading-tight font-bold">
+                                    "How do we measure probability in high dimensions?"
+                                </h5>
+                                <p class="text-[8.5px] text-klimt-slate leading-normal">
+                                    In ML, matrices act like Klimt's discrete tiles: partitioning complex space into clear tokens.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phone Frame 2: The Latent Manifold (Continuous Circles & Streamlines) -->
+            <div class="space-y-4">
+                <div class="text-center">
+                    <span class="text-[10px] font-mono text-klimt-lapis font-bold uppercase tracking-widest block">Overlay Template B</span>
+                    <h4 class="font-serif text-xl font-bold text-klimt-charcoal">The Golden Latent Streamlines</h4>
+                    <p class="text-xs text-klimt-slate">Klimt's continuous concentric circles &amp; gold streamlines overlay gradient descent flows.</p>
+                </div>
+
+                <div class="aspect-[9/16] bg-klimt-obsidian rounded-[36px] p-3 border-4 border-klimt-gold shadow-2xl relative overflow-hidden max-w-xs mx-auto">
+                    <!-- Top Notch -->
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-4 bg-black rounded-full z-30"></div>
+                    
+                    <!-- Video Canvas Area -->
+                    <div class="w-full h-full bg-[#171410] rounded-[28px] overflow-hidden relative flex flex-col justify-between p-5">
+                        
+                        <!-- Shimmering Klimt Background Glow -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-klimt-obsidian via-[#241E15] to-klimt-gold/25 z-0"></div>
+
+                        <!-- Klimt Concentric Circles & Vector Curves Background Overlay -->
+                        <div class="absolute inset-0 z-0 opacity-70">
+                            <svg width="100%" height="100%" viewBox="0 0 200 350" fill="none">
+                                <!-- Concentric Oval Probability Maps (Female Robe Motif) -->
+                                <ellipse cx="100" cy="120" rx="60" ry="35" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4,4" />
+                                <ellipse cx="100" cy="120" rx="40" ry="22" stroke="#2B5A75" stroke-width="1.5" />
+                                <ellipse cx="100" cy="120" rx="20" ry="10" stroke="#C02B37" stroke-width="1.5" />
+                                
+                                <!-- Golden Gradient Vector Lines (Loss Landscape Streamlines) -->
+                                <path d="M 10 300 Q 100 180 190 260" stroke="#D4AF37" stroke-width="2" />
+                                <path d="M 10 320 Q 100 200 190 280" stroke="#2E6B56" stroke-width="1.5" />
+
+                                <!-- Pointillist Cluster Dots -->
+                                <circle cx="140" cy="100" r="4" fill="#C02B37" />
+                                <circle cx="60" cy="140" r="3" fill="#D4AF37" />
+                                <circle cx="150" cy="130" r="3" fill="#2B5A75" />
+                            </svg>
+                        </div>
+
+                        <!-- Overlay Content -->
+                        <div class="relative z-10 flex flex-col justify-between h-full">
+                            <!-- Profile Header -->
+                            <div class="flex items-center space-x-2 bg-black/60 backdrop-blur-md p-1.5 rounded-full self-start border border-klimt-gold/40">
+                                <div class="w-6 h-6 bg-klimt-gold rounded-full flex items-center justify-center font-cinzel text-[8px] text-klimt-obsidian font-bold">EA</div>
+                                <span class="text-[9px] font-bold tracking-tight text-white">@elvrast</span>
+                            </div>
+
+                            <!-- Talking Avatar Center -->
+                            <div class="my-auto text-center space-y-2">
+                                <div class="w-20 h-20 rounded-full border-2 border-klimt-gold mx-auto overflow-hidden bg-white/10 relative flex items-center justify-center shadow-2xl">
+                                    <svg class="w-14 h-14 text-klimt-alabaster/70" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <span class="inline-block px-2 py-0.5 bg-klimt-gold text-klimt-obsidian text-[8px] uppercase tracking-widest font-extrabold rounded">Loss Optimization</span>
+                            </div>
+
+                            <!-- Subtle Equation & Subtitle Overlay Card -->
+                            <div class="space-y-1.5 bg-black/80 backdrop-blur-md p-3.5 rounded-xl border border-klimt-gold/40 shadow-2xl text-left">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-[8px] font-mono tracking-widest text-klimt-gold uppercase font-bold">Gradient Descent</span>
+                                    <span class="text-[8px] text-klimt-alabaster/60 font-mono">&theta;<sub>t+1</sub> = &theta;<sub>t</sub> - &eta;&nabla;&Lscr;</span>
+                                </div>
+                                <h5 class="font-serif italic text-xs text-white leading-tight font-bold">
+                                    "Flowing through multidimensional valleys."
+                                </h5>
+                                <p class="text-[8.5px] text-klimt-clay leading-normal">
+                                    Optimization trajectory paths mirror the golden spiral branches in Klimt's decorative panels.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE MATH-ART SYNTHESIS SANDBOX -->
+    <section id="synthesis-sandbox" class="py-16 md:py-24 px-6 md:px-12 bg-klimt-obsidian text-klimt-alabaster border-t border-b border-klimt-gold">
+        <div class="max-w-7xl mx-auto space-y-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="text-xs uppercase tracking-[0.2em] text-klimt-gold font-extrabold">Live Visual Generator</span>
+                <h3 class="text-3xl md:text-5xl font-serif font-light mt-1 text-white">Math-Art Synthesis Sandbox</h3>
+                <p class="text-klimt-clay text-sm mt-3 leading-relaxed">
+                    Toggle layers below to see how Gustav Klimt's <em>The Kiss</em> shapes merge directly with AI &amp; Applied Math visualization layers.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Controls Side -->
+                <div class="lg:col-span-4 bg-white/5 p-6 rounded-2xl border border-klimt-gold/30 space-y-6">
+                    <span class="text-xs uppercase tracking-widest text-klimt-gold font-bold block border-b border-white/10 pb-2">Toggle Layer Motifs</span>
+
+                    <div class="space-y-3">
+                        <button onclick="toggleSandboxLayer('male')" id="btn-male" class="w-full text-left px-4 py-3 bg-klimt-gold text-klimt-obsidian text-xs uppercase tracking-widest font-bold rounded-lg flex justify-between items-center transition shadow">
+                            <span>01. Male Rectangles (Discrete Tensors)</span>
+                            <span id="badge-male" class="text-[10px] font-mono bg-klimt-obsidian text-klimt-gold px-2 py-0.5 rounded">ACTIVE</span>
+                        </button>
+                        <button onclick="toggleSandboxLayer('female')" id="btn-female" class="w-full text-left px-4 py-3 bg-klimt-gold text-klimt-obsidian text-xs uppercase tracking-widest font-bold rounded-lg flex justify-between items-center transition shadow">
+                            <span>02. Female Circles (Probability Densities)</span>
+                            <span id="badge-female" class="text-[10px] font-mono bg-klimt-obsidian text-klimt-gold px-2 py-0.5 rounded">ACTIVE</span>
+                        </button>
+                        <button onclick="toggleSandboxLayer('meadow')" id="btn-meadow" class="w-full text-left px-4 py-3 bg-klimt-gold text-klimt-obsidian text-xs uppercase tracking-widest font-bold rounded-lg flex justify-between items-center transition shadow">
+                            <span>03. Flower Meadow (Latent Clusters)</span>
+                            <span id="badge-meadow" class="text-[10px] font-mono bg-klimt-obsidian text-klimt-gold px-2 py-0.5 rounded">ACTIVE</span>
+                        </button>
+                    </div>
+
+                    <p class="text-[11px] text-klimt-clay leading-relaxed pt-2">
+                        <strong>Male tiles</strong> construct the rigid matrix multiplication grids. <strong>Female concentric rings</strong> generate continuous probability density maps. <strong>Meadow specks</strong> plot high-dimensional cluster embeddings.
+                    </p>
+                </div>
+
+                <!-- Live SVG Render Engine -->
+                <div class="lg:col-span-8 bg-black/80 rounded-2xl p-8 border-2 border-klimt-gold/40 relative h-[380px] flex items-center justify-center overflow-hidden shadow-2xl">
+                    <svg id="sandbox-svg" class="w-full h-full max-w-[550px]" viewBox="0 0 550 320" xmlns="http://www.w3.org/2000/svg">
+                        
+                        <!-- Base Neural Network Edges -->
+                        <g opacity="0.3">
+                            <line x1="80" y1="160" x2="275" y2="80" stroke="#D4AF37" stroke-width="1.5" />
+                            <line x1="80" y1="160" x2="275" y2="240" stroke="#D4AF37" stroke-width="1.5" />
+                            <line x1="275" y1="80" x2="470" y2="160" stroke="#D4AF37" stroke-width="1.5" />
+                            <line x1="275" y1="240" x2="470" y2="160" stroke="#D4AF37" stroke-width="1.5" />
+                        </g>
+
+                        <!-- Layer 1: Male Rectangles (Discrete Matrix Tiles) -->
+                        <g id="layer-male">
+                            <g transform="translate(50, 120)">
+                                <rect width="55" height="80" fill="#F5F0E6" stroke="#D4AF37" stroke-width="1.5" rx="3" />
+                                <rect x="6" y="10" width="12" height="24" fill="#1A1815" />
+                                <rect x="22" y="10" width="26" height="24" fill="#D4AF37" />
+                                <rect x="6" y="38" width="42" height="15" fill="#2B5A75" />
+                                <rect x="6" y="57" width="20" height="15" fill="#C02B37" />
+                                <rect x="28" y="57" width="20" height="15" fill="#1A1815" />
+                            </g>
+                            <g transform="translate(440, 120)">
+                                <rect width="55" height="80" fill="#1A1815" stroke="#D4AF37" stroke-width="1.5" rx="3" />
+                                <rect x="6" y="10" width="42" height="18" fill="#F5F0E6" />
+                                <rect x="6" y="32" width="18" height="20" fill="#D4AF37" />
+                                <rect x="28" y="32" width="20" height="20" fill="#2E6B56" />
+                                <rect x="6" y="56" width="42" height="16" fill="#C02B37" />
+                            </g>
+                        </g>
+
+                        <!-- Layer 2: Female Circles (Continuous Probability Distributions) -->
+                        <g id="layer-female">
+                            <!-- Upper Central MoE Latent Sphere -->
+                            <g transform="translate(275, 80)">
+                                <circle cx="0" cy="0" r="38" fill="rgba(43, 90, 117, 0.25)" stroke="#2B5A75" stroke-width="1.5" />
+                                <circle cx="0" cy="0" r="28" fill="#C02B37" />
+                                <circle cx="0" cy="0" r="18" fill="#F5F0E6" />
+                                <circle cx="0" cy="0" r="8" fill="#D4AF37" />
+                            </g>
+                            <!-- Lower Central MoE Latent Sphere -->
+                            <g transform="translate(275, 240)">
+                                <circle cx="0" cy="0" r="38" fill="rgba(212, 175, 55, 0.2)" stroke="#D4AF37" stroke-width="1.5" />
+                                <circle cx="0" cy="0" r="28" fill="#2B5A75" />
+                                <circle cx="0" cy="0" r="18" fill="#2E6B56" />
+                                <circle cx="0" cy="0" r="8" fill="#F5F0E6" />
+                            </g>
+                        </g>
+
+                        <!-- Layer 3: Meadow Pointillist Tiles (Feature Embedding Clusters) -->
+                        <g id="layer-meadow">
+                            <g transform="translate(160, 130)">
+                                <circle cx="0" cy="0" r="7" fill="#2E6B56" />
+                                <circle cx="12" cy="-10" r="5" fill="#D4AF37" />
+                                <circle cx="-14" cy="12" r="6" fill="#C02B37" />
+                                <circle cx="15" cy="15" r="4" fill="#2B5A75" />
+                                <circle cx="-10" cy="-12" r="5" fill="#F5F0E6" />
+                            </g>
+                            <g transform="translate(390, 180)">
+                                <circle cx="0" cy="0" r="8" fill="#C02B37" />
+                                <circle cx="14" cy="-8" r="6" fill="#2B5A75" />
+                                <circle cx="-12" cy="10" r="5" fill="#D4AF37" />
+                                <circle cx="10" cy="14" r="4" fill="#2E6B56" />
+                            </g>
+                        </g>
+
+                    </svg>
+
+                    <!-- Realtime Canvas Overlay Label -->
+                    <div class="absolute bottom-4 left-6 right-6 flex justify-between text-[10px] uppercase tracking-widest text-klimt-gold font-mono bg-black/60 p-2.5 rounded-lg border border-klimt-gold/30 backdrop-blur-sm">
+                        <span>Render Status: Gustav Klimt &times; Applied ML Engine</span>
+                        <span id="sandbox-status">All Layers Rendered</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: LINGUISTICS & BRAND VOICE SIMULATOR -->
+    <section id="voice-lab" class="py-16 md:py-24 px-6 md:px-12 bg-klimt-alabaster border-t border-b border-klimt-clay">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="text-xs uppercase tracking-[0.2em] text-klimt-gold font-extrabold">Editorial Linguistics</span>
+                <h3 class="text-3xl md:text-5xl font-serif font-light mt-1 text-klimt-charcoal">Brand Voice Simulator</h3>
+                <p class="text-klimt-slate text-sm mt-3">Translate generic tech jargon into Elvira's specific editorial authority (Doletskaya $\times$ Logvinova tone).</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Selector Side -->
+                <div class="lg:col-span-4 bg-white p-6 rounded-xl border border-klimt-clay shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-serif text-xl font-bold mb-4 text-klimt-charcoal">Select Scenario</h4>
+                        <div class="space-y-2">
+                            <button onclick="translateVoice('about')" id="btn-voice-about" class="voice-scenario-btn w-full text-left p-3.5 rounded-lg border-2 border-klimt-gold text-xs uppercase tracking-widest font-bold flex justify-between items-center transition">
+                                <span>01. The "About Me" Bio</span>
+                                <span class="text-klimt-gold">&rarr;</span>
+                            </button>
+                            <button onclick="translateVoice('collab')" id="btn-voice-collab" class="voice-scenario-btn w-full text-left p-3.5 rounded-lg border border-klimt-clay text-xs uppercase tracking-widest flex justify-between items-center hover:border-klimt-gold transition">
+                                <span>02. Declining AI Hype Collab</span>
+                                <span>&rarr;</span>
+                            </button>
+                            <button onclick="translateVoice('launch')" id="btn-voice-launch" class="voice-scenario-btn w-full text-left p-3.5 rounded-lg border border-klimt-clay text-xs uppercase tracking-widest flex justify-between items-center hover:border-klimt-gold transition">
+                                <span>03. Launching Measure Theory Series</span>
+                                <span>&rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-klimt-slate leading-relaxed mt-6 pt-4 border-t border-klimt-clay/60">
+                        Notice how the "Maverick" uses sharp humor and academic credentials, while the "Architect" uses absolute restraint and clean spatial clarity.
+                    </p>
+                </div>
+
+                <!-- Comparison Output Boxes -->
+                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Column 1: Aliona (Maverick) -->
+                    <div class="bg-klimt-obsidian text-klimt-alabaster p-6 rounded-xl border-2 border-klimt-gold flex flex-col justify-between shadow-xl relative overflow-hidden">
+                        <div class="space-y-4 relative z-10">
+                            <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                                <span class="text-[10px] uppercase tracking-widest text-klimt-gold font-extrabold">The Intellectual Maverick</span>
+                                <span class="text-xs font-mono text-klimt-gold">Aliona Style</span>
+                            </div>
+                            <p id="voice-aliona" class="text-xs leading-relaxed text-klimt-alabaster/90 font-serif italic text-md pt-2">
+                                "I have spent over a decade dismantling institutional boredom in AI. My core craft is making graduate-level measure theory human, smart, and unapologetically fashionable. No hype. No generic prompts. Just pure mathematical truth."
+                            </p>
+                        </div>
+                        <button onclick="copySnippet('voice-aliona')" class="mt-6 text-[10px] uppercase tracking-widest text-klimt-gold hover:underline self-start font-bold">Copy Copywriting Snippet</button>
+                    </div>
+
+                    <!-- Column 2: Maria (Architect) -->
+                    <div class="bg-white text-klimt-charcoal p-6 rounded-xl border border-klimt-clay flex flex-col justify-between shadow-sm relative overflow-hidden">
+                        <div class="space-y-4 relative z-10">
+                            <div class="flex justify-between items-center border-b border-klimt-clay/60 pb-2">
+                                <span class="text-[10px] uppercase tracking-widest text-klimt-lapis font-extrabold">The Silent Architect</span>
+                                <span class="text-xs font-mono text-klimt-slate">Maria Style</span>
+                            </div>
+                            <p id="voice-maria" class="text-xs leading-relaxed text-klimt-charcoal/90 font-sans pt-2">
+                                "We formulate mathematical frameworks that prioritize absolute clarity in machine learning. An ongoing exploration of measure spaces, geometry, and neural structure. Everything we include is purposeful."
+                            </p>
+                        </div>
+                        <button onclick="copySnippet('voice-maria')" class="mt-6 text-[10px] uppercase tracking-widest text-klimt-lapis hover:underline self-start font-bold">Copy Copywriting Snippet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: CLIENT AUDIT CHECKLIST -->
+    <section class="py-16 md:py-24 px-6 md:px-12 max-w-4xl mx-auto">
+        <div class="bg-white border-2 border-klimt-gold p-8 md:p-12 rounded-2xl shadow-xl relative">
+            <div class="absolute -top-4 left-6 bg-klimt-gold text-klimt-obsidian text-xs uppercase tracking-widest px-4 py-1.5 rounded font-extrabold shadow">
+                Implementation Blueprint
+            </div>
+            
+            <div class="mb-8 mt-2">
+                <h3 class="text-3xl font-serif italic text-klimt-charcoal">Style &amp; Brand Audit Checklist</h3>
+                <p class="text-xs text-klimt-slate uppercase tracking-wider mt-1">Begin aligning `@elvrast` with Klimt's <em>The Kiss</em> palette &amp; Applied Math overlays.</p>
+            </div>
+
+            <div class="space-y-4" id="checklist">
+                <div class="flex items-start space-x-4 p-4 hover:bg-klimt-alabaster rounded-lg transition border border-transparent hover:border-klimt-clay">
+                    <input type="checkbox" id="item-1" onchange="updateAuditProgress()" class="mt-1 h-4 w-4 rounded border-klimt-clay text-klimt-gold accent-klimt-gold cursor-pointer">
+                    <label for="item-1" class="cursor-pointer select-none">
+                        <span class="block text-sm font-bold text-klimt-charcoal">Adopt "The Kiss" Color System</span>
+                        <span class="block text-xs text-klimt-slate mt-1">Swap generic Reel text backgrounds for Klimt Gold (`#D4AF37`), Lapis (`#2B5A75`), and Crimson (`#C02B37`) overlay accents.</span>
+                    </label>
+                </div>
+                <div class="flex items-start space-x-4 p-4 hover:bg-klimt-alabaster rounded-lg transition border border-transparent hover:border-klimt-clay">
+                    <input type="checkbox" id="item-2" onchange="updateAuditProgress()" class="mt-1 h-4 w-4 rounded border-klimt-clay text-klimt-gold accent-klimt-gold cursor-pointer">
+                    <label for="item-2" class="cursor-pointer select-none">
+                        <span class="block text-sm font-bold text-klimt-charcoal">Implement Dual Geometric Overlays</span>
+                        <span class="block text-xs text-klimt-slate mt-1">Use discrete rectangular stacked bars (Male motif) for matrix/tensor episodes, and concentric circular maps (Female motif) for probability density episodes.</span>
+                    </label>
+                </div>
+                <div class="flex items-start space-x-4 p-4 hover:bg-klimt-alabaster rounded-lg transition border border-transparent hover:border-klimt-clay">
+                    <input type="checkbox" id="item-3" onchange="updateAuditProgress()" class="mt-1 h-4 w-4 rounded border-klimt-clay text-klimt-gold accent-klimt-gold cursor-pointer">
+                    <label for="item-3" class="cursor-pointer select-none">
+                        <span class="block text-sm font-bold text-klimt-charcoal">Golden Streamline Vector Graphics</span>
+                        <span class="block text-xs text-klimt-slate mt-1">Overlay thin, elegant gold vector lines representing gradient descent loss landscapes over talking-head video footage.</span>
+                    </label>
+                </div>
+                <div class="flex items-start space-x-4 p-4 hover:bg-klimt-alabaster rounded-lg transition border border-transparent hover:border-klimt-clay">
+                    <input type="checkbox" id="item-4" onchange="updateAuditProgress()" class="mt-1 h-4 w-4 rounded border-klimt-clay text-klimt-gold accent-klimt-gold cursor-pointer">
+                    <label for="item-4" class="cursor-pointer select-none">
+                        <span class="block text-sm font-bold text-klimt-charcoal">Fine Art &amp; Jewelry Pairing</span>
+                        <span class="block text-xs text-klimt-slate mt-1">Incorporate chunky geometric gold rings and structured linen/poplin shirts to embody the Doletskaya "Sprezzatura" aesthetic while speaking.</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Audit Progress Bar -->
+            <div class="mt-8 pt-6 border-t border-klimt-clay flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="w-full md:w-2/3">
+                    <div class="flex justify-between text-xs uppercase tracking-widest text-klimt-slate font-bold mb-1">
+                        <span>Implementation Progress</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="w-full bg-klimt-alabaster h-2 rounded-full overflow-hidden border border-klimt-clay">
+                        <div id="progress-bar" class="bg-klimt-gold h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+                <button onclick="resetChecklist()" class="text-xs uppercase tracking-widest text-klimt-slate hover:text-klimt-charcoal hover:underline font-bold">Reset Tracker</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPORT MODAL -->
+    <div id="export-modal" class="fixed inset-0 bg-klimt-obsidian/80 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-all duration-300">
+        <div class="bg-klimt-alabaster max-w-2xl w-full rounded-2xl border-2 border-klimt-gold overflow-hidden shadow-2xl transform scale-95 transition-all duration-300" id="export-modal-body">
+            <div class="p-8 space-y-6">
+                <div class="flex justify-between items-start border-b border-klimt-clay pb-4">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-klimt-gold font-extrabold">Brand Summary Sheet</span>
+                        <h4 class="text-2xl font-serif italic text-klimt-charcoal mt-0.5">Elvira Astashkina: Klimt &times; Applied ML</h4>
+                    </div>
+                    <button onclick="closeExportModal()" class="text-klimt-charcoal hover:text-klimt-gold text-2xl font-light">&times;</button>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl border border-klimt-clay space-y-3 text-xs">
+                    <div class="flex justify-between border-b border-klimt-alabaster pb-2">
+                        <span class="font-bold text-klimt-charcoal">Inspiration Source:</span>
+                        <span class="font-serif italic text-klimt-gold font-bold">Gustav Klimt's "The Kiss" (1907)</span>
+                    </div>
+                    <div class="flex justify-between border-b border-klimt-alabaster pb-2">
+                        <span class="font-bold text-klimt-charcoal">Core Mathematics Domain:</span>
+                        <span class="font-mono text-klimt-lapis">Measure Theory, Machine Learning, AI</span>
+                    </div>
+                    <div class="flex justify-between border-b border-klimt-alabaster pb-2">
+                        <span class="font-bold text-klimt-charcoal">Extract Palette Hexes:</span>
+                        <span class="font-mono text-[10px] text-klimt-slate">#D4AF37, #2B5A75, #C02B37, #2E6B56, #1A1815</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-klimt-charcoal block mb-1">Mantra Core:</span>
+                        <p class="italic font-serif text-klimt-charcoal bg-klimt-alabaster p-3 rounded border border-klimt-clay/60">
+                            "The Kiss is the ultimate synthesis: discrete tensor blocks unioned with continuous probability density fields in a shimmering golden latent space."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 pt-2">
+                    <button onclick="window.print()" class="flex-1 bg-klimt-gold hover:bg-klimt-obsidian hover:text-klimt-gold text-klimt-obsidian text-xs uppercase tracking-widest py-3 px-6 rounded-lg transition font-bold">Print / Save PDF</button>
+                    <button onclick="closeExportModal()" class="flex-1 bg-white hover:bg-klimt-alabaster border border-klimt-clay text-klimt-charcoal text-xs uppercase tracking-widest py-3 px-6 rounded-lg transition font-bold">Close View</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editorial Footer -->
+    <footer class="bg-klimt-obsidian text-klimt-alabaster py-12 px-6 md:px-12 border-t-2 border-klimt-gold">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <p class="font-cinzel text-lg tracking-widest text-klimt-gold">ELVIRA ASTASHKINA</p>
+                <p class="text-xs text-klimt-clay mt-0.5">Applied Mathematics, Machine Learning, &amp; Klimt Fine Art Brand Systems.</p>
+            </div>
+            <div class="text-xs text-klimt-clay font-mono">
+                &copy; 2026 Personal Brand Strategy System.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        // Data for Voice Simulator
+        const voiceData = {
+            about: {
+                aliona: `"I have spent over a decade dismantling institutional boredom in AI. My core craft is making graduate-level measure theory human, smart, and unapologetically fashionable. No hype. No generic prompts. Just pure mathematical truth."`,
+                maria: `"We formulate mathematical frameworks that prioritize absolute clarity in machine learning. An ongoing exploration of measure spaces, geometry, and neural structure. Everything we include is purposeful."`
+            },
+            collab: {
+                aliona: `"Thank you for the proposal. While your initiative is energetic, my calendar permits zero fluff. Unless our alliance results in rigorous mathematical truth, let's both save our precious hours. Let's talk when the project has real substance."`,
+                maria: `"Thank you for reaching out. We are currently declining all commercial sponsorship requests to focus entirely on our measure theory series. We wish you success with your launch."`
+            },
+            launch: {
+                aliona: `"Finally. We're opening the doors to Measure Theory Ep. 1. After months of grueling work, we built the exact mathematical breakdown of AI we wanted to see in the world. It’s sharp, it’s precise, and it’s beautifully executed."`,
+                maria: `"Our new video series on Measure Theory and Machine Learning is now live. It explores probability spaces, integration, and latent density fields. We invite you to watch online."`
+            }
+        };
+
+        // Sandbox Layer States
+        const sandboxState = {
+            male: true,
+            female: true,
+            meadow: true
+        };
+
+        // Toast Helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 2800);
+        }
+
+        // Toggle Sandbox Layer Logic
+        function toggleSandboxLayer(layerKey) {
+            sandboxState[layerKey] = !sandboxState[layerKey];
+            const svgGroup = document.getElementById(`layer-${layerKey}`);
+            const btn = document.getElementById(`btn-${layerKey}`);
+            const badge = document.getElementById(`badge-${layerKey}`);
+
+            if (sandboxState[layerKey]) {
+                svgGroup.style.display = 'block';
+                btn.className = "w-full text-left px-4 py-3 bg-klimt-gold text-klimt-obsidian text-xs uppercase tracking-widest font-bold rounded-lg flex justify-between items-center transition shadow";
+                badge.innerText = "ACTIVE";
+                badge.className = "text-[10px] font-mono bg-klimt-obsidian text-klimt-gold px-2 py-0.5 rounded";
+            } else {
+                svgGroup.style.display = 'none';
+                btn.className = "w-full text-left px-4 py-3 bg-white/5 text-klimt-clay border border-white/10 text-xs uppercase tracking-widest font-bold rounded-lg flex justify-between items-center hover:border-klimt-gold transition";
+                badge.innerText = "MUTED";
+                badge.className = "text-[10px] font-mono bg-white/10 text-klimt-clay px-2 py-0.5 rounded";
+            }
+
+            const activeLayers = Object.keys(sandboxState).filter(k => sandboxState[k]);
+            document.getElementById('sandbox-status').innerText = activeLayers.length === 0 ? "All Layers Muted" : `Active: ${activeLayers.map(l => l.toUpperCase()).join(', ')}`;
+        }
+
+        // Voice Translator
+        function translateVoice(scenarioKey) {
+            const scenario = voiceData[scenarioKey];
+            if (!scenario) return;
+
+            document.querySelectorAll('.voice-scenario-btn').forEach(btn => {
+                btn.classList.remove('border-2', 'border-klimt-gold', 'font-bold');
+                btn.classList.add('border', 'border-klimt-clay');
+            });
+
+            const activeBtn = document.getElementById(`btn-voice-${scenarioKey}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('border', 'border-klimt-clay');
+                activeBtn.classList.add('border-2', 'border-klimt-gold', 'font-bold');
+            }
+
+            const alionaEl = document.getElementById('voice-aliona');
+            const mariaEl = document.getElementById('voice-maria');
+
+            alionaEl.style.opacity = '0';
+            mariaEl.style.opacity = '0';
+
+            setTimeout(() => {
+                alionaEl.innerText = scenario.aliona;
+                mariaEl.innerText = scenario.maria;
+                alionaEl.style.opacity = '1';
+                mariaEl.style.opacity = '1';
+                showToast("Voice scenarios translated below");
+            }, 180);
+        }
+
+        // Copy Helper
+        function copySnippet(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            const temp = document.createElement("textarea");
+            temp.value = el.innerText.replace(/"/g, '');
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand("copy");
+            document.body.removeChild(temp);
+
+            showToast("Snippet copied to clipboard");
+        }
+
+        // Checklist Progress Tracker
+        function updateAuditProgress() {
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            let checked = 0;
+            checkboxes.forEach(c => { if (c.checked) checked++; });
+            const percent = Math.round((checked / checkboxes.length) * 100);
+            document.getElementById('progress-percent').innerText = `${percent}%`;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+        }
+
+        function resetChecklist() {
+            document.querySelectorAll('#checklist input[type="checkbox"]').forEach(c => c.checked = false);
+            updateAuditProgress();
+            showToast("Audit tracker reset");
+        }
+
+        // Modal Control
+        function openExportModal() {
+            const modal = document.getElementById('export-modal');
+            const modalBody = document.getElementById('export-modal-body');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalBody.classList.remove('scale-95');
+                modalBody.classList.add('scale-100');
+            }, 50);
+        }
+
+        function closeExportModal() {
+            const modal = document.getElementById('export-modal');
+            const modalBody = document.getElementById('export-modal-body');
+            modal.classList.add('opacity-0');
+            modalBody.classList.add('scale-95');
+            modalBody.classList.remove('scale-100');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+    </script>
+</body>
+</html>

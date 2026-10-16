@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/deliverables/index.html" },
+    { "source": "/bio", "destination": "/deliverables/content-templates/link-in-bio.html" },
+    { "source": "/link-in-bio", "destination": "/deliverables/content-templates/link-in-bio.html" },
+    { "source": "/newsletter", "destination": "/deliverables/content-templates/email-newsletter-template.html" },
+    { "source": "/carousel", "destination": "/instagram_carousel_generator.html" },
+    { "source": "/brand", "destination": "/aesthetic_canvas_klimt_ml_brand_system.html" },
+    { "source": "/video", "destination": "/video.html" },
+    { "source": "/studio", "destination": "/video.html" },
+    { "source": "/files", "destination": "/files.html" },
+    { "source": "/klimt-assets/:file", "destination": "/:file" }
+  ]
+}

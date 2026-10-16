@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elvira Astashkina — Brand Ecosystem &amp; Deliverables Hub</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, Cinzel, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- KaTeX Mathematical Typesetting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
+                        cinzel: ['"Cinzel"', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        klimt: {
+                            gold: '#D4AF37',       // Primary Gold Leaf (Dark Surfaces & Borders)
+                            ochre: '#7A5B14',      // Burnished Gold Ink (WCAG AA on Light Surfaces)
+                            lapis: '#2B5A75',      // Lapis Teal Blue Mosaic
+                            crimson: '#C02B37',    // Crimson Red Mosaic Pop
+                            emerald: '#2E6B56',    // Meadow Green Pointillist Speck
+                            obsidian: '#1A1815',   // Male Robe Black Rectangle
+                            alabaster: '#F5F0E6',  // Flesh Tone / Parchment Light Base
+                            clay: '#DED6C5',       // Sandstone Frame Border
+                            charcoal: '#22201D',   // Crisp Typography Dark
+                            slate: '#4A4842'       // High-Contrast Muted Limestone
+                        }
+                    }
+                }
+            }
+        };
+
+        window.packageConfig = {
+            "clientName": "Elvira Astashkina",
+            "clientHandle": "@elvrast",
+            "clientSlug": "elvira-astashkina-2026-10",
+            "generatedDate": "2026-10-15",
+            "consultant": {
+                "name": "Kamilla Gafurzianova, OLY",
+                "title": "Olympian & Principal Brand Strategist",
+                "firm": "",
+                "email": "kgafurzianova@gmail.com",
+                "website": "https://bulachak.com",
+                "linkedin": "https://linkedin.com/in/kamillagafurzianova"
+            },
+            "logoUrl": "/deliverables/assets/logo.svg"
+        };
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #F5F0E6; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
+
+        .klimt-texture {
+            background-color: #F5F0E6;
+            background-image:
+                radial-gradient(rgba(212, 175, 55, 0.14) 1px, transparent 0),
+                radial-gradient(rgba(43, 90, 117, 0.07) 1px, transparent 0);
+            background-size: 28px 28px;
+            background-position: 0 0, 14px 14px;
+        }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+    </style>
+  <!-- Open Graph / Telegram / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Elvira Astashkina (@elvrast)">
+  <meta property="og:title" content="Elvira Astashkina — Brand Ecosystem &amp; Deliverables Hub">
+  <meta property="og:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta property="og:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:secure_url" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Elvira Astashkina — Applied Machine Learning Engineer &amp; AI Educator (@elvrast)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Elvira Astashkina — Brand Ecosystem &amp; Deliverables Hub">
+  <meta name="twitter:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta name="twitter:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+</head>
+<body class="klimt-texture text-klimt-charcoal font-sans selection:bg-klimt-gold selection:text-klimt-obsidian min-h-screen">
+
+    <!-- Unified Editorial Header: Horizontal Lockup (Logo + First & Last Name Only) -->
+    <header class="border-b border-klimt-clay px-5 py-3.5 md:px-12 bg-white/95 backdrop-blur-md sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-4">
+            <a href="/" class="flex items-center gap-3.5 group" aria-label="Elvira Astashkina">
+                <svg class="w-10 h-10 rounded-lg shadow-sm border border-klimt-obsidian group-hover:scale-105 transition shrink-0" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="2" width="60" height="60" rx="10" fill="#F5F0E6" stroke="#1A1815" stroke-width="3.5"/>
+                    <rect x="8" y="8" width="20" height="26" rx="2" fill="#1A1815"/>
+                    <rect x="16" y="12" width="4" height="18" fill="#D4AF37"/>
+                    <rect x="8" y="38" width="20" height="10" rx="1.5" fill="#D4AF37" stroke="#1A1815" stroke-width="1"/>
+                    <rect x="8" y="50" width="20" height="6" rx="1.5" fill="#2B5A75"/>
+                    <line x1="32" y1="6" x2="32" y2="58" stroke="#1A1815" stroke-width="2"/>
+                    <circle cx="46" cy="24" r="11" fill="#C02B37" stroke="#1A1815" stroke-width="2"/>
+                    <circle cx="46" cy="24" r="5" fill="#F5F0E6"/>
+                    <circle cx="46" cy="47" r="8" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+                    <circle cx="46" cy="47" r="3.2" fill="#2E6B56"/>
+                </svg>
+                <span class="text-2xl md:text-[26px] font-serif font-bold tracking-tight text-klimt-obsidian">
+                    Elvira Astashkina
+                </span>
+            </a>
+
+            <nav class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 w-full lg:w-auto justify-end text-xs font-bold uppercase tracking-wider">
+                <a href="/brand" class="px-3.5 py-2 rounded-lg bg-klimt-obsidian text-klimt-alabaster border border-klimt-gold hover:bg-klimt-lapis hover:text-white text-center transition shadow-sm">Brand Canvas</a>
+                <a href="/deliverables/brand-book/elvira-astashkina-2026-10-brand-book.html" class="px-3.5 py-2 rounded-lg bg-white text-klimt-obsidian border border-klimt-clay hover:border-klimt-obsidian text-center transition">Brand Book</a>
+                <a href="/carousel" class="px-3.5 py-2 rounded-lg bg-white text-klimt-obsidian border border-klimt-clay hover:border-klimt-obsidian text-center transition">Carousel Studio</a>
+                <a href="/video" class="px-3.5 py-2 rounded-lg bg-klimt-lapis text-white border border-klimt-lapis hover:opacity-90 text-center transition">Video Studio</a>
+                <a href="/deliverables/content-templates/link-in-bio.html" class="px-3.5 py-2 rounded-lg bg-white text-klimt-obsidian border border-klimt-clay hover:border-klimt-obsidian text-center transition">Link-in-Bio</a>
+                <a href="/deliverables/content-templates/email-newsletter-template.html" class="px-3.5 py-2 rounded-lg bg-white text-klimt-obsidian border border-klimt-clay hover:border-klimt-obsidian text-center transition">Newsletter</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-5 md:px-12 py-10 md:py-14 space-y-14" id="top">
+
+        <!-- HERO SECTION: KLIMT GEOMETRIC EMBLEM + EVERYTHING YOU NEED -->
+        <section class="bg-white/95 rounded-2xl border border-klimt-clay p-7 md:p-12 shadow-xl relative overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+                <!-- Left: Hero Copy & Instructions -->
+                <div class="lg:col-span-7 space-y-5">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-klimt-clay bg-klimt-alabaster text-klimt-obsidian text-[11px] font-mono uppercase tracking-[0.18em] font-bold">
+                        <span class="w-2 h-2 rounded-sm bg-klimt-crimson"></span>
+                        <span>Approved Identity Ecosystem · Elvira Astashkina</span>
+                    </div>
+
+                    <h1 class="text-4xl md:text-6xl font-serif font-normal leading-none tracking-tight text-klimt-obsidian" id="heroTitle">
+                        Everything You Need — <br>
+                        <span class="italic font-semibold text-klimt-lapis">The Klimt × ML</span> Archive.
+                    </h1>
+
+                    <p class="text-klimt-slate text-sm md:text-base leading-relaxed max-w-2xl">
+                        Welcome to the unified brand studio and deliverables archive for <strong>Elvira Astashkina</strong>. Every interactive studio, 12-spread illustrated Brand Book, visual execution kit, design system foundry, and specialist brief below is built around the approved <strong>Gustav Klimt <em>"The Kiss"</em> (1908) × Applied Machine Learning</strong> identity.
+                    </p>
+
+                    <div class="bg-klimt-alabaster border border-klimt-clay rounded-xl p-4 text-xs text-klimt-obsidian leading-relaxed flex items-start gap-3">
+                        <span class="px-2.5 py-1 rounded-md bg-klimt-obsidian text-klimt-gold font-mono text-[10px] font-bold uppercase shrink-0 mt-0.5">Start Here</span>
+                        <span>
+                            Explore the <strong>12-Spread Illustrated Brand Book</strong> or <strong>Approved Brand Canvas</strong> for the visual philosophy, launch the <strong>Instagram Carousel Studio</strong> or <strong>Manim Video Studio</strong> to generate live content, and share the specialist briefs directly with collaborators.
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right: Canonical 2-Logo + 2-Horizontal-Lockup Preview Card -->
+                <div class="lg:col-span-5 bg-klimt-obsidian text-klimt-alabaster rounded-2xl border-2 border-klimt-gold p-6 shadow-2xl space-y-4">
+                    <div class="flex items-center justify-between border-b border-klimt-gold/30 pb-3">
+                        <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-klimt-gold font-bold">Canonical 4-Asset Logo System</span>
+                        <span class="font-mono text-[10px] text-klimt-clay">Light &amp; Dark Editions</span>
+                    </div>
+
+                    <!-- Horizontal Lockup Dark & Light Previews -->
+                    <div class="space-y-2.5">
+                        <div class="p-3 rounded-xl bg-[#1A1815] border border-klimt-gold/40 flex items-center justify-between gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" class="h-11 w-auto" role="img" aria-label="Elvira Astashkina — Horizontal Lockup (Dark)">
+                                <rect x="1" y="1" width="278" height="62" rx="10" fill="#1A1815" stroke="#D4AF37" stroke-width="1.8"/>
+                                <rect x="8" y="8" width="48" height="48" rx="8" fill="#1A1815" stroke="#D4AF37" stroke-width="2.8"/>
+                                <rect x="13" y="13" width="15" height="20" rx="1.5" fill="#F5F0E6"/>
+                                <rect x="19" y="16" width="3.5" height="14" fill="#1A1815"/>
+                                <rect x="13" y="36" width="15" height="8" rx="1.2" fill="#D4AF37"/>
+                                <rect x="13" y="46" width="15" height="5" rx="1.2" fill="#2B5A75"/>
+                                <line x1="32" y1="11" x2="32" y2="53" stroke="#D4AF37" stroke-width="1.8"/>
+                                <circle cx="44" cy="24" r="8.5" fill="#C02B37" stroke="#D4AF37" stroke-width="1.8"/>
+                                <circle cx="44" cy="24" r="3.6" fill="#F5F0E6"/>
+                                <circle cx="44" cy="43" r="6.5" fill="#2B5A75" stroke="#D4AF37" stroke-width="1.6"/>
+                                <circle cx="44" cy="43" r="2.5" fill="#D4AF37"/>
+                                <text x="68" y="40" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" font-weight="700" fill="#F5F0E6">Elvira Astashkina</text>
+                            </svg>
+                            <a href="/deliverables/assets/logo-horizontal-dark.svg" download class="px-2.5 py-1 rounded-md bg-klimt-gold text-klimt-obsidian font-mono text-[10px] font-bold shrink-0">⬇ Dark SVG</a>
+                        </div>
+                        <div class="p-3 rounded-xl bg-[#F5F0E6] border border-klimt-clay flex items-center justify-between gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" class="h-11 w-auto" role="img" aria-label="Elvira Astashkina — Horizontal Lockup (Light)">
+                                <rect x="1" y="1" width="278" height="62" rx="10" fill="#F5F0E6" stroke="#DED6C5" stroke-width="1.5"/>
+                                <rect x="8" y="8" width="48" height="48" rx="8" fill="#F5F0E6" stroke="#1A1815" stroke-width="2.8"/>
+                                <rect x="13" y="13" width="15" height="20" rx="1.5" fill="#1A1815"/>
+                                <rect x="19" y="16" width="3.5" height="14" fill="#D4AF37"/>
+                                <rect x="13" y="36" width="15" height="8" rx="1.2" fill="#D4AF37" stroke="#1A1815" stroke-width="0.8"/>
+                                <rect x="13" y="46" width="15" height="5" rx="1.2" fill="#2B5A75"/>
+                                <line x1="32" y1="11" x2="32" y2="53" stroke="#1A1815" stroke-width="1.8"/>
+                                <circle cx="44" cy="24" r="8.5" fill="#C02B37" stroke="#1A1815" stroke-width="1.8"/>
+                                <circle cx="44" cy="24" r="3.6" fill="#F5F0E6"/>
+                                <circle cx="44" cy="43" r="6.5" fill="#2B5A75" stroke="#D4AF37" stroke-width="1.6"/>
+                                <circle cx="44" cy="43" r="2.5" fill="#2E6B56"/>
+                                <text x="68" y="40" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" font-weight="700" fill="#1A1815">Elvira Astashkina</text>
+                            </svg>
+                            <a href="/deliverables/assets/logo-horizontal-light.svg" download class="px-2.5 py-1 rounded-md bg-klimt-obsidian text-klimt-alabaster font-mono text-[10px] font-bold shrink-0">⬇ Light SVG</a>
+                        </div>
+                    </div>
+
+                    <!-- Standalone Marks + 6-Tone Spectrum Bar -->
+                    <div class="grid grid-cols-2 gap-2.5 pt-1">
+                        <div class="p-2.5 rounded-lg bg-[#1A1815] border border-klimt-gold/40 flex items-center justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <img src="/deliverables/assets/logo-mark-dark.svg" alt="Logo Dark" class="w-9 h-9">
+                                <span class="font-mono text-[10px] text-klimt-alabaster font-semibold">Logo · Dark</span>
+                            </div>
+                            <a href="/deliverables/assets/logo-mark-dark.svg" download class="font-mono text-[10px] text-klimt-gold font-bold hover:underline">⬇ SVG</a>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-[#F5F0E6] border border-klimt-clay flex items-center justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <img src="/deliverables/assets/logo-mark-light.svg" alt="Logo Light" class="w-9 h-9">
+                                <span class="font-mono text-[10px] text-klimt-obsidian font-semibold">Logo · Light</span>
+                            </div>
+                            <a href="/deliverables/assets/logo-mark-light.svg" download class="font-mono text-[10px] text-klimt-obsidian font-bold hover:underline">⬇ SVG</a>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5 pt-1">
+                        <div class="flex justify-between text-[10px] font-mono uppercase tracking-wider text-klimt-clay">
+                            <span>The Spectrum of "The Kiss"</span>
+                            <span>6 Canonical Swatches</span>
+                        </div>
+                        <div class="grid grid-cols-6 gap-1.5 h-7 rounded-lg p-1 bg-black/40 border border-klimt-gold/25">
+                            <div class="bg-[#D4AF37] rounded-sm" title="Klimt Gold #D4AF37"></div>
+                            <div class="bg-[#2B5A75] rounded-sm" title="Lapis Mosaic #2B5A75"></div>
+                            <div class="bg-[#C02B37] rounded-sm" title="Crimson Berry #C02B37"></div>
+                            <div class="bg-[#2E6B56] rounded-sm" title="Emerald Flora #2E6B56"></div>
+                            <div class="bg-[#1A1815] border border-klimt-gold/40 rounded-sm" title="Obsidian Grid #1A1815"></div>
+                            <div class="bg-[#F5F0E6] rounded-sm" title="Alabaster Parchment #F5F0E6"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 1: INTERACTIVE STUDIOS & APPROVED BRAND CANVAS -->
+        <section class="space-y-5" id="deliverables">
+            <div class="flex items-center justify-between border-b border-klimt-clay pb-3">
+                <div>
+                    <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-klimt-ochre font-bold">01 · Live Production Studios &amp; Master Canvas</span>
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold text-klimt-obsidian">Approved Brand Canvas &amp; Content Generators</h2>
+                </div>
+                <span class="hidden sm:inline-block font-mono text-xs text-klimt-slate font-semibold">Interactive Web Applications</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1: Approved Brand Canvas (/brand) -->
+                <a href="/brand" class="bg-klimt-obsidian text-klimt-alabaster rounded-xl border-2 border-klimt-gold p-6 flex flex-col justify-between shadow-lg hover:-translate-y-1 transition group">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-klimt-gold/20 border border-klimt-gold text-klimt-gold font-mono text-[10px] font-bold uppercase tracking-wider">Approved Master Identity</span>
+                            <span class="font-mono text-xs text-klimt-gold">/brand</span>
+                        </div>
+                        <h3 class="font-serif text-2xl md:text-3xl font-semibold text-klimt-alabaster group-hover:text-klimt-gold transition">
+                            Aesthetic Brand Canvas (Klimt × ML)
+                        </h3>
+                        <p class="text-xs text-klimt-clay leading-relaxed">
+                            The canonical identity source of truth: The 6-Tone Spectrum of <em>"The Kiss"</em>, the 4-Motif Geometric Shape Matrix, Reels/TikTok Overlay Studio, and Doletskaya × Logvinova Voice Lab.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-klimt-gold/30 flex items-center justify-between">
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-klimt-gold font-bold">Open Brand Canvas</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-klimt-gold text-klimt-obsidian font-mono text-xs font-bold">Launch →</span>
+                    </div>
+                </a>
+
+                <!-- Card 2: Instagram Carousel Studio (/carousel) -->
+                <a href="/carousel" class="bg-white text-klimt-obsidian rounded-xl border-2 border-klimt-clay hover:border-klimt-obsidian p-6 flex flex-col justify-between shadow-lg hover:-translate-y-1 transition group">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-klimt-obsidian text-klimt-gold font-mono text-[10px] font-bold uppercase tracking-wider">Interactive Generator</span>
+                            <span class="font-mono text-xs text-klimt-slate font-semibold">/carousel</span>
+                        </div>
+                        <h3 class="font-serif text-2xl md:text-3xl font-bold text-klimt-obsidian group-hover:text-klimt-lapis transition">
+                            Instagram Carousel Studio
+                        </h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            Multi-slide 4:5 &amp; 1:1 carousel builder matching the Alabaster gallery aesthetic, with optional visuals &amp; KaTeX formulas, 12 Klimt × ML vector motifs, 4 gallery pattern sheets, and 1-click .ZIP export.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-klimt-clay flex items-center justify-between">
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-klimt-obsidian font-bold">Create Carousels</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-klimt-obsidian text-klimt-alabaster border border-klimt-gold font-mono text-xs font-bold">Launch →</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: Manim Video Studio (/video) -->
+                <a href="/video" class="bg-white text-klimt-obsidian rounded-xl border-2 border-klimt-lapis p-6 flex flex-col justify-between shadow-lg hover:-translate-y-1 transition group">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-klimt-lapis text-white font-mono text-[10px] font-bold uppercase tracking-wider">Motion Engine</span>
+                            <span class="font-mono text-xs text-klimt-slate font-semibold">/video</span>
+                        </div>
+                        <h3 class="font-serif text-2xl md:text-3xl font-bold text-klimt-obsidian group-hover:text-klimt-lapis transition">
+                            Manim Video &amp; Overlay Studio
+                        </h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            Render mathematical derivations, neural architectures, and transparent alpha video overlays (.webm &amp; .mp4) in 9:16 vertical Reels/TikTok and 16:9 lecture formats.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-klimt-clay flex items-center justify-between">
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-klimt-lapis font-bold">Open Motion Studio</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-klimt-lapis text-white font-mono text-xs font-bold">Launch →</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: CORE BRAND BOOKS, VISUAL KITS & DESIGN SYSTEM -->
+        <section class="space-y-5">
+            <div class="flex items-center justify-between border-b border-klimt-clay pb-3">
+                <div>
+                    <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-klimt-lapis font-bold">02 · Core Brand Systems &amp; Execution Kits</span>
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold text-klimt-obsidian">Brand Book, Social Execution &amp; Component Foundry</h2>
+                </div>
+                <span class="hidden sm:inline-block font-mono text-xs text-klimt-slate font-semibold">Client-Ready HTML &amp; PDF Deliverables</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Featured Brand Book -->
+                <a href="/deliverables/brand-book/elvira-astashkina-2026-10-brand-book.html" class="bg-klimt-obsidian text-klimt-alabaster rounded-xl border-2 border-klimt-gold p-6 flex flex-col justify-between shadow-md hover:-translate-y-1 transition group">
+                    <div class="space-y-3">
+                        <span class="px-2.5 py-1 rounded-md bg-klimt-gold/20 text-klimt-gold font-mono text-[10px] font-bold uppercase tracking-wider">12-Spread Illustrated Monograph</span>
+                        <h3 class="font-serif text-2xl font-semibold text-klimt-alabaster group-hover:text-klimt-gold transition">The Brand Book</h3>
+                        <p class="text-xs text-klimt-clay leading-relaxed">
+                            Richly illustrated 12-spread editorial monograph: Core Values, Editorial Photography, Klimt × ML Pattern Sheets, 4-Asset Logo System, Illustrated Do/Don’t Guidelines, and Voice Architecture.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-3 border-t border-klimt-gold/25 flex items-center justify-between text-xs font-mono text-klimt-gold font-bold">
+                        <span>Open Brand Book</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- Social Media Execution Kit -->
+                <a href="/deliverables/execution-kit/elvira-astashkina-2026-10-social-media-kit.html" class="bg-white rounded-xl border border-klimt-clay hover:border-klimt-obsidian p-6 flex flex-col justify-between shadow-md hover:-translate-y-1 transition group">
+                    <div class="space-y-3">
+                        <span class="px-2.5 py-1 rounded-md bg-klimt-crimson/15 text-klimt-crimson font-mono text-[10px] font-bold uppercase tracking-wider">Visual Execution</span>
+                        <h3 class="font-serif text-2xl font-bold text-klimt-obsidian">Social Media Execution Kit</h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            Branded @elvrast bio architecture, 6 Klimt geometric piece highlight medallions, populated 9-grid narrative (4:5 &amp; 1:1), and 9:16 vertical story templates.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-3 border-t border-klimt-clay flex items-center justify-between text-xs font-mono text-klimt-obsidian font-bold">
+                        <span>Open Social Kit</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- Design System & Component Foundry -->
+                <a href="/deliverables/design-system/elvira-astashkina-2026-10-design-system.html" id="card-design-system" class="bg-white rounded-xl border border-klimt-clay hover:border-klimt-obsidian p-6 flex flex-col justify-between shadow-md hover:-translate-y-1 transition group">
+                    <div class="space-y-3">
+                        <span class="px-2.5 py-1 rounded-md bg-klimt-lapis/15 text-klimt-lapis font-mono text-[10px] font-bold uppercase tracking-wider">Interactive System</span>
+                        <h3 class="font-serif text-2xl font-bold text-klimt-obsidian">Design System &amp; Foundry</h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            The 6-Tone Spectrum of <em>"The Kiss"</em>, 4-Motif Geometric Shape Matrix, live WCAG 2.2 contrast table, architectural corner radii (6px / 8px / 12px), and CSS/Tailwind tokens.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-3 border-t border-klimt-clay flex items-center justify-between text-xs font-mono text-klimt-obsidian font-bold">
+                        <span>Open System Foundry</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- Designer Brief -->
+                <a href="/deliverables/briefs/elvira-astashkina-2026-10-designer-brief.html" class="bg-white rounded-xl border border-klimt-clay hover:border-klimt-obsidian p-6 flex flex-col justify-between shadow-sm hover:-translate-y-1 transition">
+                    <div class="space-y-2.5">
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-klimt-ochre font-bold">Visual Identity</span>
+                        <h3 class="font-serif text-2xl font-bold text-klimt-obsidian">Designer Brief</h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            Color tokens, Cormorant Garamond × Plus Jakarta Sans typography pairings, the 4 canonical SVG logo &amp; lockup assets with live visual previews, and integrity rules.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-klimt-clay flex items-center justify-between text-xs font-mono text-klimt-obsidian font-bold">
+                        <span>Access Designer Brief</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- Developer Brief -->
+                <a href="/deliverables/briefs/elvira-astashkina-2026-10-developer-brief.html" class="bg-white rounded-xl border border-klimt-clay hover:border-klimt-obsidian p-6 flex flex-col justify-between shadow-sm hover:-translate-y-1 transition">
+                    <div class="space-y-2.5">
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-klimt-lapis font-bold">Implementation</span>
+                        <h3 class="font-serif text-2xl font-bold text-klimt-obsidian">Developer Specs</h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            CSS custom properties, Tailwind theme configuration, live visual SVG previews with XML code for all 4 logo assets, and WCAG AA/AAA contrast verification.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-klimt-clay flex items-center justify-between text-xs font-mono text-klimt-obsidian font-bold">
+                        <span>View Technical Specs</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- SMM Brief -->
+                <a href="/deliverables/briefs/elvira-astashkina-2026-10-smm-brief.html" class="bg-white rounded-xl border border-klimt-clay hover:border-klimt-obsidian p-6 flex flex-col justify-between shadow-sm hover:-translate-y-1 transition">
+                    <div class="space-y-2.5">
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-klimt-crimson font-bold">Social Context</span>
+                        <h3 class="font-serif text-2xl font-bold text-klimt-obsidian">SMM Brief</h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            Channel-specific publishing cadence, carousel vs. Reels mix, and mathematical visual storytelling guidelines.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-klimt-clay flex items-center justify-between text-xs font-mono text-klimt-obsidian font-bold">
+                        <span>Open SMM Brief</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- Content Playbook -->
+                <a href="/deliverables/playbook/elvira-astashkina-2026-10-content-playbook.html" class="bg-white rounded-xl border border-klimt-clay hover:border-klimt-obsidian p-6 flex flex-col justify-between shadow-sm hover:-translate-y-1 transition">
+                    <div class="space-y-2.5">
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-klimt-emerald font-bold">Communications</span>
+                        <h3 class="font-serif text-2xl font-bold text-klimt-obsidian">Content Playbook</h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            The Intellectual Maverick × Silent Architect voice matrix, banned AI cliché list, and copywriting formulas.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-klimt-clay flex items-center justify-between text-xs font-mono text-klimt-obsidian font-bold">
+                        <span>Open Playbook</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- Link-in-Bio Page -->
+                <a href="/deliverables/content-templates/link-in-bio.html" class="bg-klimt-obsidian text-klimt-alabaster rounded-xl border-2 border-klimt-gold p-6 flex flex-col justify-between shadow-md hover:-translate-y-1 transition group">
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-klimt-gold/20 text-klimt-gold font-mono text-[10px] font-bold uppercase tracking-wider">Mobile Bio Hub · @elvrast</span>
+                            <span class="font-mono text-[10px] text-klimt-clay">EN / RU · Light / Dark</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-klimt-alabaster group-hover:text-klimt-gold transition">Link-in-Bio Page</h3>
+                        <p class="text-xs text-klimt-clay leading-relaxed">
+                            Mobile-first 540px social bio destination for <strong>@elvrast</strong> (San Francisco Bay Area) with editorial portrait, Klimt mosaic medallion, stacked destination cards, and 1-click HTML export.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-klimt-gold/25 flex items-center justify-between text-xs font-mono text-klimt-gold font-bold">
+                        <span>Open Link-in-Bio</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- Email Newsletter Template -->
+                <a href="/deliverables/content-templates/email-newsletter-template.html" class="bg-white rounded-xl border-2 border-klimt-lapis hover:border-klimt-obsidian p-6 flex flex-col justify-between shadow-md hover:-translate-y-1 transition group">
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-klimt-lapis/15 text-klimt-lapis font-mono text-[10px] font-bold uppercase tracking-wider">600px Email Dispatch</span>
+                            <span class="font-mono text-[10px] text-klimt-slate font-semibold">3 Issue Presets</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-klimt-obsidian group-hover:text-klimt-lapis transition">Email Newsletter Template</h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            <em>The Measure &amp; The Mosaic</em> — table-safe 600px HTML email template with Horizontal Lockup, Klimt 6-tone bar, mathematical theorem callout, author card, and 1-click Send-Ready HTML copy.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-klimt-clay flex items-center justify-between text-xs font-mono text-klimt-lapis font-bold">
+                        <span>Open Newsletter Studio</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- Business Cards -->
+                <a href="/deliverables/content-templates/business-card-template.html" class="bg-white rounded-xl border border-klimt-clay hover:border-klimt-obsidian p-6 flex flex-col justify-between shadow-sm hover:-translate-y-1 transition">
+                    <div class="space-y-2.5">
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-klimt-ochre font-bold">Print Mechanicals</span>
+                        <h3 class="font-serif text-2xl font-bold text-klimt-obsidian">Business Cards</h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            Print-ready 300 DPI front and back networking cards in Obsidian Dark &amp; Alabaster Light with Horizontal Lockup, @elvrast, and San Francisco Bay Area.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-klimt-clay flex items-center justify-between text-xs font-mono text-klimt-obsidian font-bold">
+                        <span>Open Mechanicals</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- Generative Markdown Exports -->
+                <div class="bg-white rounded-xl border border-klimt-clay p-6 flex flex-col justify-between shadow-sm">
+                    <div class="space-y-2.5">
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-klimt-slate font-bold">Generative Assets</span>
+                        <h3 class="font-serif text-2xl font-bold text-klimt-obsidian">Strategy &amp; Design Exports</h3>
+                        <p class="text-xs text-klimt-slate leading-relaxed">
+                            Download raw Markdown specifications (brand-strategy.md, DESIGN.md, DESIGN_SYSTEM.md) for AI agents and engineering handoff.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-klimt-clay flex flex-wrap gap-2">
+                        <a href="/deliverables/exports/brand-strategy.md" download class="px-2.5 py-1.5 rounded-lg bg-klimt-alabaster border border-klimt-clay hover:border-klimt-obsidian font-mono text-[10px] font-bold text-klimt-obsidian transition">brand-strategy.md ↓</a>
+                        <a href="/deliverables/exports/DESIGN.md" download class="px-2.5 py-1.5 rounded-lg bg-klimt-alabaster border border-klimt-clay hover:border-klimt-obsidian font-mono text-[10px] font-bold text-klimt-obsidian transition">DESIGN.md ↓</a>
+                        <a href="/deliverables/exports/DESIGN_SYSTEM.md" download id="link-design-system-md" class="px-2.5 py-1.5 rounded-lg bg-klimt-alabaster border border-klimt-clay hover:border-klimt-obsidian font-mono text-[10px] font-bold text-klimt-obsidian transition">DESIGN_SYSTEM.md ↓</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-klimt-clay pt-10 pb-14" id="contact">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                <div class="max-w-md space-y-2">
+                    <h2 class="font-serif text-2xl font-bold text-klimt-obsidian">Share With Confidence</h2>
+                    <p class="text-xs text-klimt-slate leading-relaxed">
+                        Every card above opens a self-contained, client-ready artifact synchronized with the approved <strong>Gustav Klimt <em>"The Kiss"</em> × Applied Machine Learning</strong> identity system.
+                    </p>
+                </div>
+                <div class="md:text-right space-y-1">
+                    <div class="font-serif text-2xl font-bold text-klimt-obsidian" id="consultantName">Kamilla Gafurzianova, OLY</div>
+                    <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-klimt-ochre font-bold" id="consultantTitle">Olympian &amp; Principal Brand Strategist</div>
+                    <div class="flex flex-col md:items-end gap-1 pt-2 text-xs font-mono text-klimt-slate font-semibold">
+                        <a href="mailto:kgafurzianova@gmail.com" class="hover:text-klimt-obsidian transition" id="consultantEmail">kgafurzianova@gmail.com</a>
+                        <a href="https://bulachak.com" target="_blank" rel="noopener noreferrer" class="hover:text-klimt-obsidian transition" id="consultantWebsite">bulachak.com</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+</body>
+</html>

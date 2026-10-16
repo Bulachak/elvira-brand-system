@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elvira Astashkina | Design System &amp; Component Foundry (Klimt × ML)</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='10' fill='%231A1815' stroke='%23D4AF37' stroke-width='3.5'/%3E%3Crect x='8' y='8' width='20' height='26' rx='2' fill='%23F5F0E6'/%3E%3Crect x='16' y='12' width='4' height='18' fill='%231A1815'/%3E%3Crect x='8' y='38' width='20' height='10' rx='1.5' fill='%23D4AF37'/%3E%3Crect x='8' y='50' width='20' height='6' rx='1.5' fill='%232B5A75'/%3E%3Cline x1='32' y1='6' x2='32' y2='58' stroke='%23D4AF37' stroke-width='2'/%3E%3Ccircle cx='46' cy='24' r='11' fill='%23C02B37' stroke='%23D4AF37' stroke-width='2.5'/%3E%3Ccircle cx='46' cy='24' r='5' fill='%23F5F0E6'/%3E%3Ccircle cx='46' cy='47' r='8' fill='%232B5A75' stroke='%23D4AF37' stroke-width='2'/%3E%3Ccircle cx='46' cy='47' r='3.2' fill='%23D4AF37'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, Cinzel, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- KaTeX Mathematical Typesetting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+  <style>
+    :root {
+      /* Approved Gustav Klimt "The Kiss" × Applied ML Tokens */
+      --klimt-gold: #D4AF37;
+      --klimt-ochre: #B58E43;
+      --klimt-lapis: #2B5A75;
+      --klimt-crimson: #C02B37;
+      --klimt-emerald: #2E6B56;
+      --klimt-obsidian: #1A1815;
+      --klimt-alabaster: #F5F0E6;
+      --klimt-clay: #DED6C5;
+      --klimt-charcoal: #22201D;
+      --klimt-slate: #5A5852;
+
+      --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-cinzel: 'Cinzel', Georgia, serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+      --color-bg: #F5F0E6;
+      --color-paper: #FFFFFF;
+      --color-heading: #1A1815;
+      --color-text: #22201D;
+      --color-text-muted: #5A5852;
+      --color-text-soft: rgba(90, 88, 82, 0.78);
+      --color-border: #DED6C5;
+      --color-border-subtle: rgba(222, 214, 197, 0.6);
+      --color-panel: rgba(245, 240, 230, 0.65);
+
+      --color-primary: #1A1815;
+      --color-secondary: #2B5A75;
+      --color-accent: #D4AF37;
+      --color-on-primary: #F5F0E6;
+
+      --color-success: #2E6B56;
+      --color-success-bg: rgba(46, 107, 86, 0.12);
+      --color-warning: #B58E43;
+      --color-warning-bg: rgba(212, 175, 55, 0.15);
+      --color-error: #C02B37;
+      --color-error-bg: rgba(192, 43, 55, 0.12);
+
+      /* Strict Anti-Pill Architectural Radii */
+      --radius-xs: 4px;
+      --radius-badge: 6px;
+      --radius-btn: 8px;
+      --radius-input: 8px;
+      --radius-card: 12px;
+      --radius-modal: 16px;
+
+      --shadow-sm: 0 1px 3px rgba(26,24,21,0.06), 0 1px 2px rgba(26,24,21,0.04);
+      --shadow-md: 0 6px 16px rgba(26,24,21,0.08), 0 1px 3px rgba(26,24,21,0.04);
+      --shadow-lg: 0 16px 36px rgba(26,24,21,0.14), 0 2px 6px rgba(26,24,21,0.05);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      line-height: 1.6;
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      background-image:
+        radial-gradient(rgba(212, 175, 55, 0.14) 1px, transparent 0),
+        radial-gradient(rgba(43, 90, 117, 0.07) 1px, transparent 0);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+      padding: 88px 20px 60px;
+    }
+
+    h1, h2, h3, h4 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+
+    /* Unified Top Navigation Bar */
+    #factory-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      min-height: 64px; display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 28px;
+      background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--klimt-clay);
+      font-family: var(--font-body); font-size: 12px; color: var(--klimt-charcoal);
+      box-shadow: 0 2px 10px rgba(26, 24, 21, 0.05);
+      flex-wrap: wrap; gap: 12px;
+    }
+    .bar-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .bar-kicker { font-size: 9px; text-transform: uppercase; letter-spacing: 0.24em; color: var(--klimt-gold); font-weight: 800; display: block; }
+    .bar-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--klimt-obsidian); }
+    .bar-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .bar-link, #factory-bar button, #factory-bar select {
+      padding: 7px 13px; border-radius: var(--radius-btn); border: 1px solid var(--klimt-clay);
+      background: var(--klimt-alabaster); color: var(--klimt-obsidian); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; text-decoration: none;
+      font-family: var(--font-body); transition: all 0.15s;
+    }
+    .bar-link:hover, #factory-bar button:hover { border-color: var(--klimt-gold); background: rgba(212, 175, 55, 0.15); }
+    .bar-link-gold { background: rgba(212, 175, 55, 0.18); border-color: var(--klimt-gold); }
+    #factory-bar .btn-export {
+      background: var(--klimt-obsidian); color: var(--klimt-gold);
+      border-color: var(--klimt-gold); font-weight: 700;
+    }
+    #factory-bar .btn-export:hover { background: var(--klimt-gold); color: var(--klimt-obsidian); }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      background: var(--color-paper);
+      padding: 48px;
+      border-radius: var(--radius-modal);
+      border: 1px solid var(--klimt-clay);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Hero Header inside Container */
+    header.ds-hero {
+      background: var(--klimt-obsidian);
+      color: var(--klimt-alabaster);
+      border: 2px solid var(--klimt-gold);
+      border-radius: var(--radius-card);
+      padding: 36px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: var(--radius-badge);
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--klimt-gold);
+      color: var(--klimt-gold);
+      margin-bottom: 16px;
+    }
+
+    header.ds-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+      font-weight: 400;
+      margin-bottom: 10px;
+      color: var(--klimt-alabaster);
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--klimt-clay);
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(212, 175, 55, 0.3);
+      flex-wrap: wrap;
+      gap: 12px;
+      font-family: var(--font-mono);
+    }
+
+    .section { margin-bottom: 56px; }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--klimt-gold);
+      padding-left: 14px;
+      color: var(--color-heading);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h3 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 28px 0 14px;
+      color: var(--klimt-lapis);
+      font-family: var(--font-mono);
+    }
+
+    .intro-box {
+      background: var(--color-panel);
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--klimt-gold);
+      border-radius: var(--radius-btn);
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--color-text);
+    }
+
+    /* Grid utilities */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+    .grid-6 { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 14px; }
+
+    /* Swatches */
+    .swatch-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--color-paper);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s;
+    }
+    .swatch-card:hover { transform: translateY(-2px); }
+    .swatch-color {
+      height: 92px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 8px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+    }
+    .swatch-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .swatch-info { padding: 12px 14px; font-size: 12px; }
+    .swatch-title { font-weight: 700; color: var(--color-heading); display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .swatch-meta { font-family: var(--font-mono); font-size: 11px; color: var(--color-text-muted); }
+
+    /* Motif Card */
+    .motif-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      background: var(--color-panel);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .motif-stage {
+      height: 124px;
+      background: var(--klimt-obsidian);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: var(--radius-btn);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 13.5px; }
+    th {
+      background: var(--color-panel);
+      border: 1px solid var(--color-border);
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-heading);
+    }
+    td { border: 1px solid var(--color-border); padding: 12px 14px; vertical-align: middle; }
+
+    /* Typography scale preview */
+    .type-specimen-row {
+      display: flex;
+      align-items: baseline;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--color-border-subtle);
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .type-specimen-meta {
+      width: 210px;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+    .type-specimen-sample {
+      flex: 1;
+      color: var(--color-heading);
+      min-width: 240px;
+    }
+
+    /* Interactive Component Catalog */
+    .catalog-panel {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      margin-bottom: 24px;
+      background: var(--color-paper);
+    }
+    .catalog-panel-title {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-heading);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--color-border-subtle);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .catalog-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 18px; }
+
+    /* Buttons (Strict 8px Radius — Anti-Pill) */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: var(--font-body); font-weight: 600; cursor: pointer;
+      border: 1px solid transparent; transition: all 0.15s ease-in-out;
+      text-decoration: none; white-space: nowrap;
+    }
+    .btn-sm { height: 36px; padding: 0 14px; font-size: 12px; border-radius: var(--radius-badge); }
+    .btn-md { height: 44px; padding: 0 20px; font-size: 13.5px; border-radius: var(--radius-btn); }
+    .btn-lg { height: 50px; padding: 0 26px; font-size: 15px; border-radius: 10px; }
+
+    .btn-primary { background: var(--klimt-obsidian); color: var(--klimt-gold); border-color: var(--klimt-gold); box-shadow: var(--shadow-sm); }
+    .btn-primary:hover { background: var(--klimt-gold); color: var(--klimt-obsidian); transform: translateY(-1px); }
+
+    .btn-lapis { background: var(--klimt-lapis); color: #FFFFFF; }
+    .btn-lapis:hover { opacity: 0.92; transform: translateY(-1px); }
+
+    .btn-secondary { background: var(--klimt-alabaster); color: var(--klimt-obsidian); border-color: var(--klimt-clay); }
+    .btn-secondary:hover { border-color: var(--klimt-gold); }
+
+    .btn-destructive { background: var(--klimt-crimson); color: #FFFFFF; }
+    .btn-destructive:hover { opacity: 0.9; }
+
+    .btn:disabled, .btn.is-disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+
+    /* Badges & Chips (Strict Anti-Pill 6px / 8px) */
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 26px; padding: 0 10px; border-radius: var(--radius-badge);
+      font-size: 11px; font-family: var(--font-mono); font-weight: 600;
+      letter-spacing: 0.03em; border: 1px solid transparent; white-space: nowrap;
+    }
+    .badge-neutral { background: var(--klimt-alabaster); border-color: var(--klimt-clay); color: var(--klimt-obsidian); }
+    .badge-primary { background: var(--klimt-obsidian); border-color: var(--klimt-gold); color: var(--klimt-gold); }
+    .badge-accent  { background: var(--klimt-gold); color: var(--klimt-obsidian); }
+    .badge-lapis   { background: var(--klimt-lapis); color: #FFFFFF; }
+    .badge-success { background: var(--color-success-bg); border-color: rgba(46, 107, 86, 0.3); color: var(--klimt-emerald); }
+    .badge-error   { background: var(--color-error-bg); border-color: rgba(192, 43, 55, 0.3); color: var(--klimt-crimson); }
+
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 32px; padding: 0 12px; border-radius: var(--radius-btn);
+      border: 1px solid var(--klimt-clay); background: var(--color-paper);
+      font-size: 12.5px; font-weight: 600; cursor: pointer; transition: all 0.15s;
+    }
+    .chip.is-active { background: var(--klimt-obsidian); color: var(--klimt-gold); border-color: var(--klimt-gold); }
+
+    /* Form Controls */
+    .input-field {
+      height: 44px; padding: 0 14px; font-family: var(--font-body); font-size: 14px;
+      border: 1px solid var(--klimt-clay); border-radius: var(--radius-input);
+      background: var(--color-paper); color: var(--color-text); width: 100%; max-width: 340px;
+    }
+    .input-field:focus { border-color: var(--klimt-gold); outline: none; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2); }
+    .input-field.is-error { border-color: var(--klimt-crimson); box-shadow: 0 0 0 3px rgba(192, 43, 55, 0.12); }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-label { font-size: 11px; font-family: var(--font-mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-heading); }
+    .form-hint { font-size: 11.5px; color: var(--color-text-muted); }
+    .form-hint.is-error { color: var(--klimt-crimson); font-weight: 600; }
+
+    .alert-banner {
+      background: var(--color-panel);
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--klimt-crimson);
+      padding: 16px 20px;
+      border-radius: var(--radius-btn);
+      margin-bottom: 24px;
+      font-size: 13.5px;
+    }
+
+    .code-block {
+      background: #1A1815;
+      color: #F5F0E6;
+      border: 1px solid var(--klimt-gold);
+      border-radius: var(--radius-btn);
+      padding: 18px 20px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      position: relative;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .copy-btn {
+      position: absolute; top: 10px; right: 12px;
+      padding: 4px 10px; border-radius: var(--radius-badge);
+      border: 1px solid var(--klimt-gold); background: rgba(212, 175, 55, 0.15);
+      color: var(--klimt-gold); font-family: var(--font-mono); font-size: 11px; font-weight: 600; cursor: pointer;
+    }
+    .copy-btn:hover { background: var(--klimt-gold); color: var(--klimt-obsidian); }
+
+    footer.consultant-footer {
+      border-top: 1px solid var(--color-border);
+      margin-top: 50px; padding-top: 24px;
+      text-align: center; font-size: 12px; color: var(--color-text-muted); line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 24px 18px; }
+      header.ds-hero { padding: 24px 18px; }
+    }
+
+    @media print {
+      body { padding: 0 !important; background: white !important; }
+      #factory-bar, .copy-btn { display: none !important; }
+      .container { max-width: 100%; padding: 0; box-shadow: none; border: none; }
+    }
+  </style>
+
+  <script>
+    window.designSystemConfig = {
+      "clientSlug": "elvira-astashkina-2026-10",
+      "clientName": "Elvira Astashkina (@elvrast)",
+      "generatedDate": "2026-10-15",
+      "consultant": {
+        "name": "Kamilla Gafurzianova, OLY",
+        "title": "Olympian & Principal Brand Strategist",
+        "firm": "",
+        "email": "kgafurzianova@gmail.com",
+        "website": "https://bulachak.com"
+      },
+      "spectrumOfTheKiss": [
+        { "name": "Klimt Gold", "hex": "#D4AF37", "tag": "Core Leaf", "tagBg": "#FFFFFF", "tagColor": "#1A1815", "role": "Shimmering background latent space, high-value highlight lines & borders." },
+        { "name": "Lapis Mosaic", "hex": "#2B5A75", "tag": "Mosaic Lapis", "tagBg": "rgba(0,0,0,0.45)", "tagColor": "#FFFFFF", "role": "Muted teal/blue from female concentric circles & flower ground." },
+        { "name": "Crimson Berry", "hex": "#C02B37", "tag": "Vibrant Pop", "tagBg": "rgba(0,0,0,0.45)", "tagColor": "#FFFFFF", "role": "High-contrast accent from female floral clusters, optima & focal nodes." },
+        { "name": "Emerald Flora", "hex": "#2E6B56", "tag": "Flora Pointillist", "tagBg": "rgba(0,0,0,0.45)", "tagColor": "#FFFFFF", "role": "Natural green ground from the flower meadow; latent cluster embeddings." },
+        { "name": "Obsidian Grid", "hex": "#1A1815", "tag": "Rectangular Dark", "tagBg": "#D4AF37", "tagColor": "#1A1815", "role": "Male robe black rectangles; crisp structure, dark-mode slides & primary ink." },
+        { "name": "Alabaster Parchment", "hex": "#F5F0E6", "tag": "Luminous Canvas", "tagBg": "#1A1815", "tagColor": "#F5F0E6", "role": "Flesh tones & warm gallery paper base; soft & non-glare daylight surface." }
+      ],
+      "structuralNeutrals": [
+        { "name": "Warm Ochre", "hex": "#B58E43", "role": "Secondary gold gradient & warm metallic border accent" },
+        { "name": "Sandstone Clay", "hex": "#DED6C5", "role": "Architectural hairline dividers & card borders" },
+        { "name": "Charcoal Ink", "hex": "#22201D", "role": "High-contrast editorial body typography" },
+        { "name": "Limestone Slate", "hex": "#5A5852", "role": "Muted captions, axis labels & metadata" }
+      ]
+    };
+  </script>
+  <!-- Open Graph / Telegram / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Elvira Astashkina (@elvrast)">
+  <meta property="og:title" content="Elvira Astashkina | Design System &amp; Component Foundry (Klimt × ML)">
+  <meta property="og:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta property="og:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:secure_url" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Elvira Astashkina — Applied Machine Learning Engineer &amp; AI Educator (@elvrast)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Elvira Astashkina | Design System &amp; Component Foundry (Klimt × ML)">
+  <meta name="twitter:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta name="twitter:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+</head>
+<body>
+
+  <!-- Unified Brand Canvas Topbar -->
+  <div id="factory-bar">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="/" class="bar-brand" title="Canonical Horizontal Lockup — Light (Logo + First & Last Name)">
+        <svg width="36" height="36" viewBox="0 0 64 64" style="border-radius: 8px; flex-shrink: 0; border: 1px solid #1A1815;">
+          <rect x="2" y="2" width="60" height="60" rx="10" fill="#F5F0E6" stroke="#1A1815" stroke-width="3.5"/>
+          <rect x="8" y="8" width="20" height="26" rx="2" fill="#1A1815"/>
+          <rect x="16" y="12" width="4" height="18" fill="#D4AF37"/>
+          <rect x="8" y="38" width="20" height="10" rx="1.5" fill="#D4AF37"/>
+          <rect x="8" y="50" width="20" height="6" rx="1.5" fill="#2B5A75"/>
+          <line x1="32" y1="6" x2="32" y2="58" stroke="#1A1815" stroke-width="2"/>
+          <circle cx="46" cy="24" r="11" fill="#C02B37" stroke="#1A1815" stroke-width="2"/>
+          <circle cx="46" cy="24" r="5" fill="#D4AF37"/>
+          <circle cx="46" cy="47" r="8" fill="#2B5A75" stroke="#1A1815" stroke-width="2"/>
+          <circle cx="46" cy="47" r="3.2" fill="#F5F0E6"/>
+        </svg>
+        <span class="bar-title" id="bar-title" style="font-weight:700;">Elvira Astashkina</span>
+      </a>
+      <span style="height:22px;width:1px;background:#DED6C5;"></span>
+      <span class="bar-kicker" style="color:#7A5B14;margin:0;">Authoritative Design System</span>
+    </div>
+    <div class="bar-actions">
+      <a href="/" class="bar-link">← Brand Hub</a>
+      <a href="/brand" class="bar-link bar-link-gold">Brand Canvas</a>
+      <a href="/carousel" class="bar-link">Carousel Studio</a>
+      <a href="/video" class="bar-link">Video Studio</a>
+      <select id="theme-select" title="Color mode" onchange="toggleTheme(this.value)">
+        <option value="light">☀ Alabaster Light</option>
+        <option value="dark">◑ Obsidian Dark</option>
+      </select>
+      <button class="btn-export" onclick="window.print()">⬇ Export PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <header class="ds-hero">
+      <span class="badge-kicker">
+        <span style="width:7px;height:7px;border-radius:50%;background:#C02B37;display:inline-block;"></span>
+        Approved Brand Identity Foundry · Gustav Klimt The Kiss (1908) × Deep Learning
+      </span>
+      <h1 id="ds-title">Design System &amp; <span style="font-style: italic; color: #D4AF37;">Geometric Component Foundry</span></h1>
+      <p id="ds-subtitle" style="font-size: 15px; color: #DED6C5; max-width: 65ch; margin-top: 8px;">
+        Deterministic visual contracts encoding Gustav Klimt’s <em>"The Kiss"</em> into Applied Machine Learning: the 6-tone extracted color spectrum, the 4-motif geometric shape matrix, WCAG 2.2 contrast pairs, and strict anti-pill architectural UI tokens.
+      </p>
+      <div class="meta">
+        <div>Client: <strong id="client-name" style="color:#D4AF37;">Elvira Astashkina (@elvrast)</strong> &bull; Updated: <span id="generated-date">2026-10-15</span></div>
+        <div>Prepared by: <strong id="consultant-name" style="color:#F5F0E6;">Kamilla Gafurzianova, OLY</strong></div>
+      </div>
+    </header>
+
+    <div class="intro-box">
+      <strong>System Governance Contract:</strong> This Design System is synchronized 1:1 with the approved <strong>Aesthetic Brand Canvas (/brand)</strong>. It establishes four immutable invariants across all web, video, and carousel surfaces: <strong>(1) The 6-Tone Spectrum of "The Kiss"</strong>, <strong>(2) Discrete Male Rectangles × Continuous Female Rings Geometry</strong>, <strong>(3) Zero Pill-Shapes (6px / 8px / 12px architectural radii)</strong>, and <strong>(4) Zero-Orphan Balanced Typography</strong>.
+    </div>
+
+    <!-- SECTION 1: THE SPECTRUM OF "THE KISS" & GEOMETRIC MOTIFS -->
+    <div class="section">
+      <h2>1. The Spectrum of "The Kiss" &amp; Geometric Tokens</h2>
+
+      <h3>A. Primary 6-Tone Color Extraction ("The Kiss", 1907–1908)</h3>
+      <p style="font-size: 13.5px; color: var(--color-text-muted); margin-bottom: 16px;">
+        Sampled directly from Gustav Klimt’s masterwork, these six core tokens govern every background, mathematical diagram, vector ornament, and typographic hierarchy.
+      </p>
+      <div class="grid-6" id="palette-grid">
+        <!-- Populated by JS -->
+      </div>
+
+      <h3>B. Supporting Structural &amp; Editorial Neutrals</h3>
+      <div class="grid-4" id="neutrals-grid">
+        <!-- Populated by JS -->
+      </div>
+
+      <h3>C. Geometric Shape Matrix (Klimt Visual Motifs ↔ Applied Math / ML)</h3>
+      <p style="font-size: 13.5px; color: var(--color-text-muted); margin-bottom: 16px;">
+        Every decorative piece in Elvira’s brand system carries a rigorous mathematical correspondence:
+      </p>
+      <div class="grid-4">
+        <!-- Motif 1 -->
+        <div class="motif-card">
+          <div class="motif-stage">
+            <svg width="130" height="84" viewBox="0 0 130 84">
+              <rect x="10" y="10" width="32" height="28" rx="2" fill="#F5F0E6"/>
+              <rect x="23" y="15" width="6" height="18" fill="#1A1815"/>
+              <rect x="48" y="10" width="32" height="28" rx="2" fill="#D4AF37"/>
+              <rect x="86" y="10" width="34" height="28" rx="2" fill="#C02B37"/>
+              <rect x="10" y="44" width="32" height="30" rx="2" fill="#2B5A75"/>
+              <rect x="48" y="44" width="32" height="30" rx="2" fill="#F5F0E6"/>
+              <rect x="61" y="49" width="6" height="20" fill="#1A1815"/>
+              <rect x="86" y="44" width="34" height="30" rx="2" fill="#D4AF37"/>
+            </svg>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--klimt-ochre);font-weight:700;text-transform:uppercase;">01 · Male Robe Motif</div>
+          <div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--klimt-obsidian);">Discrete Rectangles</div>
+          <div style="font-size:12px;color:var(--color-text-muted);line-height:1.5;">
+            &bull; Matrix Multiplication $\mathbf{W}\cdot\mathbf{x}+\mathbf{b}$<br>
+            &bull; ViT Patch Grids $x_p \in \mathbb{R}^{P^2 \cdot C}$<br>
+            &bull; Quantized Tensor Blocks
+          </div>
+        </div>
+
+        <!-- Motif 2 -->
+        <div class="motif-card">
+          <div class="motif-stage">
+            <svg width="100" height="90" viewBox="0 0 100 90">
+              <circle cx="50" cy="45" r="38" fill="none" stroke="#D4AF37" stroke-width="2"/>
+              <circle cx="50" cy="45" r="28" fill="#2B5A75" stroke="#D4AF37" stroke-width="1.5"/>
+              <circle cx="50" cy="45" r="18" fill="#C02B37"/>
+              <circle cx="50" cy="45" r="8" fill="#F5F0E6" stroke="#1A1815" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--klimt-lapis);font-weight:700;text-transform:uppercase;">02 · Female Robe Motif</div>
+          <div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--klimt-obsidian);">Concentric Ovals &amp; Rings</div>
+          <div style="font-size:12px;color:var(--color-text-muted);line-height:1.5;">
+            &bull; Probability Density $p(\mathbf{x})$<br>
+            &bull; Gaussian Iso-Density Contours<br>
+            &bull; Radial Basis Kernels &amp; MoE
+          </div>
+        </div>
+
+        <!-- Motif 3 -->
+        <div class="motif-card">
+          <div class="motif-stage">
+            <svg width="130" height="84" viewBox="0 0 120 90" fill="none">
+              <circle cx="30" cy="36" r="7" fill="#2E6B56"/>
+              <circle cx="20" cy="28" r="4.5" fill="#D4AF37"/>
+              <circle cx="40" cy="46" r="4.5" fill="#2B5A75"/>
+              <circle cx="22" cy="48" r="3.5" fill="#C02B37"/>
+              <circle cx="82" cy="54" r="8" fill="#C02B37"/>
+              <circle cx="70" cy="44" r="5.5" fill="#2B5A75"/>
+              <circle cx="94" cy="60" r="4.5" fill="#D4AF37"/>
+              <circle cx="88" cy="38" r="4" fill="#2E6B56"/>
+              <path d="M 12 76 Q 60 38 108 16" stroke="#D4AF37" stroke-width="1.8" stroke-dasharray="3 3"/>
+            </svg>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--klimt-emerald);font-weight:700;text-transform:uppercase;">03 · Meadow Motif</div>
+          <div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--klimt-obsidian);">Pointillist Mosaic Tiles</div>
+          <div style="font-size:12px;color:var(--color-text-muted);line-height:1.5;">
+            &bull; Latent Space Embeddings<br>
+            &bull; t-SNE &amp; UMAP Cluster Maps<br>
+            &bull; $k$-NN Decision Boundaries
+          </div>
+        </div>
+
+        <!-- Motif 4 -->
+        <div class="motif-card">
+          <div class="motif-stage">
+            <svg width="130" height="84" viewBox="0 0 140 90" fill="none">
+              <path d="M 10 72 Q 70 8 130 44" stroke="#D4AF37" stroke-width="2.2"/>
+              <path d="M 10 82 Q 70 18 130 54" stroke="#2B5A75" stroke-width="1.6"/>
+              <path d="M 10 62 Q 70 0 130 34" stroke="#C02B37" stroke-width="1.2" stroke-dasharray="3 3"/>
+              <circle cx="70" cy="32" r="5" fill="#D4AF37"/>
+            </svg>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--klimt-ochre);font-weight:700;text-transform:uppercase;">04 · Gold Leaf Motif</div>
+          <div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--klimt-obsidian);">Golden Streamlines</div>
+          <div style="font-size:12px;color:var(--color-text-muted);line-height:1.5;">
+            &bull; Loss Landscapes $\mathcal{L}(\theta)$<br>
+            &bull; Gradient Flow $\nabla f(\mathbf{x})$<br>
+            &bull; Diffusion Continuum $\mathcal{N}(0,\mathbf{I})$
+          </div>
+        </div>
+      </div>
+
+      <h3>D. Live WCAG 2.2 Contrast Matrix Across the Klimt Palette</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Editorial / UI Role</th>
+            <th>Foreground</th>
+            <th>Background</th>
+            <th>Ratio</th>
+            <th>WCAG Rating</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="contrast-matrix-body">
+          <!-- Populated dynamically -->
+        </tbody>
+      </table>
+
+      <h3>E. 4-Font Typographic System (Editorial Serif × Geometric Sans × Classical Caps × Math Mono)</h3>
+      <div style="border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 4px 20px; background: var(--color-paper);">
+        <div class="type-specimen-row">
+          <div class="type-specimen-meta">Cormorant Garamond<br>Display Serif · 44px / 1.08</div>
+          <div class="type-specimen-sample" style="font-family: var(--font-display); font-size: 38px; font-weight: 600;">
+            Gustav Klimt’s <span style="font-style:italic;color:var(--klimt-ochre);">"The Kiss"</span> in Measure Space
+          </div>
+        </div>
+        <div class="type-specimen-row">
+          <div class="type-specimen-meta">Cinzel<br>Classical Monogram Caps · 20px</div>
+          <div class="type-specimen-sample" style="font-family: var(--font-cinzel); font-size: 20px; font-weight: 600; letter-spacing: 0.18em;">
+            ELVIRA ASTASHKINA · APPLIED MACHINE LEARNING
+          </div>
+        </div>
+        <div class="type-specimen-row">
+          <div class="type-specimen-meta">Plus Jakarta Sans<br>Editorial &amp; UI Body · 16px / 1.6</div>
+          <div class="type-specimen-sample" style="font-family: var(--font-body); font-size: 16px;">
+            Rigid discrete matrices unioned with fluid continuous probability fields inside a golden latent manifold.
+          </div>
+        </div>
+        <div class="type-specimen-row" style="border-bottom:none;">
+          <div class="type-specimen-meta">JetBrains Mono<br>Mathematical &amp; Token Notation · 14px</div>
+          <div class="type-specimen-sample" style="font-family: var(--font-mono); font-size: 14px; color: var(--klimt-lapis);">
+            x_p ∈ ℝ^{P²·C} &bull; softmax(QKᵀ / √d_k)V &bull; --klimt-gold: #D4AF37;
+          </div>
+        </div>
+      </div>
+
+      <h3>F. Architectural Corner Geometry (Strict Anti-Pill Standard)</h3>
+      <div class="alert-banner">
+        <strong>Strict Anti-Pill Invariant:</strong> Pill-shaped buttons, badges, chips, tags, or inputs (<code style="font-family: var(--font-mono); font-size: 12px;">rounded-full</code> / <code style="font-family: var(--font-mono); font-size: 12px;">border-radius: 9999px</code>) are strictly forbidden across all surfaces. Only 1:1 circular profile avatars and Instagram highlight medallions may use a circle.
+      </div>
+      <div class="grid-4">
+        <div style="border: 1px solid var(--color-border); border-radius: var(--radius-badge); padding: 16px; text-align: center; background: var(--color-panel);">
+          <div style="font-family: var(--font-mono); font-size: 17px; font-weight: 700; color: var(--color-heading); margin-bottom: 4px;">6px (rounded-md)</div>
+          <div style="font-size: 12px; color: var(--color-text-muted);">Badges, Kicker Tags, Formula Pills</div>
+        </div>
+        <div style="border: 1px solid var(--color-border); border-radius: var(--radius-btn); padding: 16px; text-align: center; background: var(--color-panel);">
+          <div style="font-family: var(--font-mono); font-size: 17px; font-weight: 700; color: var(--color-heading); margin-bottom: 4px;">8px (rounded-lg)</div>
+          <div style="font-size: 12px; color: var(--color-text-muted);">Buttons, CTAs, Inputs, Selects</div>
+        </div>
+        <div style="border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 16px; text-align: center; background: var(--color-panel);">
+          <div style="font-family: var(--font-mono); font-size: 17px; font-weight: 700; color: var(--color-heading); margin-bottom: 4px;">12px (rounded-xl)</div>
+          <div style="font-size: 12px; color: var(--color-text-muted);">Cards, Panels, Carousel Frames</div>
+        </div>
+        <div style="border: 2px solid var(--klimt-gold); border-radius: 50%; width: 76px; height: 76px; margin: 0 auto; display: flex; align-items: center; justify-content: center; background: var(--klimt-obsidian); color: var(--klimt-gold);">
+          <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-align: center; line-height: 1.2;">1:1 Circle<br>Avatars Only</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: INTERACTIVE COMPONENT FOUNDRY -->
+    <div class="section">
+      <h2>2. Component Foundry &amp; Interactive Mechanics</h2>
+
+      <!-- Buttons -->
+      <div class="catalog-panel">
+        <div class="catalog-panel-title">
+          <span>Action Buttons &amp; Studio Triggers</span>
+          <span style="opacity: 0.7;">8px Radius &bull; Min 44px Touch Target &bull; Zero Pill</span>
+        </div>
+        <div class="catalog-row">
+          <button class="btn btn-md btn-primary">Obsidian × Gold Primary</button>
+          <button class="btn btn-md btn-lapis">Lapis Mosaic Action</button>
+          <button class="btn btn-md btn-secondary">Alabaster Secondary</button>
+          <button class="btn btn-md btn-destructive">Crimson Berry Alert</button>
+          <button class="btn btn-md btn-primary is-disabled" disabled>Disabled State</button>
+        </div>
+      </div>
+
+      <!-- Badges, Chips & Voice Meters -->
+      <div class="catalog-panel">
+        <div class="catalog-panel-title">
+          <span>Badges, Mathematical Tags &amp; Voice Calibration Chips</span>
+          <span style="opacity: 0.7;">6px / 8px Architectural Radii &bull; Zero Sliders</span>
+        </div>
+        <div class="catalog-row">
+          <span class="badge badge-primary">Klimt Gold Leaf · #D4AF37</span>
+          <span class="badge badge-lapis">Lapis Mosaic · #2B5A75</span>
+          <span class="badge badge-accent">Discrete Tensor W·x</span>
+          <span class="badge badge-success">&#x2713; Emerald Flora · WCAG Pass</span>
+          <span class="badge badge-error">&#x2715; Crimson Berry · Zero Pill</span>
+        </div>
+        <div class="catalog-row" style="margin-bottom: 0;">
+          <span class="chip is-active">Persona: Intellectual Maverick (60%)</span>
+          <span class="chip">Persona: Silent Architect (40%)</span>
+          <span class="badge badge-neutral">Rigor: 10/10</span>
+          <span class="badge badge-neutral">Hype Tolerance: 0/10</span>
+        </div>
+      </div>
+
+      <!-- Form Inputs -->
+      <div class="catalog-panel">
+        <div class="catalog-panel-title">
+          <span>Form Inputs &amp; BYOK Studio Controls</span>
+          <span style="opacity: 0.7;">44px Touch Target &bull; Klimt Gold Focus Ring</span>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Carousel Topic / Theorem</label>
+            <input type="text" class="input-field" value="Radon-Nikodym Derivatives in Diffusion" placeholder="Enter theorem">
+            <span class="form-hint">Architectural 8px radius with Klimt Clay border.</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">LaTeX Formula Expression</label>
+            <input type="text" class="input-field" style="font-family:var(--font-mono);" value="x_p \in \mathbb{R}^{P^2 \cdot C}">
+            <span class="form-hint">Rendered live via KaTeX in Carousel &amp; Video Studios.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: CODE & INTEGRATION EXPORTS -->
+    <div class="section">
+      <h2>3. Code &amp; Token Integration Hub</h2>
+
+      <h3>A. CSS Custom Properties (:root)</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode('css-code', this)">Copy CSS</button>
+        <code id="css-code"></code>
+      </div>
+
+      <h3>B. Tailwind CSS Configuration (tailwind.config.js)</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode('tailwind-code', this)">Copy Tailwind</button>
+        <code id="tailwind-code"></code>
+      </div>
+    </div>
+
+    <footer class="consultant-footer">
+      <div>Authoritative Strategic &amp; Visual Design System &bull; <strong>Elvira Astashkina (@elvrast)</strong></div>
+      <div>Prepared by <strong>Kamilla Gafurzianova, OLY</strong> &bull; Olympian &amp; Principal Brand Strategist &bull; <a href="mailto:kgafurzianova@gmail.com" style="color:inherit;">kgafurzianova@gmail.com</a> &bull; <a href="https://bulachak.com" target="_blank" rel="noopener noreferrer" style="color:inherit;">bulachak.com</a></div>
+      <div style="margin-top: 4px; font-size: 11px; opacity: 0.75;">Unified with Approved Brand Canvas (aesthetic_canvas_klimt_ml_brand_system.html) &bull; 1-Click Print &amp; PDF Ready</div>
+    </footer>
+  </div>
+
+  <script>
+    function hexToRgb(hex) {
+      const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [0,0,0];
+    }
+
+    function getLuminance(r, g, b) {
+      const a = [r, g, b].map(v => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      });
+      return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+    }
+
+    function getContrastRatio(hex1, hex2) {
+      const [r1, g1, b1] = hexToRgb(hex1);
+      const [r2, g2, b2] = hexToRgb(hex2);
+      const l1 = getLuminance(r1, g1, b1);
+      const l2 = getLuminance(r2, g2, b2);
+      return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+    }
+
+    function toggleTheme(mode) {
+      const root = document.documentElement;
+      if (mode === 'dark') {
+        root.style.setProperty('--color-bg', '#12100E');
+        root.style.setProperty('--color-paper', '#1A1815');
+        root.style.setProperty('--color-heading', '#F5F0E6');
+        root.style.setProperty('--color-text', '#DED6C5');
+        root.style.setProperty('--color-text-muted', '#B58E43');
+        root.style.setProperty('--color-border', 'rgba(212, 175, 55, 0.28)');
+        root.style.setProperty('--color-panel', 'rgba(255, 255, 255, 0.03)');
+      } else {
+        root.style.setProperty('--color-bg', '#F5F0E6');
+        root.style.setProperty('--color-paper', '#FFFFFF');
+        root.style.setProperty('--color-heading', '#1A1815');
+        root.style.setProperty('--color-text', '#22201D');
+        root.style.setProperty('--color-text-muted', '#5A5852');
+        root.style.setProperty('--color-border', '#DED6C5');
+        root.style.setProperty('--color-panel', 'rgba(245, 240, 230, 0.65)');
+      }
+    }
+
+    function copyCode(id, btn) {
+      const code = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = '✓ Copied';
+        setTimeout(() => btn.textContent = orig, 1800);
+      });
+    }
+
+    function renderDesignSystem() {
+      const cfg = window.designSystemConfig;
+
+      // 1. Render 6-Tone Spectrum of "The Kiss"
+      const pGrid = document.getElementById('palette-grid');
+      pGrid.innerHTML = cfg.spectrumOfTheKiss.map(s => `
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: ${s.hex};">
+            <span class="swatch-tag" style="background:${s.tagBg};color:${s.tagColor};">${s.tag}</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-title">
+              <span>${s.name}</span>
+              <span class="swatch-meta">${s.hex}</span>
+            </div>
+            <div style="font-size: 11px; color: var(--color-text-muted); line-height: 1.4;">${s.role}</div>
+          </div>
+        </div>
+      `).join('');
+
+      // 2. Render Supporting Structural Neutrals
+      const nGrid = document.getElementById('neutrals-grid');
+      nGrid.innerHTML = cfg.structuralNeutrals.map(s => `
+        <div class="swatch-card">
+          <div class="swatch-color" style="height: 52px; background: ${s.hex};"></div>
+          <div class="swatch-info">
+            <div class="swatch-title">
+              <span>${s.name}</span>
+              <span class="swatch-meta">${s.hex}</span>
+            </div>
+            <div style="font-size: 11px; color: var(--color-text-muted);">${s.role}</div>
+          </div>
+        </div>
+      `).join('');
+
+      // 3. Render Live WCAG 2.2 Contrast Matrix across all 6 Klimt colors
+      const contrastPairs = [
+        { role: 'Obsidian Grid Text on Alabaster Parchment', fg: '#1A1815', bg: '#F5F0E6', min: 4.5 },
+        { role: 'Alabaster Parchment Text on Obsidian Grid', fg: '#F5F0E6', bg: '#1A1815', min: 4.5 },
+        { role: 'Klimt Gold Headline / Math on Obsidian Grid', fg: '#D4AF37', bg: '#1A1815', min: 4.5 },
+        { role: 'Alabaster Text on Lapis Mosaic Card', fg: '#F5F0E6', bg: '#2B5A75', min: 4.5 },
+        { role: 'Alabaster Text on Crimson Berry Accent', fg: '#F5F0E6', bg: '#C02B37', min: 4.5 },
+        { role: 'Alabaster Text on Emerald Flora Badge', fg: '#F5F0E6', bg: '#2E6B56', min: 4.5 }
+      ];
+      const cmBody = document.getElementById('contrast-matrix-body');
+      cmBody.innerHTML = contrastPairs.map(p => {
+        const ratio = getContrastRatio(p.fg, p.bg);
+        const pass = ratio >= p.min;
+        const rating = ratio >= 7.0 ? 'WCAG AAA' : (ratio >= 4.5 ? 'WCAG AA' : 'WCAG Large AA');
+        const badgeClass = ratio >= 7.0 ? 'badge-success' : 'badge-neutral';
+        return `
+          <tr>
+            <td><strong>${p.role}</strong></td>
+            <td><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${p.fg};border:1px solid #ccc;vertical-align:middle;margin-right:6px;"></span><code style="font-family: var(--font-mono);">${p.fg}</code></td>
+            <td><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${p.bg};border:1px solid #ccc;vertical-align:middle;margin-right:6px;"></span><code style="font-family: var(--font-mono);">${p.bg}</code></td>
+            <td><strong style="font-family:var(--font-mono);">${ratio.toFixed(2)} : 1</strong></td>
+            <td><span class="badge ${badgeClass}">${rating}</span></td>
+            <td>${pass ? '<span style="color: var(--klimt-emerald); font-weight: 700;">&#x2713; Verified</span>' : '<span style="color: var(--klimt-crimson); font-weight: 700;">Adjust</span>'}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // 4. Populate CSS & Tailwind Code Blocks
+      document.getElementById('css-code').textContent = `:root {
+  /* The Spectrum of "The Kiss" (Gustav Klimt 1908 × Applied ML) */
+  --klimt-gold: #D4AF37;       /* Core Leaf: Latent space shimmer & theorem borders */
+  --klimt-lapis: #2B5A75;      /* Mosaic Lapis: Concentric probability contours */
+  --klimt-crimson: #C02B37;    /* Vibrant Pop: Focal optima & attention callouts */
+  --klimt-emerald: #2E6B56;    /* Flora Pointillist: Meadow cluster embeddings */
+  --klimt-obsidian: #1A1815;   /* Rectangular Dark: Male robe discrete blocks & ink */
+  --klimt-alabaster: #F5F0E6;  /* Luminous Canvas: Warm gallery paper ground */
+
+  /* Supporting Structural Neutrals */
+  --klimt-ochre: #B58E43;
+  --klimt-clay: #DED6C5;
+  --klimt-charcoal: #22201D;
+  --klimt-slate: #5A5852;
+
+  /* 4-Font Typographic Hierarchy */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-cinzel: 'Cinzel', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Strict Anti-Pill Architectural Radii */
+  --radius-badge: 6px;
+  --radius-button: 8px;
+  --radius-input: 8px;
+  --radius-card: 12px;
+  --radius-modal: 16px;
+}`;
+
+      document.getElementById('tailwind-code').textContent = `tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
+        cinzel: ['"Cinzel"', 'serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+      colors: {
+        klimt: {
+          gold: '#D4AF37',
+          ochre: '#B58E43',
+          lapis: '#2B5A75',
+          crimson: '#C02B37',
+          emerald: '#2E6B56',
+          obsidian: '#1A1815',
+          alabaster: '#F5F0E6',
+          clay: '#DED6C5',
+          charcoal: '#22201D',
+          slate: '#5A5852'
+        }
+      },
+      borderRadius: {
+        badge: '6px',
+        button: '8px',
+        card: '12px',
+        modal: '16px'
+      }
+    }
+  }
+};`;
+    }
+
+    window.addEventListener('DOMContentLoaded', renderDesignSystem);
+  </script>
+</body>
+</html>

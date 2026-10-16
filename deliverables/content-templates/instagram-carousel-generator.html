@@ -1,0 +1,2750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elvira Astashkina (@elvrast) — Instagram Carousel Studio (Klimt × ML)</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='10' fill='%231A1815' stroke='%23D4AF37' stroke-width='3.5'/%3E%3Crect x='8' y='8' width='20' height='26' rx='2' fill='%23F5F0E6'/%3E%3Crect x='16' y='12' width='4' height='18' fill='%231A1815'/%3E%3Crect x='8' y='38' width='20' height='10' rx='1.5' fill='%23D4AF37'/%3E%3Crect x='8' y='50' width='20' height='6' rx='1.5' fill='%232B5A75'/%3E%3Cline x1='32' y1='6' x2='32' y2='58' stroke='%23D4AF37' stroke-width='2'/%3E%3Ccircle cx='46' cy='24' r='11' fill='%23C02B37' stroke='%23D4AF37' stroke-width='2.5'/%3E%3Ccircle cx='46' cy='24' r='5' fill='%23F5F0E6'/%3E%3Ccircle cx='46' cy='47' r='8' fill='%232B5A75' stroke='%23D4AF37' stroke-width='2'/%3E%3Ccircle cx='46' cy='47' r='3.2' fill='%23D4AF37'/%3E%3C/svg%3E">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- KaTeX for live mathematical rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" crossorigin="anonymous"></script>
+
+  <!-- html2canvas & JSZip for 1080x1350 High-DPI Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, JetBrains Mono, Cinzel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            cinzel: ['"Cinzel"', 'Georgia', 'serif'],
+          },
+          colors: {
+            klimt: {
+              gold: '#D4AF37',
+              goldLight: '#F5E6BE',
+              ochre: '#B58E43',
+              lapis: '#2B5A75',
+              crimson: '#C02B37',
+              emerald: '#2E6B56',
+              obsidian: '#1A1815',
+              alabaster: '#F5F0E6',
+              clay: '#DED6C5',
+              charcoal: '#22201D',
+              slate: '#5A5852',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       KLIMT × ML ARCHITECTURAL DESIGN SYSTEM
+       Strict Ban on Pill-Shaped Elements: rounded-md (6px), rounded-lg (8px), rounded-xl (12px)
+       Frontend Typography & Zero-Orphan Standard: text-wrap: balance / pretty
+       ========================================================================== */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      background-color: #F5F0E6;
+      background-image:
+        radial-gradient(rgba(212, 175, 55, 0.14) 1px, transparent 0),
+        radial-gradient(rgba(43, 90, 117, 0.08) 1px, transparent 0);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+      color: #1A1815;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .balance-text { text-wrap: balance; }
+    p, .pretty-text { text-wrap: pretty; }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #EAE2D3; }
+    ::-webkit-scrollbar-thumb { background: #B58E43; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #9A7420; }
+
+    /* Slide Canvas Container & True 1080px Render Surface */
+    .carousel-stage-viewport {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-scale-shell {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 24px 60px rgba(26, 24, 21, 0.28), 0 0 0 1px rgba(181, 142, 67, 0.45);
+      border-radius: 8px;
+      transition: width 0.25s ease, height 0.25s ease;
+    }
+
+    .ig-slide-canvas {
+      width: 1080px;
+      height: 1350px; /* 1080x1350 (4:5) or 1080x1080 (1:1) */
+      position: relative;
+      overflow: hidden;
+      transform-origin: top left;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 78px 84px 72px 84px;
+    }
+
+    .ig-slide-canvas.aspect-1x1 {
+      height: 1080px;
+      padding: 68px 78px 62px 78px;
+    }
+
+    /* Themes: Obsidian Dark vs Alabaster Light */
+    .ig-slide-canvas.theme-dark {
+      background-color: #1A1815;
+      background-image:
+        radial-gradient(circle at 82% 18%, rgba(212, 175, 55, 0.09) 0%, transparent 48%),
+        radial-gradient(circle at 16% 84%, rgba(43, 90, 117, 0.11) 0%, transparent 52%),
+        radial-gradient(rgba(212, 175, 55, 0.08) 1.25px, transparent 0);
+      background-size: 100% 100%, 100% 100%, 36px 36px;
+      color: #F5F0E6;
+      --slide-bg: #1A1815;
+      --slide-card-bg: rgba(18, 16, 13, 0.88);
+      --slide-card-alt: rgba(34, 30, 24, 0.78);
+      --slide-text: #F5F0E6;
+      --slide-muted: #DED6C5;
+      --slide-subtle: #9E9689;
+      --slide-gold: #D4AF37;
+      --slide-border: rgba(212, 175, 55, 0.45);
+      --slide-hairline: rgba(245, 240, 230, 0.16);
+      --slide-badge-bg: rgba(212, 175, 55, 0.14);
+      --slide-badge-text: #F5E6BE;
+    }
+
+    .ig-slide-canvas.theme-light {
+      background-color: #F5F0E6;
+      background-image:
+        radial-gradient(circle at 82% 18%, rgba(212, 175, 55, 0.14) 0%, transparent 48%),
+        radial-gradient(circle at 16% 84%, rgba(43, 90, 117, 0.08) 0%, transparent 52%),
+        radial-gradient(rgba(181, 142, 67, 0.12) 1.25px, transparent 0);
+      background-size: 100% 100%, 100% 100%, 36px 36px;
+      color: #1A1815;
+      --slide-bg: #F5F0E6;
+      --slide-card-bg: rgba(255, 253, 248, 0.92);
+      --slide-card-alt: rgba(239, 232, 218, 0.85);
+      --slide-text: #1A1815;
+      --slide-muted: #2B2823;
+      --slide-subtle: #5A5852;
+      --slide-gold: #9A7420;
+      --slide-border: rgba(181, 142, 67, 0.55);
+      --slide-hairline: rgba(26, 24, 21, 0.14);
+      --slide-badge-bg: rgba(212, 175, 55, 0.22);
+      --slide-badge-text: #1A1815;
+    }
+
+    /* KaTeX Sizing inside 1080px Slide Canvas */
+    .slide-katex-box .katex {
+      font-size: 2.35rem !important;
+      line-height: 1.25 !important;
+    }
+    .slide-katex-hero .katex {
+      font-size: 2.85rem !important;
+      line-height: 1.25 !important;
+    }
+    .slide-katex-compact .katex {
+      font-size: 1.85rem !important;
+    }
+  </style>
+  <!-- Open Graph / Telegram / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Elvira Astashkina (@elvrast)">
+  <meta property="og:title" content="Elvira Astashkina (@elvrast) — Instagram Carousel Studio (Klimt × ML)">
+  <meta property="og:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta property="og:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:secure_url" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Elvira Astashkina — Applied Machine Learning Engineer &amp; AI Educator (@elvrast)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Elvira Astashkina (@elvrast) — Instagram Carousel Studio (Klimt × ML)">
+  <meta name="twitter:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta name="twitter:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+  <!-- ========================================================================
+       HEADER BAR (CANONICAL HORIZONTAL LOCKUP + BRAND-ALIGNED NAVIGATION)
+       ======================================================================== -->
+  <header class="border-b border-[#DED6C5] bg-[#F5F0E6]/95 backdrop-blur-md px-3.5 sm:px-6 py-3.5 relative xl:sticky xl:top-0 z-40 shadow-sm">
+    <div class="max-w-[1600px] mx-auto flex flex-col xl:flex-row justify-between items-stretch xl:items-center gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="/" class="flex items-center gap-2.5 no-underline group shrink-0" title="Canonical Horizontal Lockup — Light (Logo + First & Last Name)">
+          <div class="w-10 h-10 rounded-lg bg-[#F5F0E6] flex items-center justify-center border border-[#1A1815] shadow-sm overflow-hidden flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="w-9 h-9">
+              <rect x="2" y="2" width="60" height="60" rx="10" fill="#F5F0E6" stroke="#1A1815" stroke-width="3.5"/>
+              <rect x="8" y="8" width="20" height="26" rx="2" fill="#1A1815"/>
+              <rect x="16" y="12" width="4" height="18" fill="#D4AF37"/>
+              <rect x="8" y="38" width="20" height="10" rx="1.5" fill="#D4AF37"/>
+              <rect x="8" y="50" width="20" height="6" rx="1.5" fill="#2B5A75"/>
+              <line x1="32" y1="6" x2="32" y2="58" stroke="#1A1815" stroke-width="2"/>
+              <circle cx="46" cy="24" r="11" fill="#C02B37" stroke="#1A1815" stroke-width="2"/>
+              <circle cx="46" cy="24" r="5" fill="#D4AF37"/>
+              <circle cx="46" cy="47" r="8" fill="#2B5A75" stroke="#1A1815" stroke-width="2"/>
+              <circle cx="46" cy="47" r="3.2" fill="#F5F0E6"/>
+            </svg>
+          </div>
+          <span class="text-xl sm:text-2xl font-serif font-bold text-[#1A1815] tracking-tight leading-none whitespace-nowrap">
+            Elvira Astashkina
+          </span>
+        </a>
+        <span class="hidden sm:inline-block h-6 w-px bg-[#C8BEAA] shrink-0"></span>
+        <div class="min-w-0 shrink">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded-md bg-[#1A1815] text-[#D4AF37] border border-[#D4AF37] text-[10px] font-mono font-bold uppercase tracking-wider whitespace-nowrap">
+              Instagram Carousel Studio
+            </span>
+          </div>
+          <p class="hidden 2xl:block text-[10px] font-mono text-[#5A5852] tracking-wider uppercase mt-0.5 truncate">
+            4:5 Portrait &amp; 1:1 Square · KaTeX Math · BYOK AI &amp; Agent Studio
+          </p>
+        </div>
+      </div>
+
+      <!-- Symmetrical 6-Button Grid: 2x3 on Mobile, 3x2 on Tablet, 1x6 on Desktop -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 xl:flex xl:flex-nowrap items-center gap-1.5 w-full xl:w-auto shrink-0">
+        <a href="/" class="w-full xl:w-auto px-2.5 py-1.5 rounded-lg border border-[#C8BEAA] bg-white text-[11px] font-mono font-semibold text-[#1A1815] hover:border-[#1A1815] transition flex items-center justify-center text-center whitespace-nowrap">
+          ← Brand Hub
+        </a>
+        <a href="/video" class="w-full xl:w-auto px-2.5 py-1.5 rounded-lg border border-[#C8BEAA] bg-white text-[11px] font-mono font-semibold text-[#1A1815] hover:border-[#1A1815] transition flex items-center justify-center text-center whitespace-nowrap">
+          Video Studio
+        </a>
+        <a href="/deliverables/brand-book/elvira-astashkina-2026-10-brand-book.html" class="w-full xl:w-auto px-2.5 py-1.5 rounded-lg border border-[#C8BEAA] bg-white text-[11px] font-mono font-semibold text-[#7A5B14] hover:border-[#1A1815] transition flex items-center justify-center text-center whitespace-nowrap">
+          Brand Book
+        </a>
+        <button onclick="toggleAiAgentDrawer()" class="w-full xl:w-auto px-2.5 py-1.5 rounded-lg bg-[#C02B37] hover:bg-[#9E1F29] text-white border border-[#1A1815] text-[11px] font-mono font-bold transition shadow-sm flex items-center justify-center text-center whitespace-nowrap">
+          ✦ AI &amp; Agent Studio
+        </button>
+        <button onclick="exportCurrentSlidePNG()" id="btn-export-single" class="w-full xl:w-auto px-2.5 py-1.5 rounded-lg border border-[#1A1815] bg-[#EAE2D3] text-[#1A1815] hover:bg-[#1A1815] hover:text-[#F5F0E6] text-[11px] font-mono font-bold transition flex items-center justify-center text-center whitespace-nowrap">
+          <span>↓ Export Slide PNG</span>
+        </button>
+        <button onclick="exportAllSlidesZIP()" id="btn-export-zip" class="w-full xl:w-auto px-3 py-1.5 rounded-lg bg-[#1A1815] text-[#F5F0E6] hover:bg-[#2B5A75] text-[11px] font-sans font-bold tracking-wide transition shadow-sm border border-[#D4AF37] flex items-center justify-center text-center whitespace-nowrap">
+          <span id="export-zip-label">↓↓ Download .ZIP</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN WORKSPACE GRID
+       ======================================================================== -->
+  <main class="max-w-[1600px] mx-auto w-full px-3.5 sm:px-6 py-4 sm:py-6 flex-1 grid grid-cols-1 xl:grid-cols-12 gap-5 sm:gap-6 items-start">
+
+    <!-- ======================================================================
+         LEFT COLUMN (5 COLS): AI BRIDGE, PRESETS, SLIDE EDITOR & VISUAL PICKER
+         (order-2 on mobile so Live Canvas Stage appears right at top on phones, order-1 on desktop)
+         ====================================================================== -->
+    <div class="xl:col-span-5 space-y-5 order-2 xl:order-1">
+
+      <!-- 00. AI MODEL & AGENT BRIDGE (BYOK + EXTERNAL AGENT HANDOFF) -->
+      <section id="ai-agent-bridge-section" class="bg-white border-2 border-[#B58E43] rounded-xl p-4 sm:p-5 shadow-sm space-y-3.5">
+        <div class="flex justify-between items-center border-b border-[#DED6C5] pb-2.5">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded-md bg-[#1A1815] text-[#D4AF37] text-[10px] font-mono font-bold uppercase">
+              BYOK + AGENT
+            </span>
+            <h2 class="text-base font-serif font-bold text-[#1A1815]">
+              00. AI Model &amp; Agent Studio
+            </h2>
+          </div>
+          <button onclick="toggleAiAgentBody()" id="btn-collapse-ai" class="text-[10px] font-mono font-bold text-[#4A463F] hover:text-[#1A1815] px-2.5 py-1 rounded-md border border-[#C8BEAA] bg-[#F5F0E6]">
+            Hide / Show
+          </button>
+        </div>
+
+        <div id="ai-agent-body" class="space-y-3">
+          <!-- Mode Tabs: Symmetrical 2-Column Grid -->
+          <div class="grid grid-cols-2 gap-1.5 bg-[#EAE2D3] p-1 rounded-lg border border-[#DED6C5]">
+            <button onclick="switchAiBridgeTab('model')" id="aitab-model" class="w-full py-2 px-2 rounded-md text-[11px] font-mono font-bold bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37] transition text-center">
+              ✦ Direct AI (BYOK)
+            </button>
+            <button onclick="switchAiBridgeTab('agent')" id="aitab-agent" class="w-full py-2 px-2 rounded-md text-[11px] font-mono font-bold text-[#1A1815] hover:bg-white/70 transition text-center">
+              ⇄ External AI Agent
+            </button>
+          </div>
+
+          <!-- Shared Topic / Notes Input -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="text-[10px] font-mono uppercase font-bold text-[#4A463F]">Carousel Topic, Research Paper, or Draft Notes</label>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-mono font-semibold text-[#5A5852]">Slides:</span>
+                <select id="ai-slide-count" class="bg-[#F5F0E6] border border-[#C8BEAA] rounded-md px-1.5 py-0.5 text-[10px] font-mono font-bold text-[#1A1815]">
+                  <option value="4">4 Slides</option>
+                  <option value="5" selected>5 Slides</option>
+                  <option value="6">6 Slides</option>
+                  <option value="7">7 Slides</option>
+                </select>
+              </div>
+            </div>
+            <textarea id="ai-topic-input" rows="2" placeholder="e.g., Why L1 Regularization creates sparse diamond corners while L2 creates spherical contours, explained through Klimt geometry..." class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-3 py-2 text-xs text-[#1A1815] font-sans focus:outline-none focus:border-[#1A1815]">Why KL-Divergence is asymmetric (Forward vs. Reverse KL in Variational Inference &amp; LLMs), visualized through Klimt probability contours and discrete grids.</textarea>
+          </div>
+
+          <!-- TAB 1: DIRECT AI MODEL (CLAUDE, OPENAI, GEMINI, OPENROUTER, OLLAMA) -->
+          <div id="aipanel-model" class="space-y-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">AI Provider</label>
+                <select id="ai-provider" onchange="onAiProviderChange()" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-1.5 text-xs font-mono text-[#1A1815] focus:outline-none focus:border-[#1A1815]">
+                  <option value="gemini">Google Gemini API</option>
+                  <option value="anthropic">Anthropic Claude API</option>
+                  <option value="openai">OpenAI API (GPT / o-series)</option>
+                  <option value="openrouter">OpenRouter (Any Model)</option>
+                  <option value="ollama">Local Ollama / LM Studio (No Key)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Model Name (Editable)</label>
+                <input type="text" id="ai-model-name" value="gemini-2.5-flash" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-[#7A5B14] focus:outline-none focus:border-[#1A1815]">
+              </div>
+            </div>
+
+            <div id="ai-key-row">
+              <div class="flex justify-between items-center mb-1">
+                <label class="text-[10px] font-mono uppercase font-bold text-[#4A463F]">Your API Key (Or leave blank if set in local server env)</label>
+                <label class="flex items-center gap-1 text-[10px] font-mono font-semibold text-[#7A5B14] cursor-pointer">
+                  <input type="checkbox" id="ai-remember-key" checked onchange="saveAiPreferences()" class="accent-[#1A1815]">
+                  <span>Save in my browser only</span>
+                </label>
+              </div>
+              <input type="password" id="ai-api-key" oninput="saveAiPreferences()" placeholder="Paste your Gemini / Claude / OpenAI / OpenRouter key..." class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-1.5 text-xs font-mono text-[#1A1815] focus:outline-none focus:border-[#1A1815]">
+            </div>
+
+            <div id="ai-endpoint-row" class="hidden">
+              <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Local OpenAI-Compatible Endpoint URL</label>
+              <input type="text" id="ai-custom-endpoint" value="http://localhost:11434/v1/chat/completions" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-1.5 text-xs font-mono text-[#1A1815] focus:outline-none focus:border-[#1A1815]">
+            </div>
+
+            <button onclick="generateCarouselWithAI()" id="btn-ai-generate" class="w-full py-2.5 px-4 rounded-lg bg-[#1A1815] hover:bg-[#2B5A75] text-[#F5F0E6] font-sans font-bold text-xs uppercase tracking-wider transition shadow-sm flex items-center justify-center gap-2 border border-[#D4AF37]">
+              <span id="ai-generate-label">✦ Generate Multi-Slide Carousel with AI</span>
+            </button>
+          </div>
+
+          <!-- TAB 2: EXTERNAL AI AGENT HANDOFF (CLAUDE CODE, CURSOR, CHATGPT, CODEX) -->
+          <div id="aipanel-agent" class="hidden space-y-2.5">
+            <p class="text-[11px] text-[#3D3A34] leading-relaxed">
+              Use <strong>any AI agent or chat subscription</strong> (Claude Desktop, ChatGPT Plus, Cursor, Claude Code, Codex) with <strong>zero API key required</strong>:
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button onclick="copyAgentMasterPrompt()" id="btn-copy-agent-prompt" class="py-2 px-3 rounded-lg bg-[#EAE2D3] hover:bg-[#1A1815] hover:text-[#F5F0E6] text-[#1A1815] border border-[#1A1815] text-xs font-mono font-bold transition text-center">
+                1. Copy Prompt for My Agent
+              </button>
+              <button onclick="pullDeckFromServer()" class="py-2 px-3 rounded-lg bg-white hover:bg-[#F5F0E6] text-[#1A1815] border border-[#C8BEAA] text-xs font-mono font-bold transition text-center">
+                🔄 Pull Deck from Local Agent
+              </button>
+            </div>
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <label class="text-[10px] font-mono uppercase font-bold text-[#4A463F]">2. Paste JSON Returned by Your AI Agent</label>
+                <button onclick="exportCurrentDeckJSON()" class="text-[10px] font-mono font-bold text-[#7A5B14] hover:underline">Export Current Deck JSON</button>
+              </div>
+              <textarea id="agent-json-input" rows="3" placeholder='Paste the JSON array or {"slides": [...]} generated by Claude, ChatGPT, Cursor, or Codex here...' class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-2 text-[11px] font-mono text-[#1A1815] focus:outline-none focus:border-[#1A1815]"></textarea>
+            </div>
+            <button onclick="importAgentJSON()" class="w-full py-2 px-3 rounded-lg bg-[#1A1815] text-[#F5F0E6] hover:bg-[#2B5A75] border border-[#D4AF37] text-xs font-mono font-bold uppercase tracking-wider transition">
+              📥 Load Agent JSON into Carousel Studio
+            </button>
+          </div>
+
+          <div id="ai-status-msg" class="hidden text-[11px] font-mono px-3 py-2 rounded-lg bg-[#F5F0E6] border border-[#B58E43] text-[#1A1815]"></div>
+        </div>
+      </section>
+
+      <!-- 1. CURATED CAROUSEL DECK PRESETS -->
+      <section class="bg-white border border-[#DED6C5] rounded-xl p-4 sm:p-5 shadow-sm">
+        <div class="flex justify-between items-center mb-3 border-b border-[#DED6C5] pb-2">
+          <h2 class="text-base font-serif font-bold text-[#1A1815]">
+            01. Curated Multi-Slide Carousel Decks
+          </h2>
+          <span class="text-[10px] font-mono font-bold text-[#7A5B14] uppercase">5 Slides · 1-Click Load</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="deck-presets-grid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- 2. GLOBAL CAROUSEL SETTINGS (ASPECT RATIO, THEME RHYTHM, FRAMING) -->
+      <section class="bg-white border border-[#DED6C5] rounded-xl p-4 sm:p-5 shadow-sm space-y-3.5">
+        <div class="flex justify-between items-center border-b border-[#DED6C5] pb-2">
+          <h2 class="text-base font-serif font-bold text-[#1A1815]">
+            02. Format, Theme Rhythm &amp; Architectural Frame
+          </h2>
+          <span class="text-[10px] font-mono font-bold text-[#7A5B14] uppercase">Brand System Rules</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <!-- Aspect Ratio -->
+          <div>
+            <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Aspect Ratio</label>
+            <select id="ctrl-aspect" onchange="setAspectRatio(this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-2 text-xs font-medium text-[#1A1815] focus:outline-none focus:border-[#1A1815]">
+              <option value="4:5">4:5 Portrait (1080×1350)</option>
+              <option value="1:1">1:1 Square (1080×1080)</option>
+            </select>
+          </div>
+
+          <!-- Global Theme Apply -->
+          <div>
+            <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Deck Palette Rhythm</label>
+            <select id="ctrl-deck-theme" onchange="applyDeckThemeMode(this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-2 text-xs font-medium text-[#1A1815] focus:outline-none focus:border-[#1A1815]">
+              <option value="editorial">Editorial Mix (Dark/Light)</option>
+              <option value="all-dark">All Obsidian Dark (#1A1815)</option>
+              <option value="all-light">All Alabaster Light (#F5F0E6)</option>
+              <option value="alternate">Alternating Dark ↔ Light</option>
+            </select>
+          </div>
+
+          <!-- Seam & Crosshairs -->
+          <div>
+            <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Klimt Frame Detail</label>
+            <select id="ctrl-frame-style" onchange="setFrameStyle(this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-2 text-xs font-medium text-[#1A1815] focus:outline-none focus:border-[#1A1815]">
+              <option value="full">Gold Frame + Crosshairs + Seam</option>
+              <option value="minimal">Clean Gold Border Only</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. ACTIVE SLIDE CONTENT & MATH EDITOR -->
+      <section id="slide-editor-section" class="bg-white border border-[#DED6C5] rounded-xl p-4 sm:p-5 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-2 border-b border-[#DED6C5] pb-2.5">
+          <div>
+            <h2 class="text-base font-serif font-bold text-[#1A1815]" id="editor-slide-indicator">
+              03. Editing Slide 01 / 05
+            </h2>
+          </div>
+          <div class="grid grid-cols-5 sm:flex items-center gap-1.5">
+            <button onclick="moveSlide(-1)" title="Move Slide Left" class="px-2 py-1.5 rounded-md bg-[#F5F0E6] border border-[#C8BEAA] text-xs font-mono font-bold text-[#1A1815] hover:border-[#1A1815] text-center">←</button>
+            <button onclick="moveSlide(1)" title="Move Slide Right" class="px-2 py-1.5 rounded-md bg-[#F5F0E6] border border-[#C8BEAA] text-xs font-mono font-bold text-[#1A1815] hover:border-[#1A1815] text-center">→</button>
+            <button onclick="duplicateSlide()" class="px-2 py-1.5 rounded-md bg-[#F5F0E6] border border-[#C8BEAA] text-[10px] sm:text-[11px] font-mono font-bold text-[#1A1815] hover:bg-[#EAE2D3] text-center truncate">+ Copy</button>
+            <button onclick="addNewSlide()" class="px-2 py-1.5 rounded-md bg-[#1A1815] border border-[#D4AF37] text-[10px] sm:text-[11px] font-mono text-[#F5F0E6] font-bold hover:bg-[#2B5A75] text-center truncate">+ New</button>
+            <button onclick="deleteCurrentSlide()" class="px-2 py-1.5 rounded-md bg-[#FDF2F3] border border-[#C02B37] text-xs font-mono font-bold text-[#9E1F29] hover:bg-[#C02B37] hover:text-white text-center">✕</button>
+          </div>
+        </div>
+
+        <!-- Slide Archetype & Slide Theme -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Slide Layout Archetype</label>
+            <select id="slide-layout" onchange="onLayoutChange(this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-3 py-2 text-xs font-medium text-[#1A1815] focus:outline-none focus:border-[#1A1815]">
+              <option value="cover">01 · Cover / Hook Masterpiece</option>
+              <option value="visual_card">02 · Concept + Visual Diagram + Math</option>
+              <option value="theorem">03 · Bracketed Theorem &amp; Variable Legend</option>
+              <option value="comparison">04 · Dual Comparison (Discrete vs. Continuous)</option>
+              <option value="outro">05 · Synthesis &amp; @elvrast Sign-Off</option>
+              <option value="statement">06 · Pure Editorial Statement (No Visual / No Math)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">This Slide's Surface Theme</label>
+            <select id="slide-theme" onchange="updateSlideField('theme', this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-3 py-2 text-xs font-medium text-[#1A1815] focus:outline-none focus:border-[#1A1815]">
+              <option value="dark">Obsidian Dark (#1A1815)</option>
+              <option value="light">Alabaster Light (#F5F0E6)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- OPTIONAL SLIDE ELEMENTS BAR (TOGGLE VISUAL & FORMULA ON/OFF) -->
+        <div class="bg-[#F5F0E6] border border-[#DED6C5] rounded-lg p-3 space-y-2.5">
+          <div class="flex flex-wrap justify-between items-center gap-2">
+            <span class="text-[10px] font-mono uppercase tracking-wider text-[#7A5B14] font-bold">
+              Optional Slide Elements (Include or Remove)
+            </span>
+            <div class="flex items-center gap-1.5">
+              <button onclick="setDeckElementVisibility('visual')" class="px-2 py-0.5 rounded-md bg-white hover:bg-[#EAE2D3] border border-[#C8BEAA] text-[10px] font-mono font-semibold text-[#1A1815] transition" title="Toggle visuals on all slides in deck">
+                All Slides: Visuals
+              </button>
+              <button onclick="setDeckElementVisibility('formula')" class="px-2 py-0.5 rounded-md bg-white hover:bg-[#EAE2D3] border border-[#C8BEAA] text-[10px] font-mono font-semibold text-[#1A1815] transition" title="Toggle formulas on all slides in deck">
+                All Slides: Formulas
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" id="btn-toggle-visual" onclick="toggleSlideVisual()" class="px-2.5 sm:px-3 py-2 rounded-lg border text-[11px] sm:text-xs font-mono font-bold flex items-center justify-between gap-1.5 transition">
+              <span>Visual<span class="hidden sm:inline"> / Image</span></span>
+              <span id="badge-toggle-visual" class="px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] flex-shrink-0">INCLUDED</span>
+            </button>
+            <button type="button" id="btn-toggle-formula" onclick="toggleSlideFormula()" class="px-2.5 sm:px-3 py-2 rounded-lg border text-[11px] sm:text-xs font-mono font-bold flex items-center justify-between gap-1.5 transition">
+              <span><span class="hidden sm:inline">Math </span>Formula</span>
+              <span id="badge-toggle-formula" class="px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] flex-shrink-0">INCLUDED</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Kicker / Badge & Accent Color -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="sm:col-span-2">
+            <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Top Kicker / Monograph Tag</label>
+            <input type="text" id="slide-kicker" oninput="updateSlideField('kicker', this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-3 py-2 text-xs font-mono font-bold text-[#7A5B14] focus:outline-none focus:border-[#1A1815]" placeholder="MEASURE THEORY // AXIOM I">
+          </div>
+          <div>
+            <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Motif Accent Tone</label>
+            <select id="slide-accent" onchange="updateSlideField('accent', this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-2 text-xs font-medium text-[#1A1815] focus:outline-none focus:border-[#1A1815]">
+              <option value="gold">Klimt Gold (#D4AF37)</option>
+              <option value="lapis">Lapis Teal (#2B5A75)</option>
+              <option value="crimson">Crimson Berry (#C02B37)</option>
+              <option value="emerald">Emerald Flora (#2E6B56)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Editorial Headline -->
+        <div>
+          <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Headline (Cormorant Garamond — HTML/Italics supported)</label>
+          <textarea id="slide-title" rows="2" oninput="updateSlideField('title', this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-3 py-2 text-sm font-serif font-bold text-[#1A1815] focus:outline-none focus:border-[#1A1815]"></textarea>
+        </div>
+
+        <!-- Subtitle / Lead Insight -->
+        <div>
+          <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Editorial Lead / Analytical Body</label>
+          <textarea id="slide-body" rows="3" oninput="updateSlideField('body', this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-3 py-2 text-xs text-[#1A1815] leading-relaxed focus:outline-none focus:border-[#1A1815]"></textarea>
+        </div>
+
+        <!-- LaTeX Mathematical Formula + Caption (OPTIONAL) -->
+        <div id="formula-editor-box" class="bg-[#F5F0E6] border border-[#DED6C5] rounded-lg p-3 space-y-2.5 transition">
+          <div class="flex flex-wrap justify-between items-center gap-2">
+            <label class="text-[10px] font-mono uppercase text-[#7A5B14] font-bold">LaTeX Mathematical Equation (Optional)</label>
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="clearSlideFormula()" class="px-2 py-0.5 rounded bg-white hover:bg-[#EAE2D3] border border-[#C8BEAA] text-[10px] font-mono font-semibold text-[#1A1815]">Clear Text</button>
+              <button type="button" id="btn-inline-formula-toggle" onclick="toggleSlideFormula()" class="px-2 py-0.5 rounded bg-[#FDF2F3] hover:bg-[#C02B37] border border-[#C02B37] text-[10px] font-mono font-bold text-[#9E1F29] hover:text-white transition">Hide Formula</button>
+            </div>
+          </div>
+          <div id="formula-inputs-wrap" class="space-y-2">
+            <input type="text" id="slide-latex" oninput="updateSlideField('latex', this.value)" class="w-full bg-white border border-[#C8BEAA] rounded-md px-3 py-1.5 text-xs font-mono font-bold text-[#1A1815] focus:outline-none focus:border-[#1A1815]" placeholder="P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)">
+            <input type="text" id="slide-latex-caption" oninput="updateSlideField('latexCaption', this.value)" class="w-full bg-white border border-[#C8BEAA] rounded-md px-3 py-1.5 text-[11px] font-mono text-[#4A463F] focus:outline-none focus:border-[#1A1815]" placeholder="Countable Additivity over Disjoint Events (Optional caption)">
+          </div>
+        </div>
+
+        <!-- Dynamic Secondary Fields (Comparison Columns or Legend Bullets) -->
+        <div id="comparison-fields" class="bg-[#F5F0E6] border border-[#2B5A75]/40 rounded-lg p-3 space-y-2.5 hidden">
+          <div class="text-[10px] font-mono uppercase text-[#2B5A75] font-bold">Dual Comparison Columns (Discrete Male Grid vs. Continuous Female Field)</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div class="space-y-1.5">
+              <input type="text" id="slide-col1-title" oninput="updateSlideField('col1Title', this.value)" class="w-full bg-white border border-[#C8BEAA] rounded-md px-2.5 py-1.5 text-xs font-bold text-[#7A5B14]" placeholder="Left Column Header">
+              <textarea id="slide-col1-text" rows="3" oninput="updateSlideField('col1Text', this.value)" class="w-full bg-white border border-[#C8BEAA] rounded-md px-2.5 py-1.5 text-[11px] text-[#1A1815]"></textarea>
+            </div>
+            <div class="space-y-1.5">
+              <input type="text" id="slide-col2-title" oninput="updateSlideField('col2Title', this.value)" class="w-full bg-white border border-[#C8BEAA] rounded-md px-2.5 py-1.5 text-xs font-bold text-[#2B5A75]" placeholder="Right Column Header">
+              <textarea id="slide-col2-text" rows="3" oninput="updateSlideField('col2Text', this.value)" class="w-full bg-white border border-[#C8BEAA] rounded-md px-2.5 py-1.5 text-[11px] text-[#1A1815]"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Takeaway / Footer Callout -->
+        <div>
+          <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Bottom Callout / Swipe Prompt</label>
+          <input type="text" id="slide-footer-note" oninput="updateSlideField('footerNote', this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-3 py-1.5 text-xs font-mono font-semibold text-[#1A1815] focus:outline-none focus:border-[#1A1815]" placeholder="SWIPE FOR THE GEOMETRIC PROOF →">
+        </div>
+      </section>
+
+      <!-- 4. KLIMT × ML VISUAL MOTIF & ARTWORK SELECTOR (OPTIONAL) -->
+      <section class="bg-white border border-[#DED6C5] rounded-xl p-4 sm:p-5 shadow-sm space-y-4">
+        <div class="flex flex-wrap justify-between items-center gap-2 border-b border-[#DED6C5] pb-2">
+          <h2 class="text-base font-serif font-bold text-[#1A1815]">
+            04. Klimt × ML Visual Motif Library (Optional)
+          </h2>
+          <button type="button" id="btn-section4-visual-toggle" onclick="toggleSlideVisual()" class="px-2.5 py-1 rounded-md bg-[#FDF2F3] hover:bg-[#C02B37] border border-[#C02B37] text-[10px] font-mono font-bold text-[#9E1F29] hover:text-white transition">
+            Remove Visual from Slide
+          </button>
+        </div>
+
+        <!-- Tabs: Vector Motifs vs High-Res Motif Sheets vs Custom Upload -->
+        <div class="grid grid-cols-3 gap-1.5 bg-[#EAE2D3] p-1 rounded-lg border border-[#DED6C5]">
+          <button onclick="switchVisualTab('vector')" id="vtab-vector" class="w-full py-1.5 px-1.5 sm:px-2 rounded-md text-[10px] sm:text-[11px] font-mono font-bold bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37] transition text-center truncate">
+            Vector Motifs (12)
+          </button>
+          <button onclick="switchVisualTab('sheets')" id="vtab-sheets" class="w-full py-1.5 px-1.5 sm:px-2 rounded-md text-[10px] sm:text-[11px] font-mono font-bold text-[#1A1815] hover:bg-white/70 transition text-center truncate">
+            Klimt Sheets (4)
+          </button>
+          <button onclick="switchVisualTab('upload')" id="vtab-upload" class="w-full py-1.5 px-1.5 sm:px-2 rounded-md text-[10px] sm:text-[11px] font-mono font-bold text-[#1A1815] hover:bg-white/70 transition text-center truncate">
+            Custom Image
+          </button>
+        </div>
+
+        <!-- Tab 1: 12 Vector SVG Motifs -->
+        <div id="vpanel-vector" class="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-[290px] overflow-y-auto pr-1">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Tab 2: 4 High-Res Klimt × ML Reference Sheets + Crop Cell Selector -->
+        <div id="vpanel-sheets" class="space-y-3 hidden">
+          <p class="text-[11px] text-[#3D3A34] leading-relaxed">
+            Select any of Elvira's 4 high-resolution Klimt × ML visual reference sheets. Display the full sheet or focus on a specific quadrant/cell:
+          </p>
+          <div class="grid grid-cols-2 gap-2.5" id="sheet-selector-grid">
+            <!-- Populated by JS -->
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+            <div>
+              <label class="block text-[10px] font-mono uppercase font-bold text-[#4A463F] mb-1">Sheet Zoom / Focus Region</label>
+              <select id="sheet-crop-mode" onchange="updateSlideField('sheetCrop', this.value)" class="w-full bg-[#F5F0E6] border border-[#C8BEAA] rounded-lg px-2.5 py-1.5 text-xs font-medium text-[#1A1815]">
+                <option value="full">Full 16-Cell Sheet</option>
+                <option value="top-left">Quadrant I: Discrete Tensors &amp; Spirals</option>
+                <option value="top-right">Quadrant II: Probability Rings &amp; Contours</option>
+                <option value="bottom-left">Quadrant III: Clusters &amp; Pyramids</option>
+                <option value="bottom-right">Quadrant IV: Eye of Attention &amp; Streamlines</option>
+              </select>
+            </div>
+            <div class="flex items-end">
+              <button onclick="selectVectorMotif('mandala_synthesis')" class="w-full py-1.5 px-3 rounded-lg border border-[#1A1815] bg-[#EAE2D3] text-xs font-mono font-bold text-[#1A1815] hover:bg-[#1A1815] hover:text-[#F5F0E6] transition">
+                Reset to Crisp Vector SVG
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Custom Image Upload -->
+        <div id="vpanel-upload" class="space-y-3 hidden">
+          <p class="text-[11px] text-[#3D3A34] leading-relaxed">
+            Upload a portrait of Elvira, a custom Manim frame, or an experiment plot to frame inside the Klimt gold architectural border:
+          </p>
+          <input type="file" id="custom-img-input" accept="image/*" onchange="handleCustomImageUpload(event)" class="block w-full text-xs text-[#1A1815] file:mr-3 file:py-2 file:px-3.5 file:rounded-lg file:border file:border-[#1A1815] file:text-xs file:font-mono file:font-bold file:bg-[#1A1815] file:text-[#F5F0E6] hover:file:bg-[#2B5A75] cursor-pointer">
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         RIGHT COLUMN (7 COLS): LIVE INTERACTIVE STAGE & FULL CAROUSEL STRIP
+         (order-1 on mobile so the Live Slide Preview is immediately visible at top, order-2 on desktop)
+         ====================================================================== -->
+    <div class="xl:col-span-7 flex flex-col gap-4 sm:gap-5 order-1 xl:order-2 xl:sticky xl:top-20">
+
+      <!-- Stage Toolbar -->
+      <div class="bg-white border border-[#DED6C5] rounded-xl px-4 sm:px-5 py-3.5 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 shadow-sm">
+        <div class="flex items-center justify-between sm:justify-start gap-2.5">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-sm bg-[#D4AF37] border border-[#1A1815] flex-shrink-0"></span>
+            <span class="text-sm font-serif font-bold text-[#1A1815]" id="stage-title-bar">
+              Live Canvas — Slide 01 / 05
+            </span>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#F5F0E6] border border-[#DED6C5] text-[10px] font-mono font-bold text-[#7A5B14] whitespace-nowrap" id="stage-dim-badge">
+            1080 × 1350 px (4:5)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="setViewMode('single')" id="btn-view-single" class="w-full sm:w-auto px-3 py-2 sm:py-1.5 rounded-lg text-xs font-mono font-bold bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37] transition text-center">
+            Single Slide Focus
+          </button>
+          <button onclick="setViewMode('strip')" id="btn-view-strip" class="w-full sm:w-auto px-3 py-2 sm:py-1.5 rounded-lg text-xs font-mono font-bold bg-[#F5F0E6] text-[#1A1815] border border-[#C8BEAA] hover:border-[#1A1815] transition text-center">
+            Full Seam Strip
+          </button>
+        </div>
+      </div>
+
+      <!-- SINGLE SLIDE STAGE -->
+      <div id="single-stage-container" class="bg-[#EAE2D3] border border-[#DED6C5] rounded-xl p-3 sm:p-6 flex flex-col items-center justify-center shadow-inner relative">
+        <!-- Prev / Next Floating Controls -->
+        <div class="w-full flex justify-between items-center gap-1.5 sm:gap-2 mb-3.5 max-w-[518px]">
+          <button onclick="selectSlide(Math.max(0, state.activeIndex - 1))" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-white border border-[#C8BEAA] text-[11px] sm:text-xs font-mono font-bold text-[#1A1815] hover:bg-[#1A1815] hover:text-[#F5F0E6] transition whitespace-nowrap shadow-sm">
+            ← Prev
+          </button>
+          <div class="flex items-center justify-center gap-1 overflow-x-auto max-w-full py-0.5" id="slide-dots-nav">
+            <!-- Populated by JS -->
+          </div>
+          <button onclick="selectSlide(Math.min(state.slides.length - 1, state.activeIndex + 1))" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-white border border-[#C8BEAA] text-[11px] sm:text-xs font-mono font-bold text-[#1A1815] hover:bg-[#1A1815] hover:text-[#F5F0E6] transition whitespace-nowrap shadow-sm">
+            Next →
+          </button>
+        </div>
+
+        <!-- Scaled 1080px Canvas Wrapper (Dynamically sized by renderAll() for Mobile/Tablet/Desktop) -->
+        <div id="active-slide-shell" class="slide-scale-shell" style="width: 320px; height: 400px;">
+          <div id="active-slide-canvas" class="ig-slide-canvas theme-dark" style="transform: scale(0.296);">
+            <!-- Populated dynamically by renderSlideHTML() -->
+          </div>
+        </div>
+
+        <!-- Mobile Quick-Jump Bar (Visible on Mobile/Tablet so user can jump straight to Slide Editor or AI Generator) -->
+        <div class="grid grid-cols-2 gap-2 w-full max-w-[518px] mt-3.5 xl:hidden">
+          <button onclick="document.getElementById('slide-editor-section').scrollIntoView({behavior:'smooth',block:'start'})" class="w-full py-2 px-3 rounded-lg bg-white border border-[#1A1815] text-xs font-mono font-bold text-[#1A1815] text-center shadow-sm">
+            ✎ Edit This Slide ↓
+          </button>
+          <button onclick="toggleAiAgentDrawer()" class="w-full py-2 px-3 rounded-lg bg-[#1A1815] border border-[#D4AF37] text-xs font-mono font-bold text-[#F5F0E6] text-center shadow-sm">
+            ✦ Generate with AI ↓
+          </button>
+        </div>
+      </div>
+
+      <!-- FULL CAROUSEL SEAM STRIP VIEW (ALL SLIDES SIDE BY SIDE) -->
+      <div id="strip-stage-container" class="bg-[#EAE2D3] border border-[#DED6C5] rounded-xl p-4 sm:p-6 shadow-inner hidden">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 mb-3">
+          <span class="text-xs font-mono uppercase tracking-widest text-[#1A1815] font-bold">
+            Continuous Instagram Panorama Strip (Tap any slide to edit)
+          </span>
+          <span class="text-[11px] font-mono text-[#4A463F]">
+            Horizontal Gold Seam connects across slides →
+          </span>
+        </div>
+        <div id="strip-scroll-row" class="flex gap-3 overflow-x-auto pb-4 pt-1 items-start">
+          <!-- Populated dynamically by renderStripView() -->
+        </div>
+      </div>
+
+      <!-- BOTTOM MINI FILMSTRIP THUMBNAILS -->
+      <div class="bg-white border border-[#DED6C5] rounded-xl p-3.5 sm:p-4 shadow-sm">
+        <div class="flex justify-between items-center mb-2.5">
+          <span class="text-xs font-serif font-bold text-[#1A1815]">
+            Carousel Sequence Navigator
+          </span>
+          <span class="text-[10px] font-mono font-bold text-[#7A5B14] uppercase" id="filmstrip-count-label">5 Slides in Deck</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="filmstrip-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="border-t border-[#DED6C5] bg-[#EAE2D3] py-6 px-6 text-center text-xs font-mono text-[#5A5852] mt-8">
+    <div class="max-w-[1600px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div>Elvira Astashkina (@elvrast) · Applied Mathematics, ML &amp; Gustav Klimt's <em>The Kiss</em></div>
+      <div>Architected by <strong class="text-[#1A1815]">Kamilla Gafurzianova, OLY</strong> · Olympian &amp; Principal Brand Strategist · <a href="mailto:kgafurzianova@gmail.com" class="text-[#7A5B14] hover:underline">kgafurzianova@gmail.com</a> · <a href="https://bulachak.com" target="_blank" class="text-[#7A5B14] hover:underline">bulachak.com</a></div>
+    </div>
+  </footer>
+
+  <!-- Hidden Full-Resolution (1080px) Offscreen Render Host for Export -->
+  <div id="offscreen-export-host" style="position: fixed; left: -9999px; top: 0; width: 1080px; z-index: -1; pointer-events: none;"></div>
+
+  <!-- ========================================================================
+       JAVASCRIPT ENGINE: MOTIFS, PRESET DECKS, TYPOGRAPHIC GLUER & EXPORT
+       ======================================================================== -->
+  <script>
+    // ------------------------------------------------------------------------
+    // 1. MULTILINGUAL TYPOGRAPHIC GLUER (Zero-Orphan Standard)
+    // Binds short prepositions, single-letter words, and keeps short 2-4 word
+    // sentences intact so subjects are never severed across lines.
+    // ------------------------------------------------------------------------
+    function glueTypography(str) {
+      if (!str) return '';
+      // Glue common short prepositions/conjunctions/articles (EN + RU + TT)
+      let out = String(str).replace(
+        /\b(a|an|in|on|at|to|of|by|or|vs\.?|is|as|we|it|в|на|с|к|у|о|об|от|из|за|по|не|ни|но|и|а|һәм|бу|үз)\s+/gi,
+        '$1\u00A0'
+      );
+      // Glue last two words of paragraphs/sentences to prevent single-word orphans
+      out = out.replace(/\s+([^\s<>]+)\s*$/g, '\u00A0$1');
+      return out;
+    }
+
+    // ------------------------------------------------------------------------
+    // 2. HIGH-RESOLUTION KLIMT × ML REFERENCE SHEETS
+    // ------------------------------------------------------------------------
+    const KLIMT_SHEETS = [
+      {
+        id: 'sheet_dark_framed',
+        name: 'Obsidian 4×4 Master Sheet',
+        subtitle: 'Tensors · Iso-Contours · Boundaries · Streamlines',
+        url: '/klimt-assets/hf_20260815_065121_774b4807-46a7-4c8e-a129-76339e184e25.png',
+        fallbackUrl: 'hf_20260815_065121_774b4807-46a7-4c8e-a129-76339e184e25.png'
+      },
+      {
+        id: 'sheet_dark_wide',
+        name: 'Obsidian 16:9 Motif Matrix',
+        subtitle: 'Mosaic Columns · Bullseyes · Eye of Horus',
+        url: '/klimt-assets/hf_20260815_062736_4497aa3b-f405-46d3-8f0f-515e7d953974.png',
+        fallbackUrl: 'hf_20260815_062736_4497aa3b-f405-46d3-8f0f-515e7d953974.png'
+      },
+      {
+        id: 'sheet_light_square',
+        name: 'Alabaster 4×4 Parchment Grid',
+        subtitle: 'Warm Cream Ground · Gold Spirals & Matrices',
+        url: '/klimt-assets/hf_20260815_060448_a94248e2-0d0b-4c9a-a1da-ddc4b27d8fc2.png',
+        fallbackUrl: 'hf_20260815_060448_a94248e2-0d0b-4c9a-a1da-ddc4b27d8fc2.png'
+      },
+      {
+        id: 'sheet_light_wide',
+        name: 'Alabaster 16:9 Klimt Sheet',
+        subtitle: 'Checkered Tensors · Floral Circles · Pyramids',
+        url: '/klimt-assets/hf_20260815_062226_4f144a16-8716-4f11-9fb2-6bdc8d270d8f.png',
+        fallbackUrl: 'hf_20260815_062226_4f144a16-8716-4f11-9fb2-6bdc8d270d8f.png'
+      }
+    ];
+
+    // ------------------------------------------------------------------------
+    // 3. 12 VECTOR KLIMT × ML SVG MOTIFS
+    // ------------------------------------------------------------------------
+    const VECTOR_MOTIFS = [
+      {
+        id: 'mandala_synthesis',
+        name: 'Gilded Tensor Mandala',
+        category: 'Master Synthesis',
+        render: (isLight) => `
+          <svg viewBox="0 0 680 420" class="w-full h-full">
+            <!-- Outer Orbit Diamond -->
+            <path d="M 340 24 Q 520 110 610 210 Q 520 310 340 396 Q 160 310 70 210 Q 160 110 340 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-dasharray="8,6"/>
+            <circle cx="340" cy="210" r="168" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.6"/>
+            <!-- Concentric Probability Target -->
+            <circle cx="340" cy="210" r="136" fill="rgba(43,90,117,0.24)" stroke="#D4AF37" stroke-width="1.8" stroke-dasharray="5,5"/>
+            <circle cx="340" cy="210" r="102" fill="rgba(46,107,86,0.28)" stroke="#2B5A75" stroke-width="2.5"/>
+            <circle cx="340" cy="210" r="68" fill="#C02B37" stroke="#D4AF37" stroke-width="2.5"/>
+            <circle cx="340" cy="210" r="38" fill="#F5F0E6" stroke="#1A1815" stroke-width="2"/>
+            <circle cx="340" cy="210" r="16" fill="#D4AF37"/>
+            <!-- Left ViT Discrete Mosaic Card -->
+            <g transform="translate(46, 118)">
+              <rect x="0" y="0" width="124" height="184" rx="6" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+              <rect x="14" y="18" width="28" height="36" fill="#F5F0E6"/><line x1="28" y1="23" x2="28" y2="49" stroke="#1A1815" stroke-width="3"/>
+              <rect x="48" y="18" width="28" height="36" fill="#D4AF37"/>
+              <rect x="82" y="18" width="28" height="36" fill="#C02B37"/>
+              <rect x="14" y="62" width="28" height="36" fill="#2B5A75"/>
+              <rect x="48" y="62" width="28" height="36" fill="#F5F0E6"/><line x1="62" y1="67" x2="62" y2="93" stroke="#1A1815" stroke-width="3"/>
+              <rect x="82" y="62" width="28" height="36" fill="#2E6B56"/>
+              <rect x="14" y="106" width="96" height="22" fill="#D4AF37"/>
+              <text x="62" y="158" text-anchor="middle" fill="#D4AF37" font-family="JetBrains Mono" font-size="13" font-weight="700">W·x + b</text>
+            </g>
+            <!-- Right Tensor Activation Card -->
+            <g transform="translate(510, 118)">
+              <rect x="0" y="0" width="124" height="184" rx="6" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+              <path d="M 22 18 L 12 18 L 12 126 L 22 126" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+              <path d="M 102 18 L 112 18 L 112 126 L 102 126" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+              <rect x="24" y="26" width="22" height="24" fill="#2B5A75"/>
+              <rect x="51" y="26" width="22" height="24" fill="#F5F0E6"/>
+              <rect x="78" y="26" width="22" height="24" fill="#D4AF37"/>
+              <rect x="24" y="58" width="22" height="24" fill="#2E6B56"/>
+              <rect x="51" y="58" width="22" height="24" fill="#C02B37"/>
+              <rect x="78" y="58" width="22" height="24" fill="#2B5A75"/>
+              <rect x="24" y="90" width="22" height="24" fill="#D4AF37"/>
+              <rect x="51" y="90" width="22" height="24" fill="#2E6B56"/>
+              <rect x="78" y="90" width="22" height="24" fill="#F5F0E6"/>
+              <text x="62" y="158" text-anchor="middle" fill="#F5E6BE" font-family="JetBrains Mono" font-size="13" font-weight="700">p(x | z)</text>
+            </g>
+            <!-- Meadow Pointillist Embeddings -->
+            <circle cx="220" cy="95" r="6" fill="#C02B37"/><circle cx="248" cy="70" r="5" fill="#D4AF37"/>
+            <circle cx="460" cy="95" r="6" fill="#2B5A75"/><circle cx="432" cy="70" r="5" fill="#2E6B56"/>
+            <circle cx="220" cy="325" r="6" fill="#2E6B56"/><circle cx="248" cy="350" r="5" fill="#D4AF37"/>
+            <circle cx="460" cy="325" r="6" fill="#C02B37"/><circle cx="432" cy="350" r="5" fill="#D4AF37"/>
+          </svg>`
+      },
+      {
+        id: 'vit_patch_mosaic',
+        name: 'Discrete Male Mosaic',
+        category: 'Matrices & ViT Patches',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <!-- Left Matrix Bracket -->
+            <path d="M 88 36 L 62 36 L 62 324 L 88 324" fill="none" stroke="#D4AF37" stroke-width="4"/>
+            <path d="M 552 36 L 578 36 L 578 324 L 552 324" fill="none" stroke="#D4AF37" stroke-width="4"/>
+            <!-- 4x3 Klimt Male Robe Mosaic Blocks -->
+            <g transform="translate(96, 52)">
+              <!-- Row 1 -->
+              <rect x="0" y="0" width="98" height="74" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+              <rect x="18" y="14" width="62" height="46" fill="#F5F0E6"/><line x1="49" y1="20" x2="49" y2="54" stroke="#1A1815" stroke-width="5"/>
+              <rect x="116" y="0" width="98" height="74" fill="#D4AF37" stroke="#1A1815" stroke-width="2"/>
+              <rect x="138" y="18" width="54" height="38" fill="#1A1815"/>
+              <rect x="232" y="0" width="98" height="74" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+              <circle cx="281" cy="37" r="16" fill="#F5F0E6"/>
+              <rect x="348" y="0" width="98" height="74" fill="#C02B37" stroke="#D4AF37" stroke-width="2"/>
+              <rect x="374" y="18" width="46" height="38" fill="#D4AF37"/>
+              <!-- Row 2 -->
+              <rect x="0" y="90" width="98" height="74" fill="#2E6B56" stroke="#D4AF37" stroke-width="2"/>
+              <rect x="26" y="108" width="46" height="38" fill="#F5F0E6"/>
+              <rect x="116" y="90" width="98" height="74" fill="#F5F0E6" stroke="#1A1815" stroke-width="2"/>
+              <line x1="165" y1="102" x2="165" y2="152" stroke="#1A1815" stroke-width="6"/>
+              <rect x="232" y="90" width="98" height="74" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+              <rect x="252" y="108" width="58" height="38" fill="#D4AF37"/>
+              <rect x="348" y="90" width="98" height="74" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+              <rect x="372" y="108" width="50" height="38" fill="#C02B37"/>
+              <!-- Row 3 -->
+              <rect x="0" y="180" width="98" height="74" fill="#D4AF37" stroke="#1A1815" stroke-width="2"/>
+              <rect x="24" y="196" width="50" height="42" fill="#2B5A75"/>
+              <rect x="116" y="180" width="98" height="74" fill="#C02B37" stroke="#D4AF37" stroke-width="2"/>
+              <circle cx="165" cy="217" r="16" fill="#F5F0E6"/>
+              <rect x="232" y="180" width="98" height="74" fill="#F5F0E6" stroke="#1A1815" stroke-width="2"/>
+              <line x1="281" y1="192" x2="281" y2="242" stroke="#1A1815" stroke-width="6"/>
+              <rect x="348" y="180" width="98" height="74" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+              <rect x="372" y="198" width="50" height="38" fill="#2E6B56"/>
+            </g>
+          </svg>`
+      },
+      {
+        id: 'probability_contours',
+        name: 'Female Probability Rings',
+        category: 'Measure & Density p(x)',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <!-- Surveyor Axis Lines -->
+            <line x1="60" y1="180" x2="580" y2="180" stroke="#D4AF37" stroke-width="1.2" stroke-dasharray="6,6" opacity="0.6"/>
+            <line x1="320" y1="20" x2="320" y2="340" stroke="#D4AF37" stroke-width="1.2" stroke-dasharray="6,6" opacity="0.6"/>
+            <!-- Primary Concentric Target -->
+            <circle cx="320" cy="180" r="150" fill="none" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="320" cy="180" r="126" fill="rgba(43,90,117,0.32)" stroke="#D4AF37" stroke-width="1.8" stroke-dasharray="5,4"/>
+            <circle cx="320" cy="180" r="96" fill="rgba(46,107,86,0.38)" stroke="#2B5A75" stroke-width="2.5"/>
+            <circle cx="320" cy="180" r="66" fill="#C02B37" stroke="#D4AF37" stroke-width="2.5"/>
+            <circle cx="320" cy="180" r="38" fill="#F5F0E6" stroke="#1A1815" stroke-width="2"/>
+            <circle cx="320" cy="180" r="16" fill="#D4AF37"/>
+            <!-- Flanking Satellite Modes (Mixture of Gaussians) -->
+            <g transform="translate(125, 110)">
+              <circle cx="0" cy="0" r="46" fill="rgba(212,175,55,0.18)" stroke="#D4AF37" stroke-width="2"/>
+              <circle cx="0" cy="0" r="28" fill="#2B5A75"/>
+              <circle cx="0" cy="0" r="12" fill="#F5F0E6"/>
+            </g>
+            <g transform="translate(515, 245)">
+              <circle cx="0" cy="0" r="46" fill="rgba(192,43,55,0.22)" stroke="#D4AF37" stroke-width="2"/>
+              <circle cx="0" cy="0" r="28" fill="#2E6B56"/>
+              <circle cx="0" cy="0" r="12" fill="#D4AF37"/>
+            </g>
+          </svg>`
+      },
+      {
+        id: 'golden_spiral_gd',
+        name: 'Golden Spiral Optimization',
+        category: 'Gradient Descent ∇L(θ)',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <!-- Iso-Loss Ellipses -->
+            <ellipse cx="320" cy="185" rx="235" ry="135" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="6,5" opacity="0.55"/>
+            <ellipse cx="320" cy="185" rx="180" ry="102" fill="rgba(43,90,117,0.22)" stroke="#2B5A75" stroke-width="2"/>
+            <ellipse cx="320" cy="185" rx="125" ry="70" fill="rgba(46,107,86,0.26)" stroke="#D4AF37" stroke-width="1.8"/>
+            <ellipse cx="320" cy="185" rx="70" ry="40" fill="rgba(192,43,55,0.32)" stroke="#C02B37" stroke-width="2"/>
+            <!-- Golden Spiral Trajectory converging to Center -->
+            <path d="M 115 95 Q 240 20 420 65 Q 540 120 490 235 Q 430 325 270 290 Q 165 255 215 160 Q 260 100 365 130 Q 425 160 385 215 Q 345 245 295 215 Q 275 185 320 185" fill="none" stroke="#D4AF37" stroke-width="4" stroke-linecap="round"/>
+            <!-- Step Iterates θ_0 -> θ_* -->
+            <circle cx="115" cy="95" r="9" fill="#F5F0E6" stroke="#1A1815" stroke-width="2"/>
+            <circle cx="420" cy="65" r="8" fill="#D4AF37" stroke="#1A1815" stroke-width="2"/>
+            <circle cx="490" cy="235" r="7.5" fill="#2B5A75" stroke="#F5F0E6" stroke-width="1.5"/>
+            <circle cx="215" cy="160" r="7" fill="#2E6B56" stroke="#F5F0E6" stroke-width="1.5"/>
+            <circle cx="320" cy="185" r="12" fill="#C02B37" stroke="#D4AF37" stroke-width="3"/>
+          </svg>`
+      },
+      {
+        id: 'lebesgue_partition',
+        name: 'Lebesgue vs. Riemann Partition',
+        category: 'Measure Theory Integral',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <!-- Horizontal Lebesgue Value-Space Slices -->
+            <line x1="70" y1="70" x2="570" y2="70" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="5,5"/>
+            <line x1="70" y1="125" x2="570" y2="125" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="5,5"/>
+            <line x1="70" y1="180" x2="570" y2="180" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="5,5"/>
+            <line x1="70" y1="235" x2="570" y2="235" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="5,5"/>
+            <!-- Klimt Measure Bars on [0,1] -->
+            <rect x="235" y="70" width="170" height="55" fill="#C02B37" fill-opacity="0.85" stroke="#D4AF37" stroke-width="2"/>
+            <rect x="175" y="125" width="290" height="55" fill="#D4AF37" fill-opacity="0.85" stroke="#1A1815" stroke-width="2"/>
+            <rect x="125" y="180" width="390" height="55" fill="#2B5A75" fill-opacity="0.88" stroke="#D4AF37" stroke-width="2"/>
+            <rect x="85" y="235" width="470" height="55" fill="#2E6B56" fill-opacity="0.85" stroke="#D4AF37" stroke-width="2"/>
+            <!-- Smooth Measurable Function Curve -->
+            <path d="M 70 290 C 150 290, 210 65, 320 65 C 430 65, 490 290, 570 290" fill="none" stroke="#F5F0E6" stroke-width="4"/>
+            <!-- Base Number Line [0, 1] -->
+            <line x1="60" y1="295" x2="580" y2="295" stroke="#D4AF37" stroke-width="3"/>
+            <text x="85" y="332" fill="#D4AF37" font-family="JetBrains Mono" font-size="18" font-weight="700">0</text>
+            <text x="310" y="332" fill="#F5F0E6" font-family="JetBrains Mono" font-size="16">μ(A_i)</text>
+            <text x="550" y="332" fill="#D4AF37" font-family="JetBrains Mono" font-size="18" font-weight="700">1</text>
+          </svg>`
+      },
+      {
+        id: 'attention_eye',
+        name: 'Eye of Self-Attention',
+        category: 'Transformers Q·K^T',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <!-- Surveyor Crosshairs & Attention Rays -->
+            <line x1="60" y1="180" x2="580" y2="180" stroke="#D4AF37" stroke-width="1.2" stroke-dasharray="5,5"/>
+            <line x1="320" y1="25" x2="320" y2="335" stroke="#D4AF37" stroke-width="1.2" stroke-dasharray="5,5"/>
+            <line x1="120" y1="55" x2="520" y2="305" stroke="#D4AF37" stroke-width="1" opacity="0.45"/>
+            <line x1="120" y1="305" x2="520" y2="55" stroke="#D4AF37" stroke-width="1" opacity="0.45"/>
+            <!-- Outer Klimt Almond Eye -->
+            <path d="M 110 180 Q 320 35 530 180 Q 320 325 110 180 Z" fill="#1A1815" stroke="#D4AF37" stroke-width="4"/>
+            <path d="M 155 180 Q 320 75 485 180 Q 320 285 155 180 Z" fill="#F5F0E6" stroke="#D4AF37" stroke-width="2"/>
+            <!-- Concentric Attention Iris -->
+            <circle cx="320" cy="180" r="68" fill="#2B5A75" stroke="#D4AF37" stroke-width="3"/>
+            <circle cx="320" cy="180" r="42" fill="#2E6B56" stroke="#F5F0E6" stroke-width="1.5"/>
+            <circle cx="320" cy="180" r="24" fill="#C02B37" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="330" cy="170" r="8" fill="#D4AF37"/>
+          </svg>`
+      },
+      {
+        id: 'tsne_decision_boundary',
+        name: 'Latent Manifold & Boundary',
+        category: 't-SNE & Classification',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <rect x="60" y="25" width="520" height="310" rx="8" fill="#1A1815" stroke="#D4AF37" stroke-width="2.5"/>
+            <!-- Non-linear Golden Decision Boundary -->
+            <path d="M 85 295 Q 250 240 320 175 T 555 55" fill="none" stroke="#D4AF37" stroke-width="4" stroke-dasharray="10,7"/>
+            <path d="M 85 275 Q 240 220 310 155 T 555 35" fill="none" stroke="#F5F0E6" stroke-width="1.2" opacity="0.4"/>
+            <!-- Class A: Upper-Left Crimson + Lapis Cluster -->
+            <circle cx="150" cy="95" r="14" fill="#C02B37"/><circle cx="195" cy="75" r="18" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="220" cy="125" r="12" fill="#D4AF37"/><circle cx="140" cy="150" r="15" fill="#F5F0E6"/>
+            <circle cx="265" cy="95" r="16" fill="#C02B37"/><circle cx="185" cy="175" r="11" fill="#2B5A75"/>
+            <!-- Class B: Lower-Right Emerald + Gold Cluster -->
+            <circle cx="395" cy="245" r="18" fill="#2E6B56" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="445" cy="210" r="14" fill="#D4AF37"/><circle cx="485" cy="260" r="16" fill="#2E6B56"/>
+            <circle cx="425" cy="290" r="12" fill="#F5F0E6"/><circle cx="515" cy="195" r="15" fill="#2B5A75"/>
+            <circle cx="355" cy="280" r="11" fill="#D4AF37"/>
+          </svg>`
+      },
+      {
+        id: 'loss_streamlines',
+        name: 'Golden Loss Streamlines',
+        category: 'Vector Field Flows',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <rect x="55" y="25" width="530" height="310" rx="8" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+            <path d="M 80 285 Q 200 75 330 175 T 560 75" fill="none" stroke="#D4AF37" stroke-width="4"/>
+            <path d="M 80 245 Q 210 115 335 205 T 560 125" fill="none" stroke="#2B5A75" stroke-width="3"/>
+            <path d="M 80 310 Q 195 140 325 145 T 560 45" fill="none" stroke="#C02B37" stroke-width="2.5" stroke-dasharray="7,5"/>
+            <path d="M 80 190 Q 220 45 350 130 T 560 185" fill="none" stroke="#2E6B56" stroke-width="2.5"/>
+            <circle cx="225" cy="146" r="9" fill="#F5F0E6" stroke="#1A1815" stroke-width="2"/>
+            <circle cx="330" cy="175" r="13" fill="#D4AF37" stroke="#1A1815" stroke-width="2.5"/>
+            <circle cx="455" cy="195" r="10" fill="#C02B37" stroke="#D4AF37" stroke-width="2"/>
+          </svg>`
+      },
+      {
+        id: 'abstraction_pyramid',
+        name: 'Abstraction Feature Hierarchy',
+        category: 'Deep Representation',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <polygon points="320,28 130,326 510,326" fill="#1A1815" stroke="#D4AF37" stroke-width="3.5"/>
+            <polygon points="320,54 158,310 482,310" fill="none" stroke="#F5F0E6" stroke-width="1.5"/>
+            <!-- 3 Semantic Tiers -->
+            <polygon points="320,54 256,155 384,155" fill="#C02B37" fill-opacity="0.88" stroke="#D4AF37" stroke-width="2"/>
+            <polygon points="256,155 384,155 434,234 206,234" fill="#D4AF37" fill-opacity="0.8" stroke="#1A1815" stroke-width="2"/>
+            <polygon points="206,234 434,234 482,310 158,310" fill="#2B5A75" fill-opacity="0.85" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="320" cy="28" r="9" fill="#D4AF37"/>
+          </svg>`
+      },
+      {
+        id: 'diffusion_continuum',
+        name: 'Diffusion Noise Continuum',
+        category: 'Forward / Reverse SDE',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <rect x="45" y="30" width="550" height="300" rx="8" fill="#1A1815" stroke="#D4AF37" stroke-width="2"/>
+            <!-- Left: Structured Klimt Mosaic x_0 -->
+            <rect x="85" y="70" width="52" height="52" fill="#D4AF37" stroke="#1A1815" stroke-width="2"/>
+            <rect x="85" y="134" width="52" height="52" fill="#2B5A75" stroke="#D4AF37" stroke-width="1.5"/>
+            <rect x="85" y="198" width="52" height="52" fill="#C02B37" stroke="#D4AF37" stroke-width="1.5"/>
+            <rect x="150" y="86" width="42" height="42" fill="#F5F0E6"/>
+            <rect x="150" y="142" width="42" height="42" fill="#2E6B56"/>
+            <rect x="150" y="198" width="42" height="42" fill="#D4AF37"/>
+            <!-- Middle: Intermediate Perturbed Latents x_t -->
+            <circle cx="265" cy="95" r="11" fill="#D4AF37"/><circle cx="255" cy="160" r="10" fill="#C02B37"/>
+            <circle cx="270" cy="225" r="11" fill="#2B5A75"/><circle cx="320" cy="78" r="8" fill="#F5F0E6"/>
+            <circle cx="330" cy="135" r="9" fill="#2E6B56"/><circle cx="315" cy="190" r="8" fill="#D4AF37"/>
+            <circle cx="335" cy="245" r="9" fill="#C02B37"/>
+            <!-- Right: Pure Isotropic Gaussian Cloud x_T ~ N(0,I) -->
+            <circle cx="430" cy="85" r="5" fill="#D4AF37"/><circle cx="465" cy="70" r="4.5" fill="#2B5A75"/>
+            <circle cx="505" cy="95" r="5.5" fill="#C02B37"/><circle cx="445" cy="135" r="4" fill="#F5F0E6"/>
+            <circle cx="490" cy="145" r="5" fill="#2E6B56"/><circle cx="535" cy="130" r="4.5" fill="#D4AF37"/>
+            <circle cx="425" cy="195" r="5" fill="#C02B37"/><circle cx="470" cy="190" r="4.5" fill="#D4AF37"/>
+            <circle cx="515" cy="205" r="5" fill="#2B5A75"/><circle cx="450" cy="245" r="4.5" fill="#2E6B56"/>
+            <circle cx="495" cy="250" r="4" fill="#F5F0E6"/><circle cx="540" cy="235" r="5" fill="#D4AF37"/>
+            <!-- Labels -->
+            <text x="135" y="295" text-anchor="middle" fill="#D4AF37" font-family="JetBrains Mono" font-size="15" font-weight="700">x_0 (Data Manifold)</text>
+            <text x="485" y="295" text-anchor="middle" fill="#F5E6BE" font-family="JetBrains Mono" font-size="15" font-weight="700">x_T ~ N(0, I)</text>
+          </svg>`
+      },
+      {
+        id: 'covariance_ellipsoids',
+        name: 'Covariance Ellipsoids',
+        category: 'Mahalanobis Metric',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <g transform="translate(320, 180) rotate(-22)">
+              <ellipse cx="0" cy="0" rx="220" ry="96" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+              <ellipse cx="0" cy="0" rx="160" ry="66" fill="rgba(43,90,117,0.38)" stroke="#2B5A75" stroke-width="2.5"/>
+              <ellipse cx="0" cy="0" rx="98" ry="38" fill="rgba(46,107,86,0.58)" stroke="#2E6B56" stroke-width="2.5"/>
+              <ellipse cx="0" cy="0" rx="44" ry="18" fill="#C02B37" stroke="#D4AF37" stroke-width="2"/>
+              <line x1="-240" y1="0" x2="240" y2="0" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="5,5"/>
+              <line x1="0" y1="-115" x2="0" y2="115" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="5,5"/>
+              <circle cx="0" cy="0" r="8" fill="#F5F0E6"/>
+            </g>
+          </svg>`
+      },
+      {
+        id: 'rbf_attention_star',
+        name: 'Multi-Head Kernel Star',
+        category: 'RBF / Attention Heads',
+        render: () => `
+          <svg viewBox="0 0 640 360" class="w-full h-full">
+            <circle cx="320" cy="180" r="130" fill="none" stroke="#D4AF37" stroke-width="2" stroke-dasharray="6,6"/>
+            <circle cx="320" cy="180" r="88" fill="none" stroke="#2B5A75" stroke-width="1.5"/>
+            <!-- 8 Orbital Attention Nodes -->
+            <circle cx="408" cy="180" r="26" fill="#D4AF37" stroke="#1A1815" stroke-width="2.5"/>
+            <circle cx="382" cy="242" r="26" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="320" cy="268" r="26" fill="#C02B37" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="258" cy="242" r="26" fill="#2E6B56" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="232" cy="180" r="26" fill="#D4AF37" stroke="#1A1815" stroke-width="2.5"/>
+            <circle cx="258" cy="118" r="26" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="320" cy="92" r="26" fill="#C02B37" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="382" cy="118" r="26" fill="#2E6B56" stroke="#D4AF37" stroke-width="2"/>
+            <!-- Center Core -->
+            <circle cx="320" cy="180" r="38" fill="#F5F0E6" stroke="#D4AF37" stroke-width="3"/>
+            <circle cx="320" cy="180" r="14" fill="#1A1815"/>
+          </svg>`
+      }
+    ];
+
+    // ------------------------------------------------------------------------
+    // 4. CURATED MULTI-SLIDE CAROUSEL PRESET DECKS (ELVIRA ASTASHKINA VOICE)
+    // ------------------------------------------------------------------------
+    const PRESET_DECKS = [
+      {
+        id: 'measure_theory',
+        name: '01 · Measure Theory vs. Naive Probability',
+        topic: 'Kolmogorov Axioms & Lebesgue Integration',
+        slides: [
+          {
+            layout: 'cover',
+            theme: 'dark',
+            accent: 'gold',
+            kicker: 'MATHEMATICAL FOUNDATIONS // EPISODE 01',
+            title: 'Why Naive Probability Breaks in <span class="italic text-[#D4AF37]">High Dimensions</span>',
+            body: 'In continuous latent spaces, the probability of sampling any single exact point is strictly zero. To build rigorous generative models, we must replace naive counting with Measure Theory.',
+            latex: String.raw`(\Omega, \mathcal{F}, P) \quad \text{where} \quad P(\Omega) = 1`,
+            latexCaption: 'The Kolmogorov Probability Space Triple',
+            visualType: 'vector',
+            motifId: 'mandala_synthesis',
+            sheetId: 'sheet_dark_framed',
+            sheetCrop: 'full',
+            footerNote: 'SWIPE FOR THE GEOMETRIC PROOF →'
+          },
+          {
+            layout: 'visual_card',
+            theme: 'light',
+            accent: 'lapis',
+            kicker: 'THE ZERO-MEASURE PARADOX // 02',
+            title: 'Points Have Zero Weight. <span class="italic text-[#2B5A75]">Sets</span> Carry Measure.',
+            body: 'When an LLM or diffusion model samples from a continuous manifold, asking for the probability of a single vector is meaningless. Probability only exists over measurable sets in a sigma-algebra.',
+            latex: String.raw`P(X = x) = 0 \implies P(X \in A) = \int_A p(x)\,d\mu(x)`,
+            latexCaption: 'Radon–Nikodym Density over Measurable Set A',
+            visualType: 'vector',
+            motifId: 'probability_contours',
+            sheetId: 'sheet_light_square',
+            sheetCrop: 'full',
+            footerNote: 'NEXT: RIEMANN VS. LEBESGUE →'
+          },
+          {
+            layout: 'comparison',
+            theme: 'dark',
+            accent: 'crimson',
+            kicker: 'INTEGRATION GEOMETRY // 03',
+            title: 'Riemann Slices the Domain. <span class="italic text-[#D4AF37]">Lebesgue</span> Partitions the Values.',
+            body: 'Gustav Klimt’s horizontal mosaic strata illustrate Lebesgue’s insight: instead of chopping the x-axis into vertical columns, we group points by the value of the function.',
+            latex: String.raw`\int_{\Omega} f\,d\mu = \sup \sum_{i=1}^{n} y_i\,\mu\big(f^{-1}([y_i, y_{i+1}))\big)`,
+            latexCaption: 'Horizontal Value-Space Partitioning',
+            col1Title: 'RIEMANN (DOMAIN SLICING)',
+            col1Text: 'Partitions the input axis into rigid vertical intervals. Fails catastrophically on highly oscillatory functions and high-dimensional probability spaces.',
+            col2Title: 'LEBESGUE (VALUE STRATA)',
+            col2Text: 'Partitions the output range into horizontal levels and measures the pre-image sets. Enables convergence theorems that power modern ML.',
+            visualType: 'vector',
+            motifId: 'lebesgue_partition',
+            sheetId: 'sheet_dark_framed',
+            sheetCrop: 'full',
+            footerNote: 'NEXT: COUNTABLE ADDITIVITY →'
+          },
+          {
+            layout: 'theorem',
+            theme: 'light',
+            accent: 'gold',
+            kicker: 'KOLMOGOROV AXIOM III // 04',
+            title: 'The Engine of <span class="italic text-[#9A7420]">Countable Additivity</span>',
+            body: 'For any sequence of mutually exclusive events, the measure of their union equals the infinite sum of their individual measures. Without this axiom, limit theorems in machine learning collapse.',
+            latex: String.raw`P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i), \quad A_i \cap A_j = \varnothing`,
+            latexCaption: 'Sigma-Additivity across Disjoint Measurable Sets',
+            visualType: 'vector',
+            motifId: 'vit_patch_mosaic',
+            sheetId: 'sheet_light_wide',
+            sheetCrop: 'full',
+            footerNote: 'FINAL SLIDE: KEY TAKEAWAY →'
+          },
+          {
+            layout: 'outro',
+            theme: 'dark',
+            accent: 'gold',
+            kicker: 'SYNTHESIS & DISCUSSION // 05',
+            title: 'Rigorous AI Begins Where <span class="italic text-[#D4AF37]">Intuition Ends</span>.',
+            body: 'Next time someone claims neural networks are "just curve fitting," remind them that learning a distribution in 4,096 dimensions is an exercise in measure transport across a latent manifold.',
+            latex: String.raw`T_{\#}P_{\text{noise}} = P_{\text{data}}`,
+            latexCaption: 'Optimal Transport & Pushforward Measure',
+            visualType: 'vector',
+            motifId: 'attention_eye',
+            sheetId: 'sheet_dark_wide',
+            sheetCrop: 'full',
+            footerNote: 'SAVE FOR REFERENCE · @ELVRAST'
+          }
+        ]
+      },
+      {
+        id: 'vit_klimt_mosaics',
+        name: '02 · Vision Transformers & Klimt Mosaics',
+        topic: 'Discrete Patch Tokens vs. Continuous Attention',
+        slides: [
+          {
+            layout: 'cover',
+            theme: 'dark',
+            accent: 'gold',
+            kicker: 'COMPUTER VISION ARCHITECTURE // EPISODE 02',
+            title: 'Why Vision Transformers See the World Like <span class="italic text-[#D4AF37]">Gustav Klimt</span>',
+            body: 'In 1908, Klimt fused discrete rectilinear mosaic tiles with continuous organic rings. In 2020, Vision Transformers (ViT) encoded that exact duality into Linear Algebra.',
+            latex: String.raw`\mathbf{z}_0 = [\mathbf{x}_{\text{class}}; \, \mathbf{x}_p^1 \mathbf{E}; \, \dots; \, \mathbf{x}_p^N \mathbf{E}] + \mathbf{E}_{\text{pos}}`,
+            latexCaption: 'Patch Tokenization & Positional Embedding',
+            visualType: 'sheet',
+            motifId: 'vit_patch_mosaic',
+            sheetId: 'sheet_dark_framed',
+            sheetCrop: 'full',
+            footerNote: 'SWIPE TO DECONSTRUCT ViT →'
+          },
+          {
+            layout: 'visual_card',
+            theme: 'light',
+            accent: 'gold',
+            kicker: 'STEP 01: DISCRETE TILING // 02',
+            title: 'Shattering the Canvas into <span class="italic text-[#9A7420]">16×16 Mosaic Patches</span>',
+            body: 'Instead of sliding local convolutional filters across pixels, ViT slices an image into non-overlapping square patches and projects each tile into a high-dimensional token vector.',
+            latex: String.raw`\mathbf{x} \in \mathbb{R}^{H \times W \times C} \longrightarrow \mathbf{x}_p \in \mathbb{R}^{N \times (P^2 \cdot C)}`,
+            latexCaption: 'Flattening 2D Spatial Patches into Token Matrices',
+            visualType: 'vector',
+            motifId: 'vit_patch_mosaic',
+            sheetId: 'sheet_light_square',
+            sheetCrop: 'full',
+            footerNote: 'NEXT: SELF-ATTENTION GEOMETRY →'
+          },
+          {
+            layout: 'theorem',
+            theme: 'dark',
+            accent: 'lapis',
+            kicker: 'STEP 02: GLOBAL RECEPTIVE FIELD // 03',
+            title: 'Every Tile Talks to Every Other Tile on <span class="italic text-[#D4AF37]">Layer One</span>',
+            body: 'Scaled dot-product attention computes pairwise affinity scores across the entire mosaic simultaneously—connecting distant geometric structures without waiting for deep pooling layers.',
+            latex: String.raw`\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V`,
+            latexCaption: 'Scaled Dot-Product Self-Attention Kernel',
+            visualType: 'vector',
+            motifId: 'attention_eye',
+            sheetId: 'sheet_dark_wide',
+            sheetCrop: 'full',
+            footerNote: 'NEXT: CNN VS. TRANSFORMER →'
+          },
+          {
+            layout: 'comparison',
+            theme: 'light',
+            accent: 'crimson',
+            kicker: 'INDUCTIVE BIAS COMPARISON // 04',
+            title: 'Local Translation Invariance vs. <span class="italic text-[#2B5A75]">Global Relational Geometry</span>',
+            body: 'Convolutions bake in strict spatial locality; Transformers learn spatial topology directly from data scale.',
+            latex: String.raw`\mathcal{O}(N^2 \cdot D) \quad \text{vs.} \quad \mathcal{O}(k^2 \cdot N \cdot D)`,
+            latexCaption: 'Global Pairwise Complexity vs. Local Kernel Window',
+            col1Title: 'CONVOLUTIONAL NETS (CNNs)',
+            col1Text: 'Strong locality and translation equivariance baked into small k×k filters. Sample-efficient on small datasets, but blind to long-range global symmetry early on.',
+            col2Title: 'VISION TRANSFORMERS (ViT)',
+            col2Text: 'Minimal spatial inductive bias. Treats the image as an permutation-equivariant set of Klimt tiles anchored only by learned positional embeddings.',
+            visualType: 'vector',
+            motifId: 'rbf_attention_star',
+            sheetId: 'sheet_light_wide',
+            sheetCrop: 'full',
+            footerNote: 'FINAL SLIDE: ARCHITECTURAL TAKEAWAY →'
+          },
+          {
+            layout: 'outro',
+            theme: 'dark',
+            accent: 'gold',
+            kicker: 'ARCHITECTURAL SYNTHESIS // 05',
+            title: 'Discrete Tokens In. <span class="italic text-[#D4AF37]">Continuous Meaning</span> Out.',
+            body: 'The magic of modern AI lies at the seam between discrete linear algebra and continuous geometric manifolds. Which visual architecture should we dissect next?',
+            latex: String.raw`\mathbf{W}\cdot\mathbf{x} + \mathbf{b} \;\longleftrightarrow\; p(\mathbf{z}\mid\mathbf{x})`,
+            latexCaption: 'Discrete Projection Unioned with Continuous Posteriors',
+            visualType: 'vector',
+            motifId: 'mandala_synthesis',
+            sheetId: 'sheet_dark_framed',
+            sheetCrop: 'full',
+            footerNote: 'COMMENT BELOW & SAVE · @ELVRAST'
+          }
+        ]
+      },
+      {
+        id: 'gradient_descent_geometry',
+        name: '03 · Gradient Descent & Loss Landscapes',
+        topic: 'Optimization Trajectories,Hessians & Saddle Points',
+        slides: [
+          {
+            layout: 'cover',
+            theme: 'dark',
+            accent: 'gold',
+            kicker: 'OPTIMIZATION DYNAMICS // EPISODE 03',
+            title: 'Why Deep Networks Don’t Get Trapped in <span class="italic text-[#D4AF37]">Local Minima</span>',
+            body: 'Our 3D intuition lies to us. In a million-dimensional parameter space, true local traps are exponentially rare—the real geometry is governed by saddle points and Hessian curvature.',
+            latex: String.raw`\theta_{t+1} = \theta_t - \eta \nabla_{\theta}\mathcal{L}(\theta_t)`,
+            latexCaption: 'First-Order Stochastic Gradient Flow',
+            visualType: 'vector',
+            motifId: 'golden_spiral_gd',
+            sheetId: 'sheet_dark_framed',
+            sheetCrop: 'full',
+            footerNote: 'SWIPE INTO THE LOSS BASIN →'
+          },
+          {
+            layout: 'visual_card',
+            theme: 'light',
+            accent: 'crimson',
+            kicker: 'HIGH-DIMENSIONAL TOPOLOGY // 02',
+            title: 'The Curse of Dimensionality Is a <span class="italic text-[#C02B37]">Blessing</span> for Optimization',
+            body: 'For a critical point where the gradient vanishes to be a true local minimum, every single eigenvalue of the Hessian matrix must be positive simultaneously. In high dimensions, almost all critical points are saddles.',
+            latex: String.raw`P(\text{All } \lambda_i > 0) \approx \frac{1}{2^d} \xrightarrow{d \to 10^9} 0`,
+            latexCaption: 'Probability of Positive-Definite Spectrum at Random Critical Point',
+            visualType: 'vector',
+            motifId: 'loss_streamlines',
+            sheetId: 'sheet_light_square',
+            sheetCrop: 'full',
+            footerNote: 'NEXT: HESSIAN CURVATURE →'
+          },
+          {
+            layout: 'theorem',
+            theme: 'dark',
+            accent: 'lapis',
+            kicker: 'SECOND-ORDER GEOMETRY // 03',
+            title: 'The Hessian Spectrum Dictates <span class="italic text-[#D4AF37]">Generalization</span>',
+            body: 'Sharp minima have huge positive eigenvalues—tiny shifts in test distribution spike the loss. Flat basins act as natural Occam razors, compressing parameter sensitivity.',
+            latex: String.raw`\mathbf{H} = \nabla^2_{\theta}\mathcal{L}(\theta^*), \quad \Delta \mathcal{L} \approx \frac{1}{2}\delta\theta^\top \mathbf{H}\,\delta\theta`,
+            latexCaption: 'Second-Order Taylor Expansion Around Optimum θ*',
+            visualType: 'vector',
+            motifId: 'covariance_ellipsoids',
+            sheetId: 'sheet_dark_wide',
+            sheetCrop: 'full',
+            footerNote: 'NEXT: SHARP VS. FLAT BASINS →'
+          },
+          {
+            layout: 'comparison',
+            theme: 'light',
+            accent: 'emerald',
+            kicker: 'GENERALIZATION GEOMETRY // 04',
+            title: 'Sharp Canyons Memorize. <span class="italic text-[#2E6B56]">Wide Valleys</span> Generalize.',
+            body: 'Stochastic mini-batch noise acts like thermal agitation—kicking weights out of narrow ravines until they settle in wide, flat golden basins.',
+            latex: String.raw`\text{Tr}(\mathbf{H}_{\text{flat}}) \ll \text{Tr}(\mathbf{H}_{\text{sharp}})`,
+            latexCaption: 'Hessian Trace as a Measure of Basin Flatness',
+            col1Title: 'SHARP MINIMA (LARGE BATCH)',
+            col1Text: 'High curvature eigenvalues (λ_max ≫ 0). Even a tiny covariate shift between training and production data causes catastrophic loss degradation.',
+            col2Title: 'FLAT BASINS (SGD NOISE)',
+            col2Text: 'Low spectral norm and broad iso-loss contours. Weight perturbations preserve predictive accuracy across out-of-distribution shifts.',
+            visualType: 'vector',
+            motifId: 'tsne_decision_boundary',
+            sheetId: 'sheet_light_wide',
+            sheetCrop: 'full',
+            footerNote: 'FINAL SLIDE: SUMMARY →'
+          },
+          {
+            layout: 'outro',
+            theme: 'dark',
+            accent: 'gold',
+            kicker: 'TAKEAWAY // 05',
+            title: 'Noise Is Not a Bug in SGD. <span class="italic text-[#D4AF37]">Noise Is the Regularizer.</span>',
+            body: 'Understanding the geometry of optimization separates blind hyperparameter tuning from principled engineering. Save this deck for your next architecture review.',
+            latex: String.raw`d\theta_t = -\nabla\mathcal{L}(\theta_t)\,dt + \sqrt{2\eta\mathbf{\Sigma}}\,dW_t`,
+            latexCaption: 'Stochastic Differential Equation (SDE) View of SGD',
+            visualType: 'vector',
+            motifId: 'golden_spiral_gd',
+            sheetId: 'sheet_dark_framed',
+            sheetCrop: 'full',
+            footerNote: 'SAVE & SHARE · @ELVRAST'
+          }
+        ]
+      },
+      {
+        id: 'diffusion_thermodynamics',
+        name: '04 · Diffusion & Score-Based Generative Models',
+        topic: 'From Klimt Mosaic to Gaussian Noise & Back',
+        slides: [
+          {
+            layout: 'cover',
+            theme: 'dark',
+            accent: 'gold',
+            kicker: 'GENERATIVE MANIFOLDS // EPISODE 04',
+            title: 'Reversing the Arrow of Time with <span class="italic text-[#D4AF37]">Score Matching</span>',
+            body: 'Imagine dissolving Gustav Klimt’s gold mosaic into pure Gaussian static—and training a vector field to guide every speck of dust back into place.',
+            latex: String.raw`dx = f(x,t)\,dt + g(t)\,dw`,
+            latexCaption: 'Forward Itô Diffusion Stochastic Differential Equation',
+            visualType: 'vector',
+            motifId: 'diffusion_continuum',
+            sheetId: 'sheet_dark_framed',
+            sheetCrop: 'full',
+            footerNote: 'SWIPE FOR ANDERSON’S THEOREM →'
+          },
+          {
+            layout: 'visual_card',
+            theme: 'light',
+            accent: 'lapis',
+            kicker: 'THE SCORE FUNCTION // 02',
+            title: 'Don’t Learn the Density. Learn the <span class="italic text-[#2B5A75]">Compass</span>.',
+            body: 'Computing the normalizing constant Z of a complex probability distribution is intractable. Score-based models sidestep Z entirely by taking the gradient of the log-density.',
+            latex: String.raw`\mathbf{s}_{\theta}(\mathbf{x}, t) \approx \nabla_{\mathbf{x}} \log p_t(\mathbf{x})`,
+            latexCaption: 'Stein Score Vector Field Pointing Toward High Density',
+            visualType: 'vector',
+            motifId: 'loss_streamlines',
+            sheetId: 'sheet_light_square',
+            sheetCrop: 'full',
+            footerNote: 'NEXT: REVERSE-TIME SDE →'
+          },
+          {
+            layout: 'theorem',
+            theme: 'dark',
+            accent: 'crimson',
+            kicker: 'ANDERSON’S REVERSE SDE (1982) // 03',
+            title: 'The Equation That Births <span class="italic text-[#D4AF37]">Structure from Chaos</span>',
+            body: 'Every forward diffusion process has an exact reverse-time stochastic differential equation that depends solely on the time-dependent score function.',
+            latex: String.raw`d\mathbf{x} = \big[\mathbf{f}(\mathbf{x},t) - g(t)^2 \nabla_{\mathbf{x}}\log p_t(\mathbf{x})\big]dt + g(t)\,d\bar{\mathbf{w}}`,
+            latexCaption: 'Reverse-Time Generative Denoising Trajectory',
+            visualType: 'vector',
+            motifId: 'diffusion_continuum',
+            sheetId: 'sheet_dark_wide',
+            sheetCrop: 'full',
+            footerNote: 'FINAL SLIDE: TAKEAWAY →'
+          },
+          {
+            layout: 'outro',
+            theme: 'light',
+            accent: 'gold',
+            kicker: 'SYNTHESIS // 04',
+            title: 'Non-Equilibrium Physics Meets <span class="italic text-[#9A7420]">Visual Art</span>.',
+            body: 'Modern generative AI is built directly on 19th-century statistical mechanics and 20th-century stochastic calculus. Follow @elvrast for deep mathematical breakdowns.',
+            latex: String.raw`p_0(\mathbf{x}) \;\xleftarrow{\;\nabla_{\mathbf{x}}\log p_t(\mathbf{x})\;}\; \mathcal{N}(\mathbf{0}, \mathbf{I})`,
+            latexCaption: 'Manifold Reconstruction via Learned Score Flow',
+            visualType: 'vector',
+            motifId: 'mandala_synthesis',
+            sheetId: 'sheet_light_wide',
+            sheetCrop: 'full',
+            footerNote: 'SAVE THIS DECK · @ELVRAST'
+          }
+        ]
+      }
+    ];
+
+    // ------------------------------------------------------------------------
+    // 5. STUDIO APPLICATION STATE
+    // ------------------------------------------------------------------------
+    const state = {
+      aspectRatio: '4:5', // '4:5' (1080x1350) or '1:1' (1080x1080)
+      frameStyle: 'full', // 'full' or 'minimal'
+      viewMode: 'single', // 'single' or 'strip'
+      activeIndex: 0,
+      slides: JSON.parse(JSON.stringify(PRESET_DECKS[0].slides))
+    };
+
+    const ACCENT_MAP = {
+      gold:    { hex: '#D4AF37', label: 'KLIMT GOLD' },
+      lapis:   { hex: '#2B5A75', label: 'LAPIS MOSAIC' },
+      crimson: { hex: '#C02B37', label: 'CRIMSON BERRY' },
+      emerald: { hex: '#2E6B56', label: 'EMERALD FLORA' }
+    };
+
+    // ------------------------------------------------------------------------
+    // 6. RENDER SLIDE HTML (1080x1350 or 1080x1080)
+    //    Supports optional Visuals (hasVisual) and optional Formulas (hasFormula)
+    //    with automatic editorial reflow when either or both are removed.
+    // ------------------------------------------------------------------------
+    function isVisualEnabled(slide) {
+      if (slide.layout === 'statement') return false;
+      return (slide.showVisual !== false) && (slide.visualType !== 'none');
+    }
+
+    function isFormulaEnabled(slide) {
+      if (slide.layout === 'statement') return false;
+      return (slide.showFormula !== false) && Boolean(slide.latex && slide.latex.trim());
+    }
+
+    function buildSlideInnerHTML(slide, index, total) {
+      const isLight = slide.theme === 'light';
+      const accentObj = ACCENT_MAP[slide.accent] || ACCENT_MAP.gold;
+      const accentHex = accentObj.hex;
+      const slideNum = String(index + 1).padStart(2, '0');
+      const totalNum = String(total).padStart(2, '0');
+      const is1x1 = state.aspectRatio === '1:1';
+
+      const hasVisual = isVisualEnabled(slide);
+      const hasFormula = isFormulaEnabled(slide);
+
+      // Render KaTeX formula safely ONLY when formula is enabled
+      let renderedKatex = '';
+      if (hasFormula) {
+        try {
+          renderedKatex = katex.renderToString(slide.latex, {
+            displayMode: true,
+            throwOnError: false
+          });
+        } catch (e) {
+          renderedKatex = `<span class="font-mono text-2xl">${slide.latex}</span>`;
+        }
+      }
+
+      // Render Visual Artwork ONLY when visual is enabled
+      let visualArtworkHTML = '';
+      if (hasVisual) {
+        if (slide.visualType === 'upload' && slide.customImageUrl) {
+          visualArtworkHTML = `
+            <div class="w-full h-full flex items-center justify-center overflow-hidden rounded-lg border-2 border-[#D4AF37]/60 bg-[#12100D]">
+              <img src="${slide.customImageUrl}" class="w-full h-full object-cover" alt="Custom Visual"/>
+            </div>`;
+        } else if (slide.visualType === 'sheet') {
+          const sheet = KLIMT_SHEETS.find(s => s.id === slide.sheetId) || KLIMT_SHEETS[0];
+          let posStyle = 'object-fit: cover; object-position: center center;';
+          if (slide.sheetCrop === 'top-left') posStyle = 'object-fit: cover; object-position: 15% 15%; transform: scale(1.65);';
+          if (slide.sheetCrop === 'top-right') posStyle = 'object-fit: cover; object-position: 85% 15%; transform: scale(1.65);';
+          if (slide.sheetCrop === 'bottom-left') posStyle = 'object-fit: cover; object-position: 15% 85%; transform: scale(1.65);';
+          if (slide.sheetCrop === 'bottom-right') posStyle = 'object-fit: cover; object-position: 85% 85%; transform: scale(1.65);';
+          visualArtworkHTML = `
+            <div class="w-full h-full overflow-hidden rounded-lg border-2 border-[#D4AF37] bg-[#14120F] relative">
+              <img src="${sheet.url}" onerror="this.onerror=null;this.src='${sheet.fallbackUrl}';" style="width:100%;height:100%;${posStyle}" alt="${sheet.name}"/>
+            </div>`;
+        } else {
+          const motif = VECTOR_MOTIFS.find(m => m.id === slide.motifId) || VECTOR_MOTIFS[0];
+          visualArtworkHTML = `
+            <div class="w-full h-full flex items-center justify-center rounded-xl border border-[#D4AF37]/45 p-3 relative overflow-hidden" style="background: ${isLight ? 'rgba(26,24,21,0.94)' : 'rgba(14,12,10,0.82)'};">
+              <!-- Corner crimson vertices -->
+              <span style="position:absolute;top:8px;left:8px;width:7px;height:7px;background:#C02B37;"></span>
+              <span style="position:absolute;top:8px;right:8px;width:7px;height:7px;background:#C02B37;"></span>
+              <span style="position:absolute;bottom:8px;left:8px;width:7px;height:7px;background:#C02B37;"></span>
+              <span style="position:absolute;bottom:8px;right:8px;width:7px;height:7px;background:#C02B37;"></span>
+              ${motif.render(isLight)}
+            </div>`;
+        }
+      }
+
+      // Ornamental Klimt Divider for Text-Only / No-Visual States
+      const ornamentalDividerHTML = `
+        <div style="display:flex;align-items:center;gap:16px;margin:12px 0;">
+          <div style="height:2px;width:96px;background:#D4AF37;"></div>
+          <div style="width:12px;height:12px;background:#C02B37;transform:rotate(45deg);"></div>
+          <div style="width:12px;height:12px;background:#2B5A75;"></div>
+          <div style="height:1px;flex:1;background:var(--slide-border);"></div>
+        </div>
+      `;
+
+      // Architectural Framing & Continuous Seam Line
+      const frameOverlayHTML = state.frameStyle === 'full' ? `
+        <svg class="pointer-events-none" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;" viewBox="0 0 1080 ${is1x1 ? 1080 : 1350}">
+          <!-- Continuous Horizontal Carousel Seam Line -->
+          <line x1="0" y1="${is1x1 ? 540 : 675}" x2="1080" y2="${is1x1 ? 540 : 675}" stroke="#D4AF37" stroke-width="1.2" stroke-dasharray="8,8" opacity="0.28"/>
+          <!-- Outer Architectural Gold Leaf Frame -->
+          <rect x="34" y="34" width="1012" height="${is1x1 ? 1012 : 1282}" rx="12" fill="none" stroke="#D4AF37" stroke-width="2.2" opacity="0.8"/>
+          <rect x="46" y="46" width="988" height="${is1x1 ? 988 : 1258}" rx="8" fill="none" stroke="#D4AF37" stroke-width="0.9" stroke-dasharray="6,5" opacity="0.45"/>
+          <!-- Corner Precision Crosshairs & Crimson Vertices -->
+          <rect x="30" y="30" width="9" height="9" fill="#C02B37"/>
+          <rect x="1041" y="30" width="9" height="9" fill="#C02B37"/>
+          <rect x="30" y="${is1x1 ? 1041 : 1311}" width="9" height="9" fill="#C02B37"/>
+          <rect x="1041" y="${is1x1 ? 1041 : 1311}" width="9" height="9" fill="#C02B37"/>
+        </svg>
+      ` : `
+        <div style="position:absolute;inset:36px;border:2px solid rgba(212,175,55,0.65);border-radius:10px;pointer-events:none;z-index:2;"></div>
+      `;
+
+      // Top Header Bar inside Slide (Strictly Canonical Horizontal Lockup: Logo + First & Last Name ONLY)
+      const badgeTextHex = (slide.accent === 'gold' || accentHex === '#D4AF37') ? '#1A1815' : '#F5F0E6';
+      const logoMarkSVG = isLight ? `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width:46px;height:46px;flex-shrink:0;">
+          <rect x="2" y="2" width="60" height="60" rx="10" fill="#F5F0E6" stroke="#1A1815" stroke-width="3.5"/>
+          <rect x="8" y="8" width="20" height="26" rx="2" fill="#1A1815"/>
+          <rect x="16" y="12" width="4" height="18" fill="#D4AF37"/>
+          <rect x="8" y="38" width="20" height="10" rx="1.5" fill="#D4AF37" stroke="#1A1815" stroke-width="1"/>
+          <rect x="8" y="50" width="20" height="6" rx="1.5" fill="#2B5A75"/>
+          <line x1="32" y1="6" x2="32" y2="58" stroke="#1A1815" stroke-width="2"/>
+          <circle cx="46" cy="24" r="11" fill="#C02B37" stroke="#1A1815" stroke-width="2"/>
+          <circle cx="46" cy="24" r="5" fill="#F5F0E6"/>
+          <circle cx="46" cy="47" r="8" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+          <circle cx="46" cy="47" r="3.2" fill="#2E6B56"/>
+        </svg>
+      ` : `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width:46px;height:46px;flex-shrink:0;">
+          <rect x="2" y="2" width="60" height="60" rx="10" fill="#1A1815" stroke="#D4AF37" stroke-width="3.5"/>
+          <rect x="8" y="8" width="20" height="26" rx="2" fill="#F5F0E6"/>
+          <rect x="16" y="12" width="4" height="18" fill="#1A1815"/>
+          <rect x="8" y="38" width="20" height="10" rx="1.5" fill="#D4AF37"/>
+          <rect x="8" y="50" width="20" height="6" rx="1.5" fill="#2B5A75"/>
+          <line x1="32" y1="6" x2="32" y2="58" stroke="#D4AF37" stroke-width="2"/>
+          <circle cx="46" cy="24" r="11" fill="#C02B37" stroke="#D4AF37" stroke-width="2.5"/>
+          <circle cx="46" cy="24" r="5" fill="#F5F0E6"/>
+          <circle cx="46" cy="47" r="8" fill="#2B5A75" stroke="#D4AF37" stroke-width="2"/>
+          <circle cx="46" cy="47" r="3.2" fill="#D4AF37"/>
+        </svg>
+      `;
+
+      const headerHTML = `
+        <div style="position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid var(--slide-border);padding-bottom:22px;">
+          <!-- Canonical Horizontal Lockup: ONLY Logo + First & Last Name -->
+          <div style="display:flex;align-items:center;gap:14px;">
+            ${logoMarkSVG}
+            <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;font-weight:700;color:${isLight ? '#1A1815' : '#F5F0E6'};letter-spacing:-0.01em;line-height:1;">
+              Elvira Astashkina
+            </span>
+          </div>
+          <!-- Series Kicker + Slide Counter Badge -->
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;letter-spacing:0.16em;color:var(--slide-gold);text-transform:uppercase;">
+              ${glueTypography(slide.kicker || 'KLIMT × APPLIED ML')}
+            </span>
+            <span style="padding:8px 16px;border-radius:6px;background:${accentHex};color:${badgeTextHex};font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;letter-spacing:0.12em;">
+              ${slideNum} / ${totalNum}
+            </span>
+          </div>
+        </div>
+      `;
+
+      // Bottom Footer Bar inside Slide
+      const footerHTML = `
+        <div style="position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid var(--slide-border);padding-top:20px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="width:12px;height:12px;background:#C02B37;display:inline-block;"></span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:0.14em;color:var(--slide-muted);text-transform:uppercase;font-weight:600;">
+              GILDED TENSOR // APPLIED MATH &amp; AI
+            </span>
+          </div>
+          <div style="padding:8px 18px;border-radius:6px;border:1.5px solid var(--slide-border);background:var(--slide-badge-bg);color:var(--slide-badge-text);font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">
+            ${glueTypography(slide.footerNote || 'SWIPE →')}
+          </div>
+        </div>
+      `;
+
+      // Reusable Formula Box Component (adapts size when visual is removed)
+      const formulaCardHTML = hasFormula ? `
+        <div class="${hasVisual ? 'slide-katex-box' : 'slide-katex-hero'}" style="position:relative;background:var(--slide-card-bg);border:2px solid #D4AF37;border-radius:10px;padding:${hasVisual ? '20px 28px' : '38px 36px'};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+          <div style="color:${isLight ? '#1A1815' : '#F5E6BE'};">${renderedKatex}</div>
+          ${slide.latexCaption ? `<div style="font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:var(--slide-gold);">${glueTypography(slide.latexCaption)}</div>` : ''}
+        </div>
+      ` : '';
+
+      // Body Layout Switcher
+      let centerBodyHTML = '';
+
+      if (slide.layout === 'statement' || (!hasVisual && !hasFormula && slide.layout !== 'comparison' && slide.layout !== 'outro')) {
+        // Pure Editorial Statement Layout (When both Visual & Formula are turned OFF)
+        centerBodyHTML = `
+          <div style="position:relative;z-index:10;flex:1;display:flex;flex-direction:column;justify-content:center;padding:${is1x1 ? '28px 0' : '48px 0'};gap:28px;">
+            ${ornamentalDividerHTML}
+            <h2 class="balance-text" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:${is1x1 ? '74px' : '88px'};font-weight:600;line-height:1.03;color:var(--slide-text);letter-spacing:-0.01em;margin:0;">
+              ${glueTypography(slide.title)}
+            </h2>
+            <p class="pretty-text" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:${is1x1 ? '27px' : '31px'};line-height:1.54;color:var(--slide-muted);max-width:58ch;margin:0;">
+              ${glueTypography(slide.body)}
+            </p>
+            ${ornamentalDividerHTML}
+          </div>
+        `;
+      } else if (slide.layout === 'cover') {
+        const visualHeight = hasFormula ? (is1x1 ? '280px' : '390px') : (is1x1 ? '380px' : '510px');
+        centerBodyHTML = `
+          <div style="position:relative;z-index:10;flex:1;display:flex;flex-direction:column;justify-content:${hasVisual ? 'space-between' : 'center'};padding:${is1x1 ? '24px 0' : '34px 0'};gap:24px;">
+            <div>
+              <h2 class="balance-text" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:${!hasVisual ? (is1x1 ? '70px' : '82px') : (is1x1 ? '66px' : '76px')};font-weight:600;line-height:1.04;color:var(--slide-text);letter-spacing:-0.01em;margin:0 0 18px 0;">
+                ${glueTypography(slide.title)}
+              </h2>
+              <p class="pretty-text" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:${!hasVisual ? '28px' : (is1x1 ? '23px' : '26px')};line-height:1.48;color:var(--slide-muted);max-width:62ch;margin:0;">
+                ${glueTypography(slide.body)}
+              </p>
+            </div>
+
+            ${hasVisual ? `<div style="height:${visualHeight};width:100%;">${visualArtworkHTML}</div>` : ornamentalDividerHTML}
+
+            ${formulaCardHTML}
+          </div>
+        `;
+      } else if (slide.layout === 'theorem') {
+        const visualHeight = hasFormula ? (is1x1 ? '210px' : '295px') : (is1x1 ? '370px' : '490px');
+        centerBodyHTML = `
+          <div style="position:relative;z-index:10;flex:1;display:flex;flex-direction:column;justify-content:${(hasVisual && hasFormula) ? 'space-between' : 'center'};padding:${is1x1 ? '22px 0' : '32px 0'};gap:26px;">
+            <div>
+              <h2 class="balance-text" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:${!hasVisual ? (is1x1 ? '66px' : '76px') : (is1x1 ? '58px' : '66px')};font-weight:600;line-height:1.06;color:var(--slide-text);margin:0 0 16px 0;">
+                ${glueTypography(slide.title)}
+              </h2>
+              <p class="pretty-text" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:${!hasVisual ? '27px' : (is1x1 ? '22px' : '25px')};line-height:1.48;color:var(--slide-muted);max-width:62ch;margin:0;">
+                ${glueTypography(slide.body)}
+              </p>
+            </div>
+
+            ${hasFormula ? `
+            <!-- Monumental Bracketed Theorem Box -->
+            <div class="slide-katex-hero" style="position:relative;background:var(--slide-card-bg);border:2.5px solid #D4AF37;border-radius:12px;padding:${hasVisual ? (is1x1 ? '28px 32px' : '42px 36px') : '54px 42px'};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;box-shadow:0 16px 40px rgba(0,0,0,0.22);">
+              <div style="position:absolute;top:12px;left:16px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#D4AF37;letter-spacing:0.18em;text-transform:uppercase;">
+                FORMAL STATEMENT // AXIOMATIC KERNEL
+              </div>
+              <div style="color:${isLight ? '#1A1815' : '#F5E6BE'};padding-top:12px;">
+                ${renderedKatex}
+              </div>
+              ${slide.latexCaption ? `
+              <div style="padding:6px 18px;border-radius:6px;background:rgba(212,175,55,0.16);border:1px solid rgba(212,175,55,0.45);font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--slide-gold);letter-spacing:0.1em;text-transform:uppercase;">
+                ${glueTypography(slide.latexCaption)}
+              </div>` : ''}
+            </div>` : ''}
+
+            ${hasVisual ? `
+            <!-- Supporting Klimt Motif Strip -->
+            <div style="height:${visualHeight};width:100%;">
+              ${visualArtworkHTML}
+            </div>` : ''}
+          </div>
+        `;
+      } else if (slide.layout === 'comparison') {
+        const visualHeight = hasFormula ? (is1x1 ? '185px' : '255px') : (is1x1 ? '240px' : '330px');
+        centerBodyHTML = `
+          <div style="position:relative;z-index:10;flex:1;display:flex;flex-direction:column;justify-content:${hasVisual ? 'space-between' : 'center'};padding:${is1x1 ? '20px 0' : '28px 0'};gap:22px;">
+            <div>
+              <h2 class="balance-text" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:${!hasVisual ? '68px' : (is1x1 ? '54px' : '62px')};font-weight:600;line-height:1.06;color:var(--slide-text);margin:0 0 12px 0;">
+                ${glueTypography(slide.title)}
+              </h2>
+              <p class="pretty-text" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:${!hasVisual ? '25px' : '23px'};line-height:1.45;color:var(--slide-muted);max-width:62ch;margin:0;">
+                ${glueTypography(slide.body)}
+              </p>
+            </div>
+
+            <!-- Dual Comparison Cards -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+              <div style="background:var(--slide-card-bg);border:2px solid #D4AF37;border-radius:10px;padding:${!hasVisual ? '32px 28px' : '24px'};display:flex;flex-direction:column;gap:14px;">
+                <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--slide-hairline);padding-bottom:10px;">
+                  <span style="width:14px;height:14px;background:#D4AF37;display:inline-block;"></span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--slide-gold);letter-spacing:0.08em;">
+                    ${glueTypography(slide.col1Title || 'DISCRETE FORMULATION')}
+                  </span>
+                </div>
+                <p class="pretty-text" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:${!hasVisual ? '23px' : '21px'};line-height:1.48;color:var(--slide-text);margin:0;">
+                  ${glueTypography(slide.col1Text || '')}
+                </p>
+              </div>
+
+              <div style="background:var(--slide-card-bg);border:2px solid #2B5A75;border-radius:10px;padding:${!hasVisual ? '32px 28px' : '24px'};display:flex;flex-direction:column;gap:14px;">
+                <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--slide-hairline);padding-bottom:10px;">
+                  <span style="width:14px;height:14px;background:#C02B37;display:inline-block;"></span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:${isLight ? '#2B5A75' : '#F5E6BE'};letter-spacing:0.08em;">
+                    ${glueTypography(slide.col2Title || 'CONTINUOUS MANIFOLD')}
+                  </span>
+                </div>
+                <p class="pretty-text" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:${!hasVisual ? '23px' : '21px'};line-height:1.48;color:var(--slide-text);margin:0;">
+                  ${glueTypography(slide.col2Text || '')}
+                </p>
+              </div>
+            </div>
+
+            ${hasVisual ? `
+            <div style="height:${visualHeight};width:100%;">
+              ${visualArtworkHTML}
+            </div>` : ''}
+
+            ${hasFormula ? `
+            <div class="slide-katex-compact" style="background:var(--slide-card-bg);border:1.5px solid var(--slide-border);border-radius:10px;padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:16px;">
+              <div style="color:${isLight ? '#1A1815' : '#F5E6BE'};margin:0 auto;">${renderedKatex}</div>
+            </div>` : ''}
+          </div>
+        `;
+      } else if (slide.layout === 'outro') {
+        const visualHeight = hasFormula ? (is1x1 ? '220px' : '310px') : (is1x1 ? '290px' : '395px');
+        centerBodyHTML = `
+          <div style="position:relative;z-index:10;flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:${is1x1 ? '22px 0' : '34px 0'};gap:22px;">
+            ${hasVisual ? `
+            <div style="height:${visualHeight};width:100%;">
+              ${visualArtworkHTML}
+            </div>` : `<div style="margin-top:auto;">${ornamentalDividerHTML}</div>`}
+
+            <div style="text-align:center;max-width:60ch;margin:0 auto;">
+              <h2 class="balance-text" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:${!hasVisual ? (is1x1 ? '68px' : '80px') : (is1x1 ? '60px' : '70px')};font-weight:600;line-height:1.05;color:var(--slide-text);margin:0 0 18px 0;">
+                ${glueTypography(slide.title)}
+              </h2>
+              <p class="pretty-text" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:${!hasVisual ? '28px' : '25px'};line-height:1.48;color:var(--slide-muted);margin:0;">
+                ${glueTypography(slide.body)}
+              </p>
+            </div>
+
+            ${hasFormula ? `
+            <div class="slide-katex-box" style="background:var(--slide-card-bg);border:2px solid #D4AF37;border-radius:10px;padding:18px 26px;text-align:center;">
+              <div style="color:${isLight ? '#1A1815' : '#F5E6BE'};">${renderedKatex}</div>
+            </div>` : (!hasVisual ? `<div style="margin-bottom:auto;">${ornamentalDividerHTML}</div>` : '')}
+
+            <!-- Architectural Action Row (Strictly NO pills — rounded-lg 8px) -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+              <div style="padding:16px;border-radius:8px;background:var(--slide-card-bg);border:1.5px solid #D4AF37;text-align:center;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--slide-gold);letter-spacing:0.1em;">
+                [01] SAVE REFERENCE
+              </div>
+              <div style="padding:16px;border-radius:8px;background:var(--slide-card-bg);border:1.5px solid #2B5A75;text-align:center;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--slide-text);letter-spacing:0.1em;">
+                [02] SHARE TO STORY
+              </div>
+              <div style="padding:16px;border-radius:8px;background:#D4AF37;border:1.5px solid #F5E6BE;text-align:center;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#1A1815;letter-spacing:0.1em;">
+                [03] FOLLOW @ELVRAST
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        // Default: 'visual_card'
+        const visualHeight = hasFormula ? (is1x1 ? '265px' : '375px') : (is1x1 ? '375px' : '505px');
+        centerBodyHTML = `
+          <div style="position:relative;z-index:10;flex:1;display:flex;flex-direction:column;justify-content:${hasVisual ? 'space-between' : 'center'};padding:${is1x1 ? '22px 0' : '32px 0'};gap:24px;">
+            <div>
+              <h2 class="balance-text" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:${!hasVisual ? (is1x1 ? '68px' : '78px') : (is1x1 ? '58px' : '68px')};font-weight:600;line-height:1.06;color:var(--slide-text);margin:0 0 16px 0;">
+                ${glueTypography(slide.title)}
+              </h2>
+              <p class="pretty-text" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:${!hasVisual ? '28px' : (is1x1 ? '23px' : '25px')};line-height:1.48;color:var(--slide-muted);max-width:62ch;margin:0;">
+                ${glueTypography(slide.body)}
+              </p>
+            </div>
+
+            ${hasVisual ? `<div style="height:${visualHeight};width:100%;">${visualArtworkHTML}</div>` : ornamentalDividerHTML}
+
+            ${formulaCardHTML}
+          </div>
+        `;
+      }
+
+      return frameOverlayHTML + headerHTML + centerBodyHTML + footerHTML;
+    }
+
+    // ------------------------------------------------------------------------
+    // 7. UI SYNCHRONIZATION & RENDERING
+    // ------------------------------------------------------------------------
+    function syncEditorInputs() {
+      const slide = state.slides[state.activeIndex];
+      if (!slide) return;
+
+      document.getElementById('editor-slide-indicator').textContent =
+        `03. Editing Slide ${String(state.activeIndex + 1).padStart(2, '0')} / ${String(state.slides.length).padStart(2, '0')}`;
+
+      document.getElementById('slide-layout').value = slide.layout || 'visual_card';
+      document.getElementById('slide-theme').value = slide.theme || 'dark';
+      document.getElementById('slide-kicker').value = slide.kicker || '';
+      document.getElementById('slide-accent').value = slide.accent || 'gold';
+      document.getElementById('slide-title').value = slide.title || '';
+      document.getElementById('slide-body').value = slide.body || '';
+      document.getElementById('slide-latex').value = slide.latex || '';
+      document.getElementById('slide-latex-caption').value = slide.latexCaption || '';
+      document.getElementById('slide-footer-note').value = slide.footerNote || '';
+
+      // Sync Optional Element Toggle States
+      const hasVisual = isVisualEnabled(slide);
+      const hasFormula = isFormulaEnabled(slide);
+
+      const btnVis = document.getElementById('btn-toggle-visual');
+      const badgeVis = document.getElementById('badge-toggle-visual');
+      const btnSec4Vis = document.getElementById('btn-section4-visual-toggle');
+      if (hasVisual) {
+        btnVis.className = 'px-2.5 sm:px-3 py-2 rounded-lg border border-[#1A1815] bg-[#1A1815] text-[#F5F0E6] text-[11px] sm:text-xs font-mono font-bold flex items-center justify-between gap-1.5 transition';
+        badgeVis.className = 'px-1.5 py-0.5 rounded bg-[#2E6B56] text-white text-[9px] sm:text-[10px] flex-shrink-0';
+        badgeVis.textContent = 'INCLUDED';
+        btnSec4Vis.textContent = 'Remove Visual from Slide';
+        btnSec4Vis.className = 'px-2.5 py-1 rounded-md bg-[#FDF2F3] hover:bg-[#C02B37] border border-[#C02B37] text-[10px] font-mono font-bold text-[#9E1F29] hover:text-white transition';
+      } else {
+        btnVis.className = 'px-2.5 sm:px-3 py-2 rounded-lg border border-[#C8BEAA] bg-white text-[#5A5852] text-[11px] sm:text-xs font-mono font-bold flex items-center justify-between gap-1.5 transition';
+        badgeVis.className = 'px-1.5 py-0.5 rounded bg-[#EAE2D3] text-[#4A463F] text-[9px] sm:text-[10px] flex-shrink-0';
+        badgeVis.textContent = 'REMOVED';
+        btnSec4Vis.textContent = '+ Restore Visual to Slide';
+        btnSec4Vis.className = 'px-2.5 py-1 rounded-md bg-[#2E6B56] hover:bg-[#1E4A3A] text-[10px] font-mono font-bold text-white transition';
+      }
+
+      const btnForm = document.getElementById('btn-toggle-formula');
+      const badgeForm = document.getElementById('badge-toggle-formula');
+      const btnInlineForm = document.getElementById('btn-inline-formula-toggle');
+      const formulaInputsWrap = document.getElementById('formula-inputs-wrap');
+      if (hasFormula) {
+        btnForm.className = 'px-2.5 sm:px-3 py-2 rounded-lg border border-[#1A1815] bg-[#1A1815] text-[#F5F0E6] text-[11px] sm:text-xs font-mono font-bold flex items-center justify-between gap-1.5 transition';
+        badgeForm.className = 'px-1.5 py-0.5 rounded bg-[#2E6B56] text-white text-[9px] sm:text-[10px] flex-shrink-0';
+        badgeForm.textContent = 'INCLUDED';
+        btnInlineForm.textContent = 'Remove Formula';
+        btnInlineForm.className = 'px-2 py-0.5 rounded bg-[#FDF2F3] hover:bg-[#C02B37] border border-[#C02B37] text-[10px] font-mono font-bold text-[#9E1F29] hover:text-white transition';
+        formulaInputsWrap.classList.remove('opacity-40');
+      } else {
+        btnForm.className = 'px-2.5 sm:px-3 py-2 rounded-lg border border-[#C8BEAA] bg-white text-[#5A5852] text-[11px] sm:text-xs font-mono font-bold flex items-center justify-between gap-1.5 transition';
+        badgeForm.className = 'px-1.5 py-0.5 rounded bg-[#EAE2D3] text-[#4A463F] text-[9px] sm:text-[10px] flex-shrink-0';
+        badgeForm.textContent = 'REMOVED';
+        btnInlineForm.textContent = '+ Include Formula';
+        btnInlineForm.className = 'px-2 py-0.5 rounded bg-[#2E6B56] hover:bg-[#1E4A3A] text-[10px] font-mono font-bold text-white transition';
+        formulaInputsWrap.classList.add('opacity-40');
+      }
+
+      const compBox = document.getElementById('comparison-fields');
+      if (slide.layout === 'comparison') {
+        compBox.classList.remove('hidden');
+        document.getElementById('slide-col1-title').value = slide.col1Title || '';
+        document.getElementById('slide-col1-text').value = slide.col1Text || '';
+        document.getElementById('slide-col2-title').value = slide.col2Title || '';
+        document.getElementById('slide-col2-text').value = slide.col2Text || '';
+      } else {
+        compBox.classList.add('hidden');
+      }
+
+      // Highlight selected motif or sheet
+      renderMotifSelectorGrid();
+      renderSheetSelectorGrid();
+    }
+
+    function renderAll() {
+      const slide = state.slides[state.activeIndex];
+      const total = state.slides.length;
+      const is1x1 = state.aspectRatio === '1:1';
+
+      // Update stage header
+      document.getElementById('stage-title-bar').textContent =
+        `Live Canvas — Slide ${String(state.activeIndex + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+      document.getElementById('stage-dim-badge').textContent =
+        is1x1 ? '1080 × 1080 px (1:1)' : '1080 × 1350 px (4:5)';
+
+      // Responsive Scale Shell Dimensions (Fits 320px-430px phones up to 1600px desktops seamlessly)
+      const stageBox = document.getElementById('single-stage-container');
+      const shell = document.getElementById('active-slide-shell');
+      const canvas = document.getElementById('active-slide-canvas');
+      const boxWidth = (stageBox && stageBox.clientWidth > 0) ? (stageBox.clientWidth - 28) : (window.innerWidth - 56);
+      const targetWidth = Math.min(518, Math.max(250, boxWidth));
+      const scale = targetWidth / 1080;
+
+      shell.style.width = `${Math.round(1080 * scale)}px`;
+      shell.style.height = `${Math.round((is1x1 ? 1080 : 1350) * scale)}px`;
+      canvas.style.transform = `scale(${scale.toFixed(4)})`;
+
+      canvas.className = `ig-slide-canvas ${slide.theme === 'light' ? 'theme-light' : 'theme-dark'} ${is1x1 ? 'aspect-1x1' : ''}`;
+      canvas.innerHTML = buildSlideInnerHTML(slide, state.activeIndex, total);
+
+      // Update dots nav
+      const dotsNav = document.getElementById('slide-dots-nav');
+      dotsNav.innerHTML = state.slides.map((s, idx) => `
+        <button onclick="selectSlide(${idx})" class="px-2 sm:px-2.5 py-1 rounded-md font-mono text-[11px] sm:text-xs font-bold transition shadow-sm ${
+          idx === state.activeIndex
+            ? 'bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37]'
+            : 'bg-white text-[#1A1815] border border-[#C8BEAA] hover:border-[#1A1815]'
+        }">${String(idx + 1).padStart(2, '0')}</button>
+      `).join('');
+
+      // Update strip view if visible
+      if (state.viewMode === 'strip') {
+        renderStripView();
+      }
+
+      // Update bottom filmstrip thumbnails
+      renderFilmstrip();
+    }
+
+    function renderStripView() {
+      const row = document.getElementById('strip-scroll-row');
+      const total = state.slides.length;
+      const is1x1 = state.aspectRatio === '1:1';
+      const scale = window.innerWidth < 640 ? 0.22 : 0.28;
+      const w = Math.round(1080 * scale);
+      const h = Math.round((is1x1 ? 1080 : 1350) * scale);
+
+      row.innerHTML = state.slides.map((s, idx) => `
+        <div onclick="selectSlide(${idx})" class="cursor-pointer transition flex-shrink-0 shadow-md ${
+          idx === state.activeIndex ? 'ring-2 ring-[#1A1815]' : 'opacity-90 hover:opacity-100'
+        }" style="border-radius:8px;overflow:hidden;">
+          <div style="width:${w}px;height:${h}px;overflow:hidden;position:relative;">
+            <div class="ig-slide-canvas ${s.theme === 'light' ? 'theme-light' : 'theme-dark'} ${is1x1 ? 'aspect-1x1' : ''}" style="transform:scale(${scale});transform-origin:top left;">
+              ${buildSlideInnerHTML(s, idx, total)}
+            </div>
+          </div>
+          <div class="bg-white px-2.5 py-1.5 flex justify-between items-center border-t border-[#DED6C5]">
+            <span class="font-mono text-[10px] text-[#1A1815] font-bold">SLIDE ${String(idx + 1).padStart(2, '0')}</span>
+            <span class="font-mono text-[10px] text-[#7A5B14] font-semibold uppercase">${s.layout}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderFilmstrip() {
+      const grid = document.getElementById('filmstrip-grid');
+      const total = state.slides.length;
+      document.getElementById('filmstrip-count-label').textContent = `${total} Slides in Deck`;
+      grid.innerHTML = state.slides.map((s, idx) => {
+        const cleanTitle = (s.title || '').replace(/<[^>]*>/g, '');
+        const isActive = idx === state.activeIndex;
+        const visTag = isVisualEnabled(s) ? 'VIS' : '—';
+        const mathTag = isFormulaEnabled(s) ? 'MATH' : '—';
+        const mobileSpan = (total % 2 === 1 && idx === total - 1) ? 'col-span-2 sm:col-span-1' : '';
+        return `
+          <button onclick="selectSlide(${idx})" class="${mobileSpan} text-left p-2.5 rounded-lg border transition flex flex-col justify-between gap-1.5 ${
+            isActive
+              ? 'bg-[#1A1815] text-[#F5F0E6] border-[#D4AF37] shadow-sm'
+              : 'bg-[#F5F0E6] text-[#1A1815] border-[#C8BEAA] hover:border-[#1A1815]'
+          }">
+            <div class="flex justify-between items-center w-full">
+              <span class="text-[10px] font-mono font-bold ${isActive ? 'text-[#D4AF37]' : 'text-[#7A5B14]'}">
+                #${String(idx + 1).padStart(2, '0')} · ${visTag}/${mathTag}
+              </span>
+              <span class="w-3 h-3 rounded-sm border border-[#B58E43]" style="background:${s.theme === 'light' ? '#F5F0E6' : '#1A1815'}"></span>
+            </div>
+            <p class="text-[11px] font-serif font-bold ${isActive ? 'text-[#F5F0E6]' : 'text-[#1A1815]'} line-clamp-2 leading-snug">${cleanTitle}</p>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // ------------------------------------------------------------------------
+    // 8. INTERACTIVE CONTROLS & MUTATORS
+    // ------------------------------------------------------------------------
+    function selectSlide(index) {
+      state.activeIndex = index;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function onLayoutChange(layoutVal) {
+      const slide = state.slides[state.activeIndex];
+      if (!slide) return;
+      slide.layout = layoutVal;
+      if (layoutVal === 'statement') {
+        slide.showVisual = false;
+        slide.showFormula = false;
+      }
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function updateSlideField(field, value) {
+      const slide = state.slides[state.activeIndex];
+      if (!slide) return;
+      slide[field] = value;
+      if (field === 'latex' && value && value.trim()) {
+        // Automatically enable formula display if user types into the LaTeX field
+        slide.showFormula = true;
+      }
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function toggleSlideVisual() {
+      const slide = state.slides[state.activeIndex];
+      if (!slide) return;
+      const currentlyOn = isVisualEnabled(slide);
+      if (currentlyOn) {
+        slide.showVisual = false;
+      } else {
+        if (slide.layout === 'statement') slide.layout = 'visual_card';
+        slide.showVisual = true;
+        if (!slide.visualType || slide.visualType === 'none') {
+          slide.visualType = 'vector';
+        }
+      }
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function toggleSlideFormula() {
+      const slide = state.slides[state.activeIndex];
+      if (!slide) return;
+      const currentlyOn = isFormulaEnabled(slide);
+      if (currentlyOn) {
+        slide.showFormula = false;
+      } else {
+        if (slide.layout === 'statement') slide.layout = 'visual_card';
+        slide.showFormula = true;
+        if (!slide.latex || !slide.latex.trim()) {
+          slide.latex = String.raw`f(\mathbf{x}) = \mathbf{W}\cdot\mathbf{x} + \mathbf{b}`;
+        }
+      }
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function clearSlideFormula() {
+      const slide = state.slides[state.activeIndex];
+      if (!slide) return;
+      slide.latex = '';
+      slide.latexCaption = '';
+      slide.showFormula = false;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function setDeckElementVisibility(elementType) {
+      if (elementType === 'visual') {
+        const anyVisible = state.slides.some(s => isVisualEnabled(s));
+        state.slides.forEach(s => {
+          s.showVisual = !anyVisible;
+          if (!anyVisible && s.layout === 'statement') s.layout = 'visual_card';
+        });
+      } else if (elementType === 'formula') {
+        const anyVisible = state.slides.some(s => isFormulaEnabled(s));
+        state.slides.forEach(s => {
+          s.showFormula = !anyVisible;
+          if (!anyVisible && (!s.latex || !s.latex.trim())) {
+            s.latex = String.raw`P(A) = \int_A p(x)\,d\mu(x)`;
+          }
+        });
+      }
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function loadPresetDeck(deckId) {
+      const deck = PRESET_DECKS.find(d => d.id === deckId);
+      if (!deck) return;
+      state.slides = JSON.parse(JSON.stringify(deck.slides));
+      state.activeIndex = 0;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function setAspectRatio(ratio) {
+      state.aspectRatio = ratio;
+      renderAll();
+    }
+
+    function setFrameStyle(style) {
+      state.frameStyle = style;
+      renderAll();
+    }
+
+    function applyDeckThemeMode(mode) {
+      state.slides.forEach((s, idx) => {
+        if (mode === 'all-dark') s.theme = 'dark';
+        else if (mode === 'all-light') s.theme = 'light';
+        else if (mode === 'alternate') s.theme = idx % 2 === 0 ? 'dark' : 'light';
+        else if (mode === 'editorial') {
+          s.theme = (idx === 0 || idx === state.slides.length - 1) ? 'dark' : (idx % 2 === 1 ? 'light' : 'dark');
+        }
+      });
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function setViewMode(mode) {
+      state.viewMode = mode;
+      const singleBox = document.getElementById('single-stage-container');
+      const stripBox = document.getElementById('strip-stage-container');
+      const btnSingle = document.getElementById('btn-view-single');
+      const btnStrip = document.getElementById('btn-view-strip');
+
+      if (mode === 'strip') {
+        singleBox.classList.add('hidden');
+        stripBox.classList.remove('hidden');
+        btnStrip.className = 'w-full sm:w-auto px-3 py-2 sm:py-1.5 rounded-lg text-xs font-mono font-bold bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37] transition text-center';
+        btnSingle.className = 'w-full sm:w-auto px-3 py-2 sm:py-1.5 rounded-lg text-xs font-mono font-bold bg-[#F5F0E6] text-[#1A1815] border border-[#C8BEAA] hover:border-[#1A1815] transition text-center';
+      } else {
+        stripBox.classList.add('hidden');
+        singleBox.classList.remove('hidden');
+        btnSingle.className = 'w-full sm:w-auto px-3 py-2 sm:py-1.5 rounded-lg text-xs font-mono font-bold bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37] transition text-center';
+        btnStrip.className = 'w-full sm:w-auto px-3 py-2 sm:py-1.5 rounded-lg text-xs font-mono font-bold bg-[#F5F0E6] text-[#1A1815] border border-[#C8BEAA] hover:border-[#1A1815] transition text-center';
+      }
+      renderAll();
+    }
+
+    function addNewSlide() {
+      const current = state.slides[state.activeIndex];
+      const newSlide = {
+        layout: 'visual_card',
+        theme: current && current.theme === 'dark' ? 'light' : 'dark',
+        accent: 'gold',
+        kicker: `CONCEPT BREAKDOWN // ${String(state.slides.length + 1).padStart(2, '0')}`,
+        title: 'Mathematical Structure Behind the <span class="italic text-[#D4AF37]">Latent Space</span>',
+        body: 'Discrete matrix projections map raw observations into continuous probability contours where semantic similarity becomes geometric distance.',
+        latex: String.raw`\mathcal{L}(\theta) = \mathbb{E}_{x \sim p_{\text{data}}}\big[-\log p_{\theta}(x)\big]`,
+        latexCaption: 'Maximum Likelihood Estimation Objective',
+        showVisual: true,
+        showFormula: true,
+        visualType: 'vector',
+        motifId: 'probability_contours',
+        sheetId: 'sheet_dark_framed',
+        sheetCrop: 'full',
+        footerNote: 'SWIPE FOR NEXT INSIGHT →'
+      };
+      state.slides.splice(state.activeIndex + 1, 0, newSlide);
+      state.activeIndex += 1;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function duplicateSlide() {
+      const copy = JSON.parse(JSON.stringify(state.slides[state.activeIndex]));
+      state.slides.splice(state.activeIndex + 1, 0, copy);
+      state.activeIndex += 1;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function deleteCurrentSlide() {
+      if (state.slides.length <= 1) {
+        alert('A carousel must have at least 1 slide.');
+        return;
+      }
+      state.slides.splice(state.activeIndex, 1);
+      state.activeIndex = Math.max(0, state.activeIndex - 1);
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function moveSlide(delta) {
+      const target = state.activeIndex + delta;
+      if (target < 0 || target >= state.slides.length) return;
+      const temp = state.slides[state.activeIndex];
+      state.slides[state.activeIndex] = state.slides[target];
+      state.slides[target] = temp;
+      state.activeIndex = target;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    // ------------------------------------------------------------------------
+    // 9. VISUAL MOTIF & SHEET PICKER UI
+    // ------------------------------------------------------------------------
+    function switchVisualTab(tab) {
+      ['vector', 'sheets', 'upload'].forEach(t => {
+        document.getElementById(`vpanel-${t}`).classList.toggle('hidden', t !== tab);
+        document.getElementById(`vtab-${t}`).className = t === tab
+          ? 'w-full py-1.5 px-1.5 sm:px-2 rounded-md text-[10px] sm:text-[11px] font-mono font-bold bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37] transition text-center truncate'
+          : 'w-full py-1.5 px-1.5 sm:px-2 rounded-md text-[10px] sm:text-[11px] font-mono font-bold text-[#1A1815] hover:bg-white/70 transition text-center truncate';
+      });
+    }
+
+    function selectNoVisual() {
+      const slide = state.slides[state.activeIndex];
+      slide.showVisual = false;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function selectVectorMotif(motifId) {
+      const slide = state.slides[state.activeIndex];
+      if (slide.layout === 'statement') slide.layout = 'visual_card';
+      slide.showVisual = true;
+      slide.visualType = 'vector';
+      slide.motifId = motifId;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function selectKlimtSheet(sheetId) {
+      const slide = state.slides[state.activeIndex];
+      if (slide.layout === 'statement') slide.layout = 'visual_card';
+      slide.showVisual = true;
+      slide.visualType = 'sheet';
+      slide.sheetId = sheetId;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function handleCustomImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const slide = state.slides[state.activeIndex];
+        if (slide.layout === 'statement') slide.layout = 'visual_card';
+        slide.showVisual = true;
+        slide.visualType = 'upload';
+        slide.customImageUrl = e.target.result;
+        syncEditorInputs();
+        renderAll();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function renderMotifSelectorGrid() {
+      const slide = state.slides[state.activeIndex];
+      const hasVisual = isVisualEnabled(slide);
+      const grid = document.getElementById('vpanel-vector');
+
+      const noneCard = `
+        <button onclick="selectNoVisual()" class="p-2 rounded-lg border text-left transition flex flex-col gap-1.5 ${
+          !hasVisual
+            ? 'bg-[#FDF2F3] border-[#C02B37] shadow-sm'
+            : 'bg-[#F5F0E6] border-[#C8BEAA] hover:border-[#C02B37]'
+        }">
+          <div class="w-full h-16 bg-[#1A1815] rounded-md overflow-hidden p-1 border border-[#B58E43] flex items-center justify-center text-xs font-mono text-[#F5F0E6]">
+            ✕ NO VISUAL
+          </div>
+          <div>
+            <div class="text-[10px] font-mono font-bold text-[#1A1815] leading-tight">None (Text / Math Only)</div>
+            <div class="text-[9px] font-mono text-[#5A5852]">Hide visual box</div>
+          </div>
+        </button>
+      `;
+
+      grid.innerHTML = noneCard + VECTOR_MOTIFS.map(m => {
+        const isSelected = hasVisual && slide.visualType === 'vector' && slide.motifId === m.id;
+        return `
+          <button onclick="selectVectorMotif('${m.id}')" class="p-2 rounded-lg border text-left transition flex flex-col gap-1.5 ${
+            isSelected
+              ? 'bg-[#1A1815] border-[#D4AF37] shadow-sm'
+              : 'bg-[#F5F0E6] border-[#C8BEAA] hover:border-[#1A1815]'
+          }">
+            <div class="w-full h-16 bg-[#12100D] rounded-md overflow-hidden p-1 border border-[#B58E43] flex items-center justify-center">
+              ${m.render(false)}
+            </div>
+            <div>
+              <div class="text-[10px] font-mono font-bold ${isSelected ? 'text-[#F5F0E6]' : 'text-[#1A1815]'} leading-tight">${m.name}</div>
+              <div class="text-[9px] font-mono ${isSelected ? 'text-[#D4AF37]' : 'text-[#5A5852]'}">${m.category}</div>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderSheetSelectorGrid() {
+      const slide = state.slides[state.activeIndex];
+      const hasVisual = isVisualEnabled(slide);
+      const grid = document.getElementById('sheet-selector-grid');
+      grid.innerHTML = KLIMT_SHEETS.map(sh => {
+        const isSelected = hasVisual && slide.visualType === 'sheet' && slide.sheetId === sh.id;
+        return `
+          <button onclick="selectKlimtSheet('${sh.id}')" class="p-2 rounded-lg border text-left transition flex flex-col gap-1.5 ${
+            isSelected
+              ? 'bg-[#1A1815] border-[#D4AF37] shadow-sm'
+              : 'bg-[#F5F0E6] border-[#C8BEAA] hover:border-[#1A1815]'
+          }">
+            <div class="w-full h-20 bg-[#12100D] rounded-md overflow-hidden border border-[#B58E43]">
+              <img src="${sh.url}" onerror="this.onerror=null;this.src='${sh.fallbackUrl}';" class="w-full h-full object-cover" alt="${sh.name}"/>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono font-bold ${isSelected ? 'text-[#F5F0E6]' : 'text-[#1A1815]'} leading-tight">${sh.name}</div>
+              <div class="text-[9px] font-mono ${isSelected ? 'text-[#D4AF37]' : 'text-[#5A5852]'}">${sh.subtitle}</div>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderDeckPresetsGrid() {
+      const grid = document.getElementById('deck-presets-grid');
+      grid.innerHTML = PRESET_DECKS.map(d => `
+        <button onclick="loadPresetDeck('${d.id}')" class="p-3 rounded-lg bg-[#F5F0E6] border border-[#C8BEAA] hover:border-[#1A1815] hover:bg-[#EAE2D3] text-left transition group">
+          <div class="text-sm font-serif font-bold text-[#1A1815] group-hover:text-[#7A5B14] transition">${d.name}</div>
+          <div class="text-[10px] font-mono font-semibold text-[#5A5852] mt-0.5">${d.topic}</div>
+        </button>
+      `).join('');
+    }
+
+    // ------------------------------------------------------------------------
+    // 10. HIGH-DPI 1080×1350 PNG & ZIP EXPORT ENGINE
+    // ------------------------------------------------------------------------
+    async function renderSlideToBlob(slideIndex) {
+      const host = document.getElementById('offscreen-export-host');
+      const slide = state.slides[slideIndex];
+      const is1x1 = state.aspectRatio === '1:1';
+      const height = is1x1 ? 1080 : 1350;
+
+      host.innerHTML = `
+        <div id="export-target-node" class="ig-slide-canvas ${slide.theme === 'light' ? 'theme-light' : 'theme-dark'} ${is1x1 ? 'aspect-1x1' : ''}" style="width:1080px;height:${height}px;transform:none;">
+          ${buildSlideInnerHTML(slide, slideIndex, state.slides.length)}
+        </div>
+      `;
+
+      const targetNode = document.getElementById('export-target-node');
+      const canvas = await html2canvas(targetNode, {
+        width: 1080,
+        height: height,
+        scale: 2, // 2160x2700 Ultra-HD Retina output
+        useCORS: true,
+        backgroundColor: slide.theme === 'light' ? '#F5F0E6' : '#1A1815'
+      });
+
+      return new Promise(resolve => canvas.toBlob(resolve, 'image/png', 1.0));
+    }
+
+    async function exportCurrentSlidePNG() {
+      const btn = document.getElementById('btn-export-single');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span>Rendering PNG...</span>';
+      btn.disabled = true;
+      try {
+        const blob = await renderSlideToBlob(state.activeIndex);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `elvira-klimt-carousel-slide-${String(state.activeIndex + 1).padStart(2, '0')}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+      } catch (e) {
+        console.error(e);
+        alert('Export error: ' + e.message);
+      } finally {
+        btn.innerHTML = orig;
+        btn.disabled = false;
+      }
+    }
+
+    async function exportAllSlidesZIP() {
+      const btn = document.getElementById('btn-export-zip');
+      const label = document.getElementById('export-zip-label');
+      const orig = label.textContent;
+      btn.disabled = true;
+
+      try {
+        const zip = new JSZip();
+        for (let i = 0; i < state.slides.length; i++) {
+          label.textContent = `Rendering Slide ${i + 1}/${state.slides.length}...`;
+          const blob = await renderSlideToBlob(i);
+          zip.file(`elvira-klimt-carousel-slide-${String(i + 1).padStart(2, '0')}.png`, blob);
+        }
+        label.textContent = 'Packaging .ZIP...';
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        const url = URL.createObjectURL(zipBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `elvira-astashkina-instagram-carousel-${state.aspectRatio.replace(':', 'x')}.zip`;
+        a.click();
+        URL.revokeObjectURL(url);
+      } catch (e) {
+        console.error(e);
+        alert('ZIP Export failed: ' + e.message);
+      } finally {
+        label.textContent = orig;
+        btn.disabled = false;
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // 11. AI MODEL & AGENT BRIDGE (BYOK + EXTERNAL AGENT + LOCAL CLI SYNC)
+    // ------------------------------------------------------------------------
+    const AI_DEFAULT_MODELS = {
+      gemini: 'gemini-2.5-flash',
+      anthropic: 'claude-sonnet-4-20250514',
+      openai: 'gpt-4.1',
+      openrouter: 'anthropic/claude-3.7-sonnet',
+      ollama: 'qwen2.5-coder:14b'
+    };
+
+    function showAiStatus(msg, isError = false) {
+      const box = document.getElementById('ai-status-msg');
+      if (!box) return;
+      box.classList.remove('hidden');
+      box.className = `text-[11px] font-mono font-bold px-3 py-2 rounded-lg border ${
+        isError
+          ? 'bg-[#FDF2F3] border-[#C02B37] text-[#9E1F29]'
+          : 'bg-[#F5F0E6] border-[#B58E43] text-[#1A1815]'
+      }`;
+      box.textContent = msg;
+    }
+
+    function toggleAiAgentDrawer() {
+      const sec = document.getElementById('ai-agent-bridge-section');
+      const body = document.getElementById('ai-agent-body');
+      if (body.classList.contains('hidden')) {
+        body.classList.remove('hidden');
+      }
+      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function toggleAiAgentBody() {
+      const body = document.getElementById('ai-agent-body');
+      body.classList.toggle('hidden');
+    }
+
+    function switchAiBridgeTab(tab) {
+      const isModel = tab === 'model';
+      document.getElementById('aipanel-model').classList.toggle('hidden', !isModel);
+      document.getElementById('aipanel-agent').classList.toggle('hidden', isModel);
+      document.getElementById('aitab-model').className = isModel
+        ? 'w-full py-2 px-2 rounded-md text-[11px] font-mono font-bold bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37] transition text-center'
+        : 'w-full py-2 px-2 rounded-md text-[11px] font-mono font-bold text-[#1A1815] hover:bg-white/70 transition text-center';
+      document.getElementById('aitab-agent').className = !isModel
+        ? 'w-full py-2 px-2 rounded-md text-[11px] font-mono font-bold bg-[#1A1815] text-[#F5F0E6] border border-[#D4AF37] transition text-center'
+        : 'w-full py-2 px-2 rounded-md text-[11px] font-mono font-bold text-[#1A1815] hover:bg-white/70 transition text-center';
+    }
+
+    function onAiProviderChange() {
+      const provider = document.getElementById('ai-provider').value;
+      const modelInput = document.getElementById('ai-model-name');
+      const keyRow = document.getElementById('ai-key-row');
+      const endpointRow = document.getElementById('ai-endpoint-row');
+
+      modelInput.value = localStorage.getItem(`elvira_ai_model_${provider}`) || AI_DEFAULT_MODELS[provider] || '';
+      keyRow.classList.toggle('hidden', provider === 'ollama');
+      endpointRow.classList.toggle('hidden', provider !== 'ollama');
+
+      const savedKey = localStorage.getItem(`elvira_ai_key_${provider}`) || '';
+      document.getElementById('ai-api-key').value = savedKey;
+      saveAiPreferences();
+    }
+
+    function saveAiPreferences() {
+      const provider = document.getElementById('ai-provider').value;
+      const model = document.getElementById('ai-model-name').value.trim();
+      const remember = document.getElementById('ai-remember-key').checked;
+      const key = document.getElementById('ai-api-key').value.trim();
+
+      localStorage.setItem('elvira_ai_provider', provider);
+      if (model) localStorage.setItem(`elvira_ai_model_${provider}`, model);
+
+      if (remember && key) {
+        localStorage.setItem(`elvira_ai_key_${provider}`, key);
+      } else if (!remember) {
+        localStorage.removeItem(`elvira_ai_key_${provider}`);
+      }
+    }
+
+    function loadAiPreferences() {
+      const savedProvider = localStorage.getItem('elvira_ai_provider') || 'gemini';
+      const provSelect = document.getElementById('ai-provider');
+      if (provSelect) {
+        provSelect.value = savedProvider;
+        onAiProviderChange();
+      }
+    }
+
+    function buildAgentMasterPrompt() {
+      const topic = document.getElementById('ai-topic-input').value.trim() || 'Measure Theory and Continuous Probability in Machine Learning';
+      const slideCount = parseInt(document.getElementById('ai-slide-count').value || '5', 10);
+
+      return `You are generating an Instagram Carousel JSON deck for Elvira Astashkina (@elvrast), whose brand system fuses Applied Mathematics / Machine Learning with Gustav Klimt's "The Kiss" (Discrete Matrix Grids × Continuous Probability Contours).
+
+TOPIC / BRIEF:
+"${topic}"
+
+NUMBER OF SLIDES: ${slideCount}
+
+BRAND & VISUAL RULES:
+- Slide 1 should use layout "cover" (theme: "dark").
+- Middle slides should alternate themes ("light" / "dark") and use layouts from: "visual_card", "theorem", "comparison", or "statement".
+- Final slide should use layout "outro" (theme: "dark").
+- Wrap 1-2 key words in each slide title with: <span class="italic text-[#D4AF37]">...</span> (or <span class="italic text-[#C02B37]">...</span>).
+- Valid motifId values (choose the best match per slide):
+  "kiss_duality", "matrix_mosaic", "probability_contours", "lebesgue_partition", "gradient_stream", "attention_web", "gaussian_bell", "hilbert_spiral", "bayes_duality", "diffusion_trajectory", "eigen_basis", "manifold_projection"
+- Valid accent values: "gold", "lapis", "crimson", "emerald"
+- Set "showVisual": true (or false for pure text/math slides) and "showFormula": true (or false if no formula is needed on that slide).
+- Ensure all "latex" strings are valid KaTeX expressions.
+
+RETURN ONLY VALID JSON matching this exact structure (no markdown commentary outside the JSON):
+{
+  "slides": [
+    {
+      "layout": "cover",
+      "theme": "dark",
+      "accent": "gold",
+      "kicker": "REAL AI // CONCEPT SERIES",
+      "title": "Main Editorial <span class=\\"italic text-[#D4AF37]\\">Headline</span>",
+      "body": "Concise, rigorous explanation connecting mathematics to machine learning intuition.",
+      "latex": "\\\\mathcal{L}(\\\\theta) = \\\\mathbb{E}_{x \\\\sim p(x)}[-\\\\log q_\\\\theta(x)]",
+      "latexCaption": "Formal Mathematical Definition",
+      "showVisual": true,
+      "showFormula": true,
+      "visualType": "vector",
+      "motifId": "kiss_duality",
+      "sheetId": "sheet_dark_framed",
+      "sheetCrop": "full",
+      "footerNote": "SWIPE FOR THE MATHEMATICS →"
+    }
+  ]
+}`;
+    }
+
+    async function copyAgentMasterPrompt() {
+      const prompt = buildAgentMasterPrompt();
+      try {
+        await navigator.clipboard.writeText(prompt);
+        showAiStatus('✓ Master Prompt copied! Paste it into Claude, ChatGPT, Cursor, or Codex, then paste the JSON reply below.');
+      } catch (e) {
+        document.getElementById('agent-json-input').value = prompt;
+        showAiStatus('Prompt placed in the text box below — copy it to your AI agent.');
+      }
+    }
+
+    function normalizeAndLoadDeckObject(parsed) {
+      const slidesArr = Array.isArray(parsed) ? parsed : (parsed && Array.isArray(parsed.slides) ? parsed.slides : null);
+      if (!slidesArr || slidesArr.length === 0) {
+        throw new Error('JSON must contain a non-empty "slides" array.');
+      }
+
+      const validMotifs = new Set(VECTOR_MOTIFS.map(m => m.id));
+      const validLayouts = new Set(['cover', 'visual_card', 'theorem', 'comparison', 'outro', 'statement']);
+
+      state.slides = slidesArr.map((s, idx) => ({
+        layout: validLayouts.has(s.layout) ? s.layout : (idx === 0 ? 'cover' : (idx === slidesArr.length - 1 ? 'outro' : 'visual_card')),
+        theme: s.theme === 'light' ? 'light' : 'dark',
+        accent: ['gold', 'lapis', 'crimson', 'emerald'].includes(s.accent) ? s.accent : 'gold',
+        kicker: s.kicker || `SLIDE // 0${idx + 1}`,
+        title: s.title || 'Mathematical <span class="italic text-[#D4AF37]">Insight</span>',
+        body: s.body || '',
+        latex: s.latex || '',
+        latexCaption: s.latexCaption || '',
+        showVisual: typeof s.showVisual === 'boolean' ? s.showVisual : (s.layout !== 'statement'),
+        showFormula: typeof s.showFormula === 'boolean' ? s.showFormula : Boolean(s.latex && s.latex.trim()),
+        visualType: s.visualType || 'vector',
+        motifId: validMotifs.has(s.motifId) ? s.motifId : VECTOR_MOTIFS[idx % VECTOR_MOTIFS.length].id,
+        sheetId: s.sheetId || 'sheet_dark_framed',
+        sheetCrop: s.sheetCrop || 'full',
+        leftTag: s.leftTag || 'DISCRETE // ALGEBRAIC',
+        leftTitle: s.leftTitle || 'Discrete Structure',
+        leftBody: s.leftBody || s.body || '',
+        rightTag: s.rightTag || 'CONTINUOUS // MEASURE',
+        rightTitle: s.rightTitle || 'Continuous Manifold',
+        rightBody: s.rightBody || '',
+        footerNote: s.footerNote || (idx === slidesArr.length - 1 ? 'SAVE & SHARE · @ELVRAST' : 'SWIPE FOR NEXT INSIGHT →')
+      }));
+
+      state.activeIndex = 0;
+      syncEditorInputs();
+      renderAll();
+    }
+
+    function extractJsonFromText(rawText) {
+      let cleaned = rawText.trim();
+      const fenceMatch = cleaned.match(/```(?:json)?\s*([\s\S]*?)```/i);
+      if (fenceMatch) cleaned = fenceMatch[1].trim();
+      const firstBrace = cleaned.indexOf('{');
+      const firstBracket = cleaned.indexOf('[');
+      if (firstBrace !== -1 && (firstBracket === -1 || firstBrace < firstBracket)) {
+        const lastBrace = cleaned.lastIndexOf('}');
+        if (lastBrace !== -1) cleaned = cleaned.slice(firstBrace, lastBrace + 1);
+      } else if (firstBracket !== -1) {
+        const lastBracket = cleaned.lastIndexOf(']');
+        if (lastBracket !== -1) cleaned = cleaned.slice(firstBracket, lastBracket + 1);
+      }
+      return JSON.parse(cleaned);
+    }
+
+    function importAgentJSON() {
+      const raw = document.getElementById('agent-json-input').value.trim();
+      if (!raw) {
+        showAiStatus('Please paste the JSON returned by your AI agent first.', true);
+        return;
+      }
+      try {
+        const parsed = extractJsonFromText(raw);
+        normalizeAndLoadDeckObject(parsed);
+        showAiStatus(`✓ Loaded ${state.slides.length} slides from your AI Agent into the studio!`);
+      } catch (e) {
+        showAiStatus('JSON Parse Error: ' + e.message, true);
+      }
+    }
+
+    function exportCurrentDeckJSON() {
+      const jsonStr = JSON.stringify({ slides: state.slides }, null, 2);
+      document.getElementById('agent-json-input').value = jsonStr;
+      navigator.clipboard.writeText(jsonStr).catch(() => {});
+      showAiStatus('✓ Current deck JSON exported to text box & clipboard.');
+    }
+
+    async function pullDeckFromServer() {
+      try {
+        showAiStatus('Checking local studio server for agent-pushed carousel deck...');
+        const res = await fetch('/api/carousel-deck');
+        if (!res.ok) throw new Error('No custom agent deck found on server yet.');
+        const data = await res.json();
+        normalizeAndLoadDeckObject(data);
+        showAiStatus(`✓ Pulled ${state.slides.length} slides from local AI agent endpoint!`);
+      } catch (e) {
+        showAiStatus('Local agent pull note: ' + e.message, true);
+      }
+    }
+
+    async function generateCarouselWithAI() {
+      const provider = document.getElementById('ai-provider').value;
+      const model = document.getElementById('ai-model-name').value.trim() || AI_DEFAULT_MODELS[provider];
+      const apiKey = document.getElementById('ai-api-key').value.trim();
+      const customEndpoint = document.getElementById('ai-custom-endpoint').value.trim();
+      const prompt = buildAgentMasterPrompt();
+
+      const btn = document.getElementById('btn-ai-generate');
+      const label = document.getElementById('ai-generate-label');
+      const origText = label.textContent;
+
+      saveAiPreferences();
+      btn.disabled = true;
+      label.textContent = `Generating with ${model}...`;
+      showAiStatus(`Contacting ${provider.toUpperCase()} (${model})...`);
+
+      try {
+        let responseText = '';
+
+        // If no key entered in browser and not Ollama, try local backend proxy (/api/ai-generate) which can read local env vars
+        if (!apiKey && provider !== 'ollama') {
+          const proxyRes = await fetch('/api/ai-generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ provider, model, prompt })
+          });
+          if (!proxyRes.ok) {
+            const errData = await proxyRes.json().catch(() => ({}));
+            throw new Error(errData.detail || `Please enter your ${provider.toUpperCase()} API key above, or switch to the "External AI Agent" tab to use Claude/ChatGPT without an API key.`);
+          }
+          const proxyData = await proxyRes.json();
+          responseText = proxyData.text;
+        } else if (provider === 'gemini') {
+          const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }],
+              generationConfig: { temperature: 0.4, responseMimeType: 'application/json' }
+            })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error?.message || 'Gemini API request failed');
+          responseText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        } else if (provider === 'anthropic') {
+          const res = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-key': apiKey,
+              'anthropic-version': '2023-06-01',
+              'anthropic-dangerous-direct-browser-access': 'true'
+            },
+            body: JSON.stringify({
+              model: model,
+              max_tokens: 4096,
+              temperature: 0.4,
+              messages: [{ role: 'user', content: prompt }]
+            })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error?.message || 'Anthropic Claude API request failed');
+          responseText = data.content?.[0]?.text || '';
+        } else if (provider === 'openai' || provider === 'openrouter' || provider === 'ollama') {
+          const endpoint = provider === 'openai'
+            ? 'https://api.openai.com/v1/chat/completions'
+            : (provider === 'openrouter'
+                ? 'https://openrouter.ai/api/v1/chat/completions'
+                : (customEndpoint || 'http://localhost:11434/v1/chat/completions'));
+          const headers = { 'Content-Type': 'application/json' };
+          if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`;
+
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({
+              model: model,
+              temperature: 0.4,
+              messages: [
+                { role: 'system', content: 'You output only valid JSON for the Elvira Astashkina Klimt × ML Instagram Carousel Studio.' },
+                { role: 'user', content: prompt }
+              ]
+            })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error?.message || `${provider} request failed`);
+          responseText = data.choices?.[0]?.message?.content || '';
+        }
+
+        const parsed = extractJsonFromText(responseText);
+        normalizeAndLoadDeckObject(parsed);
+        showAiStatus(`✓ Generated ${state.slides.length} Klimt × ML slides using ${model}!`);
+      } catch (err) {
+        console.error(err);
+        showAiStatus(err.message, true);
+      } finally {
+        btn.disabled = false;
+        label.textContent = origText;
+      }
+    }
+
+    // Initialize Studio on DOM Ready & Handle Mobile/Responsive Resize
+    window.addEventListener('DOMContentLoaded', () => {
+      loadAiPreferences();
+      renderDeckPresetsGrid();
+      syncEditorInputs();
+      renderAll();
+    });
+    window.addEventListener('resize', () => {
+      renderAll();
+    });
+  </script>
+</body>
+</html>

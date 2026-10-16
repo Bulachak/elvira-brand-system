@@ -1,0 +1,59 @@
+/* Unified Gustav Klimt "The Kiss" × Applied ML Brand Canvas Core Styles */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --klimt-gold: #D4AF37;
+  --klimt-ochre: #9A7422;
+  --klimt-lapis: #2B5A75;
+  --klimt-crimson: #C02B37;
+  --klimt-emerald: #2E6B56;
+  --klimt-obsidian: #1A1815;
+  --klimt-alabaster: #F5F0E6;
+  --klimt-clay: #DED6C5;
+  --klimt-charcoal: #22201D;
+  --klimt-slate: #4A4842;
+
+  /* Universal Component & Brief Tokens (100% WCAG Accessible) */
+  --color-bg: #F5F0E6;
+  --color-surface: #FFFFFF;
+  --color-text: #1A1815;
+  --color-muted: #4A4842;
+  --color-border: #DED6C5;
+  --color-primary: #1A1815;
+  --color-secondary: #2B5A75;
+  --color-accent: #9A7422;
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  background-color: #F5F0E6 !important;
+  color: #1A1815;
+  background-image:
+    radial-gradient(rgba(212, 175, 55, 0.14) 1px, transparent 0),
+    radial-gradient(rgba(43, 90, 117, 0.07) 1px, transparent 0) !important;
+  background-size: 28px 28px !important;
+  background-position: 0 0, 14px 14px !important;
+}
+
+#factory-bar {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid #DED6C5 !important;
+  min-height: 54px !important;
+  height: auto !important;
+  padding: 8px 24px !important;
+}
+
+/* Guarantee high-contrast buttons and controls across all templates */
+button.primary, .btn-primary {
+  background-color: #1A1815 !important;
+  color: #F5F0E6 !important;
+  border: 1px solid #D4AF37 !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+button.primary:hover, .btn-primary:hover {
+  background-color: #2B5A75 !important;
+  color: #FFFFFF !important;
+}

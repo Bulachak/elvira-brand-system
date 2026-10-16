@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Archetype Playbook</title>
+    
+    <!-- Master Google Fonts for Elvira Astashkina Brand System -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link id="brand-fonts-link" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300..700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Custom Properties for Elvira Astashkina Branding (100% WCAG Accessible) */
+        :root {
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --color-primary: #1A1815;
+            --color-secondary: #2B5A75;
+            --color-accent: #7A5B14;
+            --color-bg: #F5F0E6;
+            --color-paper: #FFFFFF;
+            --color-dark: #1A1815;
+            --color-text-muted: #3D3A35;
+            --color-text-soft: #4A4842;
+            --color-border: #DED6C5;
+            --color-panel: #F5F0E6;
+            --color-cta-bg: #1A1815;
+            --color-cta-text: #F5F0E6;
+            --spacing-unit: 16px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Responsive Presentation Container — No 1920px Fixed Overflow */
+        .playbook-container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 24px 20px 80px;
+        }
+
+        .slides-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 780px;
+            padding: 48px 56px 64px;
+            display: flex;
+            flex-direction: column;
+            background: var(--color-paper);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Top Accent Rule */
+        .slide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-secondary));
+            z-index: 10;
+        }
+
+        /* Cover Slide */
+        .slide.cover {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 820px;
+            background: linear-gradient(180deg, var(--color-paper) 0%, var(--color-bg) 100%);
+        }
+
+        .cover-content {
+            max-width: 900px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        .cover-title {
+            font-family: var(--font-display);
+            font-size: clamp(38px, 4.5vw, 68px);
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1.15;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            text-wrap: balance;
+        }
+
+        .cover-subtitle {
+            font-family: var(--font-display);
+            font-size: clamp(20px, 2.2vw, 30px);
+            font-weight: 400;
+            color: var(--color-accent);
+            margin-bottom: 40px;
+            text-wrap: balance;
+        }
+
+        .cover-meta {
+            margin-top: 40px;
+            font-size: 14px;
+            color: var(--color-text-muted);
+            font-family: var(--font-mono);
+            letter-spacing: 0.04em;
+        }
+
+        .cover-meta p {
+            margin: 6px 0;
+        }
+
+        .cover-date {
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+        }
+
+        /* Consultant Footer */
+        .consultant-footer {
+            margin-top: auto;
+            padding-top: 18px;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--color-text-soft);
+            z-index: 5;
+            width: 100%;
+        }
+
+        .consultant-info {
+            flex: 1;
+        }
+
+        .consultant-info a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .consultant-info a:hover {
+            text-decoration: underline;
+        }
+
+        .slide-counter {
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        /* Content Layout */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 2;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 3vw, 42px);
+            font-weight: 700;
+            color: var(--color-primary);
+            flex: 1;
+            min-width: 280px;
+            text-wrap: balance;
+        }
+
+        /* Strictly Architectural Non-Pill Badges (6px or 8px) */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .badge.platform {
+            background: rgba(26, 26, 26, 0.08);
+            color: var(--color-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .badge.language {
+            background: var(--color-primary);
+            color: var(--color-paper);
+        }
+
+        /* Three-Column Content Layout */
+        .slide-content {
+            display: grid;
+            grid-template-columns: 280px 1fr 380px;
+            gap: 32px;
+            flex: 1;
+            align-content: start;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 1200px) {
+            .slide-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .content-section {
+            margin-bottom: 24px;
+        }
+
+        .content-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-accent);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .content-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            text-wrap: pretty;
+        }
+
+        /* AI Prompt Card */
+        .ai-prompt-card {
+            background: var(--color-panel);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 12px;
+            font-size: 13px;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .ai-prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .ai-prompt-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        .copy-button {
+            background: var(--color-primary);
+            color: var(--color-paper);
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .copy-button:hover {
+            opacity: 0.85;
+        }
+
+        .ai-prompt-disclaimer {
+            font-size: 11px;
+            color: var(--color-text-soft);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Platform Mockup Styling */
+        .mockup-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mockup-frame {
+            width: 100%;
+            max-width: 360px;
+            background: var(--color-paper);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mockup-header {
+            padding: 12px 16px;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .mockup-body {
+            padding: 16px;
+            font-size: 13px;
+            line-height: 1.55;
+            color: var(--color-dark);
+            white-space: pre-line;
+            text-wrap: pretty;
+        }
+
+        /* Archetype Footer */
+        .archetype-footer {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 900px) {
+            .archetype-footer {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-soft);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .badges-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        /* Non-Pill Architectural Badges */
+        .kpi-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: rgba(26, 26, 26, 0.05);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--color-dark);
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: var(--color-panel);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* TOC Table */
+        .toc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .toc-table th {
+            text-align: left;
+            padding: 12px 14px;
+            background: var(--color-bg);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .toc-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: top;
+        }
+
+        .toc-number {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .toc-archetype {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        /* Voice Metrics Grid — Zero Sliders / Full Printability */
+        .voice-badge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .voice-badge-card {
+            background: var(--color-paper);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .voice-badge-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--color-primary);
+        }
+
+        .voice-badge-score {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        /* Guide / Usage Columns */
+        .how-to-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .how-to-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .how-to-card {
+            background: var(--color-panel);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .how-to-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+
+        @media print {
+            body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .playbook-container { width: 100%; max-width: none; padding: 0; }
+            .slide { break-after: page; page-break-after: always; box-shadow: none; border: none; margin: 0; min-height: 100vh; }
+            .copy-btn { display: none !important; }
+        }
+    </style>
+<script>
+window.playbookConfig = {
+  "clientName": "Elvira Astashkina",
+  "clientSlug": "elvira-astashkina-2026-10",
+  "generatedDate": "2026-10-15",
+  "consultant": {
+    "name": "Kamilla Gafurzianova, OLY",
+    "title": "Olympian & Principal Brand Strategist",
+    "firm": "",
+    "email": "kgafurzianova@gmail.com",
+    "website": "https://bulachak.com",
+    "linkedin": "https://linkedin.com/in/kamillagafurzianova"
+  },
+  "fonts": {
+    "display": "Cormorant Garamond",
+    "headline": "Cormorant Garamond",
+    "body": "Plus Jakarta Sans",
+    "displayStack": "'Cormorant Garamond', Georgia, \"Times New Roman\", serif",
+    "bodyStack": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif"
+  },
+  "colors": {
+    "primary": [
+      {
+        "name": "Klimt Gold (Core Leaf)",
+        "hex": "#D4AF37",
+        "role": "Primary Brand Accent & Latent Space Shimmer",
+        "rationale": "Extracted from the gold leaf background of Gustav Klimt's 'The Kiss' (1908); represents optimization trajectories and theorem borders."
+      },
+      {
+        "name": "Obsidian Grid (Male Robe)",
+        "hex": "#1A1815",
+        "role": "Primary Structural Dark & Discrete Tensor Ground",
+        "rationale": "Derived from the rectilinear black blocks on the male figure's robe; represents discrete matrices W·x+b and Vision Transformer patch grids."
+      },
+      {
+        "name": "Lapis Mosaic (Female Contours)",
+        "hex": "#2B5A75",
+        "role": "Secondary Structural Color & Probability Field",
+        "rationale": "Sampled from the concentric blue/teal rings; encodes continuous probability density contours p(x) and Gaussian manifolds."
+      }
+    ],
+    "accent": [
+      {
+        "name": "Crimson Berry (Vibrant Pop)",
+        "hex": "#C02B37",
+        "role": "High-Contrast Focal Pop & Optima Marker",
+        "rationale": "Sampled from the floral clusters in 'The Kiss'; marks global optima, critical attention heads, and high-salience callouts."
+      },
+      {
+        "name": "Emerald Flora (Pointillist Meadow)",
+        "hex": "#2E6B56",
+        "role": "Cluster Embedding & Convergence Accent",
+        "rationale": "Sampled from the flower meadow beneath the figures; represents t-SNE/UMAP latent embeddings and k-NN decision regions."
+      },
+      {
+        "name": "Alabaster Parchment (Luminous Canvas)",
+        "hex": "#F5F0E6",
+        "role": "Daylight Gallery Paper Ground",
+        "rationale": "Warm museum parchment surface eliminating stark white glare while preserving 16.4:1 AAA contrast against Obsidian Grid."
+      }
+    ],
+    "secondary": "#2B5A75",
+    "bg": "#F5F0E6",
+    "surface": "#FFFFFF",
+    "border": "#DED6C5",
+    "rawPrimary": [
+      {
+        "name": "Klimt Gold (Core Leaf)",
+        "hex": "#D4AF37",
+        "role": "Primary Brand Accent & Latent Space Shimmer",
+        "rationale": "Extracted from the gold leaf background of Gustav Klimt's 'The Kiss' (1908); represents optimization trajectories and theorem borders."
+      },
+      {
+        "name": "Obsidian Grid (Male Robe)",
+        "hex": "#1A1815",
+        "role": "Primary Structural Dark & Discrete Tensor Ground",
+        "rationale": "Derived from the rectilinear black blocks on the male figure's robe; represents discrete matrices W·x+b and Vision Transformer patch grids."
+      },
+      {
+        "name": "Lapis Mosaic (Female Contours)",
+        "hex": "#2B5A75",
+        "role": "Secondary Structural Color & Probability Field",
+        "rationale": "Sampled from the concentric blue/teal rings; encodes continuous probability density contours p(x) and Gaussian manifolds."
+      }
+    ],
+    "rawAccent": [
+      {
+        "name": "Crimson Berry (Vibrant Pop)",
+        "hex": "#C02B37",
+        "role": "High-Contrast Focal Pop & Optima Marker",
+        "rationale": "Sampled from the floral clusters in 'The Kiss'; marks global optima, critical attention heads, and high-salience callouts."
+      },
+      {
+        "name": "Emerald Flora (Pointillist Meadow)",
+        "hex": "#2E6B56",
+        "role": "Cluster Embedding & Convergence Accent",
+        "rationale": "Sampled from the flower meadow beneath the figures; represents t-SNE/UMAP latent embeddings and k-NN decision regions."
+      },
+      {
+        "name": "Alabaster Parchment (Luminous Canvas)",
+        "hex": "#F5F0E6",
+        "role": "Daylight Gallery Paper Ground",
+        "rationale": "Warm museum parchment surface eliminating stark white glare while preserving 16.4:1 AAA contrast against Obsidian Grid."
+      }
+    ]
+  },
+  "theme": {
+    "primary": "#1A1815",
+    "secondary": "#2B5A75",
+    "accent": "#D4AF37",
+    "background": "#F5F0E6",
+    "surface": "#FFFFFF",
+    "brandPalette": [],
+    "surfaceMuted": "rgba(26, 26, 26, 0.06)",
+    "surfaceAccent": "rgba(74, 74, 74, 0.08)",
+    "heading": "#1A1815",
+    "text": "#1A1815",
+    "textMuted": "#5A5852",
+    "textSoft": "#5A5852",
+    "border": "#DED6C5",
+    "heroBackground": "#1A1815",
+    "heroText": "#F5F0E6",
+    "ctaBackground": "#1A1815",
+    "ctaText": "#D4AF37",
+    "darkBackground": "#1A1815",
+    "onDark": "#F5F0E6",
+    "shadow": "rgba(74, 74, 74, 0.14)"
+  },
+  "voice": {
+    "casual": {
+      "score": 5,
+      "evidence": ""
+    },
+    "playful": {
+      "score": 5,
+      "evidence": ""
+    },
+    "personal": {
+      "score": 5,
+      "evidence": ""
+    },
+    "spicy": {
+      "score": 5,
+      "evidence": ""
+    },
+    "coreDescription": "60% The Intellectual Maverick (Aliona Doletskaya: razor-sharp, culturally commanding, zero tolerance for mediocrity) × 40% The Silent Architect (Maria Logvinova: calm, restrained, mathematically exact).",
+    "masterAIPrompt": "You are the master brand voice for Elvira Astashkina. Operating Thesis: \"High-standard systems turning values into practice\". Voice Profile: Authoritative, grounded, and executive-ready. Principles: Clarity, operational authority, and structural precision. Speak with rigor, specificity, and zero ungrounded fluff.",
+    "tonePrinciples": [
+      "Lead with a sharp mathematical or cultural hook.",
+      "Pair every conceptual claim with explicit notation (W·x+b, p(x), ∇L(θ)).",
+      "Use Klimt's geometric vocabulary (discrete tiles, concentric contours, golden streamlines)."
+    ],
+    "hardNos": "Never use 'game-changer', 'unlock the power of AI', 'mind-blowing', emojis in theorem blocks, or pill-shaped buttons."
+  },
+  "language": {
+    "isMultilingual": false,
+    "primary": "",
+    "allLanguages": [
+      "English"
+    ],
+    "rows": [],
+    "designerRows": [],
+    "platformLanguageMap": [],
+    "voiceAdaptations": [],
+    "archetypeNotes": [],
+    "hashtagNotes": "",
+    "channelLanguageMap": "",
+    "locales": [
+      {
+        "language": "English",
+        "code": "en",
+        "direction": "ltr"
+      }
+    ],
+    "fontStacks": "",
+    "textDirection": "LTR",
+    "urlStructure": "",
+    "cmsApproach": "",
+    "hierarchyNotes": "",
+    "printSignageNotes": ""
+  },
+  "archetypes": [
+    {
+      "name": "The Mathematical Theorem Breakdown",
+      "platform": "Instagram",
+      "language": "English",
+      "definition": "Rigorous decomposition of modern ML architectures (Diffusion, ViT, MoE) via Measure Theory and Linear Algebra.",
+      "operation": "",
+      "executionDetail": "Feed 1:1 Carousel & 9:16 Video",
+      "considerations": "",
+      "sampleType": "text_copy",
+      "sampleText": "We spent a decade treating AI like magic. Let's treat it like measure theory. Here is how Radon-Nikodym derivatives govern your loss surface.",
+      "sampleVisual": "Klimt discrete black-and-gold rectilinear tile overlay framing LaTeX mathematical derivation card.",
+      "kpis": [
+        "Saves",
+        "Shares",
+        "Reach",
+        "Profile visits",
+        "Link clicks"
+      ],
+      "tools": [
+        "Canva Pro",
+        "Later",
+        "Linktree"
+      ],
+      "aiPrompt": "You are Elvira Astashkina's mathematical copy strategist. Draft a rigorous 7-slide educational carousel explaining Vision Transformer patch embeddings ($x_p \\in \\mathbb{R}^{P^2 \\cdot C}$) using the 'Intellectual Maverick' tone (Aliona Doletskaya style). Ban hype, generic AI buzzwords, and vague metaphors. Anchor every insight in linear algebra and measure spaces.",
+      "affiliateLinks": {}
+    },
+    {
+      "name": "The Silent Architect Technical Dispatch",
+      "platform": "LinkedIn",
+      "language": "English",
+      "definition": "Architectural principles of neural representations, probability density fields, and geometric deep learning.",
+      "operation": "",
+      "executionDetail": "Executive Technical Brief",
+      "considerations": "",
+      "sampleType": "text_copy",
+      "sampleText": "Formulating mathematical frameworks that prioritize absolute clarity in machine learning. Continuous probability densities and Gaussian iso-contours on latent manifolds.",
+      "sampleVisual": "Concentric continuous gold and lapis circles depicting latent sphere probability densities.",
+      "kpis": [
+        "Impressions",
+        "Engagement rate",
+        "Comments",
+        "Profile views"
+      ],
+      "tools": [
+        "Canva Pro",
+        "LinkedIn Analytics"
+      ],
+      "aiPrompt": "Draft an executive technical brief on latent manifold projection in diffusion models for senior research engineers. Write in the 'Silent Architect' persona (Maria Logvinova style): measured, restrained, mathematically exact. Include LaTeX formula representations for $\\mathcal{N}(0, \\mathbf{I})$ and gradient loss landscape vectors.",
+      "affiliateLinks": {}
+    }
+  ],
+  "lightMode": [
+    {
+      "element": "Primary Canvas Background",
+      "hex": "#F5F0E6",
+      "rule": "Alabaster Parchment with subtle radial Klimt Gold & Lapis dot texture."
+    },
+    {
+      "element": "Elevated Card Surface",
+      "hex": "#FFFFFF",
+      "rule": "Crisp gallery card surface framed by 1px Sandstone Clay (#DED6C5) border and 12px radius."
+    },
+    {
+      "element": "Primary Display & Body Ink",
+      "hex": "#1A1815",
+      "rule": "Obsidian Grid for uncompromising 16.4:1 AAA legibility on Alabaster and White."
+    },
+    {
+      "element": "Mathematical Formula Well",
+      "hex": "#F5F0E6",
+      "rule": "Framed by 2px left border in Klimt Gold (#D4AF37) or Lapis Mosaic (#2B5A75)."
+    }
+  ],
+  "darkMode": [
+    {
+      "element": "Primary Dark Canvas",
+      "hex": "#1A1815",
+      "rule": "Obsidian Grid background for high-impact theorem hooks and video overlays."
+    },
+    {
+      "element": "Headline & Primary Copy",
+      "hex": "#F5F0E6",
+      "rule": "Alabaster Parchment ink for warm, glare-free reading in dark mode."
+    },
+    {
+      "element": "Theorem Borders & Equations",
+      "hex": "#D4AF37",
+      "rule": "Klimt Gold leaf highlights for LaTeX derivations and geometric piece frames."
+    },
+    {
+      "element": "Focal Callout Badges",
+      "hex": "#C02B37",
+      "rule": "Crimson Berry accents with Alabaster text (6px architectural radius)."
+    }
+  ],
+  "visualSystem": [
+    {
+      "section": "Motif 01: Discrete Rectangles",
+      "element": "Klimt Male Robe Blocks",
+      "lightMode": "Obsidian & Gold tiles on Alabaster",
+      "darkMode": "Alabaster & Gold tiles on Obsidian",
+      "rules": "Maps directly to Matrix Multiplication W·x+b and ViT Patch Grids."
+    },
+    {
+      "section": "Motif 02: Concentric Rings",
+      "element": "Klimt Female Robe Ovals",
+      "lightMode": "Lapis & Crimson rings on Alabaster",
+      "darkMode": "Gold, Crimson & Lapis iso-contours",
+      "rules": "Maps directly to Continuous Probability Density p(x) and RBF Kernels."
+    },
+    {
+      "section": "Motif 03: Pointillist Meadow",
+      "element": "Emerald, Lapis & Gold Specks",
+      "lightMode": "Cluster scatter with dashed boundary",
+      "darkMode": "Luminous cluster cloud on Obsidian",
+      "rules": "Maps directly to High-Dimensional Latent Embeddings (t-SNE / UMAP)."
+    },
+    {
+      "section": "Motif 04: Golden Streamlines",
+      "element": "Flowing Gold Leaf Curves",
+      "lightMode": "Gold & Lapis bezier trajectories",
+      "darkMode": "Gold & Crimson gradient vectors",
+      "rules": "Maps directly to Optimization Loss Landscapes L(θ) and Gradient Flow ∇f(x)."
+    }
+  ],
+  "mediumRules": [
+    {
+      "medium": "Instagram Carousels (/carousel)",
+      "defaultMode": "Alternating Obsidian & Alabaster",
+      "primaryPurpose": "5–7 Slide Mathematical Theorem Breakdowns (4:5 Portrait)",
+      "allowedEmphasis": "Klimt Geometric Pieces + Optional KaTeX Formula Card",
+      "constraints": "Strict 8px/12px radii; zero pill buttons; top-left Klimt SVG emblem."
+    },
+    {
+      "medium": "Reels & TikTok Video Studio (/)",
+      "defaultMode": "Obsidian & Transparent Alpha (.webm)",
+      "primaryPurpose": "9:16 Vertical Manim Derivations & Discrete Matrix Sidebars",
+      "allowedEmphasis": "Animated LaTeX equations + Klimt geometric side rail",
+      "constraints": "Keep right 80% clear for speaker framing and subtitle cards."
+    },
+    {
+      "medium": "LinkedIn & Substack Essays",
+      "defaultMode": "Alabaster Daylight",
+      "primaryPurpose": "Silent Architect Executive Dispatches",
+      "allowedEmphasis": "Concentric probability diagrams & spectral geometry charts",
+      "constraints": "Restrained Maria Logvinova tone; rigorous notation."
+    }
+  ],
+  "svgs": {
+    "horizontal_light": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 280 64\" width=\"280\" height=\"64\" role=\"img\" aria-label=\"Elvira Astashkina — Horizontal Lockup (Light)\">\n  <!-- Warm Alabaster Surface -->\n  <rect x=\"1\" y=\"1\" width=\"278\" height=\"62\" rx=\"10\" fill=\"#F5F0E6\" stroke=\"#DED6C5\" stroke-width=\"1.5\"/>\n  <!-- Logo (Light Variant) -->\n  <rect x=\"8\" y=\"8\" width=\"48\" height=\"48\" rx=\"8\" fill=\"#F5F0E6\" stroke=\"#1A1815\" stroke-width=\"2.8\"/>\n  <rect x=\"13\" y=\"13\" width=\"15\" height=\"20\" rx=\"1.5\" fill=\"#1A1815\"/>\n  <rect x=\"19\" y=\"16\" width=\"3.5\" height=\"14\" fill=\"#D4AF37\"/>\n  <rect x=\"13\" y=\"36\" width=\"15\" height=\"8\" rx=\"1.2\" fill=\"#D4AF37\" stroke=\"#1A1815\" stroke-width=\"0.8\"/>\n  <rect x=\"13\" y=\"46\" width=\"15\" height=\"5\" rx=\"1.2\" fill=\"#2B5A75\"/>\n  <line x1=\"32\" y1=\"11\" x2=\"32\" y2=\"53\" stroke=\"#1A1815\" stroke-width=\"1.8\"/>\n  <circle cx=\"44\" cy=\"24\" r=\"8.5\" fill=\"#C02B37\" stroke=\"#1A1815\" stroke-width=\"1.8\"/>\n  <circle cx=\"44\" cy=\"24\" r=\"3.6\" fill=\"#F5F0E6\"/>\n  <circle cx=\"44\" cy=\"43\" r=\"6.5\" fill=\"#2B5A75\" stroke=\"#D4AF37\" stroke-width=\"1.6\"/>\n  <circle cx=\"44\" cy=\"43\" r=\"2.5\" fill=\"#2E6B56\"/>\n  <!-- First and Last Name Only -->\n  <text x=\"72\" y=\"40\" font-family=\"'Cormorant Garamond', Georgia, serif\" font-size=\"27\" font-weight=\"700\" fill=\"#1A1815\">Elvira Astashkina</text>\n</svg>",
+    "horizontal_dark": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 280 64\" width=\"280\" height=\"64\" role=\"img\" aria-label=\"Elvira Astashkina — Horizontal Lockup (Dark)\">\n  <!-- Obsidian Dark Surface -->\n  <rect x=\"1\" y=\"1\" width=\"278\" height=\"62\" rx=\"10\" fill=\"#1A1815\" stroke=\"#D4AF37\" stroke-width=\"1.8\"/>\n  <!-- Logo (Dark Variant) -->\n  <rect x=\"8\" y=\"8\" width=\"48\" height=\"48\" rx=\"8\" fill=\"#1A1815\" stroke=\"#D4AF37\" stroke-width=\"2.8\"/>\n  <rect x=\"13\" y=\"13\" width=\"15\" height=\"20\" rx=\"1.5\" fill=\"#F5F0E6\"/>\n  <rect x=\"19\" y=\"16\" width=\"3.5\" height=\"14\" fill=\"#1A1815\"/>\n  <rect x=\"13\" y=\"36\" width=\"15\" height=\"8\" rx=\"1.2\" fill=\"#D4AF37\"/>\n  <rect x=\"13\" y=\"46\" width=\"15\" height=\"5\" rx=\"1.2\" fill=\"#2B5A75\"/>\n  <line x1=\"32\" y1=\"11\" x2=\"32\" y2=\"53\" stroke=\"#D4AF37\" stroke-width=\"1.8\"/>\n  <circle cx=\"44\" cy=\"24\" r=\"8.5\" fill=\"#C02B37\" stroke=\"#D4AF37\" stroke-width=\"1.8\"/>\n  <circle cx=\"44\" cy=\"24\" r=\"3.6\" fill=\"#F5F0E6\"/>\n  <circle cx=\"44\" cy=\"43\" r=\"6.5\" fill=\"#2B5A75\" stroke=\"#D4AF37\" stroke-width=\"1.6\"/>\n  <circle cx=\"44\" cy=\"43\" r=\"2.5\" fill=\"#D4AF37\"/>\n  <!-- First and Last Name Only -->\n  <text x=\"72\" y=\"40\" font-family=\"'Cormorant Garamond', Georgia, serif\" font-size=\"27\" font-weight=\"700\" fill=\"#F5F0E6\">Elvira Astashkina</text>\n</svg>",
+    "mark_light": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" role=\"img\" aria-label=\"Elvira Astashkina — Logo (Light)\">\n  <!-- Standalone Logo Frame (Light Mode: Alabaster Ground + Obsidian Border) -->\n  <rect x=\"2\" y=\"2\" width=\"60\" height=\"60\" rx=\"10\" fill=\"#F5F0E6\" stroke=\"#1A1815\" stroke-width=\"3.5\"/>\n  <!-- Left: Discrete Male Tensor Blocks -->\n  <rect x=\"8\" y=\"8\" width=\"20\" height=\"26\" rx=\"2\" fill=\"#1A1815\"/>\n  <rect x=\"16\" y=\"12\" width=\"4\" height=\"18\" fill=\"#D4AF37\"/>\n  <rect x=\"8\" y=\"38\" width=\"20\" height=\"10\" rx=\"1.5\" fill=\"#D4AF37\" stroke=\"#1A1815\" stroke-width=\"1\"/>\n  <rect x=\"8\" y=\"50\" width=\"20\" height=\"6\" rx=\"1.5\" fill=\"#2B5A75\"/>\n  <!-- Central Axis Seam -->\n  <line x1=\"32\" y1=\"6\" x2=\"32\" y2=\"58\" stroke=\"#1A1815\" stroke-width=\"2\"/>\n  <!-- Right: Concentric Female Probability Rings -->\n  <circle cx=\"46\" cy=\"24\" r=\"11\" fill=\"#C02B37\" stroke=\"#1A1815\" stroke-width=\"2\"/>\n  <circle cx=\"46\" cy=\"24\" r=\"5\" fill=\"#F5F0E6\"/>\n  <circle cx=\"46\" cy=\"47\" r=\"8\" fill=\"#2B5A75\" stroke=\"#D4AF37\" stroke-width=\"2\"/>\n  <circle cx=\"46\" cy=\"47\" r=\"3.2\" fill=\"#2E6B56\"/>\n</svg>",
+    "mark_dark": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" role=\"img\" aria-label=\"Elvira Astashkina — Logo (Dark)\">\n  <!-- Standalone Logo Frame (Dark Mode: Obsidian Ground + Sovereign Gold Border) -->\n  <rect x=\"2\" y=\"2\" width=\"60\" height=\"60\" rx=\"10\" fill=\"#1A1815\" stroke=\"#D4AF37\" stroke-width=\"3.5\"/>\n  <!-- Left: Discrete Male Tensor Blocks -->\n  <rect x=\"8\" y=\"8\" width=\"20\" height=\"26\" rx=\"2\" fill=\"#F5F0E6\"/>\n  <rect x=\"16\" y=\"12\" width=\"4\" height=\"18\" fill=\"#1A1815\"/>\n  <rect x=\"8\" y=\"38\" width=\"20\" height=\"10\" rx=\"1.5\" fill=\"#D4AF37\"/>\n  <rect x=\"8\" y=\"50\" width=\"20\" height=\"6\" rx=\"1.5\" fill=\"#2B5A75\"/>\n  <!-- Central Axis Seam -->\n  <line x1=\"32\" y1=\"6\" x2=\"32\" y2=\"58\" stroke=\"#D4AF37\" stroke-width=\"2\"/>\n  <!-- Right: Concentric Female Probability Rings -->\n  <circle cx=\"46\" cy=\"24\" r=\"11\" fill=\"#C02B37\" stroke=\"#D4AF37\" stroke-width=\"2.5\"/>\n  <circle cx=\"46\" cy=\"24\" r=\"5\" fill=\"#F5F0E6\"/>\n  <circle cx=\"46\" cy=\"47\" r=\"8\" fill=\"#2B5A75\" stroke=\"#D4AF37\" stroke-width=\"2\"/>\n  <circle cx=\"46\" cy=\"47\" r=\"3.2\" fill=\"#D4AF37\"/>\n</svg>"
+  },
+  "logoRules": {
+    "horizontal": {
+      "when_to_use": "Primary horizontal lockup (Logo + 'Elvira Astashkina' only) for navigation headers, lecture mastheads, business cards, and document covers.",
+      "min_size": "140px × 32px digital / 38mm print",
+      "clear_space": "0.25X (25% of logo mark height) on all four sides"
+    },
+    "mark_only": {
+      "when_to_use": "Standalone square Klimt geometric logo (Light & Dark) for Instagram carousel slide corners (28×28px), favicons, and profile avatars.",
+      "min_size": "28px × 28px digital / 10mm print",
+      "clear_space": "0.25X (25% of logo mark width) on all four sides"
+    }
+  },
+  "prohibited": {
+    "visuals": [
+      "NEVER use pill-shaped buttons, badges, chips, or inputs (rounded-full / 9999px radius).",
+      "NEVER use generic neon-blue cyberpunk AI stock art, glowing brains, or robot hands.",
+      "NEVER use ungrounded '10x AI Prompt Hack' or hype-driven marketing language.",
+      "NEVER truncate diagram labels with ellipses or compress multi-column mathematical formulas."
+    ],
+    "checklistQuestions": [
+      "Does the asset use only the 6-tone Spectrum of 'The Kiss' (#D4AF37, #2B5A75, #C02B37, #2E6B56, #1A1815, #F5F0E6)?",
+      "Are all interactive buttons, tags, and cards using architectural radii (6px, 8px, 12px) with zero pill shapes?",
+      "Does the geometric motif accurately reflect the mathematical concept (Discrete Rectangles = Tensors; Concentric Rings = Probability)?",
+      "Is the copy written in the Intellectual Maverick (Doletskaya) × Silent Architect (Logvinova) voice?"
+    ],
+    "approvalAuthority": "Elvira Astashkina (@elvrast) & Principal Brand Strategist Kamilla Gafurzianova, OLY",
+    "freelancerRules": "All external designers, video editors, and engineers must reference the Approved Brand Canvas (/brand) and use the live Instagram Carousel Studio (/carousel) and Manim Video Studio (/). Never substitute Cormorant Garamond or Plus Jakarta Sans."
+  },
+  "digitalPresence": [
+    {
+      "platform": "Instagram (@elvrast)",
+      "priority": "High",
+      "cadence": "3× Weekly (2× 4:5 Carousels + 1× 9:16 Manim Reel)",
+      "focus": "Visual mathematical breakdowns of Deep Learning, Measure Theory & ViTs using Klimt geometric pieces.",
+      "kpis": "Saves, Shares, Profile Visits"
+    },
+    {
+      "platform": "TikTok (@elvrast)",
+      "priority": "High",
+      "cadence": "2× Weekly (9:16 Vertical Overlay Studio)",
+      "focus": "60-second Discrete Matrix Sidebar & Golden Latent Streamline explainers.",
+      "kpis": "Completion Rate, Shares, Follows"
+    },
+    {
+      "platform": "LinkedIn & Substack",
+      "priority": "Medium",
+      "cadence": "1× Weekly Technical Dispatch",
+      "focus": "Long-form Silent Architect essays on probability manifolds, diffusion SDEs, and research rigor.",
+      "kpis": "Executive Engagement, Citations, Inbound Inquiries"
+    }
+  ],
+  "voiceMatrix": [
+    {
+      "dimension": "Intellectual Maverick (Aliona Doletskaya — 60%)",
+      "score": "9/10 Authority",
+      "do": "Open with razor-sharp cultural & mathematical truths ('We spent a decade treating AI like alchemy. Let's treat it like measure theory.').",
+      "dont": "Never sound academic-dry, timid, or derivative."
+    },
+    {
+      "dimension": "Silent Architect (Maria Logvinova — 40%)",
+      "score": "10/10 Precision",
+      "do": "Anchor every visual claim in exact notation (W ∈ ℝ^{m×n}, p(x), ∇L(θ)) and calm structural restraint.",
+      "dont": "Never use exclamation marks, emojis in theorem cards, or clickbait."
+    }
+  ],
+  "calendar": [
+    {
+      "week": "Week 1 · Foundation",
+      "theme": "Measure Theory & Discrete Tensors",
+      "deliverable": "7-Slide Carousel: Radon-Nikodym Derivatives + 9:16 Reel: Discrete Matrix Sidebar"
+    },
+    {
+      "week": "Week 2 · Vision & Attention",
+      "theme": "ViT Patch Grids x_p ∈ ℝ^{P²·C}",
+      "deliverable": "6-Slide Carousel: Klimt Male Robe Tiles as Patch Embeddings + LinkedIn Technical Note"
+    },
+    {
+      "week": "Week 3 · Continuous Manifolds",
+      "theme": "Gaussian Iso-Contours p(x)",
+      "deliverable": "7-Slide Carousel: Concentric Female Rings & RBF Kernels + Manim Density Animation"
+    },
+    {
+      "week": "Week 4 · Optimization Flow",
+      "theme": "Golden Streamlines ∇L(θ)",
+      "deliverable": "5-Slide Carousel: Loss Landscape Geometry & Diffusion Score Matching"
+    }
+  ],
+  "brand": {
+    "purpose": "To replace superficial AI hype with mathematical beauty, measure-theoretic rigor, and Gustav Klimt's geometric synthesis.",
+    "thesis": "Gustav Klimt's 'The Kiss' (1908) Encoded into Applied Machine Learning: Discrete Male Rectangles (Matrices & Tensors) unioned with Continuous Female Concentric Rings (Probability Manifolds).",
+    "method": "Visual-mathematical decomposition via Manim animations, KaTeX derivations, and Klimt geometric mosaic overlays.",
+    "ethicalStance": "Zero black-box mysticism: every neural architecture is accountable to linear algebra, measure theory, and statistical mechanics.",
+    "values": [
+      "Mathematical Exactness",
+      "Klimt The Kiss Aesthetic",
+      "Intellectual Maverick Candor",
+      "Zero-Fluff Pedagogy"
+    ],
+    "structure": "Dual-persona editorial laboratory (@elvrast): Instagram Carousel Studio + Manim Video Studio + Executive Research Notes.",
+    "verticals": "Applied Mathematics, Measure Theory, Deep Learning Architecture, Computer Vision & Generative Manifolds.",
+    "narrativeTiering": "60% Intellectual Maverick (Aliona Doletskaya) × 40% Silent Architect (Maria Logvinova).",
+    "motivationPolicy": "Precision over virality; depth that rewards saves, citations, and serious technical dialogue."
+  },
+  "problem": {
+    "coreProblem": "Modern AI discourse is polarized between inaccessible LaTeX PDFs and shallow '10x prompt hack' influencer noise.",
+    "context": "Engineers, researchers, and technical leaders crave high-taste, mathematically rigorous visual synthesis.",
+    "symptoms": "Generic neon-blue brain graphics, Cargo-cult engineering, and loss of foundational mathematical intuition.",
+    "costOfInaction": "Brilliant quantitative work goes unseen or gets diluted by generic social templates.",
+    "brandRole": "The definitive gallery-grade mathematical voice translating tensors, manifolds, and theorems into unmistakable visual art."
+  },
+  "lineInSand": {
+    "coreLine": "We never treat Machine Learning as magic; we treat it as Measure Theory and Geometry.",
+    "rejections": "No pill-shaped UI, no neon cyberpunk tropes, no hand-wavy metaphors without equations.",
+    "refusals": "Refuses shallow listicles and unverified AI hype.",
+    "trueCompetition": "Superficial tech commentary and uninspired academic slides.",
+    "willingLosses": "Casual audiences looking for no-code shortcuts."
+  },
+  "tension": {
+    "coreTension": "Rigid Discrete Computation vs. Fluid Continuous Probability.",
+    "evidence": "Resolved visually through Klimt's 'The Kiss': black-and-white discrete male rectangles meeting concentric female probability rings.",
+    "operatingPrinciple": "Discrete Tensors × Continuous Manifolds inside a Golden Latent Space.",
+    "insistences": "Every visual motif maps to a real mathematical operator.",
+    "risks": "Requires uncompromising typographic and mathematical curation."
+  },
+  "audience": {
+    "primary": "ML Engineers, Quantitative Researchers, Applied Mathematicians, and Technical Founders.",
+    "secondary": "Graduate STEM students and AI product architects seeking rigorous intuition.",
+    "observers": "Academic conference chairs, research labs, and high-fashion/art-tech editorial directors.",
+    "nonAudience": "Prompt-hack seekers and hype-chasers."
+  }
+};
+</script>
+  <!-- Open Graph / Telegram / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Elvira Astashkina (@elvrast)">
+  <meta property="og:title" content="Content Archetype Playbook">
+  <meta property="og:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta property="og:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:secure_url" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Elvira Astashkina — Applied Machine Learning Engineer &amp; AI Educator (@elvrast)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Content Archetype Playbook">
+  <meta name="twitter:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta name="twitter:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+</head>
+<body>
+  <div id="factory-bar" style="display:flex;justify-content:space-between;align-items:center;padding:10px 24px;background:rgba(255,255,255,0.96);border-bottom:1px solid #DED6C5;position:sticky;top:0;z-index:100;">
+    <a href="/" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#1A1815;">
+      <img src="../assets/logo-horizontal-light.svg" alt="Elvira Astashkina" style="height:34px;width:auto;display:block;">
+      <span class="bar-title" id="bar-title" style="border-left:1px solid #DED6C5;padding-left:12px;font-weight:700;font-size:13px;">Content Archetype Playbook</span>
+    </a>
+    <div class="bar-actions" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <a href="/" style="padding:6px 12px;border-radius:8px;border:1px solid #DED6C5;background:#F5F0E6;color:#1A1815;text-decoration:none;font-size:12px;font-weight:700;">← Brand Hub</a>
+      <a href="/brand" style="padding:6px 12px;border-radius:8px;border:1px solid #D4AF37;background:rgba(212,175,55,0.18);color:#1A1815;text-decoration:none;font-size:12px;font-weight:700;">Brand System</a>
+      <a href="/carousel" style="padding:6px 12px;border-radius:8px;border:1px solid #DED6C5;background:#FFFFFF;color:#1A1815;text-decoration:none;font-size:12px;font-weight:700;">Carousel Studio</a>
+      <a href="/video" style="padding:6px 12px;border-radius:8px;border:1px solid #D4AF37;background:#1A1815;color:#F5F0E6;text-decoration:none;font-size:12px;font-weight:700;">Video Studio</a>
+      <button class="btn-export" onclick="window.print()" style="padding:6px 14px;border-radius:8px;background:#1A1815;color:#F5F0E6;border:1px solid #D4AF37;font-size:12px;font-weight:700;cursor:pointer;">⬇ Export PDF</button>
+    </div>
+  </div>
+
+    <div class="playbook-container">
+        <div class="slides-wrapper">
+
+            <!-- SLIDE 1: COVER -->
+            <div class="slide cover" data-slide="1">
+                <div class="cover-content">
+                    <h1 class="cover-title" id="coverTitle">Content Archetype Playbook</h1>
+                    <div class="cover-subtitle" id="coverSubtitle">Master Execution Engine & Editorial System</div>
+                    <div class="cover-meta">
+                        <p><strong>CLIENT:</strong> <span id="clientNameCover">Brand</span></p>
+                        <p><strong>FRAMEWORK:</strong> Proprietary Archetype & AI Prompting Architecture</p>
+                        <p class="cover-date" id="generatedDate">OCTOBER 2026</p>
+                    </div>
+                </div>
+                <div class="consultant-footer">
+                    <div class="consultant-info" id="footerCover"></div>
+                    <div class="slide-counter">Slide 1</div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: HOW TO USE & VOICE CALIBRATION -->
+            <div class="slide" data-slide="2">
+                <h2 class="slide-title">How to Use This Playbook</h2>
+                <div class="how-to-grid">
+                    <div class="how-to-card">
+                        <h3 class="how-to-title">Playbook Architecture</h3>
+                        <p class="content-text" style="margin-bottom: 14px;">
+                            Each archetype slide in this playbook represents a distinct, high-impact content engine tailored to your market positioning and audience tiers.
+                        </p>
+                        <p class="content-text">
+                            <strong>Every archetype delivers:</strong><br>
+                            • Strategic definition & execution specification<br>
+                            • Platform-specific mockup & visual hierarchy<br>
+                            • Key performance indicators (KPIs)<br>
+                            • Workflow tool integrations<br>
+                            • Tuned AI prompt ready for copy generation
+                        </p>
+                    </div>
+                    <div class="how-to-card">
+                        <h3 class="how-to-title">Default Voice Calibration</h3>
+                        <p class="content-text" id="voiceDescription" style="margin-bottom: 14px;">
+                            Voice calibrated across core tonal dimensions.
+                        </p>
+                        <div class="voice-badge-grid" id="voiceBadges"></div>
+                    </div>
+                </div>
+                <div class="consultant-footer">
+                    <div class="consultant-info" id="footerSlide2"></div>
+                    <div class="slide-counter">Slide 2</div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: ARCHETYPE INDEX -->
+            <div class="slide" data-slide="3">
+                <h2 class="slide-title">Archetype Index</h2>
+                <div style="margin-top: 16px; flex: 1;">
+                    <table class="toc-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 32%">Archetype Name</th>
+                                <th style="width: 25%">Platform</th>
+                                <th style="width: 15%">Language</th>
+                                <th style="width: 23%">Focus</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tocBody"></tbody>
+                    </table>
+                </div>
+                <div class="consultant-footer">
+                    <div class="consultant-info" id="footerSlide3"></div>
+                    <div class="slide-counter">Slide 3</div>
+                </div>
+            </div>
+
+            <!-- ARCHETYPE SLIDES (Dynamically Rendered) -->
+            <div id="archetypeSlides"></div>
+
+        </div>
+    </div>
+
+    <script>
+        // Universal Brand Strategy Factory Playbook Engine
+        const config = window.playbookConfig || {};
+
+        function getFontStack(fontName, role) {
+            if (!fontName) {
+                return role === 'display' ? 'Literata, Georgia, serif' : 'Inter, -apple-system, sans-serif';
+            }
+            const clean = String(fontName).replace(/['"]/g, '').trim();
+            const isSerif = /serif|literata|cormorant|merriweather|playfair|lora|georgia/i.test(clean);
+            const fallback = isSerif ? 'Georgia, "Times New Roman", serif' : '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+            return `'${clean}', ${fallback}`;
+        }
+
+        function applyBranding() {
+            const root = document.documentElement;
+            const colors = config.colors || {};
+            const theme = config.theme || {};
+            const fonts = config.fonts || {};
+            const typography = config.typography || {};
+
+            const displayFont = fonts.display?.name || fonts.display || typography.display?.name || 'Literata';
+            const bodyFont = fonts.body?.name || fonts.body || typography.body?.name || 'Inter';
+            const monoFont = fonts.mono?.name || fonts.mono || typography.accent?.name || 'JetBrains Mono';
+
+            root.style.setProperty('--font-display', getFontStack(displayFont, 'display'));
+            root.style.setProperty('--font-body', getFontStack(bodyFont, 'body'));
+            root.style.setProperty('--font-mono', getFontStack(monoFont, 'mono'));
+
+            const primaryColor = '#1A1815';
+            const secondaryColor = '#2B5A75';
+            const accentColor = '#7A5B14';
+            const bgColor = '#F5F0E6';
+
+            root.style.setProperty('--color-primary', primaryColor);
+            root.style.setProperty('--color-secondary', secondaryColor);
+            root.style.setProperty('--color-accent', accentColor);
+            root.style.setProperty('--color-bg', bgColor);
+            root.style.setProperty('--color-paper', '#FFFFFF');
+            root.style.setProperty('--color-dark', '#1A1815');
+            root.style.setProperty('--color-panel', '#F5F0E6');
+            root.style.setProperty('--color-border', '#DED6C5');
+            root.style.setProperty('--color-cta-bg', primaryColor);
+            root.style.setProperty('--color-cta-text', '#F5F0E6');
+        }
+
+        function renderFooter(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const consultant = config.consultant || {};
+            const name = consultant.name || 'Kamilla Gafurzianova, OLY';
+            const title = consultant.title || 'Olympian & Principal Brand Strategist';
+            const website = consultant.website || 'bulachak.com';
+            const email = consultant.email || 'kgafurzianova@gmail.com';
+
+            el.innerHTML = `
+                <strong>${name}</strong> · ${title} · 
+                <a href="mailto:${email}">${email}</a> · 
+                <a href="https://${website.replace(/^https?:\/\//, '')}" target="_blank" rel="noopener noreferrer">${website}</a>
+            `;
+        }
+
+        function renderVoiceBadges() {
+            const voice = config.voice || {};
+            if (voice.coreDescription) {
+                const descEl = document.getElementById('voiceDescription');
+                if (descEl) descEl.textContent = voice.coreDescription;
+            }
+
+            const badgesContainer = document.getElementById('voiceBadges');
+            if (!badgesContainer) return;
+
+            const attributes = ['casual', 'playful', 'personal', 'spicy'];
+            let html = '';
+
+            attributes.forEach(attr => {
+                const data = voice[attr];
+                const score = typeof data === 'object' ? (data.score || 0) : (Number(data) || 0);
+                html += `
+                    <div class="voice-badge-card">
+                        <span class="voice-badge-label">${attr}</span>
+                        <span class="voice-badge-score">${score}/10</span>
+                    </div>
+                `;
+            });
+
+            badgesContainer.innerHTML = html;
+        }
+
+        function renderTOC() {
+            const tocBody = document.getElementById('tocBody');
+            if (!tocBody) return;
+            const archetypes = config.archetypes || [];
+            let html = '';
+
+            archetypes.forEach((arch, index) => {
+                const desc = arch.definition ? (arch.definition.substring(0, 70) + '…') : '';
+                html += `
+                    <tr>
+                        <td class="toc-number">${index + 4}</td>
+                        <td class="toc-archetype">${arch.name || 'Archetype'}</td>
+                        <td><span class="badge platform">${arch.platform || 'General'}</span></td>
+                        <td><span class="badge language">${arch.language || 'English'}</span></td>
+                        <td style="color: var(--color-text-muted);">${desc}</td>
+                    </tr>
+                `;
+            });
+
+            tocBody.innerHTML = html;
+        }
+
+        function renderPlatformMockup(arch) {
+            const platform = (arch.platform || '').toLowerCase();
+            const clientName = config.clientName || 'Brand';
+            const sampleText = arch.sampleText || arch.definition || '';
+
+            if (platform.includes('story') || platform.includes('reel') || platform.includes('9:16')) {
+                // Dual 9:16 vertical card layout
+                return `
+                    <div class="mockup-container" style="display:flex; gap:12px; width:100%; justify-content:center;">
+                        <div class="mockup-frame" style="max-width:175px; background:var(--color-primary); color:#FFFFFF; padding:14px; min-height:260px; display:flex; flex-direction:column; justify-content:space-between;">
+                            <div>
+                                <span style="font-family:var(--font-mono); font-size:9px; font-weight:700; color:var(--color-accent); text-transform:uppercase;">STORY 01 // HOOK</span>
+                                <div style="font-family:var(--font-display); font-size:12px; font-weight:700; line-height:1.3; margin-top:8px;">${arch.name}</div>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.08); border-radius:6px; padding:8px; font-size:9px; line-height:1.4;">
+                                ${sampleText.substring(0, 110)}…
+                            </div>
+                            <div style="font-family:var(--font-mono); font-size:9px; color:var(--color-accent); text-align:center;">Swipe ➔</div>
+                        </div>
+                        <div class="mockup-frame" style="max-width:175px; background:var(--color-bg); color:var(--color-dark); padding:14px; min-height:260px; display:flex; flex-direction:column; justify-content:space-between;">
+                            <div>
+                                <span style="font-family:var(--font-mono); font-size:9px; font-weight:700; color:var(--color-primary); text-transform:uppercase;">STORY 02 // ACTION</span>
+                                <div style="font-family:var(--font-display); font-size:12px; font-weight:700; line-height:1.3; margin-top:8px;">Operational Standard</div>
+                            </div>
+                            <div style="font-size:9px; line-height:1.4; color:var(--color-text-muted);">
+                                ${sampleText.length > 110 ? sampleText.substring(110, 220) + '…' : sampleText}
+                            </div>
+                            <div style="background:var(--color-primary); color:#FFFFFF; border-radius:6px; padding:6px; font-size:9px; font-weight:700; text-align:center; font-family:var(--font-mono);">
+                                View Standard
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="mockup-container">
+                    <div class="mockup-frame">
+                        <div class="mockup-header">
+                            <span>${clientName}</span>
+                            <span style="opacity: 0.6;">${arch.platform || 'Publication'}</span>
+                        </div>
+                        <div class="mockup-body">
+                            <div style="font-weight:700; font-family:var(--font-display); font-size:14px; margin-bottom:8px; color:var(--color-primary);">
+                                ${arch.name}
+                            </div>
+                            ${sampleText}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderArchetypeSlides() {
+            const container = document.getElementById('archetypeSlides');
+            if (!container) return;
+            const archetypes = config.archetypes || [];
+            const masterVoice = config.voice?.masterAIPrompt || config.voice?.coreDescription || "Speak with clarity, operational authority, and structural precision.";
+            const totalSlides = archetypes.length + 3;
+
+            let html = '';
+
+            archetypes.forEach((arch, index) => {
+                const slideNum = index + 4;
+                const mockup = renderPlatformMockup(arch);
+                const kpis = Array.isArray(arch.kpis) ? arch.kpis : [];
+                const tools = Array.isArray(arch.tools) ? arch.tools : [];
+
+                html += `
+                    <div class="slide" data-slide="${slideNum}">
+                        <div class="slide-header">
+                            <h2 class="slide-title">${arch.name}</h2>
+                            <div style="display:flex; gap:8px;">
+                                <span class="badge platform">${arch.platform || 'General'}</span>
+                                <span class="badge language">${arch.language || 'English'}</span>
+                            </div>
+                        </div>
+
+                        <div class="slide-content">
+                            <!-- Left: Brand Voice & Core Method -->
+                            <div>
+                                <div class="content-section">
+                                    <div class="content-label">Master Brand Voice</div>
+                                    <div class="ai-prompt-card">
+                                        <div class="ai-prompt-header">
+                                            <span class="ai-prompt-label">Identity Anchor</span>
+                                            <button class="copy-button" onclick="copyPromptText(this)">Copy</button>
+                                        </div>
+                                        <div>${masterVoice}</div>
+                                        <div class="ai-prompt-disclaimer">Inject into every generative copy prompt.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Middle: Specs, Guardrails & AI Prompt -->
+                            <div>
+                                <div class="content-section">
+                                    <div class="content-label">Strategic Definition</div>
+                                    <div class="content-text">${arch.definition || ''}</div>
+                                </div>
+
+                                <div class="content-section">
+                                    <div class="content-label">Execution Specification</div>
+                                    <div class="content-text">${arch.executionDetail || arch.operation || ''}</div>
+                                </div>
+
+                                ${arch.considerations ? `
+                                <div class="content-section">
+                                    <div class="content-label">Guardrails & Invariants</div>
+                                    <div class="content-text">${arch.considerations}</div>
+                                </div>
+                                ` : ''}
+
+                                <div class="content-section">
+                                    <div class="content-label">Generative AI Prompt</div>
+                                    <div class="ai-prompt-card">
+                                        <div class="ai-prompt-header">
+                                            <span class="ai-prompt-label">Archetype Prompt</span>
+                                            <button class="copy-button" onclick="copyPromptText(this)">Copy</button>
+                                        </div>
+                                        <div>${arch.aiPrompt || 'Prompt calibrated for generation.'}</div>
+                                        <div class="ai-prompt-disclaimer">Model-ready prompt for generating compliant content.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Platform Visual Mockup -->
+                            <div>
+                                <div class="content-section">
+                                    <div class="content-label">Platform Rendering Sample</div>
+                                    ${mockup}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="archetype-footer">
+                            <div class="footer-section">
+                                <div class="footer-label">Success KPIs</div>
+                                <div class="badges-group">
+                                    ${kpis.map(kpi => `<span class="kpi-badge">${kpi}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="footer-section">
+                                <div class="footer-label">Workflow Tools</div>
+                                <div class="badges-group">
+                                    ${tools.map(tool => `<span class="tool-badge">${tool}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="footer-section">
+                                <div class="footer-label">Strategy Authority</div>
+                                <p style="font-size: 12px; line-height: 1.5; font-family: var(--font-mono);">
+                                    <strong>${config.consultant?.name || 'Kamilla Gafurzianova, OLY'}</strong><br>
+                                    <span style="opacity: 0.7;">${config.consultant?.firm || 'Olympian & Principal Brand Strategist'}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="consultant-footer">
+                            <div class="consultant-info" id="footerArchetype${slideNum}"></div>
+                            <div class="slide-counter">Slide ${slideNum} / ${totalSlides}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+
+            archetypes.forEach((_, index) => {
+                const slideNum = index + 4;
+                renderFooter(`footerArchetype${slideNum}`);
+            });
+        }
+
+        function copyPromptText(button) {
+            const card = button.closest('.ai-prompt-card');
+            const textDiv = card.querySelector('div:not(.ai-prompt-header):not(.ai-prompt-disclaimer)');
+            if (!textDiv) return;
+
+            navigator.clipboard.writeText(textDiv.textContent.trim()).then(() => {
+                const original = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => { button.textContent = original; }, 1500);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            applyBranding();
+
+            if (config.clientName) {
+                const clientEl = document.getElementById('clientNameCover');
+                if (clientEl) clientEl.textContent = config.clientName;
+                document.title = `${config.clientName} — Content Archetype Playbook`;
+            }
+
+            if (config.generatedDate) {
+                const dateEl = document.getElementById('generatedDate');
+                if (dateEl) dateEl.textContent = config.generatedDate.toUpperCase();
+            }
+
+            renderFooter('footerCover');
+            renderFooter('footerSlide2');
+            renderFooter('footerSlide3');
+            renderVoiceBadges();
+            renderTOC();
+            renderArchetypeSlides();
+        });
+    </script>
+    <script src="../core/components.js"></script>
+</body>
+</html>

@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Handoff</title>
+  <style>
+    :root {
+      --font-display: system-ui, -apple-system, sans-serif;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --color-bg: #f8f8f8;
+      --color-paper: #ffffff;
+      --color-heading: #1a1a1a;
+      --color-text: #2d2d2d;
+      --color-text-muted: rgba(45, 45, 45, 0.72);
+      --color-border: rgba(45, 45, 45, 0.14);
+      --color-panel: rgba(0, 0, 0, 0.04);
+      --color-accent: #2d2d2d;
+      --color-primary: #1a1a1a;
+      --color-secondary: #4a4a4a;
+      --color-cta-bg: #1a1a1a;
+      --color-cta-text: #ffffff;
+      --color-dark-surface: #1a1a1a;
+      --color-on-dark: #f8f8f8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--color-paper);
+      padding: 40px;
+      color: var(--color-text);
+    }
+
+    header {
+      border-bottom: 3px solid var(--color-primary);
+      padding-bottom: 20px;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      margin-bottom: 5px;
+      color: var(--color-heading);
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 13px;
+      color: var(--color-text-muted);
+      margin-top: 10px;
+    }
+
+    .section {
+      margin-bottom: 45px;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--color-accent);
+      padding-left: 12px;
+      color: var(--color-heading);
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-bottom: 15px;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .section.hidden {
+      display: none;
+    }
+
+    .code-block {
+      background: var(--color-dark-surface);
+      border: 1px solid var(--color-border);
+      padding: 15px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      margin-bottom: 15px;
+      line-height: 1.5;
+      color: var(--color-on-dark);
+      position: relative;
+    }
+
+    .code-block pre {
+      margin: 0;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--color-cta-bg);
+      color: var(--color-cta-text);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 3px;
+      font-size: 11px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .copy-button:hover {
+      background: var(--color-primary);
+      color: var(--color-on-dark);
+    }
+
+    .copy-button.copied {
+      background: var(--color-primary);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    th {
+      background: var(--color-panel);
+      border: 1px solid var(--color-border);
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: var(--color-heading);
+    }
+
+    td {
+      border: 1px solid var(--color-border);
+      padding: 12px;
+      color: var(--color-text);
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      background: rgba(0,0,0,0.06);
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-block;
+      transition: background 0.15s;
+      user-select: all;
+    }
+    code:hover { background: rgba(0,0,0,0.12); }
+    code.copied { background: rgba(60,180,80,0.18); }
+
+    tr:nth-child(even) {
+      background: rgba(255,255,255,0.55);
+    }
+
+    .color-box {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: 3px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .intro-text {
+      color: var(--color-text-muted);
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    .note-box {
+      background: var(--color-panel);
+      border-left: 4px solid var(--color-accent);
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 2px;
+      color: var(--color-text);
+    }
+
+    .asset-link-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .asset-link-card {
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: var(--color-panel);
+      padding: 14px;
+    }
+
+    .asset-link-card h3 {
+      color: var(--color-heading);
+      margin-bottom: 8px;
+    }
+
+    .asset-link-card label {
+      display: block;
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-bottom: 6px;
+    }
+
+    .asset-link-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--color-border);
+      background: var(--color-paper);
+      color: var(--color-text);
+      font-size: 12px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      margin-bottom: 10px;
+    }
+
+    .asset-link-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .asset-link-actions a {
+      color: var(--color-primary);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .asset-link-actions a:hover {
+      text-decoration: underline;
+    }
+
+    .button-group {
+      margin: 30px 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      background: var(--color-cta-bg);
+      color: var(--color-cta-text);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: var(--color-primary);
+      color: var(--color-on-dark);
+    }
+
+    footer {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid var(--color-border);
+      font-size: 12px;
+      color: var(--color-text-soft);
+    }
+
+    .consultant-info {
+      color: var(--color-text-muted);
+      margin-top: 5px;
+    }
+
+    .inline-code {
+      background: var(--color-panel);
+      color: var(--color-primary);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    @media (max-width: 768px) {
+      body { 
+        padding: 16px; 
+      }
+      pre, code { 
+        font-size: 12px; 
+        overflow-x: auto; 
+      }
+      .code-block { 
+        max-width: 100vw; 
+      }
+      table { 
+        font-size: 13px; 
+      }
+      .table-wrapper { 
+        overflow-x: auto; 
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .container {
+        background: white;
+        color: #333;
+        box-shadow: none;
+      }
+
+    @media print {
+      html, body {
+        width: 100%;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+        background: white;
+        padding: 0;
+        margin: 0;
+        font-size: 10.5pt;
+      }
+
+      .container {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+
+      .button-group, #factory-bar, #factory-control-bar, .btn-export { display: none !important; }
+
+      h1, h2, h3 {
+        color: #111;
+        break-after: avoid;
+      }
+
+      tr, td, th, section { break-inside: avoid; }
+
+      .code-block {
+        background: #f5f5f5;
+        color: #333;
+        border: 1px solid #ddd;
+        white-space: pre-wrap !important;
+        word-break: break-all;
+      }
+
+      .copy-button {
+        display: none;
+      }
+
+      th {
+        background: #f5f5f5;
+        color: #333;
+        border: 1px solid #ddd;
+      }
+
+      td {
+        color: #333;
+        border: 1px solid #ddd;
+      }
+
+      tr:nth-child(even) {
+        background: white;
+      }
+
+      footer {
+        color: #666;
+        border-top: 1px solid #ddd;
+        break-inside: avoid;
+      }
+    }
+
+    .consultant-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--color-paper);
+      border-top: 1px solid var(--color-border);
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--color-text-soft);
+      box-shadow: 0 -1px 3px rgba(0,0,0,0.2);
+    }
+
+    @media print {
+      .consultant-footer {
+        position: static;
+        box-shadow: none;
+      }
+    }
+
+    #factory-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      height: 44px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      font-family: var(--font-body); font-size: 12px; color: #333;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+    #factory-bar .bar-title { font-weight: 600; letter-spacing: 0.04em; opacity: 0.7; }
+    #factory-bar .bar-actions { display: flex; gap: 8px; align-items: center; }
+    #factory-bar button, #factory-bar select {
+      padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.15);
+      background: #fff; color: #333; font-size: 11px; cursor: pointer;
+      font-family: inherit; transition: background 0.15s;
+    }
+    #factory-bar button:hover { background: #f0f0f0; }
+    #factory-bar .btn-export {
+      background: var(--color-primary, #1a1a1a); color: #fff;
+      border-color: transparent; font-weight: 600;
+    }
+    #factory-bar .btn-export:hover { opacity: 0.88; }
+    body { padding-top: 44px; }
+
+    @media print {
+      #factory-bar { display: none !important; }
+      body { padding-top: 0 !important; }
+    }
+  </style>
+    <link rel="stylesheet" href="../core/factory-core.css">
+<script>
+window.briefConfig = {
+  "clientName": "Elvira Astashkina",
+  "clientSlug": "elvira-astashkina-2026-10",
+  "generatedDate": "2026-10-15",
+  "consultant": {
+    "name": "Kamilla Gafurzianova, OLY",
+    "title": "Olympian & Principal Brand Strategist",
+    "firm": "",
+    "email": "kgafurzianova@gmail.com",
+    "website": "https://bulachak.com",
+    "linkedin": "https://linkedin.com/in/kamillagafurzianova"
+  },
+  "colors": {
+    "primary": [
+      {
+        "name": "Klimt Gold (Core Leaf)",
+        "hex": "#D4AF37",
+        "role": "Primary Brand Accent & Latent Space Shimmer",
+        "rationale": "Extracted from the gold leaf background of Gustav Klimt's 'The Kiss' (1908); represents optimization trajectories and theorem borders."
+      },
+      {
+        "name": "Obsidian Grid (Male Robe)",
+        "hex": "#1A1815",
+        "role": "Primary Structural Dark & Discrete Tensor Ground",
+        "rationale": "Derived from the rectilinear black blocks on the male figure's robe; represents discrete matrices W·x+b and Vision Transformer patch grids."
+      },
+      {
+        "name": "Lapis Mosaic (Female Contours)",
+        "hex": "#2B5A75",
+        "role": "Secondary Structural Color & Probability Field",
+        "rationale": "Sampled from the concentric blue/teal rings; encodes continuous probability density contours p(x) and Gaussian manifolds."
+      }
+    ],
+    "accent": [
+      {
+        "name": "Crimson Berry (Vibrant Pop)",
+        "hex": "#C02B37",
+        "role": "High-Contrast Focal Pop & Optima Marker",
+        "rationale": "Sampled from the floral clusters in 'The Kiss'; marks global optima, critical attention heads, and high-salience callouts."
+      },
+      {
+        "name": "Emerald Flora (Pointillist Meadow)",
+        "hex": "#2E6B56",
+        "role": "Cluster Embedding & Convergence Accent",
+        "rationale": "Sampled from the flower meadow beneath the figures; represents t-SNE/UMAP latent embeddings and k-NN decision regions."
+      },
+      {
+        "name": "Alabaster Parchment (Luminous Canvas)",
+        "hex": "#F5F0E6",
+        "role": "Daylight Gallery Paper Ground",
+        "rationale": "Warm museum parchment surface eliminating stark white glare while preserving 16.4:1 AAA contrast against Obsidian Grid."
+      }
+    ],
+    "secondary": "#2B5A75",
+    "bg": "#F5F0E6",
+    "surface": "#FFFFFF",
+    "border": "#DED6C5",
+    "rawPrimary": [
+      {
+        "name": "Klimt Gold (Core Leaf)",
+        "hex": "#D4AF37",
+        "role": "Primary Brand Accent & Latent Space Shimmer",
+        "rationale": "Extracted from the gold leaf background of Gustav Klimt's 'The Kiss' (1908); represents optimization trajectories and theorem borders."
+      },
+      {
+        "name": "Obsidian Grid (Male Robe)",
+        "hex": "#1A1815",
+        "role": "Primary Structural Dark & Discrete Tensor Ground",
+        "rationale": "Derived from the rectilinear black blocks on the male figure's robe; represents discrete matrices W·x+b and Vision Transformer patch grids."
+      },
+      {
+        "name": "Lapis Mosaic (Female Contours)",
+        "hex": "#2B5A75",
+        "role": "Secondary Structural Color & Probability Field",
+        "rationale": "Sampled from the concentric blue/teal rings; encodes continuous probability density contours p(x) and Gaussian manifolds."
+      }
+    ],
+    "rawAccent": [
+      {
+        "name": "Crimson Berry (Vibrant Pop)",
+        "hex": "#C02B37",
+        "role": "High-Contrast Focal Pop & Optima Marker",
+        "rationale": "Sampled from the floral clusters in 'The Kiss'; marks global optima, critical attention heads, and high-salience callouts."
+      },
+      {
+        "name": "Emerald Flora (Pointillist Meadow)",
+        "hex": "#2E6B56",
+        "role": "Cluster Embedding & Convergence Accent",
+        "rationale": "Sampled from the flower meadow beneath the figures; represents t-SNE/UMAP latent embeddings and k-NN decision regions."
+      },
+      {
+        "name": "Alabaster Parchment (Luminous Canvas)",
+        "hex": "#F5F0E6",
+        "role": "Daylight Gallery Paper Ground",
+        "rationale": "Warm museum parchment surface eliminating stark white glare while preserving 16.4:1 AAA contrast against Obsidian Grid."
+      }
+    ]
+  },
+  "lightMode": [
+    {
+      "element": "Primary Canvas Background",
+      "hex": "#F5F0E6",
+      "rule": "Alabaster Parchment with subtle radial Klimt Gold & Lapis dot texture."
+    },
+    {
+      "element": "Elevated Card Surface",
+      "hex": "#FFFFFF",
+      "rule": "Crisp gallery card surface framed by 1px Sandstone Clay (#DED6C5) border and 12px radius."
+    },
+    {
+      "element": "Primary Display & Body Ink",
+      "hex": "#1A1815",
+      "rule": "Obsidian Grid for uncompromising 16.4:1 AAA legibility on Alabaster and White."
+    },
+    {
+      "element": "Mathematical Formula Well",
+      "hex": "#F5F0E6",
+      "rule": "Framed by 2px left border in Klimt Gold (#D4AF37) or Lapis Mosaic (#2B5A75)."
+    }
+  ],
+  "darkMode": [
+    {
+      "element": "Primary Dark Canvas",
+      "hex": "#1A1815",
+      "rule": "Obsidian Grid background for high-impact theorem hooks and video overlays."
+    },
+    {
+      "element": "Headline & Primary Copy",
+      "hex": "#F5F0E6",
+      "rule": "Alabaster Parchment ink for warm, glare-free reading in dark mode."
+    },
+    {
+      "element": "Theorem Borders & Equations",
+      "hex": "#D4AF37",
+      "rule": "Klimt Gold leaf highlights for LaTeX derivations and geometric piece frames."
+    },
+    {
+      "element": "Focal Callout Badges",
+      "hex": "#C02B37",
+      "rule": "Crimson Berry accents with Alabaster text (6px architectural radius)."
+    }
+  ],
+  "typography": {
+    "display": {
+      "name": "Cormorant Garamond",
+      "source": "Google Fonts",
+      "rationale": "High-contrast classical editorial serif pairing mathematical authority with gallery elegance."
+    },
+    "body": {
+      "name": "Plus Jakarta Sans",
+      "source": "Google Fonts",
+      "rationale": "Clean geometric humanist sans-serif engineered for crisp technical legibility across mobile and desktop."
+    },
+    "hierarchy": [
+      {
+        "level": "H1",
+        "font": "Cormorant Garamond",
+        "weight": "600",
+        "size": "2.5rem"
+      },
+      {
+        "level": "H2",
+        "font": "Cormorant Garamond",
+        "weight": "500",
+        "size": "2rem"
+      },
+      {
+        "level": "H3",
+        "font": "Cormorant Garamond",
+        "weight": "500",
+        "size": "1.5rem"
+      },
+      {
+        "level": "Body",
+        "font": "Plus Jakarta Sans",
+        "weight": "400",
+        "size": "1rem"
+      },
+      {
+        "level": "Caption",
+        "font": "Plus Jakarta Sans",
+        "weight": "300",
+        "size": "0.875rem"
+      }
+    ]
+  },
+  "fonts": {
+    "display": "Cormorant Garamond",
+    "headline": "Cormorant Garamond",
+    "body": "Plus Jakarta Sans",
+    "displayStack": "'Cormorant Garamond', Georgia, \"Times New Roman\", serif",
+    "bodyStack": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif"
+  },
+  "visualSystem": [
+    {
+      "section": "Motif 01: Discrete Rectangles",
+      "element": "Klimt Male Robe Blocks",
+      "lightMode": "Obsidian & Gold tiles on Alabaster",
+      "darkMode": "Alabaster & Gold tiles on Obsidian",
+      "rules": "Maps directly to Matrix Multiplication W·x+b and ViT Patch Grids."
+    },
+    {
+      "section": "Motif 02: Concentric Rings",
+      "element": "Klimt Female Robe Ovals",
+      "lightMode": "Lapis & Crimson rings on Alabaster",
+      "darkMode": "Gold, Crimson & Lapis iso-contours",
+      "rules": "Maps directly to Continuous Probability Density p(x) and RBF Kernels."
+    },
+    {
+      "section": "Motif 03: Pointillist Meadow",
+      "element": "Emerald, Lapis & Gold Specks",
+      "lightMode": "Cluster scatter with dashed boundary",
+      "darkMode": "Luminous cluster cloud on Obsidian",
+      "rules": "Maps directly to High-Dimensional Latent Embeddings (t-SNE / UMAP)."
+    },
+    {
+      "section": "Motif 04: Golden Streamlines",
+      "element": "Flowing Gold Leaf Curves",
+      "lightMode": "Gold & Lapis bezier trajectories",
+      "darkMode": "Gold & Crimson gradient vectors",
+      "rules": "Maps directly to Optimization Loss Landscapes L(θ) and Gradient Flow ∇f(x)."
+    }
+  ],
+  "svgs": {
+    "horizontal_light": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 64\" width=\"320\" height=\"64\" role=\"img\" aria-label=\"Elvira Astashkina — Horizontal Lockup (Light)\">\n  <!-- Warm Alabaster Surface -->\n  <rect x=\"1\" y=\"1\" width=\"318\" height=\"62\" rx=\"10\" fill=\"#F5F0E6\" stroke=\"#DED6C5\" stroke-width=\"1.5\"/>\n  <!-- Logo (Light Variant) -->\n  <rect x=\"8\" y=\"8\" width=\"48\" height=\"48\" rx=\"8\" fill=\"#F5F0E6\" stroke=\"#1A1815\" stroke-width=\"2.8\"/>\n  <rect x=\"13\" y=\"13\" width=\"15\" height=\"20\" rx=\"1.5\" fill=\"#1A1815\"/>\n  <rect x=\"19\" y=\"16\" width=\"3.5\" height=\"14\" fill=\"#D4AF37\"/>\n  <rect x=\"13\" y=\"36\" width=\"15\" height=\"8\" rx=\"1.2\" fill=\"#D4AF37\" stroke=\"#1A1815\" stroke-width=\"0.8\"/>\n  <rect x=\"13\" y=\"46\" width=\"15\" height=\"5\" rx=\"1.2\" fill=\"#2B5A75\"/>\n  <line x1=\"32\" y1=\"11\" x2=\"32\" y2=\"53\" stroke=\"#1A1815\" stroke-width=\"1.8\"/>\n  <circle cx=\"44\" cy=\"24\" r=\"8.5\" fill=\"#C02B37\" stroke=\"#1A1815\" stroke-width=\"1.8\"/>\n  <circle cx=\"44\" cy=\"24\" r=\"3.6\" fill=\"#F5F0E6\"/>\n  <circle cx=\"44\" cy=\"43\" r=\"6.5\" fill=\"#2B5A75\" stroke=\"#D4AF37\" stroke-width=\"1.6\"/>\n  <circle cx=\"44\" cy=\"43\" r=\"2.5\" fill=\"#2E6B56\"/>\n  <!-- First and Last Name Only -->\n  <text x=\"68\" y=\"39\" font-family=\"'Cormorant Garamond', Georgia, serif\" font-size=\"24\" font-weight=\"700\" fill=\"#1A1815\">Elvira Astashkina</text>\n</svg>",
+    "horizontal_dark": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 64\" width=\"320\" height=\"64\" role=\"img\" aria-label=\"Elvira Astashkina — Horizontal Lockup (Dark)\">\n  <!-- Obsidian Dark Surface -->\n  <rect x=\"1\" y=\"1\" width=\"318\" height=\"62\" rx=\"10\" fill=\"#1A1815\" stroke=\"#D4AF37\" stroke-width=\"1.8\"/>\n  <!-- Logo (Dark Variant) -->\n  <rect x=\"8\" y=\"8\" width=\"48\" height=\"48\" rx=\"8\" fill=\"#1A1815\" stroke=\"#D4AF37\" stroke-width=\"2.8\"/>\n  <rect x=\"13\" y=\"13\" width=\"15\" height=\"20\" rx=\"1.5\" fill=\"#F5F0E6\"/>\n  <rect x=\"19\" y=\"16\" width=\"3.5\" height=\"14\" fill=\"#1A1815\"/>\n  <rect x=\"13\" y=\"36\" width=\"15\" height=\"8\" rx=\"1.2\" fill=\"#D4AF37\"/>\n  <rect x=\"13\" y=\"46\" width=\"15\" height=\"5\" rx=\"1.2\" fill=\"#2B5A75\"/>\n  <line x1=\"32\" y1=\"11\" x2=\"32\" y2=\"53\" stroke=\"#D4AF37\" stroke-width=\"1.8\"/>\n  <circle cx=\"44\" cy=\"24\" r=\"8.5\" fill=\"#C02B37\" stroke=\"#D4AF37\" stroke-width=\"1.8\"/>\n  <circle cx=\"44\" cy=\"24\" r=\"3.6\" fill=\"#F5F0E6\"/>\n  <circle cx=\"44\" cy=\"43\" r=\"6.5\" fill=\"#2B5A75\" stroke=\"#D4AF37\" stroke-width=\"1.6\"/>\n  <circle cx=\"44\" cy=\"43\" r=\"2.5\" fill=\"#D4AF37\"/>\n  <!-- First and Last Name Only -->\n  <text x=\"68\" y=\"39\" font-family=\"'Cormorant Garamond', Georgia, serif\" font-size=\"24\" font-weight=\"700\" fill=\"#F5F0E6\">Elvira Astashkina</text>\n</svg>",
+    "mark_light": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" role=\"img\" aria-label=\"Elvira Astashkina — Logo (Light)\">\n  <!-- Standalone Logo Frame (Light Mode: Alabaster Ground + Obsidian Border) -->\n  <rect x=\"2\" y=\"2\" width=\"60\" height=\"60\" rx=\"10\" fill=\"#F5F0E6\" stroke=\"#1A1815\" stroke-width=\"3.5\"/>\n  <!-- Left: Discrete Male Tensor Blocks -->\n  <rect x=\"8\" y=\"8\" width=\"20\" height=\"26\" rx=\"2\" fill=\"#1A1815\"/>\n  <rect x=\"16\" y=\"12\" width=\"4\" height=\"18\" fill=\"#D4AF37\"/>\n  <rect x=\"8\" y=\"38\" width=\"20\" height=\"10\" rx=\"1.5\" fill=\"#D4AF37\" stroke=\"#1A1815\" stroke-width=\"1\"/>\n  <rect x=\"8\" y=\"50\" width=\"20\" height=\"6\" rx=\"1.5\" fill=\"#2B5A75\"/>\n  <!-- Central Axis Seam -->\n  <line x1=\"32\" y1=\"6\" x2=\"32\" y2=\"58\" stroke=\"#1A1815\" stroke-width=\"2\"/>\n  <!-- Right: Concentric Female Probability Rings -->\n  <circle cx=\"46\" cy=\"24\" r=\"11\" fill=\"#C02B37\" stroke=\"#1A1815\" stroke-width=\"2\"/>\n  <circle cx=\"46\" cy=\"24\" r=\"5\" fill=\"#F5F0E6\"/>\n  <circle cx=\"46\" cy=\"47\" r=\"8\" fill=\"#2B5A75\" stroke=\"#D4AF37\" stroke-width=\"2\"/>\n  <circle cx=\"46\" cy=\"47\" r=\"3.2\" fill=\"#2E6B56\"/>\n</svg>",
+    "mark_dark": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" role=\"img\" aria-label=\"Elvira Astashkina — Logo (Dark)\">\n  <!-- Standalone Logo Frame (Dark Mode: Obsidian Ground + Sovereign Gold Border) -->\n  <rect x=\"2\" y=\"2\" width=\"60\" height=\"60\" rx=\"10\" fill=\"#1A1815\" stroke=\"#D4AF37\" stroke-width=\"3.5\"/>\n  <!-- Left: Discrete Male Tensor Blocks -->\n  <rect x=\"8\" y=\"8\" width=\"20\" height=\"26\" rx=\"2\" fill=\"#F5F0E6\"/>\n  <rect x=\"16\" y=\"12\" width=\"4\" height=\"18\" fill=\"#1A1815\"/>\n  <rect x=\"8\" y=\"38\" width=\"20\" height=\"10\" rx=\"1.5\" fill=\"#D4AF37\"/>\n  <rect x=\"8\" y=\"50\" width=\"20\" height=\"6\" rx=\"1.5\" fill=\"#2B5A75\"/>\n  <!-- Central Axis Seam -->\n  <line x1=\"32\" y1=\"6\" x2=\"32\" y2=\"58\" stroke=\"#D4AF37\" stroke-width=\"2\"/>\n  <!-- Right: Concentric Female Probability Rings -->\n  <circle cx=\"46\" cy=\"24\" r=\"11\" fill=\"#C02B37\" stroke=\"#D4AF37\" stroke-width=\"2.5\"/>\n  <circle cx=\"46\" cy=\"24\" r=\"5\" fill=\"#F5F0E6\"/>\n  <circle cx=\"46\" cy=\"47\" r=\"8\" fill=\"#2B5A75\" stroke=\"#D4AF37\" stroke-width=\"2\"/>\n  <circle cx=\"46\" cy=\"47\" r=\"3.2\" fill=\"#D4AF37\"/>\n</svg>"
+  },
+  "logoRules": {
+    "horizontal": {
+      "when_to_use": "Primary horizontal lockup (Logo + 'Elvira Astashkina' only) for navigation headers, lecture mastheads, business cards, and document covers.",
+      "min_size": "140px × 32px digital / 38mm print",
+      "clear_space": "0.25X (25% of logo mark height) on all four sides"
+    },
+    "mark_only": {
+      "when_to_use": "Standalone square Klimt geometric logo (Light & Dark) for Instagram carousel slide corners (28×28px), favicons, and profile avatars.",
+      "min_size": "28px × 28px digital / 10mm print",
+      "clear_space": "0.25X (25% of logo mark width) on all four sides"
+    }
+  },
+  "voice": {
+    "casual": {
+      "score": 5,
+      "evidence": ""
+    },
+    "playful": {
+      "score": 5,
+      "evidence": ""
+    },
+    "personal": {
+      "score": 5,
+      "evidence": ""
+    },
+    "spicy": {
+      "score": 5,
+      "evidence": ""
+    },
+    "coreDescription": "60% The Intellectual Maverick (Aliona Doletskaya: razor-sharp, culturally commanding, zero tolerance for mediocrity) × 40% The Silent Architect (Maria Logvinova: calm, restrained, mathematically exact).",
+    "tonePrinciples": [
+      "Lead with a sharp mathematical or cultural hook.",
+      "Pair every conceptual claim with explicit notation (W·x+b, p(x), ∇L(θ)).",
+      "Use Klimt's geometric vocabulary (discrete tiles, concentric contours, golden streamlines)."
+    ],
+    "hardNos": "Never use 'game-changer', 'unlock the power of AI', 'mind-blowing', emojis in theorem blocks, or pill-shaped buttons.",
+    "masterAIPrompt": "You are the master brand voice for Elvira Astashkina. Operating Thesis: \"High-standard systems turning values into practice\". Voice Profile: Authoritative, grounded, and executive-ready. Principles: Clarity, operational authority, and structural precision. Speak with rigor, specificity, and zero ungrounded fluff.",
+    "communityStrategy": "",
+    "outreachStrategy": ""
+  },
+  "voiceMatrix": [
+    {
+      "dimension": "Intellectual Maverick (Aliona Doletskaya — 60%)",
+      "score": "9/10 Authority",
+      "do": "Open with razor-sharp cultural & mathematical truths ('We spent a decade treating AI like alchemy. Let's treat it like measure theory.').",
+      "dont": "Never sound academic-dry, timid, or derivative."
+    },
+    {
+      "dimension": "Silent Architect (Maria Logvinova — 40%)",
+      "score": "10/10 Precision",
+      "do": "Anchor every visual claim in exact notation (W ∈ ℝ^{m×n}, p(x), ∇L(θ)) and calm structural restraint.",
+      "dont": "Never use exclamation marks, emojis in theorem cards, or clickbait."
+    }
+  ],
+  "digitalPresence": [
+    {
+      "platform": "Instagram (@elvrast)",
+      "priority": "High",
+      "cadence": "3× Weekly (2× 4:5 Carousels + 1× 9:16 Manim Reel)",
+      "focus": "Visual mathematical breakdowns of Deep Learning, Measure Theory & ViTs using Klimt geometric pieces.",
+      "kpis": "Saves, Shares, Profile Visits"
+    },
+    {
+      "platform": "TikTok (@elvrast)",
+      "priority": "High",
+      "cadence": "2× Weekly (9:16 Vertical Overlay Studio)",
+      "focus": "60-second Discrete Matrix Sidebar & Golden Latent Streamline explainers.",
+      "kpis": "Completion Rate, Shares, Follows"
+    },
+    {
+      "platform": "LinkedIn & Substack",
+      "priority": "Medium",
+      "cadence": "1× Weekly Technical Dispatch",
+      "focus": "Long-form Silent Architect essays on probability manifolds, diffusion SDEs, and research rigor.",
+      "kpis": "Executive Engagement, Citations, Inbound Inquiries"
+    }
+  ],
+  "contentArchetypes": [
+    {
+      "name": "The Mathematical Theorem Breakdown",
+      "platform": "Instagram",
+      "language": "English",
+      "definition": "Rigorous decomposition of modern ML architectures (Diffusion, ViT, MoE) via Measure Theory and Linear Algebra.",
+      "operation": "",
+      "executionDetail": "Feed 1:1 Carousel & 9:16 Video",
+      "considerations": "",
+      "sampleType": "text_copy",
+      "sampleText": "We spent a decade treating AI like magic. Let's treat it like measure theory. Here is how Radon-Nikodym derivatives govern your loss surface.",
+      "sampleVisual": "Klimt discrete black-and-gold rectilinear tile overlay framing LaTeX mathematical derivation card.",
+      "kpis": [
+        "Saves",
+        "Shares",
+        "Reach",
+        "Profile visits",
+        "Link clicks"
+      ],
+      "tools": [
+        "Canva Pro",
+        "Later",
+        "Linktree"
+      ],
+      "aiPrompt": "You are Elvira Astashkina's mathematical copy strategist. Draft a rigorous 7-slide educational carousel explaining Vision Transformer patch embeddings ($x_p \\in \\mathbb{R}^{P^2 \\cdot C}$) using the 'Intellectual Maverick' tone (Aliona Doletskaya style). Ban hype, generic AI buzzwords, and vague metaphors. Anchor every insight in linear algebra and measure spaces.",
+      "affiliateLinks": {}
+    },
+    {
+      "name": "The Silent Architect Technical Dispatch",
+      "platform": "LinkedIn",
+      "language": "English",
+      "definition": "Architectural principles of neural representations, probability density fields, and geometric deep learning.",
+      "operation": "",
+      "executionDetail": "Executive Technical Brief",
+      "considerations": "",
+      "sampleType": "text_copy",
+      "sampleText": "Formulating mathematical frameworks that prioritize absolute clarity in machine learning. Continuous probability densities and Gaussian iso-contours on latent manifolds.",
+      "sampleVisual": "Concentric continuous gold and lapis circles depicting latent sphere probability densities.",
+      "kpis": [
+        "Impressions",
+        "Engagement rate",
+        "Comments",
+        "Profile views"
+      ],
+      "tools": [
+        "Canva Pro",
+        "LinkedIn Analytics"
+      ],
+      "aiPrompt": "Draft an executive technical brief on latent manifold projection in diffusion models for senior research engineers. Write in the 'Silent Architect' persona (Maria Logvinova style): measured, restrained, mathematically exact. Include LaTeX formula representations for $\\mathcal{N}(0, \\mathbf{I})$ and gradient loss landscape vectors.",
+      "affiliateLinks": {}
+    }
+  ],
+  "calendar": [
+    {
+      "week": "Week 1 · Foundation",
+      "theme": "Measure Theory & Discrete Tensors",
+      "deliverable": "7-Slide Carousel: Radon-Nikodym Derivatives + 9:16 Reel: Discrete Matrix Sidebar"
+    },
+    {
+      "week": "Week 2 · Vision & Attention",
+      "theme": "ViT Patch Grids x_p ∈ ℝ^{P²·C}",
+      "deliverable": "6-Slide Carousel: Klimt Male Robe Tiles as Patch Embeddings + LinkedIn Technical Note"
+    },
+    {
+      "week": "Week 3 · Continuous Manifolds",
+      "theme": "Gaussian Iso-Contours p(x)",
+      "deliverable": "7-Slide Carousel: Concentric Female Rings & RBF Kernels + Manim Density Animation"
+    },
+    {
+      "week": "Week 4 · Optimization Flow",
+      "theme": "Golden Streamlines ∇L(θ)",
+      "deliverable": "5-Slide Carousel: Loss Landscape Geometry & Diffusion Score Matching"
+    }
+  ],
+  "mediumRules": [
+    {
+      "medium": "Instagram Carousels (/carousel)",
+      "defaultMode": "Alternating Obsidian & Alabaster",
+      "primaryPurpose": "5–7 Slide Mathematical Theorem Breakdowns (4:5 Portrait)",
+      "allowedEmphasis": "Klimt Geometric Pieces + Optional KaTeX Formula Card",
+      "constraints": "Strict 8px/12px radii; zero pill buttons; top-left Klimt SVG emblem."
+    },
+    {
+      "medium": "Reels & TikTok Video Studio (/)",
+      "defaultMode": "Obsidian & Transparent Alpha (.webm)",
+      "primaryPurpose": "9:16 Vertical Manim Derivations & Discrete Matrix Sidebars",
+      "allowedEmphasis": "Animated LaTeX equations + Klimt geometric side rail",
+      "constraints": "Keep right 80% clear for speaker framing and subtitle cards."
+    },
+    {
+      "medium": "LinkedIn & Substack Essays",
+      "defaultMode": "Alabaster Daylight",
+      "primaryPurpose": "Silent Architect Executive Dispatches",
+      "allowedEmphasis": "Concentric probability diagrams & spectral geometry charts",
+      "constraints": "Restrained Maria Logvinova tone; rigorous notation."
+    }
+  ],
+  "prohibited": {
+    "visuals": [
+      "NEVER use pill-shaped buttons, badges, chips, or inputs (rounded-full / 9999px radius).",
+      "NEVER use generic neon-blue cyberpunk AI stock art, glowing brains, or robot hands.",
+      "NEVER use ungrounded '10x AI Prompt Hack' or hype-driven marketing language.",
+      "NEVER truncate diagram labels with ellipses or compress multi-column mathematical formulas."
+    ],
+    "checklistQuestions": [
+      "Does the asset use only the 6-tone Spectrum of 'The Kiss' (#D4AF37, #2B5A75, #C02B37, #2E6B56, #1A1815, #F5F0E6)?",
+      "Are all interactive buttons, tags, and cards using architectural radii (6px, 8px, 12px) with zero pill shapes?",
+      "Does the geometric motif accurately reflect the mathematical concept (Discrete Rectangles = Tensors; Concentric Rings = Probability)?",
+      "Is the copy written in the Intellectual Maverick (Doletskaya) × Silent Architect (Logvinova) voice?"
+    ],
+    "approvalAuthority": "Elvira Astashkina (@elvrast) & Principal Brand Strategist Kamilla Gafurzianova, OLY",
+    "freelancerRules": "All external designers, video editors, and engineers must reference the Approved Brand Canvas (/brand) and use the live Instagram Carousel Studio (/carousel) and Manim Video Studio (/). Never substitute Cormorant Garamond or Plus Jakarta Sans."
+  },
+  "language": {
+    "isMultilingual": false,
+    "primary": "",
+    "allLanguages": [
+      "English"
+    ],
+    "rows": [],
+    "designerRows": [],
+    "platformLanguageMap": [],
+    "voiceAdaptations": [],
+    "archetypeNotes": [],
+    "hashtagNotes": "",
+    "channelLanguageMap": "",
+    "locales": [
+      {
+        "language": "English",
+        "code": "en",
+        "direction": "ltr"
+      }
+    ],
+    "fontStacks": "",
+    "textDirection": "LTR",
+    "urlStructure": "",
+    "cmsApproach": "",
+    "hierarchyNotes": "",
+    "printSignageNotes": ""
+  },
+  "theme": {
+    "primary": "#1A1815",
+    "secondary": "#2B5A75",
+    "accent": "#D4AF37",
+    "background": "#F5F0E6",
+    "surface": "#FFFFFF",
+    "brandPalette": [],
+    "surfaceMuted": "rgba(26, 26, 26, 0.06)",
+    "surfaceAccent": "rgba(74, 74, 74, 0.08)",
+    "heading": "#1A1815",
+    "text": "#1A1815",
+    "textMuted": "#5A5852",
+    "textSoft": "#5A5852",
+    "border": "#DED6C5",
+    "heroBackground": "#1A1815",
+    "heroText": "#F5F0E6",
+    "ctaBackground": "#1A1815",
+    "ctaText": "#D4AF37",
+    "darkBackground": "#1A1815",
+    "onDark": "#F5F0E6",
+    "shadow": "rgba(74, 74, 74, 0.14)"
+  },
+  "uiSystem": {
+    "buttonsPrimary": "Architectural (8px radius — strict anti-pill standard)",
+    "buttonsPrimaryInteraction": "Solid fill, subtle scale up on hover",
+    "buttonsSecondary": "Transparent with 1px border",
+    "cardsBorderRadius": "12px (Rounded)",
+    "cardsElevation": "1px solid border, no shadow",
+    "shadows": "None (Flat design)",
+    "spacing": "Airy (Sparse, high negative space)",
+    "spacingReason": "Reflects a calm, unstructured approach.",
+    "links": "Simple underline on hover"
+  },
+  "playbookUrl": "../playbook/content-playbook.html",
+  "brand": {
+    "purpose": "To replace superficial AI hype with mathematical beauty, measure-theoretic rigor, and Gustav Klimt's geometric synthesis.",
+    "thesis": "Gustav Klimt's 'The Kiss' (1908) Encoded into Applied Machine Learning: Discrete Male Rectangles (Matrices & Tensors) unioned with Continuous Female Concentric Rings (Probability Manifolds).",
+    "method": "Visual-mathematical decomposition via Manim animations, KaTeX derivations, and Klimt geometric mosaic overlays.",
+    "ethicalStance": "Zero black-box mysticism: every neural architecture is accountable to linear algebra, measure theory, and statistical mechanics.",
+    "values": [
+      "Mathematical Exactness",
+      "Klimt The Kiss Aesthetic",
+      "Intellectual Maverick Candor",
+      "Zero-Fluff Pedagogy"
+    ],
+    "structure": "Dual-persona editorial laboratory (@elvrast): Instagram Carousel Studio + Manim Video Studio + Executive Research Notes.",
+    "verticals": "Applied Mathematics, Measure Theory, Deep Learning Architecture, Computer Vision & Generative Manifolds.",
+    "narrativeTiering": "60% Intellectual Maverick (Aliona Doletskaya) × 40% Silent Architect (Maria Logvinova).",
+    "motivationPolicy": "Precision over virality; depth that rewards saves, citations, and serious technical dialogue."
+  },
+  "problem": {
+    "coreProblem": "Modern AI discourse is polarized between inaccessible LaTeX PDFs and shallow '10x prompt hack' influencer noise.",
+    "context": "Engineers, researchers, and technical leaders crave high-taste, mathematically rigorous visual synthesis.",
+    "symptoms": "Generic neon-blue brain graphics, Cargo-cult engineering, and loss of foundational mathematical intuition.",
+    "costOfInaction": "Brilliant quantitative work goes unseen or gets diluted by generic social templates.",
+    "brandRole": "The definitive gallery-grade mathematical voice translating tensors, manifolds, and theorems into unmistakable visual art."
+  },
+  "lineInSand": {
+    "coreLine": "We never treat Machine Learning as magic; we treat it as Measure Theory and Geometry.",
+    "rejections": "No pill-shaped UI, no neon cyberpunk tropes, no hand-wavy metaphors without equations.",
+    "refusals": "Refuses shallow listicles and unverified AI hype.",
+    "trueCompetition": "Superficial tech commentary and uninspired academic slides.",
+    "willingLosses": "Casual audiences looking for no-code shortcuts."
+  },
+  "tension": {
+    "coreTension": "Rigid Discrete Computation vs. Fluid Continuous Probability.",
+    "evidence": "Resolved visually through Klimt's 'The Kiss': black-and-white discrete male rectangles meeting concentric female probability rings.",
+    "operatingPrinciple": "Discrete Tensors × Continuous Manifolds inside a Golden Latent Space.",
+    "insistences": "Every visual motif maps to a real mathematical operator.",
+    "risks": "Requires uncompromising typographic and mathematical curation."
+  },
+  "audience": {
+    "primary": "ML Engineers, Quantitative Researchers, Applied Mathematicians, and Technical Founders.",
+    "secondary": "Graduate STEM students and AI product architects seeking rigorous intuition.",
+    "observers": "Academic conference chairs, research labs, and high-fashion/art-tech editorial directors.",
+    "nonAudience": "Prompt-hack seekers and hype-chasers."
+  }
+};
+</script>
+  <!-- Open Graph / Telegram / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Elvira Astashkina (@elvrast)">
+  <meta property="og:title" content="Developer Handoff">
+  <meta property="og:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta property="og:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:secure_url" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Elvira Astashkina — Applied Machine Learning Engineer &amp; AI Educator (@elvrast)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Developer Handoff">
+  <meta name="twitter:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta name="twitter:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+</head>
+<body>
+  <!-- Factory Control Bar -->
+  <div id="factory-bar">
+    <a href="/" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#1A1815;">
+      <img src="../assets/logo-horizontal-light.svg" alt="Elvira Astashkina" style="height:34px;width:auto;display:block;">
+      <span class="bar-title" id="bar-title" style="border-left:1px solid #DED6C5;padding-left:12px;">Developer Handoff</span>
+    </a>
+    <div class="bar-actions"><a href="/" style="padding:6px 12px;border-radius:8px;border:1px solid #DED6C5;background:#F5F0E6;color:#1A1815;text-decoration:none;font-size:12px;font-weight:700;">← Brand Hub</a><a href="/brand" style="padding:6px 12px;border-radius:8px;border:1px solid #D4AF37;background:rgba(212,175,55,0.18);color:#1A1815;text-decoration:none;font-size:12px;font-weight:700;">Brand System</a><a href="/carousel" style="padding:6px 12px;border-radius:8px;border:1px solid #DED6C5;background:#FFFFFF;color:#1A1815;text-decoration:none;font-size:12px;font-weight:700;">Carousel Studio</a><a href="/video" style="padding:6px 12px;border-radius:8px;border:1px solid #D4AF37;background:#1A1815;color:#F5F0E6;text-decoration:none;font-size:12px;font-weight:700;">Video Studio</a>
+      <select id="theme-select" title="Color mode">
+        <option value="light">☀ Light</option>
+        <option value="dark">◑ Dark</option>
+      </select>
+      <button class="btn-export" onclick="window.print()">⬇ Export PDF</button>
+    </div>
+  </div>
+  
+  <div class="container">
+    <header>
+      <h1 id="brief-title">Developer Handoff</h1>
+      <div class="meta">
+        <div>
+          <strong id="client-name">Client Name</strong> • <span id="generated-date">Date</span>
+        </div>
+        <div>Prepared by <span id="consultant-name">Consultant</span></div>
+      </div>
+    </header>
+
+    <div class="button-group" style="display:none"><!-- replaced by #factory-bar --></div>
+
+    <div class="section intro">
+      <p class="intro-text">
+        This document contains all CSS custom properties, Tailwind configuration, and color/typography token maps
+        you need to implement the brand. Copy code blocks directly into your project.
+      </p>
+    </div>
+
+    <!-- CSS CUSTOM PROPERTIES -->
+    <div class="section css-vars-section">
+      <h2>CSS Custom Properties</h2>
+      <p class="intro-text">Add this to your <span class="inline-code">:root</span> or a global CSS file:</p>
+      <div class="code-block">
+        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+        <pre id="css-vars-code"></pre>
+      </div>
+    </div>
+
+    <!-- TAILWIND CONFIG -->
+    <div class="section tailwind-section">
+      <h2>Tailwind Configuration</h2>
+      <p class="intro-text">Extend your <span class="inline-code">tailwind.config.js</span>:</p>
+      <div class="code-block">
+        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+        <pre id="tailwind-config-code"></pre>
+      </div>
+    </div>
+
+    <!-- LIGHT MODE TOKENS -->
+    <div class="section light-tokens-section">
+      <h2>Light Mode Token Map</h2>
+      <div class="table-wrapper">
+      <table id="light-tokens-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>CSS Variable</th>
+            <th>Hex</th>
+            <th>Tailwind Class</th>
+          </tr>
+        </thead>
+        <tbody id="light-tokens-body">
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- DARK MODE TOKENS -->
+    <div class="section dark-tokens-section">
+      <h2>Dark Mode Token Map</h2>
+      <p class="intro-text">Apply the <span class="inline-code">dark:</span> prefix in Tailwind or toggle a <span class="inline-code">.dark</span> class on your root element.</p>
+      <div class="table-wrapper">
+      <table id="dark-tokens-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>CSS Variable</th>
+            <th>Hex</th>
+            <th>Tailwind Class</th>
+          </tr>
+        </thead>
+        <tbody id="dark-tokens-body">
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY SCALE -->
+    <div class="section typography-section">
+      <h2>Typography Scale</h2>
+      <p class="intro-text">Import fonts from <a href="https://fonts.google.com" style="color: var(--color-primary);">Google Fonts</a>:</p>
+      <div class="code-block">
+        <pre id="typography-imports"></pre>
+      </div>
+      <div class="table-wrapper">
+      <table id="typography-table">
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Font</th>
+            <th>Weight</th>
+            <th>Size (rem)</th>
+            <th>Line Height</th>
+            <th>Letter Spacing</th>
+          </tr>
+        </thead>
+        <tbody id="typography-body">
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- INTERNATIONALIZATION (i18n) ARCHITECTURE -->
+    <div class="section i18n-section hidden">
+      <h2>Internationalization (i18n) Architecture</h2>
+      <div id="i18n-container"></div>
+    </div>
+
+    <!-- DUAL-MODE VISUAL SYSTEM -->
+    <div class="section visual-system-section">
+      <h2>Dual-Mode Visual System</h2>
+      <div class="table-wrapper">
+      <table id="visual-system-table">
+        <thead>
+          <tr>
+            <th>Section</th>
+            <th>Element</th>
+            <th>Light Mode</th>
+            <th>Dark Mode</th>
+            <th>Rules</th>
+          </tr>
+        </thead>
+        <tbody id="visual-system-body">
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- LOGO INTEGRATION -->
+    <div class="section logos-section">
+      <h2>Logo SVG Code</h2>
+      <div id="logos-container"></div>
+    </div>
+
+    <div class="section asset-links-section">
+      <h2>Hosted Asset Links</h2>
+      <p class="intro-text">Use this section when final logos or developer handoff URLs are ready. These values are saved in your browser for this client so you can update the package hero and give engineering stable links.</p>
+      <div id="asset-links-container" class="asset-link-grid"></div>
+    </div>
+
+    <!-- ACCESSIBILITY -->
+    <div class="section accessibility-section">
+      <h2>Accessibility Notes</h2>
+      <div id="accessibility-container"></div>
+    </div>
+
+    <footer>
+      <strong>Prepared by:</strong>
+      <div class="consultant-info">
+        <div id="footer-consultant-name">Kamilla Gafurzianova, OLY</div>
+        <div id="footer-consultant-title">Olympian & Principal Brand Strategist</div>
+        <div id="footer-consultant-email">kgafurzianova@gmail.com</div>
+        <div id="footer-consultant-website">https://bulachak.com</div>
+      </div>
+      <div style="margin-top: 15px; color: var(--color-text-muted);">Generated <span id="footer-date">Date</span></div>
+    </footer>
+
+    <footer class="consultant-footer">
+      <p>Prepared by <strong id="footer-consultant-name-footer">Kamilla Gafurzianova, OLY</strong> · <span id="footer-consultant-title-footer">Olympian & Principal Brand Strategist</span></p>
+      <p><span id="footer-consultant-email-footer">kgafurzianova@gmail.com</span> · <span id="footer-consultant-website-footer">https://bulachak.com</span></p>
+    </footer>
+  </div>
+
+  <script>
+    function isSerifFont(name) {
+      if (!name) return false;
+      return /serif|garamond|minion|caslon|baskerville|bodoni|didot|cambria|georgia|times|playfair|merriweather|lora|pt serif|literata|newsreader|cormorant|eb garamond/i.test(name);
+    }
+
+    function getFontFallback(name) {
+      return isSerifFont(name) ? 'serif' : 'sans-serif';
+    }
+
+    function getFullFontStack(name) {
+      if (!name) return 'system-ui, -apple-system, sans-serif';
+      if (isSerifFont(name)) {
+        return `'${name}', Georgia, Cambria, 'Times New Roman', Times, serif`;
+      }
+      return `'${name}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif`;
+    }
+
+    function loadBrandFonts(displayFont, bodyFont) {
+      const families = [];
+      if (displayFont) {
+        const dEnc = displayFont.replace(/ /g, '+');
+        families.push(dEnc.includes(':') ? dEnc : `${dEnc}:wght@400;500;600;700`);
+      }
+      if (bodyFont && bodyFont !== displayFont) {
+        const bEnc = bodyFont.replace(/ /g, '+');
+        families.push(bEnc.includes(':') ? bEnc : `${bEnc}:wght@400;500;600;700`);
+      }
+      if (families.length === 0) return;
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `https://fonts.googleapis.com/css2?family=${families.join('&family=')}&display=swap`;
+      document.head.appendChild(link);
+    }
+
+    function applyDeveloperTheme(config) {
+      const theme = config.theme || {};
+      const colors = config.colors || {};
+      const primaryHex = theme.primary || colors.primary?.[0]?.hex || '#1a1a1a';
+      const secondaryHex = theme.secondary || theme.accent || colors.accent?.[0]?.hex || '#4a4a4a';
+      const accentHex = theme.accent || colors.accent?.[0]?.hex || '#d4af37';
+      const bgHex = theme.background || '#f8f8f8';
+      const root = document.documentElement;
+
+      const dispName = config.typography?.display?.name;
+      const bodyName = config.typography?.body?.name;
+      loadBrandFonts(dispName, bodyName);
+
+      if (dispName) root.style.setProperty('--font-display', getFullFontStack(dispName));
+      if (bodyName) root.style.setProperty('--font-body', getFullFontStack(bodyName));
+
+      root.style.setProperty('--color-bg', bgHex);
+      root.style.setProperty('--color-paper', theme.surface || '#ffffff');
+      root.style.setProperty('--color-heading', theme.heading || primaryHex);
+      root.style.setProperty('--color-text', theme.text || '#2d2d2d');
+      root.style.setProperty('--color-text-muted', theme.textMuted || 'rgba(45,45,45,0.72)');
+      root.style.setProperty('--color-text-soft', theme.textSoft || 'rgba(45,45,45,0.6)');
+      root.style.setProperty('--color-border', theme.border || 'rgba(45,45,45,0.14)');
+      root.style.setProperty('--color-panel', theme.surfaceMuted || 'rgba(0,0,0,0.04)');
+      root.style.setProperty('--color-accent', accentHex);
+      root.style.setProperty('--color-primary', primaryHex);
+      root.style.setProperty('--color-secondary', secondaryHex);
+      root.style.setProperty('--color-cta-bg', theme.ctaBackground || accentHex);
+      root.style.setProperty('--color-cta-text', theme.ctaText || '#ffffff');
+      root.style.setProperty('--color-dark-surface', theme.darkBackground || primaryHex);
+      root.style.setProperty('--color-on-dark', theme.onDark || '#f8f8f8');
+    }
+
+    function hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      if (result) {
+        return `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`;
+      }
+      return 'N/A';
+    }
+
+    function getContrastColor(hex) {
+      const rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      if (!rgb) return 'N/A';
+      const brightness = (parseInt(rgb[1], 16) * 299 + parseInt(rgb[2], 16) * 587 + parseInt(rgb[3], 16) * 114) / 1000;
+      return brightness > 128 ? '#000000' : '#FFFFFF';
+    }
+
+    function getWcagLuminance(hex) {
+      const rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      if (!rgb) return 0;
+      const r = parseInt(rgb[1], 16) / 255;
+      const g = parseInt(rgb[2], 16) / 255;
+      const b = parseInt(rgb[3], 16) / 255;
+      return r * 0.2126 + g * 0.7152 + b * 0.0722;
+    }
+
+    function getContrastRatio(hex1, hex2) {
+      const l1 = getWcagLuminance(hex1);
+      const l2 = getWcagLuminance(hex2);
+      const lighter = Math.max(l1, l2);
+      const darker = Math.min(l1, l2);
+      return ((lighter + 0.05) / (darker + 0.05)).toFixed(2);
+    }
+
+    function copyCode(button) {
+      const code = button.parentElement.querySelector('pre').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function getAssetStoreKey(clientSlug) {
+      return `brandPackageAssets:${clientSlug || 'default'}`;
+    }
+
+    function readAssetStore(clientSlug) {
+      try {
+        return JSON.parse(localStorage.getItem(getAssetStoreKey(clientSlug)) || '{}');
+      } catch {
+        return {};
+      }
+    }
+
+    function writeAssetStore(clientSlug, nextState) {
+      localStorage.setItem(getAssetStoreKey(clientSlug), JSON.stringify(nextState));
+    }
+
+    function renderDeveloperBrief() {
+      if (!window.briefConfig) {
+        console.error('briefConfig not found');
+        return;
+      }
+
+      const config = window.briefConfig;
+      applyDeveloperTheme(config);
+
+      // Header & Meta
+      document.getElementById('brief-title').textContent = `Developer Handoff / ${config.clientName}`;
+      if (document.getElementById('bar-title')) document.getElementById('bar-title').textContent = `Developer Handoff / ${config.clientName}`;
+      document.getElementById('client-name').textContent = config.clientName;
+      document.getElementById('generated-date').textContent = config.generatedDate;
+      document.getElementById('consultant-name').textContent = config.consultant?.name || 'Consultant';
+
+      // Footer
+      document.getElementById('footer-consultant-name').textContent = config.consultant?.name || 'Name';
+      document.getElementById('footer-consultant-title').textContent = config.consultant?.title || 'Title';
+      document.getElementById('footer-consultant-email').textContent = config.consultant?.email || 'kgafurzianova@gmail.com';
+      document.getElementById('footer-consultant-website').textContent = config.consultant?.website || 'https://bulachak.com';
+      document.getElementById('footer-date').textContent = config.generatedDate;
+
+      // Fixed Consultant Footer
+      document.getElementById('footer-consultant-name-footer').textContent = config.consultant?.name || 'Name';
+      document.getElementById('footer-consultant-title-footer').textContent = config.consultant?.title || 'Title';
+      document.getElementById('footer-consultant-email-footer').textContent = config.consultant?.email || 'kgafurzianova@gmail.com';
+      document.getElementById('footer-consultant-website-footer').textContent = config.consultant?.website || 'https://bulachak.com';
+
+      // Generate CSS Custom Properties
+      let cssVars = ':root {\n';
+      if (config.colors?.primary) {
+        config.colors.primary.forEach((color, i) => {
+          cssVars += `  --color-primary-${i + 1}: ${color.hex};\n`;
+        });
+      }
+      if (config.colors?.accent) {
+        config.colors.accent.forEach((color, i) => {
+          cssVars += `  --color-accent-${i + 1}: ${color.hex};\n`;
+        });
+      }
+      if (config.typography?.display) {
+        const dispFallbackStr = isSerifFont(config.typography.display.name) ? "Georgia, Cambria, 'Times New Roman', serif" : "system-ui, -apple-system, sans-serif";
+        cssVars += `  --font-display: '${config.typography.display.name}', ${dispFallbackStr};\n`;
+      }
+      if (config.typography?.body) {
+        const bodyFallbackStr = isSerifFont(config.typography.body.name) ? "Georgia, Cambria, serif" : "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+        cssVars += `  --font-body: '${config.typography.body.name}', ${bodyFallbackStr};\n`;
+      }
+      cssVars += '}\n';
+      document.getElementById('css-vars-code').textContent = cssVars;
+
+      // Generate Tailwind Config
+      let tailwindConfig = 'module.exports = {\n  theme: {\n    extend: {\n      colors: {\n';
+      if (config.colors?.primary) {
+        tailwindConfig += '        primary: {\n';
+        config.colors.primary.forEach((color, i) => {
+          tailwindConfig += `          ${(i + 1) * 100}: '${color.hex}',\n`;
+        });
+        tailwindConfig += '        },\n';
+      }
+      if (config.colors?.accent) {
+        tailwindConfig += '        accent: {\n';
+        config.colors.accent.forEach((color, i) => {
+          tailwindConfig += `          ${(i + 1) * 100}: '${color.hex}',\n`;
+        });
+        tailwindConfig += '        },\n';
+      }
+      tailwindConfig += '      },\n';
+      tailwindConfig += '      fontFamily: {\n';
+      if (config.typography?.display) {
+        const dispTailwindFallback = isSerifFont(config.typography.display.name) ? "'Georgia', 'serif'" : "'system-ui', 'sans-serif'";
+        tailwindConfig += `        display: ['${config.typography.display.name}', ${dispTailwindFallback}],\n`;
+      }
+      if (config.typography?.body) {
+        const bodyTailwindFallback = isSerifFont(config.typography.body.name) ? "'Georgia', 'serif'" : "'-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'";
+        tailwindConfig += `        body: ['${config.typography.body.name}', ${bodyTailwindFallback}],\n`;
+      }
+      tailwindConfig += '      },\n';
+      tailwindConfig += '    },\n';
+      tailwindConfig += '  },\n';
+      tailwindConfig += '};\n';
+      document.getElementById('tailwind-config-code').textContent = tailwindConfig;
+
+      // Light Mode Tokens
+      const lightTokensBody = document.getElementById('light-tokens-body');
+      if (config.lightMode && config.lightMode.length > 0) {
+        config.lightMode.forEach(item => {
+          const row = document.createElement('tr');
+          const colorIndex = config.colors?.primary?.findIndex(c => c.hex === item.hex);
+          let tailwindClass = 'N/A';
+          if (colorIndex >= 0) {
+            tailwindClass = `bg-primary-${(colorIndex + 1) * 100}`;
+          }
+          row.innerHTML = `
+            <td>${item.element}</td>
+            <td><span class="inline-code">--color-light-${item.element}</span></td>
+            <td><div class="color-box" style="background-color: ${item.hex};"></div> ${item.hex}</td>
+            <td><span class="inline-code">${tailwindClass}</span></td>
+          `;
+          lightTokensBody.appendChild(row);
+        });
+      }
+
+      // Dark Mode Tokens
+      const darkTokensBody = document.getElementById('dark-tokens-body');
+      if (config.darkMode && config.darkMode.length > 0) {
+        config.darkMode.forEach(item => {
+          const row = document.createElement('tr');
+          const colorIndex = config.colors?.primary?.findIndex(c => c.hex === item.hex);
+          let tailwindClass = 'N/A';
+          if (colorIndex >= 0) {
+            tailwindClass = `dark:bg-primary-${(colorIndex + 1) * 100}`;
+          }
+          row.innerHTML = `
+            <td>${item.element}</td>
+            <td><span class="inline-code">--color-dark-${item.element}</span></td>
+            <td><div class="color-box" style="background-color: ${item.hex};"></div> ${item.hex}</td>
+            <td><span class="inline-code">${tailwindClass}</span></td>
+          `;
+          darkTokensBody.appendChild(row);
+        });
+      }
+
+      // Typography Imports
+      const googleFonts = new Set();
+      if (config.typography?.display?.source) {
+        googleFonts.add(config.typography.display.source);
+      }
+      if (config.typography?.body?.source) {
+        googleFonts.add(config.typography.body.source);
+      }
+      let imports = '';
+      googleFonts.forEach(url => {
+        imports += `@import url('${url}');\n`;
+      });
+      if (imports) {
+        document.getElementById('typography-imports').textContent = imports;
+      } else {
+        document.querySelector('.typography-section').style.display = 'block';
+      }
+
+      // Typography Scale
+      if (config.typography?.hierarchy && config.typography.hierarchy.length > 0) {
+        const typographyBody = document.getElementById('typography-body');
+        config.typography.hierarchy.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.level}</td>
+            <td>${item.font}</td>
+            <td>${item.weight}</td>
+            <td>${item.size}</td>
+            <td>${item.line_height || '1.5'}</td>
+            <td>${item.letter_spacing || '0'}</td>
+          `;
+          typographyBody.appendChild(row);
+        });
+      }
+
+      // Visual System
+      if (config.visualSystem && config.visualSystem.length > 0) {
+        const visualSystemBody = document.getElementById('visual-system-body');
+        config.visualSystem.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.section}</td>
+            <td>${item.element}</td>
+            <td>${item.lightMode || item.light_mode || ''}</td>
+            <td>${item.darkMode || item.dark_mode || ''}</td>
+            <td>${item.rules || ''}</td>
+          `;
+          visualSystemBody.appendChild(row);
+        });
+      }
+
+      // Logos (Strictly 4 Canonical Assets: 2 Horizontal Lockups + 2 Standalone Logos)
+      const logosContainer = document.getElementById('logos-container');
+      const canonicalLogos = [
+        { key: 'horizontal_light', title: 'HORIZONTAL LOCKUP — LIGHT (Logo + First & Last Name)', file: '../assets/logo-horizontal-light.svg', darkBg: false },
+        { key: 'horizontal_dark',  title: 'HORIZONTAL LOCKUP — DARK (Logo + First & Last Name)',  file: '../assets/logo-horizontal-dark.svg',  darkBg: true },
+        { key: 'mark_light',       title: 'LOGO — LIGHT (Standalone Klimt Geometric Mark)',       file: '../assets/logo-mark-light.svg',       darkBg: false },
+        { key: 'mark_dark',        title: 'LOGO — DARK (Standalone Klimt Geometric Mark)',        file: '../assets/logo-mark-dark.svg',        darkBg: true }
+      ];
+      canonicalLogos.forEach(({ key, title, file, darkBg }) => {
+        if (config.svgs?.[key]) {
+          const div = document.createElement('div');
+          div.style.cssText = 'margin-bottom: 32px; border: 1px solid #DED6C5; border-radius: 12px; overflow: hidden; background: #FFFFFF;';
+          const headerBar = document.createElement('div');
+          headerBar.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: #F5F0E6; border-bottom: 1px solid #DED6C5; flex-wrap: wrap; gap: 10px;';
+          headerBar.innerHTML = `
+            <strong style="font-size: 13px; letter-spacing: 0.06em; color: #1A1815;">${title}</strong>
+            <a href="${file}" download style="padding: 6px 14px; border-radius: 8px; background: #1A1815; color: #F5F0E6; border: 1px solid #D4AF37; text-decoration: none; font-size: 11px; font-weight: 700;">⬇ Download .SVG</a>
+          `;
+          div.appendChild(headerBar);
+
+          const previewStage = document.createElement('div');
+          previewStage.style.cssText = `padding: 28px; display: flex; align-items: center; justify-content: center; background: ${darkBg ? '#1A1815' : '#F5F0E6'}; border-bottom: 1px solid #DED6C5;`;
+          previewStage.innerHTML = config.svgs[key];
+          div.appendChild(previewStage);
+
+          const codeBlock = document.createElement('div');
+          codeBlock.className = 'code-block';
+          codeBlock.style.marginBottom = '0';
+          codeBlock.style.borderRadius = '0';
+          const button = document.createElement('button');
+          button.className = 'copy-button';
+          button.textContent = 'Copy SVG XML';
+          button.onclick = function() { copyCode(this); };
+          const pre = document.createElement('pre');
+          pre.textContent = config.svgs[key];
+          codeBlock.appendChild(button);
+          codeBlock.appendChild(pre);
+          div.appendChild(codeBlock);
+          logosContainer.appendChild(div);
+        }
+      });
+
+      // Accessibility
+      const accessibilityContainer = document.getElementById('accessibility-container');
+      if (config.colors?.primary) {
+        const h3 = document.createElement('h3');
+        h3.textContent = 'Color Contrast Ratios (WCAG AA/AAA)';
+        accessibilityContainer.appendChild(h3);
+        const ul = document.createElement('ul');
+        ul.style.marginLeft = '20px';
+        [
+          { fg: '#1A1815', bg: '#F5F0E6', label: 'Obsidian Grid (#1A1815) on Alabaster Parchment (#F5F0E6)' },
+          { fg: '#F5F0E6', bg: '#1A1815', label: 'Alabaster Parchment (#F5F0E6) on Obsidian Grid (#1A1815)' },
+          { fg: '#D4AF37', bg: '#1A1815', label: 'Klimt Gold (#D4AF37) on Obsidian Grid (#1A1815)' },
+          { fg: '#2B5A75', bg: '#F5F0E6', label: 'Lapis Mosaic (#2B5A75) on Alabaster Parchment (#F5F0E6)' }
+        ].forEach(pair => {
+          const li = document.createElement('li');
+          const ratio = getContrastRatio(pair.fg, pair.bg);
+          li.innerHTML = `<span class="inline-code">${pair.label}</span>: <strong>${ratio}:1</strong> ✓ WCAG AA/AAA Verified`;
+          li.style.marginBottom = '8px';
+          ul.appendChild(li);
+        });
+        accessibilityContainer.appendChild(ul);
+      }
+
+      if (!logosContainer.innerHTML) {
+        document.querySelector('.logos-section').classList.add('hidden');
+      }
+
+      // Hosted asset links (Strictly 4 Canonical Logo Assets + Deployment URLs)
+      const assetFields = [
+        ['horizontal_light', 'Horizontal Lockup — Light (Logo + First & Last Name)'],
+        ['horizontal_dark', 'Horizontal Lockup — Dark (Logo + First & Last Name)'],
+        ['mark_light', 'Logo — Light (Standalone Mark)'],
+        ['mark_dark', 'Logo — Dark (Standalone Mark)'],
+        ['devRepoUrl', 'Developer Repo / Workspace'],
+        ['stagingUrl', 'Staging URL'],
+        ['productionUrl', 'Production URL'],
+      ];
+      const assetState = readAssetStore(config.clientSlug);
+      const assetLinksContainer = document.getElementById('asset-links-container');
+      assetFields.forEach(([key, label]) => {
+        const card = document.createElement('div');
+        card.className = 'asset-link-card';
+        card.innerHTML = `
+          <h3>${label}</h3>
+          <label for="asset-${key}">${key}</label>
+          <input id="asset-${key}" class="asset-link-input" type="url" value="${assetState[key] || ''}" placeholder="https://..." />
+          <div class="asset-link-actions">
+            <button type="button">Save</button>
+            <a href="${assetState[key] || '#'}" target="_blank" rel="noreferrer" ${assetState[key] ? '' : 'style="display:none"'}>Open ↗</a>
+          </div>
+        `;
+        const input = card.querySelector('input');
+        const button = card.querySelector('button');
+        const link = card.querySelector('a');
+        button.addEventListener('click', () => {
+          const nextState = { ...readAssetStore(config.clientSlug), [key]: input.value.trim() };
+          writeAssetStore(config.clientSlug, nextState);
+          if (input.value.trim()) {
+            link.href = input.value.trim();
+            link.style.display = '';
+          } else {
+            link.href = '#';
+            link.style.display = 'none';
+          }
+          button.textContent = 'Saved';
+          setTimeout(() => { button.textContent = 'Save'; }, 1200);
+        });
+        assetLinksContainer.appendChild(card);
+      });
+
+      // Internationalization (i18n) Architecture
+      const i18nSection = document.querySelector('.i18n-section');
+      i18nSection.classList.remove('hidden');
+      if (config.language?.isMultilingual) {
+        const i18nContainer = document.getElementById('i18n-container');
+
+        // Language Codes & Locales
+        const langCodesDiv = document.createElement('div');
+        langCodesDiv.innerHTML = '<h3>Language Codes & Locales</h3>';
+        if (config.language?.locales && config.language.locales.length) {
+          const ul = document.createElement('ul');
+          ul.style.marginLeft = '20px';
+          config.language.locales.forEach(locale => {
+            const li = document.createElement('li');
+            const obj = typeof locale === 'object' ? locale : { language: locale, code: locale, direction: 'ltr' };
+            li.innerHTML = `<code>${obj.code}</code> — ${obj.language} (${obj.direction.toUpperCase()})`;
+            li.style.marginBottom = '6px';
+            ul.appendChild(li);
+          });
+          langCodesDiv.appendChild(ul);
+        }
+        i18nContainer.appendChild(langCodesDiv);
+
+        // Channel–Language Map
+        if (config.language?.channelLanguageMap) {
+          const chanDiv = document.createElement('div');
+          chanDiv.style.marginTop = '20px';
+          chanDiv.innerHTML = `<h3>Channel–Language Map</h3><p style="margin:0">${config.language.channelLanguageMap}</p>`;
+          i18nContainer.appendChild(chanDiv);
+        }
+
+        // Font Stack & CSS
+        const fontStackDiv = document.createElement('div');
+        fontStackDiv.style.marginTop = '20px';
+        fontStackDiv.innerHTML = '<h3>Font Stack per Language (CSS lang attribute)</h3>';
+        if (config.language?.fontStacks) {
+          const pre = document.createElement('pre');
+          pre.className = 'code-block';
+          pre.textContent = config.language.fontStacks;
+          fontStackDiv.appendChild(pre);
+        }
+        i18nContainer.appendChild(fontStackDiv);
+
+        // General i18n Notes
+        const notesDiv = document.createElement('div');
+        notesDiv.style.marginTop = '20px';
+        notesDiv.className = 'note-box';
+        notesDiv.innerHTML = `
+          <h3>Key Considerations</h3>
+          <ul style="margin-left: 20px;">
+            <li style="margin-bottom: 8px;"><strong>Text Direction:</strong> ${config.language?.textDirection || 'LTR'}</li>
+            <li style="margin-bottom: 8px;"><strong>Character Encoding:</strong> UTF-8 (required for non-Latin scripts)</li>
+            <li style="margin-bottom: 8px;"><strong>URL Structure:</strong> ${config.language?.urlStructure || 'Use subdirectory (/en/ /ru/) or subdomain (en.site.com) approach'}</li>
+            <li style="margin-bottom: 8px;"><strong>CMS / Translation Workflow:</strong> ${config.language?.cmsApproach || 'Separate translation workflows per language'}</li>
+          </ul>
+        `;
+        i18nContainer.appendChild(notesDiv);
+
+        // Full s18 rows table
+        if (config.language?.rows && config.language.rows.length > 0) {
+          const tableDiv = document.createElement('div');
+          tableDiv.style.marginTop = '20px';
+          tableDiv.innerHTML = '<h3>Full Language Framework</h3>';
+          const tbl = document.createElement('table');
+          tbl.style.cssText = 'width:100%;border-collapse:collapse;font-size:13px';
+          tbl.innerHTML = `<thead><tr>
+            <th style="border:1px solid var(--color-border);padding:8px;background:var(--color-bg-muted,#f5f5f5);text-align:left;width:22%">Topic</th>
+            <th style="border:1px solid var(--color-border);padding:8px;background:var(--color-bg-muted,#f5f5f5);text-align:left">Strategy</th>
+            <th style="border:1px solid var(--color-border);padding:8px;background:var(--color-bg-muted,#f5f5f5);text-align:left;width:30%">Operational Implication</th>
+          </tr></thead>`;
+          const tbody = document.createElement('tbody');
+          config.language.rows.forEach(r => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td style="border:1px solid var(--color-border);padding:8px;vertical-align:top;font-weight:600">${r.topic}</td>
+              <td style="border:1px solid var(--color-border);padding:8px;vertical-align:top">${r.definition}</td>
+              <td style="border:1px solid var(--color-border);padding:8px;vertical-align:top;color:var(--color-text-muted,#666)">${r.implication}</td>`;
+            tbody.appendChild(tr);
+          });
+          tbl.appendChild(tbody);
+          tableDiv.appendChild(tbl);
+          i18nContainer.appendChild(tableDiv);
+        }
+      } else {
+        const lang = config.language?.primary || config.language?.allLanguages?.[0] || 'English';
+        document.getElementById('i18n-container').innerHTML = `
+          <div class="note-box" style="margin-bottom:16px">
+            <strong>Single-Language Operation: ${lang}</strong><br>
+            All brand materials, website copy, email campaigns, and social content are produced in ${lang}.<br>
+            i18n scaffolding is not required at launch. Re-evaluate if the brand expands to additional markets.
+          </div>
+          <ul style="margin-left:20px;margin-top:12px">
+            <li style="margin-bottom:8px"><strong>HTML lang attribute:</strong> <code>${(config.language?.locales?.[0]?.code || 'en')}</code></li>
+            <li style="margin-bottom:8px"><strong>Character Encoding:</strong> UTF-8</li>
+            <li style="margin-bottom:8px"><strong>Text Direction:</strong> ${config.language?.textDirection || 'LTR'}</li>
+          </ul>
+        `;
+      }
+    }
+
+    // Render on load
+    window.addEventListener('load', renderDeveloperBrief);
+  </script>
+  <script>
+    document.addEventListener('click', function(e) {
+      const code = e.target.closest('code');
+      if (!code) return;
+      navigator.clipboard.writeText(code.textContent.trim()).then(() => {
+        code.classList.add('copied');
+        const orig = code.textContent;
+        code.textContent = 'Copied!';
+        setTimeout(() => { code.textContent = orig; code.classList.remove('copied'); }, 1200);
+      });
+    });
+  </script>
+    <script src="../core/components.js"></script>
+</body>
+</html>

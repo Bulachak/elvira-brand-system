@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+window.contentConfig = {
+  "PRIMARY_COLOR": "#1A1815",
+  "ACCENT_COLOR": "#D4AF37",
+  "LILAC_COLOR": "#2B5A75",
+  "TEXT_LIGHT": "#FFFFFF",
+  "TEXT_DARK": "#1A1815",
+  "FONT_HEADLINE": "'Cormorant Garamond', Georgia, \"Times New Roman\", serif",
+  "FONT_BODY": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif",
+  "LOGO_URL": "../assets/logo.svg",
+  "BRAND_NAME": "Elvira Astashkina"
+};
+</script>
+<title>LinkedIn Page Banner — Brand Template</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #0d0d0d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 40px;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+/* ── CONTROLS ── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  width: 792px;
+}
+.controls-label {
+  color: #666;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  flex: 1;
+}
+.export-btn {
+  background: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.export-btn:hover { background: #eee; }
+
+/* ── SLIDE WRAPPER (scales 1584→792 for preview, 396→198) ── */
+.slide-wrapper {
+  width: 792px;
+  height: 198px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.slide {
+  width: 1584px;
+  height: 396px;
+  position: relative;
+  overflow: hidden;
+  background: var(--primary);
+  transform: scale(0.5);
+  transform-origin: top left;
+  font-family: var(--font-body);
+}
+
+/* ── LAYERS ── */
+.l-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.l-gradient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* Banner: gradient comes from right (logo/text on left, photo bleeds right) */
+.gradient-left .l-gradient {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--overlay-color) 95%, transparent) 0%,
+    color-mix(in srgb, var(--overlay-color) 65%, transparent) 40%,
+    transparent 70%
+  );
+}
+/* Full dim for typographic */
+.gradient-none .l-gradient { display: none; }
+
+/* Graphic elements */
+.l-graphic-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(45deg,
+      var(--accent) 0, var(--accent) 1px,
+      transparent 0, transparent 50%);
+  background-size: 14px 14px;
+  opacity: 0.07;
+  display: none;
+}
+.l-graphic-border {
+  position: absolute;
+  inset: 32px;
+  border: 4px solid var(--accent);
+  pointer-events: none;
+  display: none;
+}
+/* Vertical accent bar on left edge */
+.l-graphic-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 18px;
+  background: var(--accent);
+  pointer-events: none;
+  display: none;
+}
+
+/* ════════════════════════════════════════════
+   LAYOUT A — PHOTO + GRADIENT
+   Photo right, brand identity anchored left
+   ════════════════════════════════════════════ */
+.layout-photo .l-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 80px;
+  gap: 20px;
+  z-index: 5;
+}
+
+/* ════════════════════════════════════════════
+   LAYOUT B — TYPOGRAPHIC
+   Solid color, no photo
+   ════════════════════════════════════════════ */
+.layout-typographic .l-photo    { display: none; }
+.layout-typographic .l-gradient { display: none; }
+.layout-typographic .l-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 80px;
+  gap: 20px;
+  z-index: 5;
+}
+
+/* ── SHARED COMPONENTS ── */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.brand-logo img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+.logo-wordmark {
+  font-family: var(--font-headline);
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--text-light);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.tagline {
+  font-family: var(--font-body);
+  font-size: 36px;
+  line-height: 1.3;
+  color: var(--text-light);
+  opacity: 0.78;
+  max-width: 860px;
+}
+
+/* Accent divider between logo and tagline */
+.accent-bar {
+  width: 80px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 4px;
+}
+</style>
+    <link rel="stylesheet" href="core/factory-core.css">
+</head>
+<body>
+
+<!-- ── CONTROLS ── -->
+<div class="controls">
+  <span class="controls-label">LinkedIn Page Banner · 1584 × 396px</span>
+  <button class="export-btn" onclick="exportPNG()">⬇ Export PNG</button>
+</div>
+
+<!-- ── SLIDE FRAME ── -->
+<div class="slide-wrapper">
+  <div class="slide" id="slide">
+
+    <div class="l-photo"    id="photoLayer"></div>
+    <div class="l-gradient"></div>
+
+    <!-- Graphic elements -->
+    <div class="l-graphic-texture" id="gTexture"></div>
+    <div class="l-graphic-border"  id="gBorder"></div>
+    <div class="l-graphic-bar"     id="gBar"></div>
+
+    <!-- Content -->
+    <div class="l-content" id="contentLayer">
+      <div class="brand-logo" id="logoBlock"></div>
+      <div class="accent-bar"></div>
+      <p   class="tagline"   id="tagline"></p>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+
+// ══════════════════════════════════════════════════════════════
+// BRAND CONFIG — set once per client at package generation time
+// ══════════════════════════════════════════════════════════════
+window.contentConfig = window.contentConfig || {
+  PRIMARY_COLOR:   '#1a1a2e',
+  SECONDARY_COLOR: '#16213e',
+  ACCENT_COLOR:    '#e94560',
+  TEXT_LIGHT:      '#ffffff',
+  TEXT_DARK:       '#1a1a1a',
+  FONT_HEADLINE:   '"Montserrat", sans-serif',
+  FONT_BODY:       '"Inter", sans-serif',
+  LOGO_URL:        '',
+  BRAND_NAME:      'Brand',
+};
+
+// ══════════════════════════════════════════════════════════════
+// PER-BANNER VARIABLES
+// ══════════════════════════════════════════════════════════════
+const POST = {
+  LAYOUT:            'photo',       // photo | typographic
+  PHOTO_URL:         '',
+  TAGLINE:           'Your brand tagline goes here',
+  GRADIENT_POSITION: 'left',        // left | none
+  OVERLAY_COLOR:     '',
+  OVERLAY_OPACITY:   0.8,
+  GRAPHIC_SHOW:      false,
+  GRAPHIC_TYPE:      'bar',         // texture | border | bar
+};
+
+// ══════════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════════
+function render() {
+  const cfg  = window.contentConfig;
+  const post = POST;
+  const slide = document.getElementById('slide');
+  const root  = document.documentElement;
+
+  root.style.setProperty('--primary',         cfg.PRIMARY_COLOR);
+  root.style.setProperty('--secondary',       cfg.SECONDARY_COLOR);
+  root.style.setProperty('--accent',          cfg.ACCENT_COLOR);
+  root.style.setProperty('--text-light',      cfg.TEXT_LIGHT);
+  root.style.setProperty('--text-dark',       cfg.TEXT_DARK);
+  root.style.setProperty('--font-headline',   cfg.FONT_HEADLINE);
+  root.style.setProperty('--font-body',       cfg.FONT_BODY);
+  root.style.setProperty('--overlay-color',   post.OVERLAY_COLOR || cfg.PRIMARY_COLOR);
+  root.style.setProperty('--overlay-opacity', post.OVERLAY_OPACITY);
+
+  slide.className = `slide layout-${post.LAYOUT} gradient-${post.GRADIENT_POSITION}`;
+
+  // Photo
+  const photoEl = document.getElementById('photoLayer');
+  if (post.PHOTO_URL) photoEl.style.backgroundImage = `url(${post.PHOTO_URL})`;
+
+  // Graphic elements
+  document.getElementById('gTexture').style.display = (post.GRAPHIC_SHOW && post.GRAPHIC_TYPE === 'texture') ? '' : 'none';
+  document.getElementById('gBorder').style.display  = (post.GRAPHIC_SHOW && post.GRAPHIC_TYPE === 'border')  ? '' : 'none';
+  document.getElementById('gBar').style.display     = (post.GRAPHIC_SHOW && post.GRAPHIC_TYPE === 'bar')     ? '' : 'none';
+
+  // Logo
+  const logoBlock = document.getElementById('logoBlock');
+  if (cfg.LOGO_URL) {
+    logoBlock.innerHTML = `<img src="${cfg.LOGO_URL}" alt="${cfg.BRAND_NAME}">`;
+  } else {
+    logoBlock.innerHTML = `<span class="logo-wordmark">${cfg.BRAND_NAME}</span>`;
+  }
+
+  // Tagline
+  document.getElementById('tagline').textContent = post.TAGLINE;
+}
+
+// ══════════════════════════════════════════════════════════════
+// EXPORT
+// ══════════════════════════════════════════════════════════════
+async function exportPNG() {
+  const slide = document.getElementById('slide');
+  slide.style.transform = 'none';
+  const canvas = await html2canvas(slide, {
+    width:   1584,
+    height:  396,
+    scale:   1,
+    useCORS: true,
+    logging: false,
+    backgroundColor: null,
+  });
+  slide.style.transform = '';
+  const a = document.createElement('a');
+  a.download = `linkedin-banner-${Date.now()}.png`;
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+}
+
+render();
+</script>
+    <script src="core/components.js"></script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Cards — Elvira Astashkina Brand Studio</title>
+<link rel="stylesheet" href="../core/factory-core.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0;
+  color: #1A1815;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── UNIFIED BRAND HEADER BAR ── */
+.brand-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245, 240, 230, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #DED6C5;
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.brand-lockup-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #1A1815;
+}
+.brand-lockup-link img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.topbar-nav a {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #1A1815;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+.topbar-nav a:hover {
+  background: #FFFFFF;
+  border-color: #DED6C5;
+}
+.topbar-nav a.active {
+  background: #1A1815;
+  color: #F5F0E6;
+  border-color: #D4AF37;
+}
+
+.studio-shell {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 36px 28px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.studio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #DED6C5;
+  padding-bottom: 20px;
+}
+.studio-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #2B5A75;
+  margin-bottom: 6px;
+}
+.studio-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0;
+  color: #1A1815;
+  line-height: 1.08;
+}
+.studio-sub {
+  font-size: 14px;
+  color: #4A4842;
+  margin: 6px 0 0;
+  max-width: 58ch;
+}
+
+/* ── CONTROLS (outside frame, not exported) ── */
+.card-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 24px;
+  background: #FFFFFF;
+  border: 1px solid #DED6C5;
+  border-radius: 12px;
+  width: 100%;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(26, 24, 21, 0.05);
+}
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.control-group label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #4A4842;
+}
+.control-group select {
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid #DED6C5;
+  background: #F5F0E6;
+  color: #1A1815;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.control-group button.primary {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #1A1815 !important;
+  color: #F5F0E6 !important;
+  border: 1px solid #D4AF37 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.control-group button.primary:hover {
+  background: #2B5A75 !important;
+  color: #FFFFFF !important;
+}
+
+/* ── CARDS WRAPPER ── */
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  width: 100%;
+  align-items: center;
+}
+.card-stage-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4A4842;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+/* ── CARD SHELL ── */
+.card-wrapper {
+  transform-origin: top center;
+}
+.card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  background: var(--card-bg);
+  color: var(--card-fg);
+  width: var(--card-w, 1050px);
+  height: var(--card-h, 600px);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(26, 24, 21, 0.14);
+  border: 1px solid var(--card-border);
+  transition: all 0.25s ease;
+}
+
+/* ── THEMES & VARIABLES ── */
+.card.theme-light {
+  --card-bg: #F5F0E6;
+  --card-fg: #1A1815;
+  --card-muted: #4A4842;
+  --card-accent: #9A7422;
+  --card-gold: #D4AF37;
+  --card-lapis: #2B5A75;
+  --card-border: #DED6C5;
+  --card-panel: #FFFFFF;
+}
+.card.theme-dark {
+  --card-bg: #1A1815;
+  --card-fg: #F5F0E6;
+  --card-muted: #DED6C5;
+  --card-accent: #D4AF37;
+  --card-gold: #D4AF37;
+  --card-lapis: #2B5A75;
+  --card-border: rgba(212, 175, 55, 0.45);
+  --card-panel: #22201D;
+}
+
+/* ── FRONT CARD LAYOUT ── */
+.side-front {
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 56px 68px;
+}
+.front-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+.front-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--card-accent);
+}
+.front-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+.front-lockup-img {
+  height: 124px;
+  width: auto;
+  object-fit: contain;
+}
+.front-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-top: 2px solid var(--card-border);
+  padding-top: 22px;
+  position: relative;
+  z-index: 2;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--card-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Mosaic Strip on Graphic Layout */
+.klimt-mosaic-strip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 240px;
+  background-image: url('/klimt-assets/hf_20260815_065121_774b4807-46a7-4c8e-a129-76339e184e25.png');
+  background-size: cover;
+  background-position: center;
+  border-left: 3px solid #D4AF37;
+  z-index: 1;
+}
+.layout-minimal .klimt-mosaic-strip {
+  display: none;
+}
+.layout-graphic.side-front {
+  padding-right: 300px;
+}
+.layout-graphic.side-front .front-center {
+  justify-content: flex-start;
+}
+
+/* ── BACK CARD LAYOUT ── */
+.side-back {
+  flex-direction: row;
+  align-items: stretch;
+  padding: 56px 68px;
+  gap: 52px;
+}
+.back-mark-col {
+  flex: 0 0 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 2px solid var(--card-border);
+  padding-right: 44px;
+}
+.back-mark-img {
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
+}
+.back-discipline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--card-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.back-info-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.info-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 54px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.05;
+  color: var(--card-fg);
+}
+.info-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--card-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 10px;
+}
+.info-tagline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 24px;
+  color: var(--card-muted);
+  margin-top: 8px;
+}
+.info-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 28px;
+  font-size: 18px;
+  font-weight: 500;
+  border-top: 2px solid var(--card-border);
+  padding-top: 26px;
+}
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--card-fg);
+}
+.info-row svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--card-gold);
+  flex-shrink: 0;
+}
+</style>
+  <!-- Open Graph / Telegram / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Elvira Astashkina (@elvrast)">
+  <meta property="og:title" content="Business Cards — Elvira Astashkina Brand Studio">
+  <meta property="og:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta property="og:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:secure_url" content="https://elvira-brand-system.vercel.app/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Elvira Astashkina — Applied Machine Learning Engineer &amp; AI Educator (@elvrast)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Business Cards — Elvira Astashkina Brand Studio">
+  <meta name="twitter:description" content="Elvira Astashkina (@elvrast) — Applied Machine Learning Engineer & AI Educator in the San Francisco Bay Area. Where Mathematical Rigor Meets Editorial Clarity.">
+  <meta name="twitter:image" content="https://elvira-brand-system.vercel.app/og-image.png">
+</head>
+<body>
+
+<!-- Unified Top Header Bar -->
+<header class="brand-topbar">
+  <a href="/" class="brand-lockup-link" title="Back to Everything You Need — Brand Hub">
+    <img src="../assets/logo-horizontal-light.svg" alt="Elvira Astashkina">
+  </a>
+  <nav class="topbar-nav">
+    <a href="/">Brand Hub</a>
+    <a href="/brand">Brand System</a>
+    <a href="../brand-book/elvira-astashkina-2026-10-brand-book.html">Brand Book</a>
+    <a href="/carousel">Carousel Studio</a>
+    <a href="/video">Video Studio</a>
+    <a href="business-card-template.html" class="active">Business Cards</a>
+  </nav>
+</header>
+
+<main class="studio-shell">
+  <div class="studio-header">
+    <div>
+      <div class="studio-eyebrow">Print &amp; Executive Stationery · 300 DPI Master</div>
+      <h1 class="studio-title">Architectural Business Cards</h1>
+      <p class="studio-sub">Configured with Elvira Astashkina’s canonical horizontal lockup and standalone Klimt geometric mark in Light Alabaster and Dark Obsidian editions.</p>
+    </div>
+  </div>
+
+  <div class="card-controls">
+    <div class="control-group">
+      <label for="ctrl-size">Format:</label>
+      <select id="ctrl-size" onchange="updateCardContext()">
+        <option value="us">US Standard (3.5" × 2" · 1050×600px)</option>
+        <option value="eu">European ISO (85mm × 55mm · 1004×650px)</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="ctrl-layout">Edition:</label>
+      <select id="ctrl-layout" onchange="updateCardContext()">
+        <option value="graphic">Klimt Mosaic Architectural</option>
+        <option value="minimal">Editorial Minimal</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="ctrl-theme">Palette:</label>
+      <select id="ctrl-theme" onchange="updateCardContext()">
+        <option value="dark">Obsidian Dark (#1A1815)</option>
+        <option value="light">Alabaster Light (#F5F0E6)</option>
+      </select>
+    </div>
+    <div style="flex: 1;"></div>
+    <div class="control-group">
+      <button class="primary" onclick="exportCards()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+        Export Print-Ready PNGs (300 DPI)
+      </button>
+    </div>
+  </div>
+
+  <div class="cards-container">
+    <!-- FRONT CARD -->
+    <div class="card-wrapper" id="wrap-front">
+      <div class="card-stage-label">01 / OBVERSE (FRONT) — HORIZONTAL LOCKUP</div>
+      <div class="card side-front layout-graphic theme-dark" id="card-front">
+        <div class="klimt-mosaic-strip"></div>
+        <div class="front-top-bar">
+          <span class="front-tag">Applied Machine Learning Engineer &amp; AI Educator</span>
+        </div>
+        <div class="front-center">
+          <img id="front-lockup-img" class="front-lockup-img" src="../assets/logo-horizontal-dark.svg" alt="Elvira Astashkina Horizontal Lockup">
+        </div>
+        <div class="front-bottom-bar">
+          <span>MATHEMATICAL FOUNDATIONS OF AI</span>
+          <span>ELVIRAASTASHKINA.COM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACK CARD -->
+    <div class="card-wrapper" id="wrap-back">
+      <div class="card-stage-label">02 / REVERSE (BACK) — STANDALONE MARK &amp; CREDENTIALS</div>
+      <div class="card side-back layout-graphic theme-dark" id="card-back">
+        <div class="back-mark-col">
+          <img id="back-mark-img" class="back-mark-img" src="../assets/logo-mark-dark.svg" alt="Elvira Astashkina Mark">
+          <div class="back-discipline">
+            STATISTICAL LEARNING<br>
+            DEEP ARCHITECTURES<br>
+            QUANTITATIVE AI
+          </div>
+        </div>
+        <div class="back-info-col">
+          <div>
+            <h2 class="info-name">Elvira Astashkina</h2>
+            <div class="info-title">Applied Machine Learning Engineer &amp; AI Educator</div>
+            <div class="info-tagline">“Every masterpiece has a mathematical structure beneath the gold leaf.”</div>
+          </div>
+          <div class="info-details">
+            <div class="info-row">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <span>elvira@astashkina.ai</span>
+            </div>
+            <div class="info-row">
+              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.34.16-2h4.68c.09.66.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+              <span>elviraastashkina.com</span>
+            </div>
+            <div class="info-row">
+              <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+              <span>@elvrast</span>
+            </div>
+            <div class="info-row">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>San Francisco Bay Area</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+function updateCardContext() {
+  const size = document.getElementById('ctrl-size').value;
+  const layout = document.getElementById('ctrl-layout').value;
+  const theme = document.getElementById('ctrl-theme').value;
+
+  const cFront = document.getElementById('card-front');
+  const cBack = document.getElementById('card-back');
+
+  let cW = '1050px', cH = '600px';
+  if (size === 'eu') { cW = '1004px'; cH = '650px'; }
+  cFront.style.setProperty('--card-w', cW);
+  cFront.style.setProperty('--card-h', cH);
+  cBack.style.setProperty('--card-w', cW);
+  cBack.style.setProperty('--card-h', cH);
+
+  cFront.className = `card side-front layout-${layout} theme-${theme}`;
+  cBack.className = `card side-back layout-${layout} theme-${theme}`;
+
+  document.getElementById('front-lockup-img').src =
+    theme === 'dark' ? '../assets/logo-horizontal-dark.svg' : '../assets/logo-horizontal-light.svg';
+  document.getElementById('back-mark-img').src =
+    theme === 'dark' ? '../assets/logo-mark-dark.svg' : '../assets/logo-mark-light.svg';
+
+  scaleForPreview();
+}
+
+function scaleForPreview() {
+  const w = window.innerWidth;
+  let scale = 0.85;
+  if (w < 1200) { scale = Math.max(0.32, (w - 80) / 1050); }
+  const h = document.getElementById('ctrl-size').value === 'eu' ? 650 : 600;
+  document.getElementById('wrap-front').style.transform = `scale(${scale})`;
+  document.getElementById('wrap-front').style.marginBottom = `-${h * (1 - scale)}px`;
+  document.getElementById('wrap-back').style.transform = `scale(${scale})`;
+  document.getElementById('wrap-back').style.marginBottom = `-${h * (1 - scale)}px`;
+}
+
+async function exportCards() {
+  const front = document.getElementById('card-front');
+  const back = document.getElementById('card-back');
+  document.querySelectorAll('.card-wrapper').forEach(w => {
+    w.style.transform = 'none';
+    w.style.marginBottom = '0px';
+  });
+  const opts = { scale: 2, useCORS: true, backgroundColor: null };
+  const c1 = await html2canvas(front, opts);
+  const c2 = await html2canvas(back, opts);
+  downloadURI(c1.toDataURL("image/png"), "elvira-astashkina-business-card-front.png");
+  setTimeout(() => {
+    downloadURI(c2.toDataURL("image/png"), "elvira-astashkina-business-card-back.png");
+    scaleForPreview();
+  }, 400);
+}
+
+function downloadURI(uri, name) {
+  const link = document.createElement("a");
+  link.download = name;
+  link.href = uri;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+window.addEventListener('resize', scaleForPreview);
+window.onload = updateCardContext;
+</script>
+</body>
+</html>
